@@ -1,5 +1,5 @@
 .about-me {
-  margin: 0;
+  margin: 212px 70px 0;
   padding: 0 0 100px;
 }
 
@@ -7,70 +7,7 @@
   margin: 0 0 65px;
 }
 
-.about-me__profile {
-  display: flex;
-  justify-content: space-between;
-
-  width: 100%;
-
-  margin: 0;
-  padding: 0;
-}
-
-.about-me__info {
-  max-width: 590px;
-  width: 100%;
-
-  margin: 0;
-  padding: 0;
-}
-
-.about-me__name {
-  font-weight: normal;
-  font-size: 50px;
-  line-height: 58px;
-
-  letter-spacing: -0.04em;
-
-  color: #000;
-
-  margin: 0 0 20px;
-  padding: 0;
-}
-
-.about-me__avatar {
-  justify-self: flex-end;
-  max-width: 270px;
-  max-height: 327px;
-
-  object-fit: cover;
-
-  margin: 0 0 0 auto;
-  padding: 0;
-}
-
-.about-me__feature {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 20px;
-
-  color: #000;
-
-  margin: 0 0 25px;
-  padding: 0;
-}
-
-.about-me__description {
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 22px;
-  color: #000;
-
-  margin: 0 0 100px;
-  padding: 0;
-}
-
-.about-me__link-list {
+.about-me__list {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -81,7 +18,7 @@
   padding: 0;
 }
 
-.about-me__link {
+.about-me__list-item {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -92,6 +29,29 @@
   padding: 0;
 }
 
-.about-me__link:last-of-type {
+.about-me__list-item:last-of-type {
   margin-right: 0;
+}
+
+.about-me__profile {
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 320px) {
+  .about-me {
+    margin: 70px 14px 0;
+  }
+
+  .about-me__header {
+    margin: 0 0 60px;
+  }
+
+  .about-me__list-item {
+    margin-right: 26px;
+  }
+
+  .about-me__portfolio {
+    margin: 70px 0 0;
+  }
 }

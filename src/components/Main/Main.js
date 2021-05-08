@@ -1,9 +1,9 @@
 import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
-import Footer from '../Footer/Footer';
-import Portfolio from '../Portfolio/Portfolio';
-import Promo from '../Promo/Promo';
+// import Footer from '../Footer/Footer';
+// import Portfolio from '../Portfolio/Portfolio';
 import Techs from '../Techs/Techs';
+import Promo from '../Promo/Promo';
 import './Main.css';
 
 // eslint-disable-next-line no-unused-vars
@@ -14,8 +14,8 @@ function Main(props) {
       <AboutProject />
       <Techs />
       <AboutMe />
-      <Portfolio />
-      <Footer />
+      {/* <Portfolio />
+      <Footer /> */}
     </main>
   );
 }

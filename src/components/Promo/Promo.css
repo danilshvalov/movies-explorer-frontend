@@ -4,10 +4,11 @@
   justify-content: center;
   align-items: center;
 
-  width: 100%;
+  background-color: #f5f5f5;
+  border-radius: 10px;
 
-  margin: 0 auto;
-  padding: 170px 0 140px;
+  margin: 20px 40px 0;
+  padding: 156px 0 140px;
 }
 
 .promo__title {
@@ -22,4 +23,16 @@
 
   margin: 0 0 150px 0;
   padding: 0;
+}
+
+@media screen and (max-width: 320px) {
+  .promo {
+    margin: 14px;
+    padding: 220px 0 0;
+  }
+
+  .promo__title {
+    font-size: 29px;
+    line-height: 37px;
+  }
 }

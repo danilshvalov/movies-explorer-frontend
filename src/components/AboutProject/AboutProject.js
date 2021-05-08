@@ -1,4 +1,6 @@
+// import InfoCard from '../InfoCard/InfoCard';
 import InfoCardList from '../InfoCardList/InfoCardList';
+import InfoTable from '../InfoTable/InfoTable';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import './AboutProject.css';
 
@@ -7,7 +9,8 @@ function AboutProject(props) {
   return (
     <section className="about-project">
       <SectionHeader className="about-project__header">О проекте</SectionHeader>
-      <InfoCardList className="about-project__info-table" />
+      <InfoCardList className="about-project__list" />
+      <InfoTable className="about-project__info-table" />
     </section>
   );
 }

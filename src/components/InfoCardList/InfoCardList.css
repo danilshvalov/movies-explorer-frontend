@@ -2,7 +2,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+}
 
-  margin: 0;
-  padding: 0;
+@media screen and (max-width: 320px) {
+  .info-list {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
 }

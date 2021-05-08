@@ -30,3 +30,9 @@
   border-right: none;
   margin-right: 0;
 }
+
+@media screen and (max-width: 320px) {
+  .navigation {
+    display: none;
+  }
+}

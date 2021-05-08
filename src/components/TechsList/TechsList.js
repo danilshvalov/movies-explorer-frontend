@@ -2,6 +2,7 @@ import {withPropsClassNames} from '../../utils/utils';
 import {techsData} from '../../utils/constants';
 import './TechsList.css';
 import TechsItem from '../TechsItem/TechsItem';
+// import List from '../List/List';
 
 function TechsList(props) {
   const {list} = techsData;

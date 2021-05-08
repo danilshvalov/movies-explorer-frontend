@@ -17,3 +17,21 @@
 .techs-list__item:last-of-type {
   margin-right: 0;
 }
+
+@media screen and (max-width: 320px) {
+  .techs-list {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .techs-list__item {
+    font-size: 12px;
+    line-height: 15px;
+
+    max-width: 84px;
+    max-height: 57px;
+
+    margin: 0;
+  }
+}

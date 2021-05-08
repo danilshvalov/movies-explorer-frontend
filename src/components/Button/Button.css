@@ -26,3 +26,9 @@
   background-color: #fff;
   color: #000;
 }
+
+@media screen and (max-width: 320px) {
+  .button {
+    padding: 5px 12px;
+  }
+}

@@ -1,17 +1,10 @@
 .arrow-link {
-  position: relative;
+  cursor: pointer;
 }
 
-.arrow-link::after {
-  position: absolute;
-  top: 35%;
-  right: 7px;
-  content: "";
-
+.arrow-link__picture {
   width: 17px;
   height: 17px;
 
-  background-image: url("../../images/arrow-link.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  object-fit: cover;
 }
