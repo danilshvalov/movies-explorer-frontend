@@ -1,0 +1,8 @@
+.page {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-family: "Inter", Arial, sans-serif;
+  margin: 0 auto;
+  padding: 0;
+}

@@ -1,0 +1,20 @@
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__container {
+  margin: 0;
+  padding: 0;
+}
+
+.profile__button {
+  font-size: 12px;
+  line-height: 16px;
+  margin-right: 10px;
+}
+
+.profile__button:last-of-type {
+  margin-right: 0;
+}

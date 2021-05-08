@@ -1,0 +1,19 @@
+.techs-list {
+  list-style: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 100px 0;
+  padding: 0;
+}
+
+.techs-list__item {
+  margin: 0 10px 0 0;
+  padding: 0;
+}
+
+.techs-list__item:last-of-type {
+  margin-right: 0;
+}
