@@ -10,6 +10,7 @@ function PushButton(props) {
       type={props.type || 'button'}
       className={className}
       theme={props.theme}
+      attrs={props.attrs}
     >
       {props.children}
     </Button>

@@ -5,6 +5,10 @@
   border: 0;
 }
 
+.button_rounded {
+  border-radius: 48px;
+}
+
 .button_theme_azure {
   background-color: #3456f3;
   color: #fff;

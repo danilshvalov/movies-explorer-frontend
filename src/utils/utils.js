@@ -10,7 +10,7 @@ const getOnlyDOMProps = (props) => {
   }
 };
 
-function concatClassNames(className, ...classNames) {
+const concatClassNames = (className, ...classNames) => {
   strict(typeof className === 'string' || !className, 'className should be a string');
   strict(classNames.length !== 0, "classNames list shouldn't be empty");
 
@@ -22,6 +22,20 @@ function concatClassNames(className, ...classNames) {
     className += ` ${otherClassName}`;
   });
   return className;
-}
+};
 
-export {getOnlyDOMProps, concatClassNames};
+const parseAttrsToArray = (attrs) => {
+  if (!attrs) {
+    return [];
+  }
+  if (typeof attrs === 'string') {
+    return [attrs];
+  }
+  if (attrs instanceof Array) {
+    return attrs;
+  }
+
+  throw new Error('Attributes should be a string/array/undefined');
+};
+
+export {getOnlyDOMProps, concatClassNames, parseAttrsToArray};

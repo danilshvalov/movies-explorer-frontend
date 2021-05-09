@@ -1,0 +1,56 @@
+.search-form {
+  border-bottom: 1px solid #e8e8e8;
+
+  padding: 70px 0 69px;
+  margin: 0 70px;
+}
+
+.search-form__container {
+  display: flex;
+  justify-content: space-between;
+
+  background: #ffffff;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 9px;
+
+  padding: 19px;
+}
+
+.search-form__list {
+  display: flex;
+  align-items: center;
+}
+
+.search-form__list-item:not(:last-of-type) {
+  padding-right: 19px;
+  border-right: 1px solid #cbcbcb;
+}
+
+.search-form__list-item {
+  margin-left: 19px;
+}
+
+
+.search-form__field {
+  display: flex;
+}
+
+.search-form__icon {
+  margin-right: 16px;
+}
+
+.search-form__input {
+  position: relative;
+}
+
+.search-form__input::placeholder {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 20px;
+
+  color: #a0a0a0;
+}
+
+.search-form__start-button {
+  padding: 8px 10px;
+}
