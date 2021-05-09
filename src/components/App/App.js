@@ -2,7 +2,8 @@ import './App.css';
 
 import Main from '../Main/Main';
 import Header from '../Header/Header';
-import NotFound from '../NotFound/NotFound';
+// import NotFound from '../NotFound/NotFound';
+import Register from '../Register/Register';
 
 function App() {
   const someFlag = false;
@@ -14,7 +15,8 @@ function App() {
           <Main />
         </>
       ) : (
-        <NotFound />
+        // <NotFound />
+        <Register />
       )}
     </div>
   );

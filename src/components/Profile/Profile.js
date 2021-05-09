@@ -1,9 +1,9 @@
-import {withPropsClassNames} from '../../utils/utils';
+import {concatClassNames} from '../../utils/utils';
 import avatarImg from '../../images/avatar.png';
 import './Profile.css';
 
 function Profile(props) {
-  const className = withPropsClassNames(props.className, 'profile');
+  const className = concatClassNames(props.className, 'profile');
 
   return (
     <div className={className}>

@@ -1,9 +1,9 @@
-import {getOnlyDOMProps, withPropsClassNames} from '../../utils/utils';
+import {getOnlyDOMProps, concatClassNames} from '../../utils/utils';
 import arrowLinkImg from '../../images/arrow-link.svg';
 import './ArrowLink.css';
 
 function ArrowLink(props) {
-  const className = withPropsClassNames(props.className, 'arrow-link');
+  const className = concatClassNames(props.className, 'arrow-link');
 
   return (
     <a {...getOnlyDOMProps(props)} className={className}>

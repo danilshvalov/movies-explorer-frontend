@@ -1,12 +1,12 @@
 import {techsData} from '../../utils/constants';
-import {withPropsClassNames} from '../../utils/utils';
+import {concatClassNames} from '../../utils/utils';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import TechsList from '../TechsList/TechsList';
 import './Techs.css';
 
 function Techs(props) {
   const {list, about} = techsData;
-  const className = withPropsClassNames(props.className, 'techs');
+  const className = concatClassNames(props.className, 'techs');
   return (
     <section className={className}>
       <SectionHeader className="techs__header">Технологии</SectionHeader>

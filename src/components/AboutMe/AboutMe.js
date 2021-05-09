@@ -1,11 +1,11 @@
-import {withPropsClassNames} from '../../utils/utils';
+import {concatClassNames} from '../../utils/utils';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import './AboutMe.css';
 import Portfolio from '../Portfolio/Portfolio';
 import Profile from '../Profile/Profile';
 
 function AboutMe(props) {
-  const className = withPropsClassNames(props.className, 'about-me');
+  const className = concatClassNames(props.className, 'about-me');
 
   // TODO сделать ссылки в виде массива
   return (
@@ -16,7 +16,7 @@ function AboutMe(props) {
         <li className="about-me__list-item">Facebook</li>
         <li className="about-me__list-item">Github</li>
       </ul>
-      <Portfolio className='about-me__portfolio' />
+      <Portfolio className="about-me__portfolio" />
     </section>
   );
 }

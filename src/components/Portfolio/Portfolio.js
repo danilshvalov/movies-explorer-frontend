@@ -1,4 +1,4 @@
-import {withPropsClassNames} from '../../utils/utils';
+import {concatClassNames} from '../../utils/utils';
 import './Portfolio.css';
 import List from '../List/List';
 import ArrowLink from '../ArrowLink/ArrowLink';
@@ -7,7 +7,7 @@ import ListItem from '../ListItem/ListItem';
 // TODO переделать в массив
 
 function Portfolio(props) {
-  const className = withPropsClassNames(props.className, 'portfolio');
+  const className = concatClassNames(props.className, 'portfolio');
   return (
     <section className={className}>
       <h3 className="portfolio__header">Портфолио</h3>

@@ -10,21 +10,18 @@ const getOnlyDOMProps = (props) => {
   }
 };
 
-function withPropsClassNames(propsClassNames, ...classNames) {
-  strict(
-    typeof propsClassNames === 'string' || !propsClassNames,
-    'propsClassNames should be a string',
-  );
-  strict(classNames.length !== 0, "classNames list shouldn't be");
+function concatClassNames(className, ...classNames) {
+  strict(typeof className === 'string' || !className, 'className should be a string');
+  strict(classNames.length !== 0, "classNames list shouldn't be empty");
 
-  if (!propsClassNames) {
-    propsClassNames = '';
+  if (!className) {
+    className = '';
   }
 
-  classNames.forEach((className) => {
-    propsClassNames += ` ${className}`;
+  classNames.forEach((otherClassName) => {
+    className += ` ${otherClassName}`;
   });
-  return propsClassNames;
+  return className;
 }
 
-export {getOnlyDOMProps, withPropsClassNames};
+export {getOnlyDOMProps, concatClassNames};

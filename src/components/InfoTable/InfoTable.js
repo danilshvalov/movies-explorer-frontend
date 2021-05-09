@@ -1,4 +1,4 @@
-import {withPropsClassNames} from '../../utils/utils';
+import {concatClassNames} from '../../utils/utils';
 import './InfoTable.css';
 
 function InfoTable(props) {
@@ -6,7 +6,7 @@ function InfoTable(props) {
     {title: '1 неделя', content: 'Back-end'},
     {title: '4 недели', content: 'Front-end'},
   ];
-  const className = withPropsClassNames(props.className, 'info-table');
+  const className = concatClassNames(props.className, 'info-table');
   return (
     <div className={className}>
       {data.map(({title, content}, index) => {

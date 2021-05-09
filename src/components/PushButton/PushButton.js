@@ -1,9 +1,9 @@
-import {getOnlyDOMProps, withPropsClassNames} from '../../utils/utils';
+import {getOnlyDOMProps, concatClassNames} from '../../utils/utils';
 import Button from '../Button/Button';
 import './PushButton.css';
 
 function PushButton(props) {
-  const className = withPropsClassNames(props.className, 'push-button');
+  const className = concatClassNames(props.className, 'push-button');
   return (
     <Button
       {...getOnlyDOMProps(props)}
