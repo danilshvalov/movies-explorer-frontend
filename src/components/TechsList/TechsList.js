@@ -1,4 +1,4 @@
-import {concatClassNames} from '../../utils/utils';
+import classNames from 'classnames';
 import {techsData} from '../../utils/constants';
 import './TechsList.css';
 import TechsItem from '../TechsItem/TechsItem';
@@ -7,7 +7,7 @@ import TechsItem from '../TechsItem/TechsItem';
 function TechsList(props) {
   const {list} = techsData;
 
-  const className = concatClassNames(props.className, 'techs-list');
+  const className = classNames('techs-list', props.className);
   return (
     <ul className={className}>
       {list.map((item) => (

@@ -7,8 +7,39 @@
   padding: 18px 70px;
 }
 
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header__hamburger-button {
+  visibility: none;
+}
+
 .header__account {
   margin-left: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .header__container {
+    visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    background-color: red;
+
+    width: 65vw;
+    height: 100vh;
+  }
+
+  .header__container_visible {
+    visibility: visible;
+  }
+
 }
 
 @media screen and (max-width: 320px) {

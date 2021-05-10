@@ -1,12 +1,13 @@
-import {getOnlyDOMProps, concatClassNames} from '../../utils/utils';
+import classNames from 'classnames';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import Button from '../Button/Button';
 import './PushButton.css';
 
 function PushButton(props) {
-  const className = concatClassNames(props.className, 'push-button');
+  const className = classNames(props.className, 'push-button');
   return (
     <Button
-      {...getOnlyDOMProps(props)}
+      {...filterInvalidDOMProps(props)}
       type={props.type || 'button'}
       className={className}
       theme={props.theme}

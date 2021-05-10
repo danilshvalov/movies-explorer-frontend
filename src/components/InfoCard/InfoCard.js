@@ -1,8 +1,8 @@
-import {concatClassNames} from '../../utils/utils';
+import classNames from 'classnames';
 import './InfoCard.css';
 
 function InfoCard(props) {
-  const className = concatClassNames(props.className, 'info-card');
+  const className = classNames('info-card', props.className);
   return (
     <div className={className}>
       <h3 className="info-card__title">{props.title}</h3>

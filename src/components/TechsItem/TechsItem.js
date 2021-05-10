@@ -1,8 +1,8 @@
-import {concatClassNames} from '../../utils/utils';
+import classNames from 'classnames';
 import './TechsItem.css';
 
 function TechsItem(props) {
-  const className = concatClassNames(props.className, 'techs-item');
+  const className = classNames('techs-item', props.className);
 
   return <li className={className}>{props.children}</li>;
 }

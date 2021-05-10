@@ -1,4 +1,6 @@
-import {concatClassNames, getOnlyDOMProps} from '../../utils/utils';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
+import {concatClassNames} from '../../utils/utils';
+
 import './Field.css';
 
 function Field(props) {
@@ -15,7 +17,7 @@ function Field(props) {
   return (
     <div className={fieldClassName}>
       <label className={labelClassName}>{props.label}</label>
-      <input {...getOnlyDOMProps(props)} className={inputClassName} />
+      <input {...filterInvalidDOMProps(props)} className={inputClassName} />
       <span className={errorClassName}>Что-то пошло не так</span>
     </div>
   );

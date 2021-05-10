@@ -1,11 +1,11 @@
+import classNames from 'classnames';
 import {infoCardListData} from '../../utils/constants';
-import {concatClassNames} from '../../utils/utils';
 import InfoCard from '../InfoCard/InfoCard';
 
 import './InfoCardList.css';
 
 function InfoCardList(props) {
-  const className = concatClassNames(props.className, 'info-list');
+  const className = classNames('info-list', props.className);
   return (
     <div className={className}>
       {infoCardListData.map((cardData) => (

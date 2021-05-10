@@ -1,10 +1,10 @@
-import {concatClassNames} from '../../utils/utils';
+import classNames from 'classnames';
 import PushButton from '../PushButton/PushButton';
 import './NavTab.css';
 
 // eslint-disable-next-line no-unused-vars
 function NavTab(props) {
-  const className = concatClassNames(props.className, 'nav-tab');
+  const className = classNames('nav-tab', props.className);
   return (
     <ul className={className}>
       <li className="nav-tab__item">

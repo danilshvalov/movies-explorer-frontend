@@ -18,7 +18,10 @@ function App() {
       ) : (
         // <NotFound />
         // <Register />
-        <SearchForm />
+        <>
+          <Header />
+          <SearchForm />
+        </>
       )}
     </div>
   );
