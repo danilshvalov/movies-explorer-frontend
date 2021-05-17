@@ -1,0 +1,15 @@
+.popup {
+  position: absolute;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #000;
+  opacity: 0.3;
+}
+
+
+.popup__close-button {
+  top: 30px;
+  right: 30px;
+}

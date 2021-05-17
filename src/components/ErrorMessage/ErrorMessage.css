@@ -1,0 +1,12 @@
+.error-message {
+  font-size: 10px;
+  line-height: 12px;
+
+  color: #ee3465;
+
+  margin: 5px 0 8px;
+}
+
+.error-message_hidden {
+  visibility: hidden;
+}

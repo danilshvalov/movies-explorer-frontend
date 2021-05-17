@@ -6,7 +6,7 @@
 
   max-height: 172px;
 
-  margin: 0 auto;
+  margin: 24px 70px 0;
   padding: 79px 0 20px;
 }
 
@@ -17,7 +17,7 @@
 
   width: 100%;
 
-  margin: 0;
+  margin: 19px 0 0;
   padding: 0;
 }
 
@@ -26,11 +26,20 @@
   font-size: 13px;
   line-height: 16px;
 
+  width: 100%;
+
   text-align: center;
 
   color: #a0a0a0;
 
-  margin: 0 0 40px;
+  border-bottom: 1px solid #e8e8e8;
+
+  margin: 0;
+  padding: 0 0 20px;
+}
+
+.footer__list {
+  margin: 0;
   padding: 0;
 }
 
@@ -43,6 +52,13 @@
   margin-right: 0;
 }
 
+.footer__link {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+}
+
 .footer__copyright {
   display: flex;
   font-weight: normal;
@@ -50,13 +66,9 @@
   line-height: 16px;
 
   width: 50%;
-  
+
   color: #000000;
 
   margin: 0;
   padding: 0;
-}
-
-.footer__list {
-  justify-content: flex-end;
 }

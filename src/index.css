@@ -1,2 +1,6 @@
 @import url("./vendor/normalize.css");
 @import url("./fonts/_inter/fonts_inter.css");
+
+.root {
+  background-color: #fafafa;
+}

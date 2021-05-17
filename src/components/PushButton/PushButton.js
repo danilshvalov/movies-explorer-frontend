@@ -1,13 +1,12 @@
 import classNames from 'classnames';
-import filterInvalidDOMProps from 'filter-invalid-dom-props';
-import Button from '../Button/Button';
+import Button from '../Button/Button.tsx';
 import './PushButton.css';
 
 function PushButton(props) {
   const className = classNames(props.className, 'push-button');
   return (
     <Button
-      {...filterInvalidDOMProps(props)}
+      {...props}
       type={props.type || 'button'}
       className={className}
       theme={props.theme}

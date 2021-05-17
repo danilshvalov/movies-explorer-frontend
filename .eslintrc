@@ -1,22 +1,20 @@
 {
   "extends": "airbnb-base",
   "rules": {
-    "no-underscore-dangle": "off",
     "object-curly-spacing": ["error", "never"],
-    "func-names": "off",
-    "no-shadow": "off",
-    "consistent-return": "off",
-    "no-param-reassign": "off",
-    "class-methods-use-this": "off",
-    "prefer-promise-reject-errors": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "import/no-named-as-default": "off",
-    "import/no-named-as-default-member": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "import/extensions": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"]
   },
-  "plugins": ["react", "import", "jsx-a11y"],
-  "parser": "babel-eslint",
+  "plugins": ["react", "import", "jsx-a11y", "@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -26,5 +24,13 @@
   },
   "env": {
     "browser": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".css"],
+        "moduleDirectory": ["node_modules", "src/"]
+      }
+    }
   }
 }

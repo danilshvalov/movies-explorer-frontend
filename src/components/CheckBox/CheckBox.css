@@ -18,8 +18,16 @@
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+.checkbox__button:hover {
+  background-color: #afafaf;
+}
+
 .checkbox__button:checked {
   background: #2be080;
+}
+
+.checkbox__button:checked:hover {
+  background-color: #1dce70;
 }
 
 .checkbox__button:before {

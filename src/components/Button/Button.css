@@ -2,7 +2,11 @@
   cursor: pointer;
   text-align: center;
 
+  position: relative;
+
   border: 0;
+
+  transition: background-color 0.2s linear;
 }
 
 .button_rounded {
@@ -14,12 +18,47 @@
   color: #fff;
 }
 
+.button_theme_azure:hover {
+  background-color: #2a49d3;
+}
+
+.button_theme_snow {
+  background-color: #f4f4f4;
+  color: #000;
+}
+
+.button_theme_snow:hover {
+  background-color: #f0f0f0;
+}
+
 .button_theme_ghost {
   background-color: #e8e8e8;
   color: #000;
 }
 
+.button_theme_ghost:hover {
+  background-color: #d4d4d4;
+}
+
 .button_theme_light {
   background-color: #fff;
   color: #000;
+}
+
+.button_theme_light:hover {
+  background-color: #eeeeee;
+}
+
+.button_theme_transparent {
+  background-color: transparent;
+  color: #000;
+}
+
+.button_disabled {
+  cursor: default;
+  background-color: #e0e0e0;
+}
+
+.button_disabled:hover {
+  background-color: #e0e0e0;
 }

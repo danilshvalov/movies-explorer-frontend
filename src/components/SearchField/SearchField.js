@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import Input from '../Input/Input';
 
+import Field from '../Field/Field';
 import magnifierImg from '../../images/magnifier.svg';
+
 import './SearchField.css';
 
 function SearchField(props) {
@@ -9,8 +10,12 @@ function SearchField(props) {
 
   return (
     <div className={className}>
-      <img className="search-field__icon" src={magnifierImg} alt="Иконка увеличительного стекла" />
-      <Input className="search-field__input" placeholder={props.placeholder} />
+      <img
+        className="search-field__icon"
+        src={magnifierImg}
+        alt="Иконка увеличительного стекла"
+      />
+      <Field className="search-field__input" placeholder={props.placeholder} />
       {props.children}
     </div>
   );

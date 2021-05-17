@@ -1,17 +1,4 @@
 .field {
-  display: flex;
-  flex-direction: column;
-}
-
-.field__label {
-  font-weight: normal;
-  font-size: 10px;
-  line-height: 12px;
-
-  color: #a0a0a0;
-}
-
-.field__input {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -25,22 +12,11 @@
   padding: 0 0 9px;
 }
 
-.field__input:focus {
+.field:focus {
   outline: none;
   border-bottom: 1px solid #3456f3;
 }
 
-.field__error-message {
-  visibility: hidden;
-
-  font-size: 10px;
-  line-height: 12px;
-
+.field_error {
   color: #ee3465;
-
-  margin: 5px 0 8px;
-}
-
-.field__error-message {
-  visibility: visible;
 }
