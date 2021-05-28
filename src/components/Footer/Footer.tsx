@@ -9,22 +9,21 @@ import {footer as texts} from '../../utils/texts';
 
 import './Footer.css';
 
-export type IFooterProps = React.HTMLAttributes<HTMLDivElement>;
+export type FooterProps = React.HTMLAttributes<HTMLDivElement>;
 
-const Footer: React.FC<IFooterProps> = (props) => {
+const Footer: React.FC<FooterProps> = (props) => {
   const cn = createCn('footer', props.className);
   return (
     <footer {...props} className={cn()}>
-      <p className={cn('about')}></p>
+      <p className={cn('about')}>{texts.about}</p>
       <div className={cn('container')}>
         <p className={cn('copyright')}>{texts.copyright}</p>
         <List className={cn('list')} itemClassName={cn('list-item')}>
           {texts.links.map((item) => (
             <ColoredLink
-              external
               key={shortid.generate()}
-              className={'link'}
-              to={item.path}
+              className={cn('link')}
+              href={item.path}
             >
               {item.name}
             </ColoredLink>

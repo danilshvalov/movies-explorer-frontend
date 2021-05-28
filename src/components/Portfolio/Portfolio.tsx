@@ -12,25 +12,25 @@ export interface IPortfolioLink {
   name: string;
   path: any;
 }
-export type IPortfolioProps = React.HTMLAttributes<HTMLDivElement>;
+export type PortfolioProps = React.HTMLAttributes<HTMLDivElement>;
 
-const Portfolio: React.FC<IPortfolioProps> = ({className, ...props}) => {
+const Portfolio: React.FC<PortfolioProps> = ({className, ...props}) => {
   const cn = createCn('portfolio', className);
   return (
-    <section {...props} className={cn()}>
+    <div {...props} className={cn()}>
       <h3 className={cn('header')}>{texts.header}</h3>
       <List className={cn('list')} itemClassName={cn('list-item')}>
         {texts.links.map((item) => (
           <ArrowLink
             key={shortid.generate()}
             className={cn('link')}
-            to={item.path}
+            href={item.path}
           >
             {item.name}
           </ArrowLink>
         ))}
       </List>
-    </section>
+    </div>
   );
 };
 

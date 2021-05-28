@@ -1,43 +1,50 @@
 import {createCn} from 'bem-react-classname';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React from 'react';
+
+import {Theme} from '../../utils/types';
+
 import './Button.css';
 
-export enum ButtonTheme {
-  Transparent = 'transparent',
-  Azure = 'azure',
-  Snow = 'snow',
-  Ghost = 'ghost',
-  Light = 'light',
-}
-
-export interface IButtonProps
+export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  theme?: ButtonTheme;
+  theme?: Theme;
   disabled?: boolean;
+  hidden?: boolean;
   rounded?: boolean;
 }
 
-const Button: React.FC<IButtonProps> = ({
-  className,
-  theme = ButtonTheme.Transparent,
-  disabled = false,
-  rounded = false,
-  ...props
-}) => {
-  const cn = createCn('button', className);
+export type RefType = HTMLButtonElement;
 
-  return (
-    <button
-      {...props}
-      className={cn({
-        theme,
-        disabled,
-        rounded,
-      })}
-    >
-      {props.children}
-    </button>
-  );
-};
+const Button = React.forwardRef<RefType, ButtonProps>(
+  (
+    {
+      className,
+      theme = Theme.Transparent,
+      disabled = false,
+      rounded = false,
+      hidden = false,
+      ...props
+    },
+    ref,
+  ) => {
+    const cn = createCn('button', className);
+
+    return (
+      <button
+        {...filterInvalidDOMProps(props)}
+        ref={ref}
+        className={cn({
+          theme,
+          disabled,
+          rounded,
+          hidden,
+        })}
+      >
+        {props.children}
+      </button>
+    );
+  },
+);
 
 export default Button;

@@ -1,12 +1,21 @@
 import {createCn} from 'bem-react-classname';
-import Button, {IButtonProps} from '../Button/Button';
+import React from 'react';
+import Button, {
+  ButtonProps,
+  RefType as ButtonRefType,
+} from '../Button/Button';
 
 import './HamburgerButton.css';
 
-function HamburgerButton(props: IButtonProps) {
-  const cn = createCn('hamburger-button', props.className);
+export type HamburgerButtonProps = ButtonProps;
+export type RefType = ButtonRefType;
 
-  return <Button {...props} className={cn()} />;
-}
+const HamburgerButton = React.forwardRef<RefType, HamburgerButtonProps>(
+  ({className, ...props}, ref) => {
+    const cn = createCn('hamburger-button', className);
+
+    return <Button {...props} ref={ref} className={cn()} />;
+  },
+);
 
 export default HamburgerButton;

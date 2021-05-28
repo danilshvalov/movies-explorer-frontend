@@ -1,6 +1,10 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
+import {Link} from 'react-router-dom';
 
+import {pageLinks} from '../../utils/config';
+import ColoredLink from '../ColoredLink/ColoredLink';
+import {register as texts} from '../../utils/texts';
 import Logo from '../Logo/Logo';
 import RegisterForm, {RegisterFunc} from '../RegisterForm/RegisterForm';
 
@@ -20,12 +24,17 @@ const Register: React.FC<RegisterProps> = ({
   return (
     <section {...props} className={cn()}>
       <Logo className={cn('logo')} />
+      <h1 className={cn('title')}>{texts.title}</h1>
       <RegisterForm className={cn('form')} onRegister={onRegister} />
-      <span className="register__sub-text">
-        Уже зарегистрированы?
-        <a href="#" className="register__link">
-          Войти
-        </a>
+      <span className={cn('sub-text')}>
+        {texts.subtext.text}
+        <Link
+          component={ColoredLink}
+          to={pageLinks.signIn}
+          className={cn('link')}
+        >
+          {texts.subtext.link}
+        </Link>
       </span>
     </section>
   );

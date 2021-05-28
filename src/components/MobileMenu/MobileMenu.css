@@ -1,12 +1,10 @@
-.mobile-menu {
-}
-
 .mobile-menu__open-button {
   width: 45px;
   height: 38px;
 }
 
 .mobile-menu__container {
+  display: flex;
   flex-direction: column;
   align-items: center;
 
@@ -35,4 +33,16 @@
   height: 30px;
 
   margin: 23px 23px 0 auto;
+}
+
+@media screen and (max-width: 458px) {
+  .mobile-menu__container {
+    width: 100%;
+  }
+
+  .mobile-menu__open-button {
+    width: 32px;
+    height: 35px;
+    margin: 0 4px 3px 0;
+  }
 }

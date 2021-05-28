@@ -4,7 +4,12 @@
 
   color: #ee3465;
 
-  margin: 5px 0 8px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.error-message__text {
+  /* width: 100%; */
 }
 
 .error-message_hidden {

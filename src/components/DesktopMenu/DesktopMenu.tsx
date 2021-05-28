@@ -3,9 +3,12 @@ import React from 'react';
 
 import './DesktopMenu.css';
 
-function DesktopMenu(props: React.HTMLAttributes<HTMLDivElement>) {
-  const cn = createCn('desktop-menu', props.className);
+export type DesktopMenuProps = React.HTMLAttributes<HTMLDivElement>;
+
+const DesktopMenu: React.FC<DesktopMenuProps> = ({className, ...props}) => {
+  const cn = createCn('desktop-menu', className);
+
   return <div className={cn()}>{props.children}</div>;
-}
+};
 
 export default DesktopMenu;

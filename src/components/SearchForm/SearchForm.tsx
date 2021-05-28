@@ -3,10 +3,12 @@ import React from 'react';
 
 import CheckBox from '../CheckBox/CheckBox';
 import SearchField from '../SearchField/SearchField';
+import Button from '../Button/Button';
 import List from '../List/List';
+import {Theme} from '../../utils/types';
+import {searchForm as texts} from '../../utils/texts';
 
 import './SearchForm.css';
-import Button, {ButtonTheme} from '../Button/Button';
 
 export interface SearchFormProps
   extends React.FormHTMLAttributes<HTMLFormElement> {
@@ -15,6 +17,7 @@ export interface SearchFormProps
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({
+  className,
   onChecked,
   defaultChecked = false,
   ...props
@@ -25,24 +28,23 @@ const SearchForm: React.FC<SearchFormProps> = ({
     onChecked(target.checked);
   };
 
-  const cn = createCn('search-form', props.className);
+  const cn = createCn('search-form', className);
 
   return (
-    <form className={cn()}>
+    <form {...props} className={cn()}>
       <List className={cn('list')} itemClassName={cn('list-item')}>
-        <SearchField className={cn('field')} placeholder="Фильм">
-          <Button
-            className={cn('start-button')}
-            theme={ButtonTheme.Azure}
-            rounded
-          >
-            Найти
+        <SearchField
+          className={cn('field')}
+          placeholder={texts.field.placeholder}
+        >
+          <Button className={cn('start-button')} theme={Theme.Azure} rounded>
+            {texts.startButton.label}
           </Button>
         </SearchField>
         <CheckBox
-          label="Короткометражки"
+          label={texts.checkBox.label}
           className={cn('check-button')}
-          labelClassName={cn('label')}
+          labelClassName={cn('check-label')}
           defaultChecked={defaultChecked}
           onChange={handleCheckboxChange}
         />

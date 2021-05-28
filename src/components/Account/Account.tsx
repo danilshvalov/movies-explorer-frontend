@@ -1,27 +1,37 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-import Button, {ButtonTheme} from '../Button/Button';
-import List from '../List/List';
+import {Link} from 'react-router-dom';
+
+import Button from '../Button/Button';
+import {account as texts} from '../../utils/texts';
+import accountImg from '../../images/account-avatar.svg';
+import ColoredLink from '../ColoredLink/ColoredLink';
+import {pageLinks} from '../../utils/config';
 
 import './Account.css';
 
-function Account(props: React.HTMLAttributes<HTMLDivElement>) {
-  const isLoggedIn = true;
-  const cn = createCn('account', props.className);
+export type AccountProps = React.HTMLAttributes<HTMLDivElement>;
+
+const Account: React.FC<AccountProps> = ({className, ...props}) => {
+  const cn = createCn('account', className);
   return (
     <div {...props} className={cn()}>
-      {isLoggedIn ? (
-        <div className="11"></div>
-      ) : (
-        <List className={cn('list')} itemClassName={cn('list-item')}>
-          <Button className={cn('button')}>Регистрация</Button>
-          <Button className={cn('button')} theme={ButtonTheme.Azure}>
-            Войти
-          </Button>
-        </List>
-      )}
+      <Link
+        component={ColoredLink}
+        to={pageLinks.profile}
+        className={cn('link')}
+      >
+        <Button className={cn('profile-button')}>
+          {texts.buttons.account}
+        </Button>
+        <img
+          className={cn('logo')}
+          src={accountImg}
+          alt={texts.accountLogo.alt}
+        />
+      </Link>
     </div>
   );
-}
+};
 
 export default Account;

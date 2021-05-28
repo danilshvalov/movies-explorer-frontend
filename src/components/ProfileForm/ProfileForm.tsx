@@ -6,6 +6,7 @@ import Form, {FormProps} from '../Form/Form';
 import {profile} from '../../utils/texts';
 
 import './ProfileForm.css';
+import CurrentUserContext from '../../contexts/CurrentUserContexts';
 
 const texts = profile.form;
 
@@ -27,6 +28,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   onProfileUpdate,
   ...props
 }) => {
+  const currentUser = React.useContext(CurrentUserContext);
+
   const cn = createCn('profile-form', className);
 
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(
@@ -62,26 +65,32 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
 
   return (
     <Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
-      <div className={cn('container')}>
-        <label className={cn('label')}>{texts.nameInput.label}</label>
-        <Field
-          minLength={2}
-          required
-          ref={nameInputRef}
-          onInput={handleNameInput}
-          isError={!isNameValid}
-        />
-      </div>
-      <div className={cn('container')}>
-        <label className={cn('label')}>{texts.emailInput.label}</label>
-        <Field
-          type="email"
-          required
-          ref={emailInputRef}
-          onInput={handleEmailInput}
-          isError={!isEmailValid}
-        />
-      </div>
+      <fieldset className={cn('fieldset')}>
+        <div className={cn('field-container')}>
+          <label className={cn('label')}>{texts.nameInput.label}</label>
+          <Field
+            className={cn('field')}
+            minLength={2}
+            required
+            ref={nameInputRef}
+            onInput={handleNameInput}
+            isError={!isNameValid}
+            defaultValue={currentUser.name}
+          />
+        </div>
+        <div className={cn('field-container')}>
+          <label className={cn('label')}>{texts.emailInput.label}</label>
+          <Field
+            className={cn('field')}
+            type="email"
+            required
+            ref={emailInputRef}
+            onInput={handleEmailInput}
+            isError={!isEmailValid}
+            defaultValue={currentUser.email}
+          />
+        </div>
+      </fieldset>
 
       <Button
         className={cn('submit-button')}

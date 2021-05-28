@@ -1,3 +1,5 @@
+import {pageLinks} from './config';
+
 export const aboutMe = {
   header: 'Студент',
 };
@@ -47,6 +49,10 @@ export const personality = {
     {name: 'Facebook', path: '#'},
     {name: 'Github', path: '#'},
   ],
+
+  img: {
+    alt: 'Аватар',
+  },
 };
 
 export const navTab = {
@@ -63,11 +69,17 @@ export const profile = {
       label: 'E-mail',
     },
   },
+  subtext: {
+    exitLink: 'Выйти из аккаунта',
+  },
 };
 
 export const register = {
+  title: 'Добро пожаловать!',
   form: {
-    submitButton: 'Зарегистрироваться',
+    submitButton: {
+      text: 'Зарегистрироваться',
+    },
     nameInput: {
       label: 'Имя',
     },
@@ -78,4 +90,106 @@ export const register = {
       label: 'Пароль',
     },
   },
+  subtext: {
+    text: 'Уже зарегистрированы?',
+    link: 'Войти',
+  },
+};
+
+export const login = {
+  title: 'Рады видеть!',
+  form: {
+    submitButton: {
+      text: 'Войти',
+    },
+    emailInput: {
+      label: 'E-mail',
+    },
+    passwordInput: {
+      label: 'Пароль',
+    },
+  },
+  subtext: {
+    text: 'Ещё не зарегистрированы?',
+    link: 'Регистрация',
+  },
+};
+
+export const account = {
+  buttons: {
+    account: 'Аккаунт',
+  },
+  accountLogo: {
+    alt: 'Изображение человечка',
+  },
+};
+
+export const searchForm = {
+  startButton: {
+    label: 'Найти',
+  },
+  checkBox: {
+    label: 'Короткометражки',
+  },
+  field: {
+    placeholder: 'Фильм',
+    img: {
+      alt: 'Иконка увеличительного стекла',
+    },
+  },
+};
+
+export const moviesCard = {
+  saveButton: {
+    text: 'Сохранить',
+  },
+  img: {
+    alt: 'Постер к фильму',
+  },
+};
+
+export const infoTicketsList = [
+  {
+    title: 'Дипломный проект включал 5 этапов',
+    about:
+      'Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.',
+  },
+  {
+    title: 'На выполнение диплома ушло 5 недель',
+    about:
+      'У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.',
+  },
+];
+
+export const arrowLink = {
+  img: {
+    alt: 'Иконка стрелочки',
+  },
+};
+
+export const logo = {
+  img: {
+    alt: 'Логотип страницы',
+  },
+};
+
+export const header = {
+  mobileMenu: [
+    {name: 'Главная', path: pageLinks.main},
+    {name: 'Фильмы', path: pageLinks.movies},
+    {name: 'Сохранённые фильмы', path: pageLinks.savedMovies},
+  ],
+  desktopMenu: [
+    {name: 'Фильмы', path: pageLinks.movies},
+    {name: 'Сохранённые фильмы', path: pageLinks.savedMovies},
+  ],
+};
+
+export const loginButtons = {
+  register: 'Регистрация',
+  login: 'Войти',
+};
+
+export const nothingFoundStub = {
+  description: 'Ничего не удалось найти :/',
 };

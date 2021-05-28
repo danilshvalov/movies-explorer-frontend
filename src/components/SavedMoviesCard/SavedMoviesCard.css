@@ -1,0 +1,14 @@
+.saved-movies-card {
+  position: relative;
+
+  margin: 0;
+  padding: 0;
+}
+
+.saved-movies-card__delete-button {
+  position: absolute;
+  right: 13px;
+  top: 12px;
+
+  padding: 0;
+}

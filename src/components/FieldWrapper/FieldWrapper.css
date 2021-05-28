@@ -4,3 +4,11 @@
 
   height: 65px;
 }
+
+.field-wrapper__field {
+  margin: 4px 0 0;
+}
+
+.field-wrapper__error-message {
+  margin: 8px 0 0;
+}

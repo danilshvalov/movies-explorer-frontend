@@ -51,4 +51,8 @@
     max-width: 82px;
     max-height: 26px;
   }
+
+  .nav-tab__item {
+    margin-right: 6px;
+  }
 }

@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
 
   height: 100vh;
 }
@@ -10,6 +9,8 @@
 .not-found__container {
   display: flex;
   flex-direction: column;
+
+  margin: auto 0;
 }
 
 .not-found__error-code {
@@ -17,8 +18,9 @@
   font-size: 140px;
   line-height: 169px;
   text-align: center;
+
+  margin: 62px 0 0;
   padding: 0;
-  margin: 35vh 0 0;
 }
 
 .not-found__description {
@@ -29,7 +31,7 @@
 
   color: #000000;
 
-  margin: 10px 0 0;
+  margin: 5px 0 0;
   padding: 0;
 }
 
@@ -42,20 +44,23 @@
 
   color: #3456f3;
 
-  margin: auto 0 60px;
+  margin: 0 0 60px;
   padding: 0;
+}
+@media screen and (min-height: 860px) {
+  .not-found {
+    margin-left: 7px;
+  }
+
+  .not-found__error-code {
+    margin-top: 222px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .not-found__error-code {
     font-size: 140px;
     line-height: 169px;
-
-    margin-top: 40vh;
-  }
-
-  .not-found__description {
-    margin-top: 0;
   }
 
   .not-found__button {
@@ -63,12 +68,12 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 468px) {
   .not-found__error-code {
     font-size: 80px;
     line-height: 97px;
 
-    margin-top: 42vh;
+    margin-top: 45px;
   }
 
   .not-found__description {

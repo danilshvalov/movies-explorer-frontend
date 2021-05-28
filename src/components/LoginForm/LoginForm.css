@@ -1,3 +1,42 @@
 .login-form {
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.login-form__field-wrapper {
+  margin: 0 0 4px;
+}
+
+.login-form__field-wrapper:last-of-type {
+  margin-bottom: 0;
+}
+
+.login-form__fieldset {
+  border: 0;
+
+  margin: 0;
+  padding: 0;
+}
+
+.login-form__submit-button {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+
+  align-items: flex-end;
+
+  width: 100%;
+
+  border-radius: 3px;
+
+  padding: 13px 0;
+}
+
+@media screen and (max-width: 458px) {
+  .login-form__submit-button {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

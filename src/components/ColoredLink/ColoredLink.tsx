@@ -1,23 +1,18 @@
 import {createCn} from 'bem-react-classname';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React from 'react';
-import {Link, LinkProps} from 'react-router-dom';
+
 import './ColoredLink.css';
 
-export interface ColoredLinkProps extends LinkProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  external?: boolean;
-}
+export type ColoredLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-const ColoredLink: React.FC<ColoredLinkProps> = ({className, external = false, ...props}) => {
+const ColoredLink: React.FC<ColoredLinkProps> = ({className, ...props}) => {
   const cn = createCn('colored-link', className);
 
-  return external ? (
-    <a {...props} href={props.to as string} className={cn()}>
+  return (
+    <a {...filterInvalidDOMProps(props)} className={cn()}>
       {props.children}
     </a>
-  ) : (
-    <Link {...props} className={cn()}>
-      {props.children}
-    </Link>
   );
 };
 

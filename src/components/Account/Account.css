@@ -1,32 +1,42 @@
+.account {
+  margin-bottom: 8px;
+}
+
 .account__list {
-  margin: 3px 0 0;
+  margin: 0;
   padding: 0;
 }
 
-.account__button {
+.account__profile-button {
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
 
-  padding: 8px 20px;
-  margin: 0;
+  color: #000000;
+
+  margin-right: 10px;
 }
 
-.account__list-item {
-  margin: 0 10px 0 0;
-  padding: 0;
+.account__logo {
+  object-fit: cover;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  padding: 8px;
 }
 
-.account__list-item:last-of-type {
-  margin-right: 0;
+.account__link {
+  display: flex;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {
-  /* TODO ...  */
+  .account {
+    margin: auto 0 92px;
+  }
 }
 
-@media screen and (max-width: 320px) {
-  .account__button {
-    font-size: 10px;
+@media screen and (max-width: 468px) {
+  .account {
+    margin-bottom: 42px;
   }
 }

@@ -4,13 +4,13 @@ import shortid from 'shortid';
 
 import {navTab as texts} from '../../utils/texts';
 import Button from '../Button/Button';
-import List, {IListProps} from '../List/List';
+import List, {ListProps} from '../List/List';
 
 import './NavTab.css';
 
-export type INavTabProps = IListProps;
+export type NavTabProps = ListProps;
 
-const NavTab: React.FC<INavTabProps> = ({className, ...props}) => {
+const NavTab: React.FC<NavTabProps> = ({className, ...props}) => {
   const cn = createCn('nav-tab', className);
   return (
     <List {...props} className={cn()} itemClassName={cn('item')}>

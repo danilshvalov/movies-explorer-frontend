@@ -12,6 +12,31 @@
   margin-left: auto;
 }
 
+.header__login-buttons {
+  margin: 0 0 4px auto;
+  padding: 0;
+}
+
+.header__list-item {
+  display: flex;
+  margin: 0 10px 0 0;
+  padding: 0;
+}
+
+.header__list-item:last-of-type {
+  margin-right: 0;
+}
+
+.header__nav-button {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 3px;
+
+  padding: 8px 20px;
+  margin: 0;
+}
+
 @media screen and (max-width: 768px) {
   .header {
     justify-content: space-between;
@@ -28,10 +53,13 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 458px) {
   .header {
-    max-width: 320px;
+    margin: 0 14px;
+    padding: 18px 0;
+  }
 
-    padding: 18px 14px;
+  .header__nav-button {
+    font-size: 10px;
   }
 }

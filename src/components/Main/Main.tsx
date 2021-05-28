@@ -8,7 +8,7 @@ function Main() {
   return (
     <main className="content">
       <Promo />
-      <AboutProject />
+      <AboutProject id="about-project" />
       <Techs />
       <AboutMe />
     </main>

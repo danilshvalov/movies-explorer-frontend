@@ -1,10 +1,11 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
 
-import Button, {ButtonTheme} from '../Button/Button';
+import Button from '../Button/Button';
 import FieldWrapper from '../FieldWrapper/FieldWrapper';
 import Form, {FormProps} from '../Form/Form';
 import {register} from '../../utils/texts';
+import {Theme} from '../../utils/types';
 
 import './RegisterForm.css';
 
@@ -62,48 +63,51 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 
   return (
     <Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
-      <FieldWrapper
-        className={cn('field-wrapper')}
-        fieldClassName={cn('field')}
-        errorMessageClassName={cn('error-message')}
-        label={texts.nameInput.label}
-        name="nameInput"
-        minLength={2}
-        required
-        ref={nameInputRef}
-        onInput={handleInput}
-      />
+      <fieldset className={cn('fieldset')}>
+        <FieldWrapper
+          className={cn('field-wrapper')}
+          fieldClassName={cn('field')}
+          errorMessageClassName={cn('error-message')}
+          label={texts.nameInput.label}
+          name="nameInput"
+          minLength={2}
+          required
+          ref={nameInputRef}
+          onInput={handleInput}
+        />
 
-      <FieldWrapper
-        className={cn('field-wrapper')}
-        fieldClassName={cn('field')}
-        errorMessageClassName={cn('error-message')}
-        name="emailInput"
-        type="email"
-        label={texts.emailInput.label}
-        required
-        ref={emailInputRef}
-        onInput={handleInput}
-      />
+        <FieldWrapper
+          className={cn('field-wrapper')}
+          fieldClassName={cn('field')}
+          errorMessageClassName={cn('error-message')}
+          name="emailInput"
+          type="email"
+          label={texts.emailInput.label}
+          required
+          ref={emailInputRef}
+          onInput={handleInput}
+        />
 
-      <FieldWrapper
-        className={cn('field-wrapper')}
-        fieldClassName={cn('field')}
-        errorMessageClassName={cn('error-message')}
-        label={texts.passwordInput.label}
-        minLength={8}
-        required
-        ref={passwordInputRef}
-        onInput={handleInput}
-      />
+        <FieldWrapper
+          className={cn('field-wrapper')}
+          fieldClassName={cn('field')}
+          errorMessageClassName={cn('error-message')}
+          label={texts.passwordInput.label}
+          minLength={8}
+          type="password"
+          required
+          ref={passwordInputRef}
+          onInput={handleInput}
+        />
+      </fieldset>
 
       <Button
         className={cn('submit-button')}
         type="submit"
         disabled={isSubmitButtonDisabled}
-        theme={ButtonTheme.Azure}
+        theme={Theme.Azure}
       >
-        {texts.submitButton}
+        {texts.submitButton.text}
       </Button>
     </Form>
   );

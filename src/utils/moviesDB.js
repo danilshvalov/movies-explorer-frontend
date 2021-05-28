@@ -19,7 +19,7 @@ const moviesList = [
     duration: 1,
     thumbnail: thirtyThreeWordsAboutDesign,
     nameRU: '33 слова о дизайне',
-    isSaved: true,
+    isSaved: false,
   },
   {
     movieId: 2,
@@ -115,5 +115,7 @@ const moviesList = [
     isSaved: true,
   },
 ];
+
+export const savedMoviesList = moviesList.filter(({isSaved}) => isSaved);
 
 export default moviesList;

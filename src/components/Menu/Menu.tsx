@@ -1,29 +1,27 @@
 import {createCn} from 'bem-react-classname';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React from 'react';
-import {useMediaQuery} from 'react-responsive';
 
 import DesktopMenu from '../DesktopMenu/DesktopMenu';
-
 import MobileMenu from '../MobileMenu/MobileMenu';
 
 import './Menu.css';
 
-export type IMenuProps = React.HTMLAttributes<HTMLDivElement>;
+export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  isDesktop: boolean;
+}
 
-const Menu: React.FC<IMenuProps> = ({className, ...props}) => {
-  const tabletWidth = 768;
-  const isDesktop = useMediaQuery({minWidth: tabletWidth});
-
+const Menu: React.FC<MenuProps> = ({className, isDesktop, ...props}) => {
   const cn = createCn('menu', className);
 
-  return (
-    <div {...props} className={cn()}>
-      {isDesktop ? (
-        <DesktopMenu>{props.children}</DesktopMenu>
-      ) : (
-        <MobileMenu>{props.children}</MobileMenu>
-      )}
-    </div>
+  return isDesktop ? (
+    <DesktopMenu {...filterInvalidDOMProps(props)} className={cn()}>
+      {props.children}
+    </DesktopMenu>
+  ) : (
+    <MobileMenu {...props} className={cn()}>
+      {props.children}
+    </MobileMenu>
   );
 };
 

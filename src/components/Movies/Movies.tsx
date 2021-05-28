@@ -1,30 +1,36 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
 
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import moviesList from '../../utils/moviesDB';
 import SearchForm from '../SearchForm/SearchForm';
+import moviesFilter from '../../utils/movies-filter';
+import AlignedMoviesCardList from '../AlignedMoviesCardList/AlignedMoviesCardList';
+import DefaultMoviesCard from '../DefaultMoviesCard/DefaultMoviesCard';
+import {MoviesList} from '../../utils/types';
 
 import './Movies.css';
 
-export type MoviesProps = React.HTMLAttributes<HTMLDivElement>;
+export interface MoviesProps extends React.HTMLAttributes<HTMLDivElement> {
+  moviesList: MoviesList;
+}
 
-const Movies: React.FC<MoviesProps> = ({className, ...props}) => {
+/**
+ * Returns a page with a list of films
+ */
+const Movies: React.FC<MoviesProps> = ({className, moviesList, ...props}) => {
+  /**
+   * Filter flag, toggled by checkbox
+   */
   const [isShortFilms, setShortFilms] = React.useState(false);
-
-  React.useEffect(() => {
-    console.log(isShortFilms);
-  }, [isShortFilms]);
 
   const cn = createCn('movies', className);
   return (
-    <section {...props} className="movies">
+    <section {...props} className={cn()}>
       <SearchForm className={cn('search-form')} onChecked={setShortFilms} />
-      <MoviesCardList
-        moviesList={moviesList}
-        isShortFilms={isShortFilms}
-        className="movies__card-list"
-      ></MoviesCardList>
+      <AlignedMoviesCardList
+        moviesList={moviesFilter({moviesList, isShortFilms})}
+        CardComponent={DefaultMoviesCard}
+        className={cn('card-list')}
+      />
     </section>
   );
 };

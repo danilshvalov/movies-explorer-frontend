@@ -7,14 +7,14 @@ import SectionHeader from '../SectionHeader/SectionHeader';
 
 import './Techs.css';
 
-export type ITechsProps = React.HTMLAttributes<HTMLDivElement>;
+export type TechsProps = React.HTMLAttributes<HTMLDivElement>;
 
-const Techs: React.FC<ITechsProps> = ({className, ...props}) => {
+const Techs: React.FC<TechsProps> = ({className, ...props}) => {
   const {list, about} = techsData;
   const cn = createCn('techs', className);
   return (
     <section {...props} className={cn()}>
-      <SectionHeader className={cn('hedaer')}>Технологии</SectionHeader>
+      <SectionHeader className={cn('header')}>Технологии</SectionHeader>
       <h2 className={cn('title')}>{`${list.length} технологий`}</h2>
       <p className={cn('about')}>{about}</p>
       <List className={cn('list')} itemClassName={cn('list-item')}>

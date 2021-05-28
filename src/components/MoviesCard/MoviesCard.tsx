@@ -1,10 +1,17 @@
 import {createCn} from 'bem-react-classname';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React from 'react';
 
 import {parseTime, stringifyTime} from '../../utils/utils';
-import PushButton from '../PushButton/PushButton';
+import {moviesCard as texts} from '../../utils/texts';
+import {ButtonProps} from '../Button/Button';
 
 import './MoviesCard.css';
+
+export interface CardButtonProps extends ButtonProps {
+  checked?: boolean;
+  hidden?: boolean;
+}
 
 export interface MoviesCardProps extends React.HTMLAttributes<HTMLDivElement> {
   thumbnail: any;
@@ -19,24 +26,11 @@ const MoviesCard: React.FC<MoviesCardProps> = ({
   nameRU,
   ...props
 }) => {
-  const [isChecked, setChecked] = React.useState(false);
-
-  const handleSaveButtonClick = () => setChecked(!isChecked);
-
   const cn = createCn('movies-card', className);
-  const saveButtonClass = cn('save-button', {checked: isChecked});
 
-  const saveButtonText = isChecked ? '' : 'Сохранить';
   return (
-    <div {...props} className={cn()}>
-      <PushButton
-        className={saveButtonClass}
-        onClick={handleSaveButtonClick}
-        theme="light"
-      >
-        {saveButtonText}
-      </PushButton>
-      <img className={cn('poster')} src={thumbnail} />
+    <div {...filterInvalidDOMProps(props)} className={cn()}>
+      <img className={cn('poster')} src={thumbnail} alt={texts.img.alt} />
       <div className={cn('info')}>
         <p className={cn('name')}>{nameRU}</p>
         <p className={cn('duration')}>{stringifyTime(parseTime(duration))}</p>

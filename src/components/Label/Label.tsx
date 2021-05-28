@@ -1,13 +1,16 @@
 import {createCn} from 'bem-react-classname';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React from 'react';
 
 import './Label.css';
 
-const Label = (props: React.LabelHTMLAttributes<HTMLLabelElement>) => {
-  const cn = createCn('label', props.className);
+export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;
+
+const Label: React.FC<LabelProps> = ({className, ...props}) => {
+  const cn = createCn('label', className);
 
   return (
-    <label {...props} className={cn()}>
+    <label {...filterInvalidDOMProps(props)} className={cn()}>
       {props.children}
     </label>
   );

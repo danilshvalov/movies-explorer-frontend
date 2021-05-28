@@ -2,17 +2,31 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  margin: 10vh auto 0;
+
+  margin: 0 auto;
+  padding: 10vh 0 0;
 
   width: 100%;
   max-width: 396px;
+
+  height: 79.5vh;
 }
 
 .register__form {
   flex-grow: 2;
+  max-height: 380px;
 }
 
+.register__title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
 
+  color: #000;
+
+  margin: 0 0 40px;
+}
 
 .register__logo {
   margin: 0 0 40px;
@@ -33,11 +47,13 @@
 .register__link {
   color: #3456f3;
   text-decoration: none;
+
+  margin-left: 8px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-height: 850px) {
   .register {
-    margin-top: 16vh;
+    padding-top: 22.5vh;
   }
 }
 
@@ -46,19 +62,28 @@
     align-items: center;
 
     max-width: calc(100vw - 60px);
-    margin: 8vh auto 30px;
+    height: 90vh;
+
+    padding-top: 7vh;
+  }
+
+  .register__logo {
+    margin-bottom: 50px;
+  }
+
+  .register__title {
+    margin-bottom: 72px;
   }
 
   .register__form {
-    margin: 10px 0 0;
+    max-height: 100vh;
+
+    margin: 10px 0;
   }
 
   .register__sub-text {
     font-size: 12px;
     line-height: 15px;
+    margin: 4px 0 7px;
   }
-}
-
-@media screen and (max-height: 690px) {
-
 }

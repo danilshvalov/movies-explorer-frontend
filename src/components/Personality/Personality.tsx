@@ -1,6 +1,7 @@
 import React from 'react';
 import {createCn} from 'bem-react-classname';
 import shortid from 'shortid';
+import {Link} from 'react-router-dom';
 
 import avatarImg from '../../images/avatar.png';
 import List from '../List/List';
@@ -15,20 +16,25 @@ const Personality: React.FC<PersonalityProps> = ({className, ...props}) => {
   const cn = createCn('personality', className);
 
   return (
-    <div {...props} className={className}>
+    <div {...props} className={cn()}>
       <article className={cn('info')}>
         <h2 className={cn('name')}>{texts.name}</h2>
         <p className={cn('feature')}>{texts.feature}</p>
         <p className={cn('description')}>{texts.description}</p>
         <List className={cn('list')} itemClassName={cn('list-item')}>
           {texts.links.map((link) => (
-            <ColoredLink key={shortid.generate()} className={cn('link')} to={link.path}>
+            <Link
+              component={ColoredLink}
+              key={shortid.generate()}
+              className={cn('link')}
+              to={link.path}
+            >
               {link.name}
-            </ColoredLink>
+            </Link>
           ))}
         </List>
       </article>
-      <img className={cn('photo')} src={avatarImg} />
+      <img className={cn('photo')} src={avatarImg} alt={texts.img.alt} />
     </div>
   );
 };

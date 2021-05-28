@@ -3,18 +3,21 @@ import React from 'react';
 
 import ColoredLink, {ColoredLinkProps} from '../ColoredLink/ColoredLink';
 import arrowLinkImg from '../../images/arrow-link.svg';
+import {arrowLink as texts} from '../../utils/texts';
 
 import './ArrowLink.css';
 
-function ArrowLink(props: ColoredLinkProps) {
-  const cn = createCn('arrow-link', props.className);
+export type ArrowLinkProps = ColoredLinkProps;
+
+const ArrowLink: React.FC<ArrowLinkProps> = ({className, ...props}) => {
+  const cn = createCn('arrow-link', className);
 
   return (
     <ColoredLink {...props} className={cn()}>
       {props.children}
-      <img className={cn('picture')} src={arrowLinkImg} />
+      <img className={cn('picture')} src={arrowLinkImg} alt={texts.img.alt} />
     </ColoredLink>
   );
-}
+};
 
 export default ArrowLink;

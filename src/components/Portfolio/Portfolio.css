@@ -55,13 +55,23 @@
   padding: 0;
 }
 
+@media screen and (max-width: 1024px) {
+  .portfolio__link {
+    font-size: 28px;
+    line-height: 50px;
+  }
+}
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .portfolio__header {
     font-size: 14px;
     line-height: 20px;
 
-    margin: 0 0 40px;
+    margin: 0 0 0px;
+  }
+
+  .portfolio__list {
+    margin-top: 38px;
   }
 
   .portfolio__link {
@@ -70,10 +80,10 @@
 
     border-bottom: 1px solid #e6e6e6;
 
-    padding: 0 0 25px;
+    padding-bottom: 25px;
   }
 
   .portfolio__list-item {
-    margin: 20px 0 0;
+    margin-top: 14px;
   }
 }

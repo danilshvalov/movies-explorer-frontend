@@ -1,5 +1,7 @@
 import {Route, Switch} from 'react-router';
+import React from 'react';
 
+import {createCn} from 'bem-react-classname';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import PageWrapper from '../PageWrapper/PageWrapper';
@@ -9,14 +11,25 @@ import NotFound from '../NotFound/NotFound';
 import {UserData as LoginUserData} from '../LoginForm/LoginForm';
 import {UserData as RegisterUserData} from '../RegisterForm/RegisterForm';
 import {UserData as ProfileUserData} from '../ProfileForm/ProfileForm';
-
-import './App.css';
+import CurrentUserContext from '../../contexts/CurrentUserContexts';
 import Profile from '../Profile/Profile';
 
+import './App.css';
+import Header from '../Header/Header';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import moviesList from '../../utils/moviesDB';
+
 const App = () => {
-  const handleLogin = (userData: LoginUserData) => {
-    /* do something */
-    console.log(userData);
+  const cn = createCn('page');
+  const currentUser = React.useContext(CurrentUserContext);
+  currentUser.isLoggedIn = true;
+  currentUser.name = 'Виталий';
+
+  const handleLogin = ({email}: LoginUserData) => {
+    currentUser.email = email;
+    currentUser.name = 'Тестовое имя';
+
+    console.log(currentUser);
   };
 
   const handleRegister = (userData: RegisterUserData) => {
@@ -25,9 +38,10 @@ const App = () => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleProfileUpdate = (userData: ProfileUserData) => {
-    /* do something */
-    console.log(userData);
+  const handleProfileUpdate = ({email, name}: ProfileUserData) => {
+    currentUser.email = email;
+    currentUser.name = name;
+    console.log(currentUser);
   };
 
   return (
@@ -41,7 +55,15 @@ const App = () => {
 
         <Route path="/movies">
           <PageWrapper>
-            <Movies />
+            <Movies moviesList={moviesList} />
+          </PageWrapper>
+        </Route>
+
+        <Route path="/saved-movies">
+          <PageWrapper>
+            <SavedMovies
+              moviesList={moviesList.filter(({isSaved}) => isSaved)}
+            />
           </PageWrapper>
         </Route>
 
@@ -54,7 +76,10 @@ const App = () => {
         </Route>
 
         <Route path="/profile">
-          <Profile onProfileUpdate={handleProfileUpdate} />
+          <div className={cn('profile')}>
+            <Header />
+            <Profile onProfileUpdate={handleProfileUpdate} />
+          </div>
         </Route>
 
         <Route path="/">

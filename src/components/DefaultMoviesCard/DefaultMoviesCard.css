@@ -1,0 +1,18 @@
+.default-movies-card {
+  position: relative;
+}
+
+.default-movies-card__save-button {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+
+  margin: 0;
+}
+
+.default-movies-card__save-button_checked {
+  right: 13px;
+  top: 12px;
+
+  padding: 0;
+}
