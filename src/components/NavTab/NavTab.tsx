@@ -3,10 +3,10 @@ import React from 'react';
 import shortid from 'shortid';
 
 import {navTab as texts} from '../../utils/texts';
-import Button from '../Button/Button';
 import List, {ListProps} from '../List/List';
 
 import './NavTab.css';
+import ColoredLink from '../ColoredLink/ColoredLink';
 
 export type NavTabProps = ListProps;
 
@@ -15,9 +15,13 @@ const NavTab: React.FC<NavTabProps> = ({className, ...props}) => {
   return (
     <List {...props} className={cn()} itemClassName={cn('item')}>
       {texts.buttons.map((btn) => (
-        <Button key={shortid.generate()} className={cn('button')}>
+        <ColoredLink
+          key={shortid.generate()}
+          className={cn('button')}
+          href={`#${btn.to}`}
+        >
           {btn.text}
-        </Button>
+        </ColoredLink>
       ))}
     </List>
   );

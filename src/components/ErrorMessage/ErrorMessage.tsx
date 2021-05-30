@@ -2,27 +2,50 @@ import {createCn} from 'bem-react-classname';
 import React from 'react';
 
 import './ErrorMessage.css';
-import Marquee from 'react-fast-marquee';
 
 export interface ErrorMessageProps
   extends React.HTMLAttributes<HTMLSpanElement> {
-  isHidden: boolean;
+  /** Флаг видимости сообщения */
+  isHidden?: boolean;
 }
 
+/** Сообщение об ошибке, появляющееся рядом с мышкой */
 const ErrorMessage: React.FC<ErrorMessageProps> = ({
   className,
   isHidden = false,
   ...props
 }) => {
   const cn = createCn('error-message', className);
+
+  /** Текущая позиция мышки */
+  const [mousePos, setMousePos] = React.useState({x: 0, y: 0});
+
+  React.useEffect(() => {
+    const handleMouseMove = (evt: MouseEvent): void => {
+      setMousePos({x: evt.clientX, y: evt.clientY});
+    };
+
+    /** Если сообщение скрыто - снимаем обработчик */
+    if (isHidden) {
+      window.removeEventListener('mousemove', handleMouseMove);
+    } else {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
+
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isHidden]);
+
   return (
-    <span {...props} className={cn()}>
+    <div {...props} className={cn()}>
       {!isHidden && (
-        <Marquee className={cn('text')} speed={60} gradient={false}>
-          {props.children}
-        </Marquee>
+        <div
+          className={cn('container')}
+          style={{left: mousePos.x, top: mousePos.y}}
+        >
+          <span className={cn('text')}>{props.children}</span>
+        </div>
       )}
-    </span>
+    </div>
   );
 };
 

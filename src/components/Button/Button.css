@@ -2,8 +2,6 @@
   cursor: pointer;
   text-align: center;
 
-  position: relative;
-
   border: 0;
 
   visibility: visible;
@@ -12,15 +10,17 @@
     visibility 0.3s ease-in-out;
 }
 
-.button_rounded {
-  border-radius: 48px;
-}
-
 .button_hidden {
   visibility: hidden;
   opacity: 0;
 }
 
+.button_disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+/* themes */
 .button_theme_azure {
   background-color: #3456f3;
   color: #fff;
@@ -62,7 +62,4 @@
   color: #000;
 }
 
-.button_disabled {
-  cursor: default;
-  opacity: 0.7;
-}
+/* ----------------------------------------------------------------------- */

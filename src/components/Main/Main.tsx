@@ -3,16 +3,15 @@ import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import Promo from '../Promo/Promo';
 import './Main.css';
+import {sectionIds} from '../../utils/config';
 
-function Main() {
-  return (
-    <main className="content">
-      <Promo />
-      <AboutProject id="about-project" />
-      <Techs />
-      <AboutMe />
-    </main>
-  );
-}
+const Main = () => (
+  <main className="content">
+    <Promo id={sectionIds.promo} />
+    <AboutProject id={sectionIds.aboutProject} />
+    <Techs id={sectionIds.techs} />
+    <AboutMe id={sectionIds.aboutMe} />
+  </main>
+);
 
 export default Main;

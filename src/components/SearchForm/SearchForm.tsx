@@ -10,37 +10,64 @@ import {searchForm as texts} from '../../utils/texts';
 
 import './SearchForm.css';
 
-export interface SearchFormProps
-  extends React.FormHTMLAttributes<HTMLFormElement> {
-  onChecked: Function;
-  defaultChecked?: boolean;
+export interface SearchData {
+  isChecked: boolean;
+  query: string;
 }
 
+export type SearchFunc = (data: SearchData) => void;
+
+export interface SearchFormProps
+  extends React.FormHTMLAttributes<HTMLFormElement> {
+  /** Изначальное состояние формы */
+  defaultChecked?: boolean;
+  onSearch: SearchFunc;
+}
+
+/** Поисковая форма */
 const SearchForm: React.FC<SearchFormProps> = ({
   className,
-  onChecked,
+  onSearch,
   defaultChecked = false,
   ...props
 }) => {
+  const cn = createCn('search-form', className);
+
+  const [fieldQuery, setFieldQuery] = React.useState('');
+  const [isChecked, setChecked] = React.useState(defaultChecked);
+
+  /** Handlers */
   const handleCheckboxChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    onChecked(target.checked);
+    setChecked(target.checked);
   };
 
-  const cn = createCn('search-form', className);
+  const handleFieldInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setFieldQuery(evt.target.value);
+  };
+
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    onSearch({isChecked, query: fieldQuery});
+  };
 
   return (
-    <form {...props} className={cn()}>
+    <form {...props} className={cn()} onSubmit={handleSubmit}>
       <List className={cn('list')} itemClassName={cn('list-item')}>
+        {/** Поле поиска */}
         <SearchField
           className={cn('field')}
           placeholder={texts.field.placeholder}
+          onInput={handleFieldInput}
         >
-          <Button className={cn('start-button')} theme={Theme.Azure} rounded>
+          {/** Start-кнопка */}
+          <Button className={cn('start-button')} theme={Theme.Azure}>
             {texts.startButton.label}
           </Button>
         </SearchField>
+        {/** Переключатель */}
         <CheckBox
           label={texts.checkBox.label}
           className={cn('check-button')}

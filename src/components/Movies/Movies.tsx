@@ -1,35 +1,32 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
-import SearchForm from '../SearchForm/SearchForm';
-import moviesFilter from '../../utils/movies-filter';
-import AlignedMoviesCardList from '../AlignedMoviesCardList/AlignedMoviesCardList';
-import DefaultMoviesCard from '../DefaultMoviesCard/DefaultMoviesCard';
+import {SaveFunc} from '../SaveButtonWrapper/SaveButtonWrapper';
 import {MoviesList} from '../../utils/types';
+import SearchableMoviesCardList from '../SearchableMoviesCardList/SearchableMoviesCardList';
+import {withSaveButton as cardWithSaveButton} from '../MoviesCard/MoviesCard';
 
 import './Movies.css';
 
 export interface MoviesProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Список фильмов, которые могут быть отображены */
   moviesList: MoviesList;
+  onSave: SaveFunc;
 }
 
-/**
- * Returns a page with a list of films
- */
-const Movies: React.FC<MoviesProps> = ({className, moviesList, ...props}) => {
-  /**
-   * Filter flag, toggled by checkbox
-   */
-  const [isShortFilms, setShortFilms] = React.useState(false);
-
+/** Секция, включающая в себя список всех доступных фильмов и поисковую форму */
+const Movies = ({
+  className, moviesList, onSave, ...props
+}: MoviesProps) => {
   const cn = createCn('movies', className);
+
   return (
-    <section {...props} className={cn()}>
-      <SearchForm className={cn('search-form')} onChecked={setShortFilms} />
-      <AlignedMoviesCardList
-        moviesList={moviesFilter({moviesList, isShortFilms})}
-        CardComponent={DefaultMoviesCard}
+    <section {...filterInvalidDOMProps(props)} className={cn()}>
+      <SearchableMoviesCardList
         className={cn('card-list')}
+        moviesList={moviesList}
+        component={(rest) => cardWithSaveButton({onSave, ...rest})}
       />
     </section>
   );

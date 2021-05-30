@@ -1,17 +1,32 @@
 .error-message {
-  font-size: 10px;
-  line-height: 12px;
-
-  color: #ee3465;
+  height: 14px;
 
   width: 100%;
+
   overflow: hidden;
 }
 
-.error-message__text {
-  /* width: 100%; */
+.error-message__container {
+  position: fixed;
+
+  display: flex;
+
+  width: 250px;
+  max-height: 100vh;
+
+  border-radius: 5px;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+
+  padding: 10px;
 }
 
-.error-message_hidden {
-  visibility: hidden;
+.error-message__text {
+  font-size: 10px;
+  line-height: 12px;
+
+  width: 100%;
+
+  word-break: break-word;
+
+  color: #ee3465;
 }

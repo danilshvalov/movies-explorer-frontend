@@ -1,5 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {Link} from 'react-router-dom';
 
 import {pageLinks} from '../../utils/config';
@@ -14,6 +15,7 @@ export interface RegisterProps extends React.HTMLAttributes<HTMLDivElement> {
   onRegister: RegisterFunc;
 }
 
+/** Секция регистрации пользователя */
 const Register: React.FC<RegisterProps> = ({
   onRegister,
   className,
@@ -22,10 +24,12 @@ const Register: React.FC<RegisterProps> = ({
   const cn = createCn('register', className);
 
   return (
-    <section {...props} className={cn()}>
+    <section {...filterInvalidDOMProps(props)} className={cn()}>
       <Logo className={cn('logo')} />
       <h1 className={cn('title')}>{texts.title}</h1>
+      {/** Форма регистрации */}
       <RegisterForm className={cn('form')} onRegister={onRegister} />
+      {/** Ссылки перенаправления зарегистрированных пользователей */}
       <span className={cn('sub-text')}>
         {texts.subtext.text}
         <Link

@@ -1,40 +1,34 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-import moviesFilter from '../../utils/movies-filter';
+
 import {MoviesList} from '../../utils/types';
-import AlignedMoviesCardList from '../AlignedMoviesCardList/AlignedMoviesCardList';
-import SavedMoviesCard from '../SavedMoviesCard/SavedMoviesCard';
-import SearchForm from '../SearchForm/SearchForm';
+import {withDeleteButton as cardWithDeleteButton} from '../MoviesCard/MoviesCard';
+import {DeleteFunc} from '../DeleteButtonWrapper/DeleteButtonWrapper';
+import SearchableMoviesCardList from '../SearchableMoviesCardList/SearchableMoviesCardList';
 
 import './SavedMovies.css';
 
 export interface SavedMoviesProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Список фильмов, которые могут быть отображены */
   moviesList: MoviesList;
+  onDelete: DeleteFunc;
 }
 
-const SavedMovies: React.FC<SavedMoviesProps> = ({className, moviesList, ...props}) => {
-  const [isShortFilms, setShortFilms] = React.useState(false);
-
-  const [
-    filteredMoviesList,
-    setFilteredMoviesList,
-  ] = React.useState<MoviesList>(moviesList);
-
-  React.useEffect(() => {
-    setFilteredMoviesList(
-      moviesFilter({moviesList, isShortFilms}),
-    );
-  }, [isShortFilms]);
-
+/** Секция, включающая в себя список всех сохранённых фильмов и поисковую форму */
+const SavedMovies: React.FC<SavedMoviesProps> = ({
+  className,
+  moviesList,
+  onDelete,
+  ...props
+}) => {
   const cn = createCn('saved-movies', className);
+
   return (
     <section {...props} className={cn()}>
-      <SearchForm className={cn('search-form')} onChecked={setShortFilms} />
-
-      <AlignedMoviesCardList
-        moviesList={filteredMoviesList}
-        CardComponent={SavedMoviesCard}
+      <SearchableMoviesCardList
+        component={(rest) => cardWithDeleteButton({onDelete, ...rest})}
         className={cn('card-list')}
+        moviesList={moviesList}
       />
     </section>
   );

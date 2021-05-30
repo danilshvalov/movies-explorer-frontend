@@ -8,21 +8,23 @@ import './Button.css';
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Внешний вид кнопки */
   theme?: Theme;
+  /** Состояние выключенной кнопки */
   disabled?: boolean;
+  /** Сокрытие видимости кнопки */
   hidden?: boolean;
-  rounded?: boolean;
 }
 
 export type RefType = HTMLButtonElement;
 
+/** Обёртка над обычной кнопкой, поддерживающая разные цветовые решения */
 const Button = React.forwardRef<RefType, ButtonProps>(
   (
     {
       className,
       theme = Theme.Transparent,
       disabled = false,
-      rounded = false,
       hidden = false,
       ...props
     },
@@ -37,7 +39,6 @@ const Button = React.forwardRef<RefType, ButtonProps>(
         className={cn({
           theme,
           disabled,
-          rounded,
           hidden,
         })}
       >

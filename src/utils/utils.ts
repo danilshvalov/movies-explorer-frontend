@@ -21,4 +21,11 @@ const parseTime = (minutes: number): ParsedTime => ({
 
 const stringifyTime = ({hours, minutes}: ParsedTime) => (hours && hours > 0 ? `${hours}ч ${minutes}м` : `${minutes}м`);
 
-export {alignQuantity, parseTime, stringifyTime};
+const getCopyrightDate = () => {
+  const year = new Date().getFullYear();
+  return year === 2021 ? '2021' : `2021 - ${year}`;
+};
+
+export {
+  alignQuantity, parseTime, stringifyTime, getCopyrightDate,
+};

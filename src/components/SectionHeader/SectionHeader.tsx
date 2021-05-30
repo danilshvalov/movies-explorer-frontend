@@ -7,6 +7,7 @@ export type SectionHeaderProps = React.HTMLAttributes<HTMLHeadingElement>;
 
 export type RefType = HTMLHeadingElement;
 
+/** Заголовок для секций с нижним подчеркиванием */
 const SectionHeader = React.forwardRef<RefType, SectionHeaderProps>(
   ({className, ...props}, ref) => {
     const cn = createCn('section-header', className);

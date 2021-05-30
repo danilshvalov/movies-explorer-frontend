@@ -1,16 +1,14 @@
-@import url("./vendor/normalize.css");
-@import url("./fonts/_inter/fonts_inter.css");
+@import url('./vendor/normalize.css');
+@import url('./fonts/_inter/fonts_inter.css');
 
 body,
 html {
   height: 100%;
   background-color: #fafafa;
+  scroll-behavior: smooth;
 }
 
-/* приложение очень маленькое, изменение разрешения происходит очень редко,
-поэтому можно позволить себе плавные переходы на большинстве элементов  */
 * {
-  transition: margin 0.5s, font-size 0.5s, line-height 0.5s, gap 0.5s,
-    padding 0.5s, width 0.5s, max-width 0.5s, min-width 0.5s, height 0.5s,
-    max-height 0.5s, min-height 0.5s, background 0.5s;
+  margin: 0;
+  padding: 0;
 }

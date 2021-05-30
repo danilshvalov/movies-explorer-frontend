@@ -1,14 +1,21 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-import Button, {ButtonProps} from '../Button/Button';
+import Button, {ButtonProps, RefType as ButtonRefType} from '../Button/Button';
 
 import './DeleteButton.css';
 
 export type DeleteButtonProps = ButtonProps;
+export type RefType = ButtonRefType;
 
-const DeleteButton: React.FC<DeleteButtonProps> = ({className, ...props}) => {
-  const cn = createCn('delete-button', className);
-  return <Button {...props} className={cn()} />;
-};
+/**
+ * Кнопка удаления
+ *
+ * Обёртка над [обычной кнопкой]{@link Button} с картинкой крестика */
+const DeleteButton = React.forwardRef<RefType, DeleteButtonProps>(
+  ({className, ...props}) => {
+    const cn = createCn('delete-button', className);
+    return <Button {...props} className={cn()} />;
+  },
+);
 
 export default DeleteButton;

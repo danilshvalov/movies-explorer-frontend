@@ -1,7 +1,7 @@
 import {Route, Switch} from 'react-router';
 import React from 'react';
-
 import {createCn} from 'bem-react-classname';
+
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import PageWrapper from '../PageWrapper/PageWrapper';
@@ -11,82 +11,107 @@ import NotFound from '../NotFound/NotFound';
 import {UserData as LoginUserData} from '../LoginForm/LoginForm';
 import {UserData as RegisterUserData} from '../RegisterForm/RegisterForm';
 import {UserData as ProfileUserData} from '../ProfileForm/ProfileForm';
-import CurrentUserContext from '../../contexts/CurrentUserContexts';
+import CurrentUserContext, {
+  UserContextProps,
+} from '../../contexts/CurrentUserContext';
 import Profile from '../Profile/Profile';
-
-import './App.css';
 import Header from '../Header/Header';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import moviesList from '../../utils/moviesDB';
+import {SaveData} from '../SaveButtonWrapper/SaveButtonWrapper';
+import {DeleteData} from '../DeleteButtonWrapper/DeleteButtonWrapper';
+import {pageLinks} from '../../utils/config';
+
+import './App.css';
 
 const App = () => {
   const cn = createCn('page');
-  const currentUser = React.useContext(CurrentUserContext);
-  currentUser.isLoggedIn = true;
-  currentUser.name = 'Виталий';
+  const [currentUser, setCurrentUser] = React.useState<UserContextProps>({
+    email: '',
+    name: '',
+    isLoggedIn: true,
+    savedMovies: [],
+  });
 
-  const handleLogin = ({email}: LoginUserData) => {
-    currentUser.email = email;
-    currentUser.name = 'Тестовое имя';
-
-    console.log(currentUser);
+  const handleLogin = ({email, password}: LoginUserData) => {
+    setCurrentUser({...currentUser, email});
+    // FEATURE добавить логику
+    // eslint-disable-next-line no-console
+    console.log(`Login | email: ${email} password: ${password}`);
   };
 
-  const handleRegister = (userData: RegisterUserData) => {
-    /* do something */
-    console.log(userData);
+  const handleRegister = ({email, name, password}: RegisterUserData) => {
+    // FEATURE добавить логику
+    // eslint-disable-next-line no-console
+    console.log(
+      `Register | email: ${email} password: ${password} name: ${name}`,
+    );
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleProfileUpdate = ({email, name}: ProfileUserData) => {
-    currentUser.email = email;
-    currentUser.name = name;
-    console.log(currentUser);
+    setCurrentUser({...currentUser, email, name});
+    // FEATURE добавить логику
+    // eslint-disable-next-line no-console
+    console.log(`ProfileUpdate | email: ${email} name: ${name}`);
+  };
+
+  const handleSaveCard = ({isSaved, id}: SaveData) => {
+    // FEATURE добавить логику
+    // eslint-disable-next-line no-console
+    console.log(`SaveCard | id: ${id} isSaved: ${isSaved}`);
+  };
+  const handleDeleteCard = ({id}: DeleteData) => {
+    // FEATURE добавить логику
+    // eslint-disable-next-line no-console
+    console.log(`DeleteCard | id: ${id}`);
   };
 
   return (
-    <div className="page">
-      <Switch>
-        <Route exact path="/">
-          <PageWrapper>
-            <Main />
-          </PageWrapper>
-        </Route>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Switch>
+          <Route exact path={pageLinks.main}>
+            <PageWrapper>
+              <Main />
+            </PageWrapper>
+          </Route>
 
-        <Route path="/movies">
-          <PageWrapper>
-            <Movies moviesList={moviesList} />
-          </PageWrapper>
-        </Route>
+          <Route path={pageLinks.movies}>
+            <PageWrapper>
+              <Movies onSave={handleSaveCard} moviesList={moviesList} />
+            </PageWrapper>
+          </Route>
 
-        <Route path="/saved-movies">
-          <PageWrapper>
-            <SavedMovies
-              moviesList={moviesList.filter(({isSaved}) => isSaved)}
-            />
-          </PageWrapper>
-        </Route>
+          <Route path={pageLinks.savedMovies}>
+            <PageWrapper>
+              <SavedMovies
+                onDelete={handleDeleteCard}
+                moviesList={moviesList.filter(({isSaved}) => isSaved)}
+              />
+            </PageWrapper>
+          </Route>
 
-        <Route path="/signin">
-          <Login onLogin={handleLogin} />
-        </Route>
+          <Route path={pageLinks.signIn}>
+            <Login onLogin={handleLogin} />
+          </Route>
 
-        <Route path="/signup">
-          <Register onRegister={handleRegister} />
-        </Route>
+          <Route path={pageLinks.signUp}>
+            <Register onRegister={handleRegister} />
+          </Route>
 
-        <Route path="/profile">
-          <div className={cn('profile')}>
-            <Header />
-            <Profile onProfileUpdate={handleProfileUpdate} />
-          </div>
-        </Route>
+          <Route path={pageLinks.profile}>
+            <div className={cn('profile')}>
+              <Header />
+              <Profile onProfileUpdate={handleProfileUpdate} />
+            </div>
+          </Route>
 
-        <Route path="/">
-          <NotFound />
-        </Route>
-      </Switch>
-    </div>
+          <Route path="/">
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
+    </CurrentUserContext.Provider>
   );
 };
 

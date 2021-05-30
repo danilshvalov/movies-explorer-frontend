@@ -1,5 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
+
 import Button, {
   ButtonProps,
   RefType as ButtonRefType,
@@ -10,6 +11,7 @@ import './HamburgerButton.css';
 export type HamburgerButtonProps = ButtonProps;
 export type RefType = ButtonRefType;
 
+/** Кнопка "гамбургер" (≡) */
 const HamburgerButton = React.forwardRef<RefType, HamburgerButtonProps>(
   ({className, ...props}, ref) => {
     const cn = createCn('hamburger-button', className);

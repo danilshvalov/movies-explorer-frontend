@@ -1,4 +1,6 @@
-import {pageLinks} from './config';
+import {externalLinks, pageLinks, sectionIds} from './config';
+import {getCopyrightDate} from './utils';
+import notFoundCatImg from '../images/not-found-cat.png';
 
 export const aboutMe = {
   header: 'Студент',
@@ -6,16 +8,20 @@ export const aboutMe = {
 
 export const aboutProject = {
   header: 'О проекте',
+  infoTable: {
+    leftColumn: {title: '1 неделя', content: 'Back-end'},
+    rightColumn: {title: '4 недели', content: 'Front-end'},
+  },
 };
 
 export const footer = {
   links: [
-    {name: 'Яндекс.Практикум', path: 'https://praktikum.yandex.ru/'},
-    {name: 'Github', path: '#'},
-    {name: 'Facebook', path: '#'},
+    {name: 'Яндекс.Практикум', path: externalLinks.yandexPraktikum},
+    {name: 'Github', path: externalLinks.github},
+    {name: 'Telegram', path: externalLinks.telegram},
   ],
   about: 'Учебный проект Яндекс.Практикум х BeatFilm.',
-  copyright: '© 2021',
+  copyright: `© ${getCopyrightDate()}`,
 };
 
 export const notFound = {
@@ -27,9 +33,9 @@ export const notFound = {
 export const portfolio = {
   header: 'Портфолио',
   links: [
-    {name: 'Статичный сайт', path: '#'},
-    {name: 'Адаптивный сайт', path: '#'},
-    {name: 'Одностраничное приложение', path: '#'},
+    {name: 'Статичный сайт', path: externalLinks.staticSite},
+    {name: 'Адаптивный сайт', path: externalLinks.adaptiveSite},
+    {name: 'Одностраничное приложение', path: externalLinks.SPA},
   ],
 };
 
@@ -38,25 +44,26 @@ export const promo = {
 };
 
 export const personality = {
-  name: 'Виталий',
-  feature: 'Фронтенд-разработчик, 30 лет',
-  description: `Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и дочь. Я
-  люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в
-  компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься
-  фриланс-заказами и ушёл с постоянной работы.`,
+  name: 'Даниил',
+  feature: 'Начинающий фронтенд-разработчик, 17 лет',
+  description:
+    'Я родился и живу во Владивостоке, Обожаю кодить, увлекаюсь математикой и физикой. Закончил Яндекс.Лицей. Впечатлённый лицеем, решил учиться в Яндекс.Практикуме. Время обучения пролетело незаметно, очень понравилось.',
   buttons: [{text: 'О проекте'}, {text: 'Технологии'}, {text: 'Студент'}],
   links: [
-    {name: 'Facebook', path: '#'},
-    {name: 'Github', path: '#'},
+    {name: 'Telegram', path: externalLinks.telegram},
+    {name: 'Github', path: externalLinks.github},
   ],
-
   img: {
     alt: 'Аватар',
   },
 };
 
 export const navTab = {
-  buttons: [{text: 'О проекте'}, {text: 'Технологии'}, {text: 'Студент'}],
+  buttons: [
+    {text: 'О проекте', to: sectionIds.aboutProject},
+    {text: 'Технологии', to: sectionIds.techs},
+    {text: 'Студент', to: sectionIds.aboutMe},
+  ],
 };
 
 export const profile = {
@@ -192,4 +199,15 @@ export const loginButtons = {
 
 export const nothingFoundStub = {
   description: 'Ничего не удалось найти :/',
+  img: {
+    src: notFoundCatImg,
+    alt: 'Картинка котика',
+  },
+};
+
+export const techs = {
+  header: 'Технологии',
+  list: ['HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB'],
+  about:
+    'На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.',
 };

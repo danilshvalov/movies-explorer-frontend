@@ -6,6 +6,7 @@ import './ColoredLink.css';
 
 export type ColoredLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
+/** Обёртка над обычной ссылкой, поддерживающая анимацию при наведении */
 const ColoredLink: React.FC<ColoredLinkProps> = ({className, ...props}) => {
   const cn = createCn('colored-link', className);
 

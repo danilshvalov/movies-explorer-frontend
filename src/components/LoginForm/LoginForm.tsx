@@ -10,19 +10,23 @@ import './LoginForm.css';
 
 const texts = login.form;
 
+/** Тип возвращаемых данных  */
 export interface UserData {
   email: string;
   password: string;
 }
 
+/** Тип callback функции */
 export interface LoginFunc {
   (userData: UserData): void;
 }
 
 export interface LoginFormProps extends FormProps {
+  /** callback, вызываемый при отправке формы */
   onLogin: LoginFunc;
 }
 
+/** Форма входа в аккаунт */
 const LoginForm: React.FC<LoginFormProps> = ({
   className,
   onLogin,
@@ -30,22 +34,25 @@ const LoginForm: React.FC<LoginFormProps> = ({
 }) => {
   const cn = createCn('login-form', className);
 
+  /** Переменная-флаг для отключения кнопки отправки формы */
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(
     true,
   );
 
+  /** Ссылки на input-элементы */
   const emailInputRef = React.createRef<HTMLInputElement>();
   const passwordInputRef = React.createRef<HTMLInputElement>();
 
+  /** Список всех ссылок */
   const inputs = [emailInputRef, passwordInputRef];
 
+  /** Handlers */
   const handleInput = () => {
     setSubmitButtonDisabled(
       inputs.some((input) => !input?.current?.validity.valid),
     );
   };
 
-  // submit handlers
   const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
 
@@ -60,6 +67,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   return (
     <Form {...props} className={cn()} onSubmit={handleSubmit} noValidate={true}>
       <fieldset className={cn('fieldset')}>
+        {/** Поле с Email */}
         <FieldWrapper
           className={cn('field-wrapper')}
           fieldClassName={cn('field')}
@@ -72,6 +80,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           onInput={handleInput}
         />
 
+        {/** Поле с паролем */}
         <FieldWrapper
           className={cn('field-wrapper')}
           fieldClassName={cn('field')}
@@ -85,6 +94,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         />
       </fieldset>
 
+      {/** Кнопка отправки формы */}
       <Button
         className={cn('submit-button')}
         type="submit"

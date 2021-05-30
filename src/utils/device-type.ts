@@ -1,5 +1,8 @@
 import {DeviceType, DeviceWidthSettings} from './types';
 
+/** Функция определения типа текущего устройства
+  @param settings - критерии, определяющие устройства
+*/
 const getDeviceType = (settings: DeviceWidthSettings): DeviceType => {
   const currentWidth = window.innerWidth;
 

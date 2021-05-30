@@ -11,6 +11,7 @@ import './CloseButton.css';
 export type CloseButtonProps = ButtonProps;
 export type RefType = ButtonRefType;
 
+/** Кнопка с крестиком */
 const CloseButton = React.forwardRef<RefType, CloseButtonProps>(
   ({className, ...props}, ref) => {
     const cn = createCn('close-button', className);

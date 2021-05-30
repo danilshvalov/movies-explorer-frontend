@@ -5,6 +5,7 @@ import './DesktopMenu.css';
 
 export type DesktopMenuProps = React.HTMLAttributes<HTMLDivElement>;
 
+/** Меню, отображаемое на ПК */
 const DesktopMenu: React.FC<DesktopMenuProps> = ({className, ...props}) => {
   const cn = createCn('desktop-menu', className);
 

@@ -9,6 +9,7 @@ import './ArrowLink.css';
 
 export type ArrowLinkProps = ColoredLinkProps;
 
+/** Ссылка с картинкой стрелочки */
 const ArrowLink: React.FC<ArrowLinkProps> = ({className, ...props}) => {
   const cn = createCn('arrow-link', className);
 

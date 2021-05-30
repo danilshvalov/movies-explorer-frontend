@@ -1,19 +1,15 @@
 .about-me {
-  margin: 212px 70px 100px;
-  padding: 0;
+  max-width: 1140px;
+  width: calc(100% - 140px);
+  margin: 212px auto 100px;
 }
 
 .about-me__header {
-  margin: 0 0 65px;
+  margin-bottom: 65px;
 }
 
 .about-me__portfolio {
-  margin: 102px 0 0;
-}
-
-.about-me__personality {
-  margin: 0;
-  padding: 0;
+  margin-top: 102px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -37,10 +33,6 @@
 
   .about-me__header {
     margin-bottom: 60px;
-  }
-
-  .about-me__list-item {
-    margin-right: 26px;
   }
 
   .about-me__portfolio {

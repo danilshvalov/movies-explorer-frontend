@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {devicesWidth, moviesAmountByDevice} from '../../utils/config';
 import getDeviceType from '../../utils/device-type';
 import {alignQuantity} from '../../utils/utils';
@@ -11,11 +12,12 @@ export type AlignedMoviesCardListProps = Omit<
   'isCompleteList' | 'onMoreButtonClick'
 >;
 
-const AlignedMoviesCardList: React.FC<AlignedMoviesCardListProps> = ({
+/** Выравненный под разрешение список с фильмами */
+const AlignedMoviesCardList = ({
   moviesList,
   ...props
-}) => {
-  // Функция делает невозможным превышение счётчиком реального кол-ва карточек
+}: AlignedMoviesCardListProps) => {
+  /** Функция делает невозможным превышение счётчиком реального кол-ва карточек */
   const [currentCardCount, setCurrentCardCount] = React.useReducer(
     (_: number, newCount: number) => {
       if (newCount !== 0) {
@@ -32,11 +34,12 @@ const AlignedMoviesCardList: React.FC<AlignedMoviesCardListProps> = ({
     ),
   );
 
+  /** Текущий шаг, зависит от разрешения и переданных настроек */
   const [currentStep, setCurrentStep] = React.useState<number>(
     moviesAmountByDevice[getDeviceType(devicesWidth)].step,
   );
 
-  // Ловим изменение текущего разрешения
+  /** Ловим изменение текущего разрешения */
   React.useEffect(() => {
     const handleResize = () => {
       setCurrentStep(moviesAmountByDevice[getDeviceType(devicesWidth)].step);
@@ -47,6 +50,7 @@ const AlignedMoviesCardList: React.FC<AlignedMoviesCardListProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  /** При изменении списка или шага выравниваем список */
   React.useEffect(() => {
     setCurrentCardCount(alignQuantity(currentCardCount, currentStep));
   }, [currentStep, moviesList]);

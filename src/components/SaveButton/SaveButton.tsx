@@ -1,14 +1,17 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
+
 import {Theme} from '../../utils/types';
 import Button, {ButtonProps} from '../Button/Button';
 
 import './SaveButton.css';
 
 export interface SaveButtonProps extends ButtonProps {
+  /** Флаг изначального состояния кнопки */
   checked?: boolean;
 }
 
+/** Кнопка сохранения */
 const SaveButton: React.FC<SaveButtonProps> = ({
   className,
   checked = false,

@@ -1,8 +1,8 @@
-.default-movies-card {
+.save-button-wrapper {
   position: relative;
 }
 
-.default-movies-card__save-button {
+.save-button-wrapper__save-button {
   position: absolute;
   right: 15px;
   top: 12px;
@@ -10,7 +10,7 @@
   margin: 0;
 }
 
-.default-movies-card__save-button_checked {
+.save-button-wrapper__save-button_checked {
   right: 13px;
   top: 12px;
 

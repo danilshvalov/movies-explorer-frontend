@@ -12,14 +12,21 @@ const texts = searchForm.field;
 export type SearchFieldProps = FieldProps;
 export type RefType = FieldRefType;
 
+/** Поле поисковой формы */
 const SearchField = React.forwardRef<RefType, SearchFieldProps>(
   ({placeholder, className, ...props}, ref) => {
     const cn = createCn('search-field', className);
 
     return (
       <div className={cn()}>
+        {/** Иконка увеличительного стекла */}
         <img className={cn('icon')} src={magnifierImg} alt={texts.img.alt} />
-        <Field ref={ref} className={cn('input')} placeholder={placeholder} />
+        <Field
+          {...props}
+          ref={ref}
+          className={cn('input')}
+          placeholder={placeholder}
+        />
         {props.children}
       </div>
     );

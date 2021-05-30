@@ -9,15 +9,19 @@ import './MobileMenu.css';
 
 export type MobileMenuProps = React.HTMLAttributes<HTMLDivElement>;
 
+/** Меню для устройств с небольшим разрешением */
 const MobileMenu: React.FC<MobileMenuProps> = ({className, ...props}) => {
   const cn = createCn('mobile-menu', className);
 
+  /** Переменная-флаг, изменяющая видимость меню */
   const [isOpen, setOpen] = React.useState(false);
 
+  /** Handlers */
   const handleOpenButtonClick = () => setOpen(true);
   const handleCloseButtonClick = () => setOpen(false);
   const handleEsc = () => setOpen(false);
 
+  /** Вешаем слушателя кнопки Esc при открытии */
   useKey(['Escape'], handleEsc, {when: isOpen});
 
   return (

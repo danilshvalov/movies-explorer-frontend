@@ -7,6 +7,7 @@ import './NothingFoundStub.css';
 
 export type NothingFoundStubProps = React.HTMLAttributes<HTMLSpanElement>;
 
+/** Заглушка "Ничего не найдено" */
 const NothingFoundStub: React.FC<NothingFoundStubProps> = ({
   className,
   ...props
@@ -15,7 +16,8 @@ const NothingFoundStub: React.FC<NothingFoundStubProps> = ({
 
   return (
     <span {...props} className={cn()}>
-      {texts.description}
+      <p className={cn('text')}>{texts.description}</p>
+      <img className={cn('picture')} src={texts.img.src} alt={texts.img.alt} />
     </span>
   );
 };

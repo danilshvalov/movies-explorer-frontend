@@ -11,12 +11,14 @@ import './RegisterForm.css';
 
 const texts = register.form;
 
+/** Возвращаемые формой данные */
 export interface UserData {
   email: string;
   password: string;
   name: string;
 }
 
+/** callback функция при отправке формы */
 export interface RegisterFunc {
   (userData: UserData): void;
 }
@@ -31,24 +33,26 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
 }) => {
   const cn = createCn('register-form', props.className);
 
+  /** Переменная-флаг для отключения кнопки отправки формы */
   const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(
     true,
   );
 
-  // refs
+  /** Ссылки на input-элементы */
   const nameInputRef = React.createRef<HTMLInputElement>();
   const emailInputRef = React.createRef<HTMLInputElement>();
   const passwordInputRef = React.createRef<HTMLInputElement>();
 
+  /** Список всех ссылок */
   const inputs = [nameInputRef, emailInputRef, passwordInputRef];
 
+  /** Handlers */
   const handleInput = () => {
     setSubmitButtonDisabled(
       inputs.some((input) => !input?.current?.validity.valid),
     );
   };
 
-  // submit handlers
   const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
 
@@ -64,6 +68,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
   return (
     <Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
       <fieldset className={cn('fieldset')}>
+        {/** Поле с именем */}
         <FieldWrapper
           className={cn('field-wrapper')}
           fieldClassName={cn('field')}
@@ -76,6 +81,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
           onInput={handleInput}
         />
 
+        {/** Поле с Email */}
         <FieldWrapper
           className={cn('field-wrapper')}
           fieldClassName={cn('field')}
@@ -88,6 +94,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
           onInput={handleInput}
         />
 
+        {/** Поле с паролем */}
         <FieldWrapper
           className={cn('field-wrapper')}
           fieldClassName={cn('field')}
@@ -101,6 +108,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         />
       </fieldset>
 
+      {/** Кнопка отправки формы */}
       <Button
         className={cn('submit-button')}
         type="submit"

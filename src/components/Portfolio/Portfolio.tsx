@@ -8,12 +8,9 @@ import {portfolio as texts} from '../../utils/texts';
 
 import './Portfolio.css';
 
-export interface IPortfolioLink {
-  name: string;
-  path: any;
-}
 export type PortfolioProps = React.HTMLAttributes<HTMLDivElement>;
 
+/** Секция с ссылками на проекты из портфолио */
 const Portfolio: React.FC<PortfolioProps> = ({className, ...props}) => {
   const cn = createCn('portfolio', className);
   return (

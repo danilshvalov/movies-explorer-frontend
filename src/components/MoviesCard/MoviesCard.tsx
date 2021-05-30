@@ -3,27 +3,25 @@ import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React from 'react';
 
 import {parseTime, stringifyTime} from '../../utils/utils';
+import {IMovie} from '../../utils/types';
 import {moviesCard as texts} from '../../utils/texts';
-import {ButtonProps} from '../Button/Button';
 
 import './MoviesCard.css';
+import SaveButtonWrapper, {
+  SaveButtonWrapperProps,
+} from '../SaveButtonWrapper/SaveButtonWrapper';
+import DeleteButtonWrapper, {
+  DeleteButtonWrapperProps,
+} from '../DeleteButtonWrapper/DeleteButtonWrapper';
 
-export interface CardButtonProps extends ButtonProps {
-  checked?: boolean;
-  hidden?: boolean;
-}
+export type MoviesCardProps = React.HTMLAttributes<HTMLDivElement> & IMovie;
 
-export interface MoviesCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  thumbnail: any;
-  duration: number;
-  nameRU: string;
-}
-
+/** Миниатюрная карточка фильма */
 const MoviesCard: React.FC<MoviesCardProps> = ({
   className,
-  duration,
   thumbnail,
   nameRU,
+  duration,
   ...props
 }) => {
   const cn = createCn('movies-card', className);
@@ -38,5 +36,31 @@ const MoviesCard: React.FC<MoviesCardProps> = ({
     </div>
   );
 };
+
+export function withSaveButton(
+  rest: MoviesCardProps &
+    Omit<SaveButtonWrapperProps, 'componentId' | 'component'>,
+) {
+  return (
+    <SaveButtonWrapper
+      {...rest}
+      componentId={rest.movieId}
+      component={MoviesCard}
+    />
+  );
+}
+
+export function withDeleteButton(
+  rest: MoviesCardProps &
+    Omit<DeleteButtonWrapperProps, 'componentId' | 'component'>,
+) {
+  return (
+    <DeleteButtonWrapper
+      {...rest}
+      componentId={rest.movieId}
+      component={MoviesCard}
+    />
+  );
+}
 
 export default MoviesCard;

@@ -11,10 +11,12 @@ import './Logo.css';
 
 export type LogoProps = React.ImgHTMLAttributes<HTMLImageElement>;
 
+/** Логотип сайта */
 const Logo = React.forwardRef<HTMLImageElement, LogoProps>(
   ({className, ...props}, ref) => {
     const cn = createCn('logo', className);
     return (
+      /** При нажатии перенаправляем на главную страницу */
       <Link component={ColoredLink} to={pageLinks.main}>
         <img
           {...props}

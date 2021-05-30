@@ -10,10 +10,13 @@ import {LinkList} from '../../utils/types';
 import './Navigation.css';
 
 export interface NavigationProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Список с отображаемыми ссылками */
   linksList: LinkList;
+  /** Включение подчеркивания ссылки по текущему адресу */
   underline: boolean;
 }
 
+/** Компонент навигации по сайту */
 const Navigation: React.FC<NavigationProps> = ({
   className,
   linksList,

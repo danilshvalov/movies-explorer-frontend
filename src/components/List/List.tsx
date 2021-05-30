@@ -1,20 +1,25 @@
+import React from 'react';
 import {createCn} from 'bem-react-classname';
 import classNames from 'classnames';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-import React from 'react';
 
 import './List.css';
 
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
+  /** className <li/> элемента */
   itemClassName?: string;
 }
 
 export type RefType = HTMLUListElement;
 
+/**
+ * Компонент-обёртка над <ul/>
+ * Все дочерние элементы помещаются в <li/>
+ */
 const List = React.forwardRef<RefType, ListProps>(
   ({className, ...props}, ref) => {
     const cn = createCn('list', className);
-    const itemClassName = classNames('list__item', props.itemClassName);
+    const itemClassName = classNames(cn('item'), props.itemClassName);
 
     return (
       <ul {...filterInvalidDOMProps(props)} className={cn()} ref={ref}>

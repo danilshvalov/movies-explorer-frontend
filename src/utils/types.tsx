@@ -6,11 +6,14 @@ export enum Theme {
   Light = 'light',
 }
 
+export type Id = number;
+
 export interface IMovie {
-  movieId: number;
+  movieId: Id;
   duration: number;
   thumbnail: any;
   nameRU: string;
+  isSaved: boolean;
 }
 
 export interface ILink {
