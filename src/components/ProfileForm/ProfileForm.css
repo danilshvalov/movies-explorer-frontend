@@ -68,7 +68,7 @@
   }
 }
 
-@media screen and (max-width: 458px) {
+@media screen and (max-width: 460px) {
   .profile-form__fieldset {
     margin-bottom: 350px;
   }

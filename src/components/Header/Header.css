@@ -36,7 +36,8 @@
 
 @media screen and (max-width: 768px) {
   .header {
-    width: calc(100vw - 60px);
+    max-width: 100%;
+    width: calc(100% - 60px);
   }
 
   .header__menu {

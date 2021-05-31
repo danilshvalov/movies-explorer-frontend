@@ -15,7 +15,7 @@
 .register-form__fieldset {
   border: 0;
 
-  margin-bottom: 132px;
+  margin-bottom: 131px;
 }
 
 .register-form__label {
@@ -35,10 +35,16 @@
 
   border-radius: 3px;
 
-  padding: 13px 0;
+  padding: 14px 0;
 }
 
-@media screen and (max-width: 458px) {
+@media screen and (max-width: 768px) {
+  .register-form__fieldset {
+    margin-bottom: 132px;
+  }
+}
+
+@media screen and (max-width: 460px) {
   .register-form__fieldset {
     margin-bottom: 220px;
   }
@@ -46,5 +52,7 @@
   .register-form__submit-button {
     font-size: 12px;
     line-height: 15px;
+
+    padding: 15px 0;
   }
 }

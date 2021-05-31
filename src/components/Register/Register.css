@@ -26,7 +26,7 @@
 }
 
 .register__logo {
-  margin: 70px 0 38px;
+  margin: 71px 0 38px;
 }
 
 .register__sub-text {
@@ -48,11 +48,11 @@
 
 @media screen and (min-height: 850px) {
   .register__logo {
-    margin-top: 230px;
+    margin-top: 232px;
   }
 
   .register__title {
-    margin-bottom: 42px;
+    margin-bottom: 39px;
   }
 }
 
@@ -64,16 +64,16 @@
   }
 
   .register__logo {
-    margin-top: 55px;
-    margin-bottom: 46px;
+    margin-top: 56px;
+    margin-bottom: 47px;
   }
 
   .register__title {
-    margin-bottom: 84px;
+    margin-bottom: 80px;
   }
 
   .register__form {
-    margin-bottom: 18px;
+    margin-bottom: 15px;
   }
 
   .register__sub-text {

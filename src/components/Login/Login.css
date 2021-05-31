@@ -48,7 +48,7 @@
 
 @media screen and (min-height: 850px) {
   .login__logo {
-    margin-top: 230px;
+    margin-top: 232px;
   }
 
   .login__title {
@@ -73,7 +73,7 @@
   }
 
   .login__form {
-    margin-bottom: 18px;
+    margin-bottom: 14px;
   }
 
   .login__sub-text {

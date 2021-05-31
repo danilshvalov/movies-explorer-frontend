@@ -38,13 +38,15 @@
   padding: 13px 0;
 }
 
-@media screen and (max-width: 458px) {
+@media screen and (max-width: 460px) {
   .login-form__fieldset {
-    margin-bottom: 290px;
+    margin-bottom: 289px;
   }
 
   .login-form__submit-button {
     font-size: 12px;
     line-height: 15px;
+
+    padding: 15px 0;
   }
 }

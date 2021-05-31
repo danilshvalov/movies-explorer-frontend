@@ -8,7 +8,7 @@
   margin-bottom: 40px;
 }
 
-@media screen and (max-width: 458px) {
+@media screen and (max-width: 460px) {
   .form {
     width: 100%;
   }
