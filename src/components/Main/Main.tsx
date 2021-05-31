@@ -1,12 +1,18 @@
+import React from 'react';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
+
 import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import Promo from '../Promo/Promo';
-import './Main.css';
 import {sectionIds} from '../../utils/config';
 
-const Main = () => (
-  <main className="content">
+import './Main.css';
+
+export type MainProps = React.HTMLAttributes<HTMLDivElement>;
+
+const Main = (props: MainProps) => (
+  <main {...filterInvalidDOMProps(props)} className="content">
     <Promo id={sectionIds.promo} />
     <AboutProject id={sectionIds.aboutProject} />
     <Techs id={sectionIds.techs} />

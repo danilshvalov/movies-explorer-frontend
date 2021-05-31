@@ -13,7 +13,7 @@ import './Account.css';
 export type AccountProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Элемент, перенаправляющий на страницу управления аккаунтом */
-const Account: React.FC<AccountProps> = ({className, ...props}) => {
+const Account = ({className, ...props}: AccountProps) => {
   const cn = createCn('account', className);
   return (
     <div {...props} className={cn()}>

@@ -13,8 +13,8 @@ export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
 export type RefType = HTMLUListElement;
 
 /**
- * Компонент-обёртка над <ul/>
- * Все дочерние элементы помещаются в <li/>
+ * Компонент-обёртка над [списком]{@link HTMLUListElement}
+ * Все дочерние элементы помещаются в {@link HTMLLIElement}
  */
 const List = React.forwardRef<RefType, ListProps>(
   ({className, ...props}, ref) => {

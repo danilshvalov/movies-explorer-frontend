@@ -11,7 +11,7 @@ import './LoginButtons.css';
 export type LoginButtonsProps = Omit<ListProps, 'itemClassName'>;
 
 /** Кнопки, перенаправляющие пользователя на вход в аккаунт */
-const LoginButtons: React.FC<LoginButtonsProps> = ({className, ...props}) => {
+const LoginButtons = ({className, ...props}: LoginButtonsProps) => {
   const cn = createCn('login-buttons', className);
 
   return (

@@ -1,7 +1,6 @@
 import React from 'react';
 import {createCn} from 'bem-react-classname';
 import shortid from 'shortid';
-import {Link} from 'react-router-dom';
 
 import avatarImg from '../../images/avatar.png';
 import List from '../List/List';
@@ -12,8 +11,10 @@ import './Personality.css';
 
 export type PersonalityProps = React.HTMLAttributes<HTMLDivElement>;
 
-/** Информация об ученике Яндекс.Практикума */
-const Personality: React.FC<PersonalityProps> = ({className, ...props}) => {
+/**
+ * Информация об ученике Яндекс.Практикума
+ * */
+const Personality = ({className, ...props}: PersonalityProps) => {
   const cn = createCn('personality', className);
 
   return (
@@ -28,14 +29,13 @@ const Personality: React.FC<PersonalityProps> = ({className, ...props}) => {
         {/** Список ссылок на соцсети и т.п. */}
         <List className={cn('list')} itemClassName={cn('list-item')}>
           {texts.links.map((link) => (
-            <Link
-              component={ColoredLink}
+            <ColoredLink
               key={shortid.generate()}
               className={cn('link')}
-              to={link.path}
+              href={link.path}
             >
               {link.name}
-            </Link>
+            </ColoredLink>
           ))}
         </List>
       </article>

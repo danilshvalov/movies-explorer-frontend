@@ -63,7 +63,7 @@ const SaveButtonWrapper = ({
         className: cn('component'),
       })}
       <SaveButton
-        className={cn('save-button')}
+        className={cn('save-button', {checked: isChecked})}
         hidden={!isHovered && !isChecked}
         checked={isChecked}
         onClick={handleSaveButtonClick}

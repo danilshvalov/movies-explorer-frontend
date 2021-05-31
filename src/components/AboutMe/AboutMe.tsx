@@ -12,14 +12,14 @@ import './AboutMe.css';
 export type AboutMeProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Секция с информацией об ученике (персональные данные, портфолио) Яндекс.Практикума */
-const AboutMe: React.FC<AboutMeProps> = ({className, ...props}) => {
+const AboutMe = ({className, ...props}: AboutMeProps) => {
   const cn = createCn('about-me', className);
 
   return (
     <section {...filterInvalidDOMProps(props)} className={cn()}>
       <SectionHeader className={cn('header')}>{texts.header}</SectionHeader>
-      <Personality className={cn('personality')} />
-      <Portfolio className={cn('portfolio')} />
+      <Personality className={cn('personality')}/>
+      <Portfolio className={cn('portfolio')}/>
     </section>
   );
 };

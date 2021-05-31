@@ -5,8 +5,6 @@ import React from 'react';
 import {parseTime, stringifyTime} from '../../utils/utils';
 import {IMovie} from '../../utils/types';
 import {moviesCard as texts} from '../../utils/texts';
-
-import './MoviesCard.css';
 import SaveButtonWrapper, {
   SaveButtonWrapperProps,
 } from '../SaveButtonWrapper/SaveButtonWrapper';
@@ -14,16 +12,24 @@ import DeleteButtonWrapper, {
   DeleteButtonWrapperProps,
 } from '../DeleteButtonWrapper/DeleteButtonWrapper';
 
+import './MoviesCard.css';
+
 export type MoviesCardProps = React.HTMLAttributes<HTMLDivElement> & IMovie;
 
-/** Миниатюрная карточка фильма */
-const MoviesCard: React.FC<MoviesCardProps> = ({
+/**
+ * Миниатюрная карточка фильма
+ *
+ * Поддерживается карточка с [удалением]{@link withDeleteButton}
+ *
+ * Поддерживается карточка с [сохранением]{@link withSaveButton}
+ * */
+const MoviesCard = ({
   className,
   thumbnail,
   nameRU,
   duration,
   ...props
-}) => {
+}: MoviesCardProps) => {
   const cn = createCn('movies-card', className);
 
   return (

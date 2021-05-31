@@ -5,19 +5,8 @@
 
 }
 
-.login-form__field-wrapper {
-  margin: 0 0 4px;
-}
-
-.login-form__field-wrapper:last-of-type {
-  margin-bottom: 0;
-}
-
-.login-form__fieldset {
-  border: 0;
-
-  margin: 0;
-  padding: 0;
+.login-form__field-wrapper:not(:last-of-type) {
+  margin-bottom: 4px;
 }
 
 .login-form__submit-button {

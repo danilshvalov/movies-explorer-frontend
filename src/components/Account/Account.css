@@ -1,15 +1,11 @@
-.account {
-  margin-bottom: 8px;
-}
-
 .account__profile-button {
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
 
-  color: #000000;
+  color: #000;
 
-  margin-right: 10px;
+  margin-right: 16px;
 }
 
 .account__logo {
@@ -24,14 +20,3 @@
   align-items: center;
 }
 
-@media screen and (max-width: 768px) {
-  .account {
-    margin: auto 0 92px;
-  }
-}
-
-@media screen and (max-width: 468px) {
-  .account {
-    margin-bottom: 42px;
-  }
-}

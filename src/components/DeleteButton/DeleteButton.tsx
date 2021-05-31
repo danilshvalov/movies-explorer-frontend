@@ -12,9 +12,9 @@ export type RefType = ButtonRefType;
  *
  * Обёртка над [обычной кнопкой]{@link Button} с картинкой крестика */
 const DeleteButton = React.forwardRef<RefType, DeleteButtonProps>(
-  ({className, ...props}) => {
+  ({className, ...props}, ref) => {
     const cn = createCn('delete-button', className);
-    return <Button {...props} className={cn()} />;
+    return <Button {...props} ref={ref} className={cn()} />;
   },
 );
 

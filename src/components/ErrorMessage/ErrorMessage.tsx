@@ -18,7 +18,10 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   const cn = createCn('error-message', className);
 
   /** Текущая позиция мышки */
-  const [mousePos, setMousePos] = React.useState({x: 0, y: 0});
+  const [mousePos, setMousePos] = React.useState({
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
+  });
 
   React.useEffect(() => {
     const handleMouseMove = (evt: MouseEvent): void => {
@@ -36,15 +39,12 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
   }, [isHidden]);
 
   return (
-    <div {...props} className={cn()}>
-      {!isHidden && (
-        <div
-          className={cn('container')}
-          style={{left: mousePos.x, top: mousePos.y}}
-        >
-          <span className={cn('text')}>{props.children}</span>
-        </div>
-      )}
+    <div
+      {...props}
+      className={cn()}
+      style={{left: mousePos.x, top: mousePos.y}}
+    >
+      {!isHidden && <span className={cn('text')}>{props.children}</span>}
     </div>
   );
 };

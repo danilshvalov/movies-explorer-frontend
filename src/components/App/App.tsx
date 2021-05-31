@@ -1,4 +1,4 @@
-import {Route, Switch} from 'react-router';
+import {Route, Switch} from 'react-router-dom';
 import React from 'react';
 import {createCn} from 'bem-react-classname';
 
@@ -28,7 +28,7 @@ const App = () => {
   const cn = createCn('page');
   const [currentUser, setCurrentUser] = React.useState<UserContextProps>({
     email: '',
-    name: '',
+    name: 'Виталий',
     isLoggedIn: true,
     savedMovies: [],
   });
@@ -49,7 +49,9 @@ const App = () => {
   };
 
   const handleProfileUpdate = ({email, name}: ProfileUserData) => {
-    setCurrentUser({...currentUser, email, name});
+    setCurrentUser({
+      ...currentUser, isLoggedIn: true, email, name,
+    });
     // FEATURE добавить логику
     // eslint-disable-next-line no-console
     console.log(`ProfileUpdate | email: ${email} name: ${name}`);
@@ -68,7 +70,7 @@ const App = () => {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
+      <div className={cn()}>
         <Switch>
           <Route exact path={pageLinks.main}>
             <PageWrapper>
@@ -100,10 +102,8 @@ const App = () => {
           </Route>
 
           <Route path={pageLinks.profile}>
-            <div className={cn('profile')}>
-              <Header />
-              <Profile onProfileUpdate={handleProfileUpdate} />
-            </div>
+            <Header />
+            <Profile onProfileUpdate={handleProfileUpdate} />
           </Route>
 
           <Route path="/">

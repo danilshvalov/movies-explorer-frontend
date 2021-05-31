@@ -13,8 +13,8 @@ export const moviesAmountByDevice: AmountDeviceSettings = {
     step: 2,
   },
   phone: {
-    startCount: 5,
-    step: 4,
+    startCount: 4,
+    step: 1,
   },
 };
 

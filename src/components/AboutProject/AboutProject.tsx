@@ -16,7 +16,7 @@ export type AboutProjectProps = React.HTMLAttributes<HTMLDivElement>;
 /**
  * Секция с информацией о проекте: описание этапов разработки
  * */
-const AboutProject: React.FC<AboutProjectProps> = ({className, ...props}) => {
+const AboutProject = ({className, ...props}: AboutProjectProps) => {
   const cn = createCn('about-project', className);
   const {leftColumn, rightColumn} = texts.infoTable;
 

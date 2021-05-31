@@ -1,12 +1,12 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
 import Button from '../Button/Button';
-import Field from '../Field/Field';
 import Form, {FormProps} from '../Form/Form';
 import {profile} from '../../utils/texts';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import FieldWrapper from '../FieldWrapper/FieldWrapper';
 
 import './ProfileForm.css';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 const texts = profile.form;
 
@@ -35,15 +35,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   const cn = createCn('profile-form', className);
 
   /** Переменная-флаг для отключения кнопки отправки формы */
-  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(
-    true,
-  );
+  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(true);
   /**
    * Флаги валидности данных. По умолчанию TRUE, чтобы ошибка была видна
    *  только при вводе/попытке отправить некорректные данные
    * */
-  const [isNameValid, setNameValid] = React.useState(true);
-  const [isEmailValid, setEmailValid] = React.useState(true);
 
   /** Ссылки на input-элементы */
   const nameInputRef = React.createRef<HTMLInputElement>();
@@ -51,9 +47,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
 
   const inputs = [nameInputRef, emailInputRef];
 
-  /** Handlers */
-  const handleNameInput = () => setNameValid(nameInputRef.current?.validity.valid as boolean);
-  const handleEmailInput = () => setEmailValid(emailInputRef.current?.validity.valid as boolean);
+  const handleInput = () => {
+    setSubmitButtonDisabled(
+      inputs.some((input) => !input?.current?.validity.valid),
+    );
+  };
 
   const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
@@ -75,32 +73,35 @@ const ProfileForm: React.FC<ProfileFormProps> = ({
   return (
     <Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
       <fieldset className={cn('fieldset')}>
-        {/** Поле с Email */}
-        <div className={cn('field-container')}>
-          <label className={cn('label')}>{texts.nameInput.label}</label>
-          <Field
-            className={cn('field')}
-            minLength={2}
-            required
-            ref={nameInputRef}
-            onInput={handleNameInput}
-            isError={!isNameValid}
-            defaultValue={currentUser.name}
-          />
-        </div>
         {/** Поле с именем */}
-        <div className={cn('field-container')}>
-          <label className={cn('label')}>{texts.emailInput.label}</label>
-          <Field
-            className={cn('field')}
-            type="email"
-            required
-            ref={emailInputRef}
-            onInput={handleEmailInput}
-            isError={!isEmailValid}
-            defaultValue={currentUser.email}
-          />
-        </div>
+        <FieldWrapper
+          className={cn('field-wrapper')}
+          label={texts.nameInput.label}
+          labelClassName={cn('label')}
+          fieldClassName={cn('field')}
+          errorMessageClassName={cn('error-message')}
+          name="nameInput"
+          minLength={2}
+          required
+          ref={nameInputRef}
+          onInput={handleInput}
+          defaultValue={currentUser.name}
+        />
+
+        {/** Поле с Email */}
+        <FieldWrapper
+          className={cn('field-wrapper')}
+          label={texts.emailInput.label}
+          labelClassName={cn('label')}
+          fieldClassName={cn('field')}
+          errorMessageClassName={cn('error-message')}
+          name="emailInput"
+          type="email"
+          required
+          ref={emailInputRef}
+          onInput={handleInput}
+          defaultValue={currentUser.email}
+        />
       </fieldset>
 
       {/** Кнопка отправки формы */}

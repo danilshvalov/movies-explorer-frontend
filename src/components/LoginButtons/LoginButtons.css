@@ -9,7 +9,6 @@
   border-radius: 3px;
 
   padding: 8px 20px;
-  margin: 0;
 }
 
 .login-buttons__list-item {
@@ -20,8 +19,13 @@
   margin-right: 0;
 }
 
-@media screen and (max-width: 458px) {
+@media screen and (max-width: 460px) {
   .login-buttons__button {
     font-size: 10px;
+    padding: 5px 12px;
+  }
+
+  .login-buttons__list-item {
+    margin-right: 2px;
   }
 }

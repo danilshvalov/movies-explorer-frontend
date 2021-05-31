@@ -9,3 +9,11 @@
   object-fit: cover;
   margin-left: 20px;
 }
+
+@media screen and (max-width: 460px) {
+  .arrow-link__picture {
+    width: 10px;
+    height: 10px;
+    margin-bottom: 5px;
+  }
+}

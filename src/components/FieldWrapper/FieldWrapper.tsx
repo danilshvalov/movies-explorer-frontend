@@ -10,6 +10,8 @@ import './FieldWrapper.css';
 export interface FieldWrapperProps extends FieldProps {
   /** Label поля ввода */
   label?: string;
+  /** className label */
+  labelClassName?: string;
   /** className поля ввода */
   fieldClassName?: string;
   /** className сообщения об ошибке */
@@ -27,6 +29,7 @@ const FieldWrapper = React.forwardRef<FieldRefType, FieldWrapperProps>(
     {
       className,
       label,
+      labelClassName,
       fieldClassName,
       errorMessageClassName,
       name,
@@ -36,6 +39,7 @@ const FieldWrapper = React.forwardRef<FieldRefType, FieldWrapperProps>(
     ref,
   ) => {
     const cn = createCn('field-wrapper', className);
+    const labelClass = classNames(cn('label'), labelClassName);
     const fieldClass = classNames(cn('field'), fieldClassName);
     const errorMessageClass = classNames(
       cn('error-message'),
@@ -71,7 +75,11 @@ const FieldWrapper = React.forwardRef<FieldRefType, FieldWrapperProps>(
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
-        {label && <label htmlFor={name}>{label}</label>}
+        {label && (
+          <label className={labelClass} htmlFor={name}>
+            {label}
+          </label>
+        )}
         <Field
           {...props}
           className={fieldClass}

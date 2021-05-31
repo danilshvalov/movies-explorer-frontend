@@ -3,6 +3,27 @@
   height: 38px;
 }
 
+.mobile-menu__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 999;
+
+  width: 100vw;
+  height: 100vh;
+
+  visibility: hidden;
+  transition: all 0.3s linear;
+  background-color: transparent;
+
+}
+
+.mobile-menu__overlay_visible {
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .mobile-menu__container {
   display: flex;
   flex-direction: column;
@@ -13,7 +34,6 @@
   position: fixed;
   top: 0;
   right: -100vw;
-  z-index: 999;
 
   width: 67.7%;
   height: 100%;
@@ -35,7 +55,7 @@
   margin: 23px 23px 0 auto;
 }
 
-@media screen and (max-width: 458px) {
+@media screen and (max-width: 460px) {
   .mobile-menu__container {
     width: 100%;
   }
@@ -43,6 +63,14 @@
   .mobile-menu__open-button {
     width: 32px;
     height: 35px;
-    margin: 0 4px 3px 0;
+    margin-right: 4px;
+    margin-bottom: 3px;
+  }
+
+  .mobile-menu__close-button {
+    width: 32px;
+    height: 32px;
+
+    margin: 13px 13px 0 auto;
   }
 }

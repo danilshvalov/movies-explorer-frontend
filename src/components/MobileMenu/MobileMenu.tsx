@@ -10,7 +10,7 @@ import './MobileMenu.css';
 export type MobileMenuProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Меню для устройств с небольшим разрешением */
-const MobileMenu: React.FC<MobileMenuProps> = ({className, ...props}) => {
+const MobileMenu = ({className, ...props}: MobileMenuProps) => {
   const cn = createCn('mobile-menu', className);
 
   /** Переменная-флаг, изменяющая видимость меню */
@@ -30,12 +30,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({className, ...props}) => {
         className={cn('open-button')}
         onClick={handleOpenButtonClick}
       />
-      <div className={cn('container', {visible: isOpen})}>
-        <CloseButton
-          className={cn('close-button')}
-          onClick={handleCloseButtonClick}
-        />
-        {props.children}
+      <div className={cn('overlay', {visible: isOpen})}>
+        <div className={cn('container', {visible: isOpen})}>
+          <CloseButton
+            className={cn('close-button')}
+            onClick={handleCloseButtonClick}
+          />
+          {props.children}
+        </div>
       </div>
     </div>
   );

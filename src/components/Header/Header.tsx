@@ -20,10 +20,12 @@ export type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
 const Header = ({className, ...props}: HeaderProps) => {
   const cn = createCn('header', className);
 
+  /** Текущее устройство пользователя */
   const [deviceType, setDeviceType] = React.useState<DeviceType>(
     DeviceType.Desktop,
   );
 
+  /** Обработчик обновления текущего устройства */
   React.useEffect(() => {
     const handleWindowResize = () => setDeviceType(
       getDeviceType({

@@ -1,5 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
+
 import {Theme} from '../../utils/types';
 import Button from '../Button/Button';
 import FieldWrapper from '../FieldWrapper/FieldWrapper';
@@ -27,17 +28,11 @@ export interface LoginFormProps extends FormProps {
 }
 
 /** Форма входа в аккаунт */
-const LoginForm: React.FC<LoginFormProps> = ({
-  className,
-  onLogin,
-  ...props
-}) => {
+const LoginForm = ({className, onLogin, ...props}: LoginFormProps) => {
   const cn = createCn('login-form', className);
 
   /** Переменная-флаг для отключения кнопки отправки формы */
-  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(
-    true,
-  );
+  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(true);
 
   /** Ссылки на input-элементы */
   const emailInputRef = React.createRef<HTMLInputElement>();

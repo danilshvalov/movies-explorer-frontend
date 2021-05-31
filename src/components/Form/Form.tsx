@@ -6,7 +6,7 @@ import './Form.css';
 
 export type FormProps = React.FormHTMLAttributes<HTMLFormElement>;
 
-/** Обёртка над HTML <form/> с измененными стилями */
+/** Обёртка над [формой]{@link HTMLFormElement} с измененными стилями */
 const Form = React.forwardRef<HTMLFormElement, FormProps>((props, ref) => {
   const cn = createCn('form', props.className);
 

@@ -67,15 +67,17 @@ const MoviesCardList = (props: MoviesCardListProps) => {
           }))}
         </List>
         {/** Кнопка "Еще" */}
-        {!props.isCompleteList && (
-          <Button
-            className={cn('more-button')}
-            theme={Theme.Snow}
-            onClick={props.onMoreButtonClick}
-          >
-            Ещё
-          </Button>
-        )}
+        <div className={cn('container')}>
+          {!props.isCompleteList && (
+            <Button
+              className={cn('more-button')}
+              theme={Theme.Snow}
+              onClick={props.onMoreButtonClick}
+            >
+              Ещё
+            </Button>
+          )}
+        </div>
       </>
   ));
 

@@ -10,7 +10,7 @@
   background-color: #f5f5f5;
   border-radius: 10px;
 
-  margin: 20px auto 0;
+  margin: 20px auto 109px;
   padding: 156px 0 32px;
 }
 
@@ -23,17 +23,21 @@
   text-align: center;
 
   max-width: 730px;
+  width: 100%;
 
   margin: 0 235px 152px;
 }
 
 @media screen and (min-height: 920px) {
   .promo {
-    padding: 346px 0 34px;
+    width: calc(100% - 40px);
+
+    margin-bottom: 90px;
+    padding: 348px 0 30px;
   }
 
   .promo__title {
-    margin-bottom: 315px;
+    margin-bottom: 313px;
   }
 }
 
@@ -42,18 +46,22 @@
     font-size: 40px;
     line-height: 52px;
 
-    margin-left: 20px;
-    margin-right: 20px;
+    max-width: calc(100% - 200px);
   }
 }
 
 @media screen and (max-width: 320px) {
   .promo {
-    margin: 14px;
-    padding: 217px 0 0;
+    width: calc(100% - 28px);
+
+    margin-top: 10px;
+    margin-bottom: 70px;
+    padding: 221px 0 0;
   }
 
   .promo__title {
+    max-width: 100%;
+
     font-size: 29px;
     line-height: 37px;
     margin-bottom: 195px;

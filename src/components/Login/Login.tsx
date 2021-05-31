@@ -15,8 +15,11 @@ export interface LoginProps extends React.HTMLAttributes<HTMLDivElement> {
   onLogin: LoginFunc;
 }
 
-/** Секция с логином */
-const Login: React.FC<LoginProps> = ({onLogin, className, ...props}) => {
+/**
+ * Секция с логином
+ * @see LoginForm
+ * */
+const Login = ({onLogin, className, ...props}: LoginProps) => {
   const cn = createCn('login', className);
   return (
     <div {...props} className={cn()}>

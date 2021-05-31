@@ -55,7 +55,9 @@ const AlignedMoviesCardList = ({
     setCurrentCardCount(alignQuantity(currentCardCount, currentStep));
   }, [currentStep, moviesList]);
 
-  const handleMoreButtonClick = () => setCurrentCardCount(currentStep + currentCardCount);
+  function handleMoreButtonClick() {
+    setCurrentCardCount(currentStep + currentCardCount);
+  }
 
   return (
     <MoviesCardList

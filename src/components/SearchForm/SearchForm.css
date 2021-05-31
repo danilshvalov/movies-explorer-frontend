@@ -2,7 +2,6 @@
   border-bottom: 1px solid #e8e8e8;
 
   padding: 70px 0 69px;
-  margin: 0;
 }
 
 .search-form__container {
@@ -17,9 +16,6 @@
   border-radius: 9px;
 
   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
-
-  margin: 0;
-  padding: 0;
 }
 
 /* list-item */
@@ -60,10 +56,11 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 18px;
-  
+
   border-radius: 48px;
 
   padding: 8px 13px;
+  margin: 1px 0 2px;
 }
 
 @media screen and (max-width: 860px) {
@@ -82,7 +79,6 @@
 
 @media screen and (max-width: 630px) {
   .search-form {
-    margin: 0 10px;
     padding-bottom: 20px;
   }
 
@@ -99,8 +95,8 @@
 
   .search-form__field {
     border-right: none;
-    padding-left: 16px;
-    padding-right: 10px;
+
+    padding: 0 10px 5px 18px;
   }
 
   .search-form__list-item:first-of-type {

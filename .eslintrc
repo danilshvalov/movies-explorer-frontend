@@ -1,36 +1,74 @@
 {
-  "extends": "airbnb-base",
-  "rules": {
-    "object-curly-spacing": ["error", "never"],
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-    "linebreak-style": "off",
-    "import/extensions": "off",
-    "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["error"],
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"]
+  "env": {
+    "browser": true,
+    "es2021": true
   },
-  "plugins": ["react", "import", "jsx-a11y", "@typescript-eslint"],
+  "extends": [
+    "airbnb-base"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
-    "sourceType": "module",
-    "allowImportExportEverywhere": true
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
-  "env": {
-    "browser": true
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "object-curly-spacing": [
+      "error",
+      "never"
+    ],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": [
+      "error"
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error"
+    ],
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never"
+      }
+    ]
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".css"],
-        "moduleDirectory": ["node_modules", "src/"]
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".css"
+        ],
+        "moduleDirectory": [
+          "node_modules",
+          "src/"
+        ]
       }
-    }
+    },
+    "typescript": {}
   }
 }
