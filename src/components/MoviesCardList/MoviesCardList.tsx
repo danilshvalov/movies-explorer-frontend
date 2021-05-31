@@ -83,7 +83,7 @@ const MoviesCardList = (props: MoviesCardListProps) => {
 
   return (
     <div {...filterInvalidDOMProps(props)} className={cn()}>
-      {isLoading ? <Preloader /> : getMarkup()}
+      {isLoading ? <Preloader className={cn('preloader')} /> : getMarkup()}
     </div>
   );
 };

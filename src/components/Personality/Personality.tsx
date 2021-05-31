@@ -2,7 +2,7 @@ import React from 'react';
 import {createCn} from 'bem-react-classname';
 import shortid from 'shortid';
 
-import avatarImg from '../../images/avatar.png';
+import avatarImg from '../../images/avatar.jpg';
 import List from '../List/List';
 import {personality as texts} from '../../utils/texts';
 import ColoredLink from '../ColoredLink/ColoredLink';

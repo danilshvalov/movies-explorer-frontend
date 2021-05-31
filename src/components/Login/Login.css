@@ -1,16 +1,17 @@
 .login {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  margin: 0 auto;
 
   width: 100%;
   max-width: 396px;
+
+  height: 100vh;
+
+  margin: 0 auto;
 }
 
 .login__form {
-  max-height: 380px;
+  margin-bottom: 17px;
 }
 
 .login__title {
@@ -25,7 +26,7 @@
 }
 
 .login__logo {
-  margin-bottom: 40px;
+  margin: 70px 0 38px;
 }
 
 .login__sub-text {
@@ -36,9 +37,6 @@
   text-align: center;
 
   color: #a0a0a0;
-
-  /* TODO сменить на bottom */
-  margin: 14px 0 0;
 }
 
 .login__link {
@@ -49,40 +47,37 @@
 }
 
 @media screen and (min-height: 850px) {
-  .login {
-    /*  TODO ... */
+  .login__logo {
+    margin-top: 230px;
+  }
+
+  .login__title {
+    margin-bottom: 42px;
   }
 }
 
-@media screen and (max-width: 458px) {
+@media screen and (max-width: 460px) {
   .login {
     align-items: center;
 
     max-width: calc(100% - 60px);
-
-    /*  TODO ... */
-
-
   }
 
   .login__logo {
-    margin-bottom: 50px;
+    margin-top: 55px;
+    margin-bottom: 46px;
   }
 
   .login__title {
-    margin-bottom: 72px;
+    margin-bottom: 82px;
   }
 
   .login__form {
-
-    /*  TODO ... */
-
-    margin: 10px 0;
+    margin-bottom: 18px;
   }
 
   .login__sub-text {
     font-size: 12px;
     line-height: 15px;
-    margin: 4px 0 7px;
   }
 }

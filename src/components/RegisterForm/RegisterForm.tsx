@@ -71,9 +71,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         {/** Поле с именем */}
         <FieldWrapper
           className={cn('field-wrapper')}
+          label={texts.nameInput.label}
+          labelClassName={cn('label')}
           fieldClassName={cn('field')}
           errorMessageClassName={cn('error-message')}
-          label={texts.nameInput.label}
           name="nameInput"
           minLength={2}
           required
@@ -84,11 +85,12 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         {/** Поле с Email */}
         <FieldWrapper
           className={cn('field-wrapper')}
+          label={texts.emailInput.label}
+          labelClassName={cn('label')}
           fieldClassName={cn('field')}
           errorMessageClassName={cn('error-message')}
           name="emailInput"
           type="email"
-          label={texts.emailInput.label}
           required
           ref={emailInputRef}
           onInput={handleInput}
@@ -97,9 +99,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         {/** Поле с паролем */}
         <FieldWrapper
           className={cn('field-wrapper')}
+          label={texts.passwordInput.label}
+          labelClassName={cn('label')}
           fieldClassName={cn('field')}
           errorMessageClassName={cn('error-message')}
-          label={texts.passwordInput.label}
           minLength={8}
           type="password"
           required

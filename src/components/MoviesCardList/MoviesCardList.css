@@ -4,6 +4,10 @@
   justify-content: center;
 }
 
+.movies-list__preloader {
+  width: auto;
+}
+
 .movies-list__card-list {
   display: grid;
   justify-content: center;

@@ -1,4 +1,4 @@
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, useHistory} from 'react-router-dom';
 import React from 'react';
 import {createCn} from 'bem-react-classname';
 
@@ -26,6 +26,8 @@ import './App.css';
 
 const App = () => {
   const cn = createCn('page');
+  const history = useHistory();
+
   const [currentUser, setCurrentUser] = React.useState<UserContextProps>({
     email: '',
     name: 'Виталий',
@@ -38,6 +40,7 @@ const App = () => {
     // FEATURE добавить логику
     // eslint-disable-next-line no-console
     console.log(`Login | email: ${email} password: ${password}`);
+    history.push(pageLinks.main);
   };
 
   const handleRegister = ({email, name, password}: RegisterUserData) => {
@@ -46,11 +49,16 @@ const App = () => {
     console.log(
       `Register | email: ${email} password: ${password} name: ${name}`,
     );
+
+    history.push(pageLinks.signIn);
   };
 
   const handleProfileUpdate = ({email, name}: ProfileUserData) => {
     setCurrentUser({
-      ...currentUser, isLoggedIn: true, email, name,
+      ...currentUser,
+      isLoggedIn: true,
+      email,
+      name,
     });
     // FEATURE добавить логику
     // eslint-disable-next-line no-console

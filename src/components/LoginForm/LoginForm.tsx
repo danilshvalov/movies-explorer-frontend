@@ -65,11 +65,12 @@ const LoginForm = ({className, onLogin, ...props}: LoginFormProps) => {
         {/** Поле с Email */}
         <FieldWrapper
           className={cn('field-wrapper')}
+          label={texts.emailInput.label}
+          labelClassName={cn('label')}
           fieldClassName={cn('field')}
           errorMessageClassName={cn('error-message')}
           name="emailInput"
           type="email"
-          label={texts.emailInput.label}
           required
           ref={emailInputRef}
           onInput={handleInput}
@@ -78,9 +79,10 @@ const LoginForm = ({className, onLogin, ...props}: LoginFormProps) => {
         {/** Поле с паролем */}
         <FieldWrapper
           className={cn('field-wrapper')}
+          label={texts.passwordInput.label}
+          labelClassName={cn('label')}
           fieldClassName={cn('field')}
           errorMessageClassName={cn('error-message')}
-          label={texts.passwordInput.label}
           minLength={8}
           type="password"
           required
