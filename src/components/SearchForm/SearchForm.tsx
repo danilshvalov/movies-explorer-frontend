@@ -5,7 +5,7 @@ import CheckBox from '../CheckBox/CheckBox';
 import SearchField from '../SearchField/SearchField';
 import Button from '../Button/Button';
 import List from '../List/List';
-import {Theme} from '../../utils/types';
+import {Theme} from '../../types/types';
 import {searchForm as texts} from '../../utils/texts';
 
 import './SearchForm.css';

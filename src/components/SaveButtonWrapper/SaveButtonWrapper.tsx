@@ -2,24 +2,16 @@ import {createCn} from 'bem-react-classname';
 import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
-import {Id} from '../../utils/types';
+import {Id} from '../../types/types';
 import SaveButton from '../SaveButton/SaveButton';
+import {SaveCardData} from '../../types/Movie';
 
 import './SaveButtonWrapper.css';
 
 /**
- * Возвращаемые данные при сохранении
- * @see SaveFunc
- * */
-export interface SaveData {
-  id: Id;
-  isSaved: boolean;
-}
-
-/**
  * Вызываемая функция при сохранении [карточки]{@link SaveButtonWrapper}
  * */
-export type SaveFunc = (data: SaveData) => void;
+export type SaveFunc = (data: SaveCardData) => void;
 
 export interface SaveButtonWrapperProps
   extends React.HTMLProps<HTMLDivElement> {

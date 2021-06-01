@@ -3,7 +3,7 @@ import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React from 'react';
 
 import {parseTime, stringifyTime} from '../../utils/utils';
-import {IMovie} from '../../utils/types';
+import {IMovie} from '../../types/types';
 import {moviesCard as texts} from '../../utils/texts';
 import SaveButtonWrapper, {
   SaveButtonWrapperProps,

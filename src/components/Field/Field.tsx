@@ -2,7 +2,7 @@ import React from 'react';
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
-import {Theme} from '../../utils/types';
+import {Theme} from '../../types/types';
 
 import './Field.css';
 

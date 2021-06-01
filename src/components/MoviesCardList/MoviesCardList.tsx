@@ -4,7 +4,7 @@ import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
 import List from '../List/List';
 import Preloader from '../Preloader/Preloader';
-import {MoviesList, Theme} from '../../utils/types';
+import {MoviesList, Theme} from '../../types/types';
 import Button from '../Button/Button';
 import NothingFoundStub from '../NothingFoundStub/NothingFoundStub';
 

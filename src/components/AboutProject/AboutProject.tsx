@@ -6,7 +6,7 @@ import SectionHeader from '../SectionHeader/SectionHeader';
 import {aboutProject as texts, infoTicketsList} from '../../utils/texts';
 import List from '../List/List';
 import InfoTicket from '../InfoTicket/InfoTicket';
-import {Theme} from '../../utils/types';
+import {Theme} from '../../types/types';
 import ColoredTitle from '../ColoredTitle/ColoredTitle';
 
 import './AboutProject.css';

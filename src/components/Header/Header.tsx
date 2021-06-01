@@ -9,7 +9,7 @@ import Menu from '../Menu/Menu';
 import {header as texts} from '../../utils/texts';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import LoginButtons from '../LoginButtons/LoginButtons';
-import {DeviceType} from '../../utils/types';
+import {DeviceType} from '../../types/types';
 import getDeviceType from '../../utils/device-type';
 
 import './Header.css';

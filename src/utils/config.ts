@@ -1,4 +1,4 @@
-import {AmountDeviceSettings, DeviceWidthSettings} from './types';
+import {AmountDeviceSettings, DeviceWidthSettings} from '../types/types';
 
 export const startMoviesCardCount = 9;
 export const addStep = 3;
@@ -50,3 +50,4 @@ export const externalLinks = {
 };
 
 export const backendUrl = 'https://api.ds.movies-explorer.nomoredomains.icu';
+export const beatFilmUrl = 'https://api.nomoreparties.co/beatfilm-movies';

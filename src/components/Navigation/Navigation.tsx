@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 import ColoredLink from '../ColoredLink/ColoredLink';
 import List from '../List/List';
-import {LinkList} from '../../utils/types';
+import {LinkList} from '../../types/types';
 
 import './Navigation.css';
 

@@ -5,38 +5,27 @@ import Button from '../Button/Button';
 import FieldWrapper from '../FieldWrapper/FieldWrapper';
 import Form, {FormProps} from '../Form/Form';
 import {register} from '../../utils/texts';
-import {Theme} from '../../utils/types';
+import {Theme} from '../../types/types';
+import {RegisterUserData} from '../../types/User';
 
 import './RegisterForm.css';
 
 const texts = register.form;
 
-/** Возвращаемые формой данные */
-export interface UserData {
-  email: string;
-  password: string;
-  name: string;
-}
-
 /** callback функция при отправке формы */
 export interface RegisterFunc {
-  (userData: UserData): void;
+  (userData: RegisterUserData): void;
 }
 
 export interface RegisterFormProps extends FormProps {
   onRegister: RegisterFunc;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({
-  onRegister,
-  ...props
-}) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({onRegister, ...props}) => {
   const cn = createCn('register-form', props.className);
 
   /** Переменная-флаг для отключения кнопки отправки формы */
-  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(
-    true,
-  );
+  const [isSubmitButtonDisabled, setSubmitButtonDisabled] = React.useState(true);
 
   /** Ссылки на input-элементы */
   const nameInputRef = React.createRef<HTMLInputElement>();

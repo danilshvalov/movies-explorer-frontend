@@ -1,25 +1,22 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
 
-import {Theme} from '../../utils/types';
+import {Theme} from '../../types/types';
 import Button from '../Button/Button';
 import FieldWrapper from '../FieldWrapper/FieldWrapper';
 import Form, {FormProps} from '../Form/Form';
 import {login} from '../../utils/texts';
+import {LoginUserData} from '../../types/User';
 
 import './LoginForm.css';
 
 const texts = login.form;
 
 /** Тип возвращаемых данных  */
-export interface UserData {
-  email: string;
-  password: string;
-}
 
 /** Тип callback функции */
 export interface LoginFunc {
-  (userData: UserData): void;
+  (userData: LoginUserData): void;
 }
 
 export interface LoginFormProps extends FormProps {

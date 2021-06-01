@@ -1,7 +1,7 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
 
-import {Theme} from '../../utils/types';
+import {Theme} from '../../types/types';
 import Button, {ButtonProps} from '../Button/Button';
 
 import './SaveButton.css';

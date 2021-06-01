@@ -4,7 +4,7 @@ import {createCn} from 'bem-react-classname';
 import Button from '../Button/Button';
 import List, {ListProps} from '../List/List';
 import {loginButtons as texts} from '../../utils/texts';
-import {Theme} from '../../utils/types';
+import {Theme} from '../../types/types';
 
 import './LoginButtons.css';
 

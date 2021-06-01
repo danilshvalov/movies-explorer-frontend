@@ -1,7 +1,7 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
 
-import {MoviesList} from '../../utils/types';
+import {MoviesList} from '../../types/types';
 import {withDeleteButton as cardWithDeleteButton} from '../MoviesCard/MoviesCard';
 import {DeleteFunc} from '../DeleteButtonWrapper/DeleteButtonWrapper';
 import SearchableMoviesCardList from '../SearchableMoviesCardList/SearchableMoviesCardList';

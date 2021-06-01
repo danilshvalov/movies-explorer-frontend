@@ -3,7 +3,7 @@ import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
 import {SaveFunc} from '../SaveButtonWrapper/SaveButtonWrapper';
-import {MoviesList} from '../../utils/types';
+import {MoviesList} from '../../types/types';
 import SearchableMoviesCardList from '../SearchableMoviesCardList/SearchableMoviesCardList';
 import {withSaveButton as cardWithSaveButton} from '../MoviesCard/MoviesCard';
 

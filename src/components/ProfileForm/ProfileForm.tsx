@@ -5,20 +5,15 @@ import Form, {FormProps} from '../Form/Form';
 import {profile} from '../../utils/texts';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import FieldWrapper from '../FieldWrapper/FieldWrapper';
+import {ProfileUserData} from '../../types/User';
 
 import './ProfileForm.css';
 
 const texts = profile.form;
 
-/** Возвращаемые формой данные */
-export interface UserData {
-  email: string;
-  name: string;
-}
-
 /** callback функция, вызываемая при обновлении профиля */
 export interface ProfileUpdateFunc {
-  (userData: UserData): void;
+  (userData: ProfileUserData): void;
 }
 
 export interface ProfileFormProps extends FormProps {

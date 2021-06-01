@@ -2,18 +2,14 @@ import {createCn} from 'bem-react-classname';
 import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
-import {Id} from '../../utils/types';
+import {Id} from '../../types/types';
 import DeleteButton from '../DeleteButton/DeleteButton';
+import {DeleteCardData} from '../../types/Movie';
 
 import './DeleteButtonWrapper.css';
 
-/** Возвращаемые данные при нажатии [кнопки]{@link DeleteButton} */
-export interface DeleteData {
-  id: Id;
-}
-
 /** callback функция, вызываемая при нажатии [кнопки]{@link DeleteButton} */
-export type DeleteFunc = (data: DeleteData) => void;
+export type DeleteFunc = (data: DeleteCardData) => void;
 
 export interface DeleteButtonWrapperProps
   extends React.HTMLAttributes<HTMLDivElement> {

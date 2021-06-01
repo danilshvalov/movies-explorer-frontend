@@ -1,4 +1,4 @@
-import {ParsedTime} from './types';
+import {ParsedTime} from '../types/types';
 
 /**
  * Функция выравнивания количества

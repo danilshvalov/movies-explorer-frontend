@@ -1,4 +1,4 @@
-import {DeviceType, DeviceWidthSettings} from './types';
+import {DeviceType, DeviceWidthSettings} from '../types/types';
 
 /** Функция определения типа текущего устройства
   @param settings - критерии, определяющие устройства

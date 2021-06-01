@@ -1,4 +1,4 @@
-import {MoviesList} from './types';
+import {MoviesList} from '../types/types';
 
 export interface moviesFilterProps {
   moviesList: MoviesList;
