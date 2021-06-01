@@ -51,3 +51,10 @@ export interface ParsedTime {
   hours?: number;
   minutes: number;
 }
+
+export enum HTTPMethod {
+  Get = 'GET',
+  Post = 'POST',
+  Put = 'PUT',
+  Delete = 'DELETE',
+}

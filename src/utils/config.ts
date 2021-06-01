@@ -34,7 +34,10 @@ export const pageLinks = {
 };
 
 export const sectionIds = {
-  promo: 'promo', techs: 'techs', aboutProject: 'about-project', aboutMe: 'about-me',
+  promo: 'promo',
+  techs: 'techs',
+  aboutProject: 'about-project',
+  aboutMe: 'about-me',
 };
 
 export const externalLinks = {
@@ -45,3 +48,5 @@ export const externalLinks = {
   adaptiveSite: 'https://github.com/danilshvalov/russian-travel',
   SPA: 'https://github.com/danilshvalov/react-mesto-api-full',
 };
+
+export const backendUrl = 'https://api.ds.movies-explorer.nomoredomains.icu';

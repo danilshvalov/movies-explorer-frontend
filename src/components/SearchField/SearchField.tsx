@@ -26,6 +26,7 @@ const SearchField = React.forwardRef<RefType, SearchFieldProps>(
           ref={ref}
           className={cn('input')}
           placeholder={placeholder}
+          required
         />
         {props.children}
       </div>
