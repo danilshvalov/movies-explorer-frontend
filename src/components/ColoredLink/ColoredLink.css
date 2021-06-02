@@ -1,0 +1,10 @@
+.colored-link {
+  text-decoration: none;
+  color: #000;
+
+  transition: opacity 0.2s linear;
+}
+
+.colored-link:hover {
+  opacity: 0.6;
+}

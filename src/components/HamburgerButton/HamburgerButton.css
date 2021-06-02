@@ -1,0 +1,12 @@
+.hamburger-button {
+  display: block;
+
+  background-image: url("../../images/hamburger-button.svg");
+  background-position: center;
+  background-size: cover;
+  background-color: transparent;
+}
+
+.hamburger-button:focus {
+  outline: none;
+}

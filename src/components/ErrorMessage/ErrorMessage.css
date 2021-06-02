@@ -1,0 +1,27 @@
+.error-message {
+  position: fixed;
+
+  display: flex;
+
+  width: 250px;
+  max-height: 100vh;
+  overflow: hidden;
+
+  pointer-events: none;
+
+  border-radius: 5px;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
+
+  padding: 10px;
+}
+
+.error-message__text {
+  font-size: 10px;
+  line-height: 12px;
+
+  width: 100%;
+
+  word-break: break-word;
+
+  color: #ee3465;
+}

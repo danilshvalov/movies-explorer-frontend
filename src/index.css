@@ -1,0 +1,14 @@
+@import url('./vendor/normalize.css');
+@import url('./fonts/_inter/fonts_inter.css');
+
+body,
+html {
+  height: 100%;
+  background-color: #fafafa;
+  scroll-behavior: smooth;
+}
+
+html * {
+  margin: 0;
+  padding: 0;
+}
