@@ -19,7 +19,7 @@ export type RefType = React.ForwardedRef<HTMLUListElement>;
  * Компонент-обёртка над [списком]{@link HTMLUListElement}
  * Все дочерние элементы помещаются в {@link HTMLLIElement}
  */
-function List(props: Props, ref: RefType) {
+export function List(props: Props, ref: RefType): JSX.Element {
   const cn = createCn('list', props.className);
   const itemClassName = classNames(cn('item'), props.itemClassName);
 

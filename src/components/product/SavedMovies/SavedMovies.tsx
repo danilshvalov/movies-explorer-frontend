@@ -1,52 +1,41 @@
-/* eslint-disable typescript-eslint/no-unused-vars */
+import {useState, HTMLAttributes} from 'react';
 import {createCn} from 'bem-react-classname';
-import React from 'react';
-
-import {ButtonTypes, IMovie, MoviesList, OnSearchFunc} from 'types/types';
-import PageWrapper from '@PageWrapper/PageWrapper';
-
-import MoviesCardList from '@MoviesCardList/MoviesCardList';
-
-import {OnDeleteFunc} from '@DeleteButton/DeleteButton';
-
+/* --------------------------------- Generic -------------------------------- */
+import PageWrapper from '@generic/PageWrapper/PageWrapper';
+import SearchForm, {SearchData} from '@generic/SearchForm/SearchForm';
+/* ---------------------------------- Local --------------------------------- */
+import MoviesManager from '@product/SavedMovies/MoviesManager/MoviesManager';
+/* -------------------------------------------------------------------------- */
 import './SavedMovies.css';
-import SearchForm, {SearchData} from '@SearchForm/SearchForm';
-import DeleteButtonWrapper from '@DeleteButtonWrapper/DeleteButtonWrapper';
 
-export interface SavedMoviesProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Список фильмов, которые могут быть отображены */
-  onDelete?: OnDeleteFunc<IMovie>;
-  onSearch: OnSearchFunc;
-}
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export type Props = DOMProps;
 
 /** Секция, включающая в себя список всех сохранённых фильмов и поисковую форму */
-const SavedMovies = ({className, onDelete, onSearch, ...props}: SavedMoviesProps) => {
+export function SavedMovies({className, ...props}: Props): JSX.Element {
   const cn = createCn('saved-movies', className);
+  const defaultChecked = false;
 
-  const [moviesList, setMoviesList] = React.useState<MoviesList>();
-
-  function handleSearch(data: SearchData) {
-    setMoviesList(onSearch(data));
-  }
-
-  console.log('saved: ', moviesList);
-
-  const MoviesCardMarkup = (data: IMovie) => <DeleteButtonWrapper {...data} key={data.movieId} />;
+  const [searchData, setSearchData] = useState<SearchData>({query: '', isChecked: defaultChecked});
 
   return (
     <section {...props} className={cn()}>
-      <SearchForm className={cn('search-form')} onSearch={handleSearch} />
-      <MoviesCardList isLoading={true} isEmpty={!(moviesList && moviesList.length > 0)}>
-        {moviesList?.map(MoviesCardMarkup)}
-      </MoviesCardList>
+      <SearchForm
+        className={cn('search-form')}
+        onSearch={setSearchData}
+        defaultChecked={defaultChecked}
+      />
+      <MoviesManager searchData={searchData} />
     </section>
   );
-};
+}
 
-const SavedMoviesPage = (props: SavedMoviesProps) => (
-  <PageWrapper>
-    <SavedMovies {...props} />
-  </PageWrapper>
-);
+export function SavedMoviesPage(props: Props): JSX.Element {
+  return (
+    <PageWrapper>
+      <SavedMovies {...props} />
+    </PageWrapper>
+  );
+}
 
 export default SavedMoviesPage;

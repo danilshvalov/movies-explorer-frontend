@@ -18,7 +18,8 @@ interface FunctionalProps extends MoviesCardDataProps {
 type DOMProps = React.HTMLAttributes<HTMLDivElement>;
 
 type Props = FunctionalProps & DOMProps;
-
+/** @deprecated */
+// REMOVE
 export default function DeleteButtonWrapper(props: Props) {
   const cn = createCn('delete-button-wrapper', props.className);
 

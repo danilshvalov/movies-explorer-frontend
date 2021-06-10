@@ -1,12 +1,12 @@
 import {createCn} from 'bem-react-classname';
 import {useState} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-// generics
+/* -------------------------------- Generics -------------------------------- */
 import PageWrapper from '@generic/PageWrapper/PageWrapper';
 import SearchForm, {SearchData} from '@generic/SearchForm/SearchForm';
-// product
+/* --------------------------------- Local -------------------------------- */
 import MoviesManager from '@product/Movies/MoviesManager/MoviesManager';
-
+/* -------------------------------------------------------------------------- */
 import './Movies.css';
 
 export type DOMProps = React.HTMLAttributes<HTMLDivElement>;
@@ -30,7 +30,6 @@ const Movies = ({className, ...props}: Props) => {
   return (
     <section {...filterInvalidDOMProps(props)} className={cn()}>
       <SearchForm className={cn('search-form')} onSearch={handleSearch} />
-
       {searchData && <MoviesManager searchData={searchData} />}
     </section>
   );

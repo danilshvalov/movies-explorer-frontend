@@ -7,6 +7,7 @@ import './DeleteButton.css';
 
 export type DeleteButtonProps = ButtonProps;
 export type RefType = ButtonRefType;
+// TODO Move to types
 export type OnDeleteFunc<T> = (args: T) => any;
 
 /**

@@ -9,15 +9,13 @@ import {useExpandableList} from '@utils/hooks';
 // types
 import {IMovie, WithMoviesList} from 'types/types';
 // product
-import MoviesCard, {
-  FunctionalProps as MovieCardFuncProps,
-} from '@product/Movies/MoviesCard/MoviesCard';
+import * as Card from '@product/Movies/MoviesCard/MoviesCard';
 // local
 import './MoviesCardList.css';
 
 export type DOMProps = GenericList.DOMProps;
-export type FunctionalProps = MovieCardFuncProps;
 export type DataProps = WithMoviesList;
+export type FunctionalProps = Card.FunctionalProps;
 export type Props = DOMProps & FunctionalProps & DataProps;
 
 function MoviesCardList({moviesList, ...props}: Props): JSX.Element {
@@ -43,14 +41,18 @@ function MoviesCardList({moviesList, ...props}: Props): JSX.Element {
   ));
 
   return (
-    <GenericList.default className={cn()}>
+    <GenericList.List {...props} className={cn()}>
       {/* TODO добавить error-wrapper */}
       {list.value?.map((data) => (
-        <MoviesCard {...data} {...(props as MovieCardFuncProps)} key={data.movieId} />
+        <Card.MoviesCard
+          {...data}
+          {...(props as Card.DataProps & Card.FunctionalProps)}
+          key={data.movieId}
+        />
       ))}
 
       <OptionalMoreButton />
-    </GenericList.default>
+    </GenericList.List>
   );
 }
 

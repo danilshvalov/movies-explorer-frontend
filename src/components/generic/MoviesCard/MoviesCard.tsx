@@ -19,7 +19,7 @@ export type Props = DataProps & DOMProps;
  *
  * Поддерживается карточка с [сохранением]{@link SaveButton}
  * */
-const MoviesCard = ({className, ...props}: Props) => {
+export function MoviesCard({className, ...props}: Props): JSX.Element {
   const cn = createCn('movies-card', className);
 
   const [isPosterLoading, setPosterLoading] = React.useState(true);
@@ -40,5 +40,5 @@ const MoviesCard = ({className, ...props}: Props) => {
       </div>
     </div>
   );
-};
+}
 export default MoviesCard;
