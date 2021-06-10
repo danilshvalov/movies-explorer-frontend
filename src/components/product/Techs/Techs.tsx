@@ -1,17 +1,19 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import {HTMLAttributes} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-
-import {techs as texts} from '@utils/texts';
+/* --------------------------------- Generic -------------------------------- */
 import List from '@generic/List/List';
-import SectionHeader from '@SectionHeader/SectionHeader';
-
+import SectionHeader from '@generic/SectionHeader/SectionHeader';
+/* ---------------------------------- Utils --------------------------------- */
+import {techs as texts} from '@utils/texts';
+/* -------------------------------------------------------------------------- */
 import './Techs.css';
 
-export type TechsProps = React.HTMLAttributes<HTMLDivElement>;
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export type Props = DOMProps;
 
 /** Секция с используемыми технологиями */
-const Techs = ({className, ...props}: TechsProps) => {
+export function Techs({className, ...props}: Props): JSX.Element {
   const cn = createCn('techs', className);
   return (
     <section {...filterInvalidDOMProps(props)} className={cn()}>
@@ -27,6 +29,6 @@ const Techs = ({className, ...props}: TechsProps) => {
       </div>
     </section>
   );
-};
+}
 
 export default Techs;

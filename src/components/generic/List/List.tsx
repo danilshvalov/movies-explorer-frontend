@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {createCn} from 'bem-react-classname';
 import classNames from 'classnames';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
@@ -13,13 +13,13 @@ export interface FunctionalProps {
 
 export type Props = DOMProps & FunctionalProps;
 
-export type RefType = React.ForwardedRef<HTMLUListElement>;
+export type RefType = HTMLUListElement;
 
 /**
  * Компонент-обёртка над [списком]{@link HTMLUListElement}
  * Все дочерние элементы помещаются в {@link HTMLLIElement}
  */
-export function List(props: Props, ref: RefType): JSX.Element {
+export const List = forwardRef<RefType, Props>((props, ref): JSX.Element => {
   const cn = createCn('list', props.className);
   const itemClassName = classNames(cn('item'), props.itemClassName);
 
@@ -30,6 +30,6 @@ export function List(props: Props, ref: RefType): JSX.Element {
       ))}
     </ul>
   );
-}
+});
 
-export default React.forwardRef(List);
+export default List;

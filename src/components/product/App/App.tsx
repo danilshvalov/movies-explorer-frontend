@@ -17,7 +17,7 @@ import mainApi from '@utils/api/MainApi';
 import {PAGE_LINKS} from '@utils/config';
 import {errorParser} from '@utils/utils';
 /* -------------------------------- Contexts -------------------------------- */
-import CurrentUserContext, {UserContextProps} from 'contexts/CurrentUserContext';
+import CurrentUserContext, {UserContextProps} from '@contexts/CurrentUserContext';
 /* ---------------------------------- Types --------------------------------- */
 import {LoginUserData} from 'types/types';
 import {ProfileUserData, RegisterUserData} from 'types/User';

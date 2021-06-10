@@ -1,5 +1,5 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import {FormEvent, useState} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import Button from '@generic/Button/Button';
 import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
@@ -10,24 +10,19 @@ import useFormWithValidation from '@hooks/UseFormWithValidation';
 /* ---------------------------------- Utils --------------------------------- */
 import {register} from '@utils/texts';
 /* ---------------------------------- Types --------------------------------- */
-import {ApiCallback, Theme} from 'types/types';
-import {RegisterUserData} from 'types/User';
-/* -------------------------------- Contexts -------------------------------- */
-/* ---------------------------------- Local --------------------------------- */
+import {OnRegisterFunc, Theme} from 'types/types';
 /* -------------------------------------------------------------------------- */
-
 import './RegisterForm.css';
 
 const texts = register.form;
 
-/** callback функция при отправке формы */
-export type RegisterFunc = ApiCallback<RegisterUserData>;
-
-export interface RegisterFormProps extends FormProps {
-  onRegister: RegisterFunc;
+export type DOMProps = GenericForm.DOMProps;
+export interface FunctionalProps {
+  onRegister: OnRegisterFunc;
 }
+export type Props = DOMProps & FunctionalProps;
 
-const RegisterForm = ({onRegister, ...props}: RegisterFormProps) => {
+export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
   const cn = createCn('register-form', props.className);
 
   enum Fields {
@@ -36,13 +31,14 @@ const RegisterForm = ({onRegister, ...props}: RegisterFormProps) => {
     passwordInput,
   }
 
-  const {values, handleChange, errors, fieldsValidity, isValid} =
-    useFormWithValidation<typeof Fields>();
+  const {
+    values, handleChange, errors, fieldsValidity, isValid,
+  } = useFormWithValidation<typeof Fields>();
 
-  const [APIError, setAPIError] = React.useState('');
-  const [isProcessing, setIsProcessing] = React.useState(false);
+  const [APIError, setAPIError] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSubmit = (evt: React.FormEvent) => {
+  const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
 
     if (isValid) {
@@ -59,7 +55,7 @@ const RegisterForm = ({onRegister, ...props}: RegisterFormProps) => {
   };
 
   return (
-    <Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
+    <GenericForm.Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
       <fieldset className={cn('fieldset')}>
         {/** Поле с именем */}
 
@@ -117,8 +113,8 @@ const RegisterForm = ({onRegister, ...props}: RegisterFormProps) => {
       <Button className={cn('submit-button')} type="submit" disabled={isValid} theme={Theme.Azure}>
         {isProcessing ? texts.submitButton.loadingText : texts.submitButton.text}
       </Button>
-    </Form>
+    </GenericForm.Form>
   );
-};
+}
 
 export default RegisterForm;

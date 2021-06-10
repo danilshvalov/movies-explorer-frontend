@@ -1,24 +1,27 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-
+/* -------------------------------- Generics -------------------------------- */
+import * as GenericButton from '@generic/Button/Button';
+/* ---------------------------------- Types --------------------------------- */
 import {Theme} from 'types/types';
-import Button, {ButtonProps} from '@generic/Button/Button';
-
+/* -------------------------------------------------------------------------- */
 import './SaveButton.css';
 
-export interface SaveButtonProps extends ButtonProps {
+export type DOMProps = GenericButton.DOMProps;
+export interface FunctionalProps {
   /** Флаг изначального состояния кнопки */
   checked?: boolean;
 }
+export type Props = DOMProps & FunctionalProps;
 
 /** Кнопка сохранения */
-const SaveButton: React.FC<SaveButtonProps> = ({className, checked = false, ...props}) => {
+export function SaveButton({className, checked = false, ...props}: Props): JSX.Element {
   const cn = createCn('save-button', className);
   return (
-    <Button {...props} theme={Theme.Light} className={cn({checked})}>
+    <GenericButton.Button {...props} theme={Theme.Light} className={cn({checked})}>
       {!checked && 'Сохранить'}
-    </Button>
+    </GenericButton.Button>
   );
-};
+}
 
 export default SaveButton;

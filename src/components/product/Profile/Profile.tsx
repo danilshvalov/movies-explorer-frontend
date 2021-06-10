@@ -1,12 +1,18 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-
-import CurrentUserContext from '@contexts/CurrentUserContext';
-import {profile as texts} from '@utils/texts';
+/* --------------------------------- Generic -------------------------------- */
 import Button from '@generic/Button/Button';
+/* ---------------------------------- Types --------------------------------- */
+import {OnLogoutFunc, OnProfileUpdateFunc} from 'types/types';
+/* ---------------------------------- Utils --------------------------------- */
+import {profile as texts} from '@utils/texts';
+/* -------------------------------------------------------------------------- */
 import Header from '@product/Header/Header';
-import ProfileForm, {ProfileUpdateFunc} from './ProfileForm/ProfileForm';
-
+/* -------------------------------- Contexts -------------------------------- */
+import CurrentUserContext from '@contexts/CurrentUserContext';
+/* ---------------------------------- Local --------------------------------- */
+import ProfileForm from '@product/Profile/ProfileForm/ProfileForm';
+/* -------------------------------------------------------------------------- */
 import './Profile.css';
 
 function getGreetingText(name: string | undefined) {
@@ -15,8 +21,8 @@ function getGreetingText(name: string | undefined) {
 
 export interface ProfileProps extends React.HTMLAttributes<HTMLDivElement> {
   /** callback изменения профиля */
-  onProfileUpdate: ProfileUpdateFunc;
-  onLogout: Function;
+  onProfileUpdate: OnProfileUpdateFunc;
+  onLogout: OnLogoutFunc;
 }
 
 /** Секция с формой изменения профиля */

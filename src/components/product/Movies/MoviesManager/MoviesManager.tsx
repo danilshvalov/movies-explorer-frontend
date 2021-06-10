@@ -1,12 +1,11 @@
 import {useEffect, useState} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
-import {SearchData} from '@generic/SearchForm/SearchForm';
 /* ---------------------------------- Hooks --------------------------------- */
 import useAllMovies from '@hooks/UseAllMovies';
 import useSavedMovies from '@hooks/UseSavedMovies';
 /* ---------------------------------- Types --------------------------------- */
-import {MoviesList} from 'types/types';
+import {MoviesList, SearchData} from 'types/types';
 /* ---------------------------------- Utils --------------------------------- */
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Local --------------------------------- */

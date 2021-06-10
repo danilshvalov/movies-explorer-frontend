@@ -1,12 +1,14 @@
 import React from 'react';
 import {Route, Redirect, RouteProps} from 'react-router-dom';
-
+/* ---------------------------------- Utils --------------------------------- */
 import {PAGE_LINKS} from '@utils/config';
-import CurrentUserContext from 'contexts/CurrentUserContext';
+/* -------------------------------- Contexts -------------------------------- */
+import CurrentUserContext from '@contexts/CurrentUserContext';
+/* -------------------------------------------------------------------------- */
 
-export type ProtectedRouteProps = RouteProps
+export type Props = RouteProps;
 
-const ProtectedRoute = ({...rest}: ProtectedRouteProps) => {
+export function ProtectedRoute({...rest}: Props): JSX.Element {
   const {loggedIn: isLoggedIn} = React.useContext(CurrentUserContext);
   const renderComponent = () => {
     if (!isLoggedIn) {
@@ -15,6 +17,6 @@ const ProtectedRoute = ({...rest}: ProtectedRouteProps) => {
     return <Route {...rest} />;
   };
   return <>{renderComponent()}</>;
-};
+}
 
 export default ProtectedRoute;

@@ -1,4 +1,4 @@
-import {SearchData} from '@generic/SearchForm/SearchForm';
+import {RegisterUserData, ProfileUserData} from './User';
 
 export enum Theme {
   Transparent = 'transparent',
@@ -107,4 +107,12 @@ export interface LoginUserData {
   password: string;
 }
 
+export interface SearchData {
+  isChecked: boolean;
+  query: string;
+}
+
 export type OnLoginFunc = ApiCallback<LoginUserData>;
+export type OnRegisterFunc = ApiCallback<RegisterUserData>;
+export type OnProfileUpdateFunc = ApiCallback<ProfileUserData>;
+export type OnLogoutFunc = () => void;

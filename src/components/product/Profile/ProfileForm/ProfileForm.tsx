@@ -1,28 +1,30 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-
+/* --------------------------------- Generic -------------------------------- */
+import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
+import * as GenericForm from '@generic/Form/Form';
 import Button from '@generic/Button/Button';
 import Field from '@generic/Field/Field';
-import Form, {FormProps} from '@generic/Form/Form';
+/* ---------------------------------- Hooks --------------------------------- */
+import useFormWithValidation from '@hooks/UseFormWithValidation';
+/* ---------------------------------- Utils --------------------------------- */
 import {profile} from '@utils/texts';
+/* ---------------------------------- Types --------------------------------- */
+import {OnProfileUpdateFunc} from 'types/types';
+/* -------------------------------- Contexts -------------------------------- */
 import CurrentUserContext from '@contexts/CurrentUserContext';
-import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
-import {useFormWithValidation} from '@utils/hooks';
-import {ProfileUserData} from 'types/User';
-import {ApiCallback} from 'types/types';
-
+/* -------------------------------------------------------------------------- */
 import './ProfileForm.css';
 
 const texts = profile.form;
 
-/** callback функция, вызываемая при обновлении профиля */
-export type ProfileUpdateFunc = ApiCallback<ProfileUserData>;
-
-export interface ProfileFormProps extends FormProps {
-  onProfileUpdate: ProfileUpdateFunc;
+export type DOMProps = GenericForm.DOMProps;
+export interface FunctionalProps {
+  onProfileUpdate: OnProfileUpdateFunc;
 }
 
-const ProfileForm: React.FC<ProfileFormProps> = ({className, onProfileUpdate, ...props}) => {
+export type Props = DOMProps & FunctionalProps;
+export function ProfileForm({className, onProfileUpdate, ...props}: Props): JSX.Element {
   const cn = createCn('profile-form', className);
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -56,8 +58,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({className, onProfileUpdate, ..
 
   console.log('change');
 
-  const isChanged = () => currentUser.name !== values.nameInput
-  || currentUser.email !== values.emailInput;
+  function isChanged() {
+    return currentUser.name !== values.nameInput || currentUser.email !== values.emailInput;
+  }
 
   // ----------------------------------------------
   React.useEffect(() => {
@@ -65,7 +68,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({className, onProfileUpdate, ..
   }, [isValid]);
 
   return (
-    <Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
+    <GenericForm.Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
       <fieldset className={cn('fieldset')}>
         {/** Поле с именем */}
         <div className={cn('container')}>
@@ -107,8 +110,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({className, onProfileUpdate, ..
       <Button className={cn('submit-button')} type="submit" disabled={!isFormValid}>
         {isProcessing ? texts.submitButton.loadingText : texts.submitButton.text}
       </Button>
-    </Form>
+    </GenericForm.Form>
   );
-};
+}
 
 export default ProfileForm;

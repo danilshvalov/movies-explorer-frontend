@@ -6,7 +6,7 @@ import mainApi from '@utils/api/MainApi';
 /* ---------------------------------- Types --------------------------------- */
 import {IMovie, MoviesList} from 'types/types';
 /* ---------------------------------- Hooks --------------------------------- */
-import {useLocalStorage} from '@utils/hooks';
+import useLocalStorage from './UseLocalStorage';
 /* -------------------------------------------------------------------------- */
 
 export interface ReturnType {

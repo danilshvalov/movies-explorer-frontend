@@ -1,16 +1,18 @@
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-import React from 'react';
-
+import {HTMLAttributes} from 'react';
+/* ---------------------------------- Utils --------------------------------- */
 import {promo as texts} from '@utils/texts';
-import NavTab from '@NavTab/NavTab';
-
+/* --------------------------------- Product -------------------------------- */
+import NavTab from '@product/NavTab/NavTab';
+/* -------------------------------------------------------------------------- */
 import './Promo.css';
 
-export type PromoProps = React.HTMLAttributes<HTMLDivElement>;
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export type Props = DOMProps;
 
 /** Приветствующая секция с навигацией по странице */
-const Promo: React.FC<PromoProps> = ({className, ...props}) => {
+export function Promo({className, ...props}: Props): JSX.Element {
   const cn = createCn('promo', className);
   return (
     <section {...filterInvalidDOMProps(props)} className={cn()}>
@@ -18,6 +20,6 @@ const Promo: React.FC<PromoProps> = ({className, ...props}) => {
       <NavTab className={cn('nav-tab')} />
     </section>
   );
-};
+}
 
 export default Promo;

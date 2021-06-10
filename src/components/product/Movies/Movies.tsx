@@ -3,7 +3,9 @@ import {useState} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* -------------------------------- Generics -------------------------------- */
 import PageWrapper from '@generic/PageWrapper/PageWrapper';
-import SearchForm, {SearchData} from '@generic/SearchForm/SearchForm';
+import SearchForm from '@generic/SearchForm/SearchForm';
+/* ---------------------------------- Types --------------------------------- */
+import {SearchData} from 'types/types';
 /* --------------------------------- Local -------------------------------- */
 import MoviesManager from '@product/Movies/MoviesManager/MoviesManager';
 /* -------------------------------------------------------------------------- */

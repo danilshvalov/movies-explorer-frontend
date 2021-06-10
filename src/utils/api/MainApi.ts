@@ -1,10 +1,10 @@
+import {ProfileUserData, RegisterUserData} from 'types/User';
 import {
-  HTTPMethod, Id, IMovie, MoviesList,
+  HTTPMethod, Id, IMovie, LoginUserData, MoviesList,
 } from '../../types/types';
 
 import {BACKEND_URL} from '../config';
 import Api from './Api';
-import {LoginUserData, ProfileUserData, RegisterUserData} from '../../types/User';
 import {CurrentProfileData, UpdateProfileData} from '../../types/Api';
 
 export interface MovieData {

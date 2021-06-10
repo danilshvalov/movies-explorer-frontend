@@ -2,21 +2,25 @@ import {createCn} from 'bem-react-classname';
 import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {Link} from 'react-router-dom';
-
-import {PAGE_LINKS} from '@utils/config';
-import {Link as GenericLink} from '@generic/Link/Link';
-import {register as texts} from '@utils/texts';
+/* --------------------------------- Generic -------------------------------- */
 import Logo from '@generic/Logo/Logo';
-import RegisterForm, {RegisterFunc} from '@product/RegisterForm/RegisterForm';
-
+import {Link as GenericLink} from '@generic/Link/Link';
+/* ---------------------------------- Utils --------------------------------- */
+import {PAGE_LINKS} from '@utils/config';
+import {register as texts} from '@utils/texts';
+/* ---------------------------------- Types --------------------------------- */
+import {OnRegisterFunc} from 'types/types';
+/* ---------------------------------- Local --------------------------------- */
+import RegisterForm from '@product/RegisterForm/RegisterForm';
+/* -------------------------------------------------------------------------- */
 import './Register.css';
 
 export interface RegisterProps extends React.HTMLAttributes<HTMLDivElement> {
-  onRegister: RegisterFunc;
+  onRegister: OnRegisterFunc;
 }
 
 /** Секция регистрации пользователя */
-const Register = ({className, onRegister, ...props}: RegisterProps) => {
+export function Register({className, onRegister, ...props}: RegisterProps): JSX.Element {
   const cn = createCn('register', className);
 
   return (
@@ -34,6 +38,6 @@ const Register = ({className, onRegister, ...props}: RegisterProps) => {
       </span>
     </section>
   );
-};
+}
 
 export default Register;

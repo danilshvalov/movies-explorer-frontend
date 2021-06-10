@@ -32,8 +32,9 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
     passwordInput,
   }
 
-  const {values, handleChange, errors, fieldsValidity, isValid} =
-    useFormWithValidation<typeof Fields>();
+  const {
+    values, handleChange, errors, fieldsValidity, isValid,
+  } = useFormWithValidation<typeof Fields>();
 
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);

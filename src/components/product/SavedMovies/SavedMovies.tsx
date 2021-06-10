@@ -2,7 +2,9 @@ import {useState, HTMLAttributes} from 'react';
 import {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
 import PageWrapper from '@generic/PageWrapper/PageWrapper';
-import SearchForm, {SearchData} from '@generic/SearchForm/SearchForm';
+import SearchForm from '@generic/SearchForm/SearchForm';
+/* ---------------------------------- Types --------------------------------- */
+import {SearchData} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesManager from '@product/SavedMovies/MoviesManager/MoviesManager';
 /* -------------------------------------------------------------------------- */

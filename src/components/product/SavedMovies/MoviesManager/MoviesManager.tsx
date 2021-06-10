@@ -1,13 +1,12 @@
 import {useEffect, useState} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
-import {SearchData} from '@generic/SearchForm/SearchForm';
 /* ---------------------------------- Hooks --------------------------------- */
 import useSavedMovies from '@hooks/UseSavedMovies';
 /* ---------------------------------- Utils --------------------------------- */
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Types --------------------------------- */
-import {MoviesList} from 'types/types';
+import {MoviesList, SearchData} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/SavedMovies/MoviesCardList/MoviesCardList';
 /* -------------------------------------------------------------------------- */

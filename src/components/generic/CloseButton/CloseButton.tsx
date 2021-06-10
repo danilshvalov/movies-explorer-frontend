@@ -1,17 +1,17 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
-
-import Button, {ButtonProps, RefType as ButtonRefType} from '@generic/Button/Button';
-
+import {forwardRef} from 'react';
+/* -------------------------------- Generics -------------------------------- */
+import * as GenericButton from '@generic/Button/Button';
+/* -------------------------------------------------------------------------- */
 import './CloseButton.css';
 
-export type CloseButtonProps = ButtonProps;
-export type RefType = ButtonRefType;
+export type Props = GenericButton.Props;
+export type RefType = GenericButton.RefType;
 
 /** Кнопка с крестиком */
-const CloseButton = React.forwardRef<RefType, CloseButtonProps>(({className, ...props}, ref) => {
+export const CloseButton = forwardRef<RefType, Props>(({className, ...props}, ref) => {
   const cn = createCn('close-button', className);
-  return <Button {...props} ref={ref} className={cn()} />;
+  return <GenericButton.Button {...props} ref={ref} className={cn()} />;
 });
 
 export default CloseButton;

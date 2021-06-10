@@ -10,11 +10,6 @@ import {searchForm as texts} from '@utils/texts';
 
 import './SearchForm.css';
 
-export interface SearchData {
-  isChecked: boolean;
-  query: string;
-}
-
 export interface SearchFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   /** Изначальное состояние формы */
   defaultChecked?: boolean;
