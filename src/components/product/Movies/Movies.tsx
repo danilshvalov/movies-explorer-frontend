@@ -14,7 +14,9 @@ import './Movies.css';
 import Button from 'components/Button/Button';
 import SearchForm, {SearchData} from '@/SearchForm';
 import {useExpandableList} from '@utils/hooks';
-import {IMovie, MoviesList, OnSearchFunc, ReadablePromise, Theme} from 'types/types';
+import {
+  IMovie, MoviesList, OnSearchFunc, ReadablePromise, Theme,
+} from 'types/types';
 import {DEVICES_WIDTHS, MOVIES_AMOUNT_BY_DEVICE} from '@utils/config';
 import getDeviceType from '@utils/device-type';
 import SaveButtonWrapper, {FunctionalProps as WrapperFunctionalProps} from '@/SaveButtonWrapper';
@@ -23,7 +25,7 @@ import moviesFilter from '@utils/movies-filter';
 import {OnDeleteFunc, OnSaveFunc} from 'types/MoviesCard';
 import {useAllMovies, useSavedMovies} from '@/App';
 import PreloaderWrapper from '@/PreloaderWrapper';
-import ErrorWrapper from '@/ErrorWrapper';
+import ErrorWrapper from '@generic/ErrorWrapper/ErrorWrapper';
 
 export type DOMProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -127,7 +129,9 @@ const MoviesListMarkup = (props: MoviesListP) => (
 );
 
 /** Секция, включающая в себя список всех доступных фильмов и поисковую форму */
-const Movies = ({className, onSave, onDelete, ...props}: MoviesProps) => {
+const Movies = ({
+  className, onSave, onDelete, ...props
+}: MoviesProps) => {
   const cn = createCn('movies', className);
 
   const [isActivated, setActivated] = useState(false);

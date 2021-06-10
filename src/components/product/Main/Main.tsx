@@ -1,11 +1,11 @@
 import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
-import AboutMe from '@/AboutMe';
-import AboutProject from '@/AboutProject';
-import Techs from '@/Techs';
-import Promo from '@/Promo';
-import PageWrapper from '@/PageWrapper';
+import AboutMe from '@product/AboutMe/AboutMe';
+import AboutProject from '@product/AboutProject/AboutProject';
+import Techs from '@product/Techs/Techs';
+import Promo from '@product/Promo/Promo';
+import PageWrapper from '@generic/PageWrapper/PageWrapper';
 import {SECTIONS_IDS} from '@utils/config';
 
 import './Main.css';

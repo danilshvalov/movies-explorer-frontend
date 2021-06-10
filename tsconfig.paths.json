@@ -6,8 +6,8 @@
       "@product/*": ["components/product/*"],
       "@generic/*": ["components/generic/*"],
       "@utils/*": ["utils/*"],
-      "@types/*": ["types/*"],
-      "contexts/*": ["contexts/*"],
+      "types/*": ["types/*"],
+      "@contexts/*": ["contexts/*"],
       "@hooks/*": ["hooks/*"]
     }
   }
