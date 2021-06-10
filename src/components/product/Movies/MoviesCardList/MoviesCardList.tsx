@@ -1,24 +1,22 @@
-import * as GenericMoviesCardList from '@generic/MoviesCardList/MoviesCardList';
-import {SearchData} from '@generic/SearchForm/SearchForm';
+import {createCn} from 'bem-react-classname';
+// generics
 import Button from '@generic/Button/Button';
+import * as GenericList from '@generic/List/List';
+// utils
 import {DEVICES_WIDTHS, MOVIES_AMOUNT_BY_DEVICE} from '@utils/config';
 import getDeviceType from '@utils/device-type';
 import {useExpandableList} from '@utils/hooks';
-import {createCn} from 'bem-react-classname';
+// types
 import {IMovie, WithMoviesList} from 'types/types';
-
+// product
 import MoviesCard, {
   FunctionalProps as MovieCardFuncProps,
 } from '@product/Movies/MoviesCard/MoviesCard';
-
+// local
 import './MoviesCardList.css';
 
-export type DOMProps = GenericMoviesCardList.DOMProps;
-export interface FunctionalProps
-  extends GenericMoviesCardList.FunctionalProps,
-    MovieCardFuncProps {
-  searchData: SearchData;
-}
+export type DOMProps = GenericList.DOMProps;
+export type FunctionalProps = MovieCardFuncProps;
 export type DataProps = WithMoviesList;
 export type Props = DOMProps & FunctionalProps & DataProps;
 
@@ -45,22 +43,14 @@ function MoviesCardList({moviesList, ...props}: Props): JSX.Element {
   ));
 
   return (
-    <GenericMoviesCardList.MoviesCardList
-      isEmpty={true}
-      isLoading={true}
-      className={cn()}
-    >
+    <GenericList.default className={cn()}>
       {/* TODO добавить error-wrapper */}
       {list.value?.map((data) => (
-        <MoviesCard
-          {...data}
-          {...(props as MovieCardFuncProps)}
-          key={data.movieId}
-        />
+        <MoviesCard {...data} {...(props as MovieCardFuncProps)} key={data.movieId} />
       ))}
 
       <OptionalMoreButton />
-    </GenericMoviesCardList.MoviesCardList>
+    </GenericList.default>
   );
 }
 

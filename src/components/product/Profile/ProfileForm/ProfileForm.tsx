@@ -31,8 +31,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({className, onProfileUpdate, ..
     emailInput,
   }
 
-  const {values, handleChange, errors, fieldsValidity, isValid} =
-    useFormWithValidation<typeof Fields>();
+  const {
+    values, handleChange, errors, fieldsValidity, isValid,
+  } = useFormWithValidation<typeof Fields>();
 
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);
@@ -55,8 +56,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({className, onProfileUpdate, ..
 
   console.log('change');
 
-  const isChanged = () =>
-    currentUser.name !== values.nameInput || currentUser.email !== values.emailInput;
+  const isChanged = () => currentUser.name !== values.nameInput
+  || currentUser.email !== values.emailInput;
 
   // ----------------------------------------------
   React.useEffect(() => {

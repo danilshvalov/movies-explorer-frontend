@@ -2,10 +2,10 @@ import {createCn} from 'bem-react-classname';
 import React from 'react';
 
 import CurrentUserContext from '@contexts/CurrentUserContext';
-import ProfileForm, {ProfileUpdateFunc} from './ProfileForm/ProfileForm';
 import {profile as texts} from '@utils/texts';
-import Button from '@Button/Button';
-import Header from '@/Header';
+import Button from '@generic/Button/Button';
+import Header from '@product/Header/Header';
+import ProfileForm, {ProfileUpdateFunc} from './ProfileForm/ProfileForm';
 
 import './Profile.css';
 
@@ -20,7 +20,9 @@ export interface ProfileProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /** Секция с формой изменения профиля */
-const Profile = ({className, onProfileUpdate, onLogout, ...props}: ProfileProps) => {
+const Profile = ({
+  className, onProfileUpdate, onLogout, ...props
+}: ProfileProps) => {
   const currentUser = React.useContext(CurrentUserContext);
   const cn = createCn('profile', className);
 

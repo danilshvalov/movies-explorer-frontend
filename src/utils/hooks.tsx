@@ -72,8 +72,10 @@ export function useFormWithValidation<T extends {[key: number]: any}>() {
   };
 }
 
-export function useLocalStorage<T>(key: string): [T | null, Dispatch<SetStateAction<T | null>>] {
-  const [value, setValue] = useState<T | null>(null);
+export function useLocalStorage<T>(
+  key: string,
+): [T | undefined, Dispatch<SetStateAction<T | undefined>>] {
+  const [value, setValue] = useState<T | undefined>();
 
   // const item = window.localStorage.getItem(key);
   // return item ? JSON.parse(item) : null;

@@ -15,7 +15,9 @@ export type DOMProps = ListDOMProps;
 
 export type Props = FunctionalProps & DOMProps;
 
-export function MoviesCardList({isEmpty, isLoading, ...props}: Props) {
+/** @deprecated */
+// REMOVE
+export function MoviesCardList({isEmpty, isLoading, ...props}: Props): JSX.Element {
   const cn = createCn('movies-list');
 
   /** Markup */
@@ -24,7 +26,7 @@ export function MoviesCardList({isEmpty, isLoading, ...props}: Props) {
       {props.children}
     </List>
   );
-  const NotFoundMarkup = () => <NothingFoundStub className={cn('nothing-found')} />;
+
   const LoadingMarkup = () => <Preloader className={cn('preloader')} />;
   // -----------------------------------------------------------------------
 
