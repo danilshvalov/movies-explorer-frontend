@@ -1,16 +1,18 @@
 import {createCn} from 'bem-react-classname';
-// generics
+/* --------------------------------- Generic -------------------------------- */
 import Button from '@generic/Button/Button';
 import * as GenericList from '@generic/List/List';
-// utils
+/* ---------------------------------- Hooks --------------------------------- */
+import useExpandableList from '@hooks/UseExpandableList';
+/* ---------------------------------- Utils --------------------------------- */
 import {DEVICES_WIDTHS, MOVIES_AMOUNT_BY_DEVICE} from '@utils/config';
 import getDeviceType from '@utils/device-type';
-import {useExpandableList} from '@utils/hooks';
-// types
+/* ---------------------------------- Types --------------------------------- */
 import {IMovie, WithMoviesList} from 'types/types';
-// product
+/* ---------------------------------- Local --------------------------------- */
 import * as Card from '@product/Movies/MoviesCard/MoviesCard';
-// local
+/* -------------------------------------------------------------------------- */
+
 import './MoviesCardList.css';
 
 export type DOMProps = GenericList.DOMProps;

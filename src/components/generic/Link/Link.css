@@ -1,9 +1,9 @@
-.colored-link {
+.link {
   color: #000;
   text-decoration: none;
   transition: opacity 0.2s linear;
 }
 
-.colored-link:hover {
+.link:hover {
   opacity: 0.6;
 }

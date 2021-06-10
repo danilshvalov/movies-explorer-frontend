@@ -1,14 +1,20 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-
-import Button from '@Button/Button';
-import Form, {FormProps} from '@generic/Form/Form';
+/* --------------------------------- Generic -------------------------------- */
+import Button from '@generic/Button/Button';
+import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
+import Field from '@generic/Field/Field';
+import * as GenericForm from '@generic/Form/Form';
+/* ---------------------------------- Hooks --------------------------------- */
+import useFormWithValidation from '@hooks/UseFormWithValidation';
+/* ---------------------------------- Utils --------------------------------- */
 import {register} from '@utils/texts';
+/* ---------------------------------- Types --------------------------------- */
 import {ApiCallback, Theme} from 'types/types';
 import {RegisterUserData} from 'types/User';
-import {useFormWithValidation} from '@utils/hooks';
-import Field from '@generic/Field/Field';
-import ErrorMessage from '@ErrorMessage/ErrorMessage';
+/* -------------------------------- Contexts -------------------------------- */
+/* ---------------------------------- Local --------------------------------- */
+/* -------------------------------------------------------------------------- */
 
 import './RegisterForm.css';
 

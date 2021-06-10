@@ -3,7 +3,7 @@ import {createCn} from 'bem-react-classname';
 import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
-import ColoredLink from '@generic/ColoredLink/ColoredLink';
+import Link from '@generic/Link/Link';
 import List from '@generic/List/List';
 import {footer as texts} from '@utils/texts';
 
@@ -24,9 +24,9 @@ const Footer = ({className, ...props}: FooterProps) => {
         {/** Список ссылок на внешние сервисы */}
         <List className={cn('list')} itemClassName={cn('list-item')}>
           {texts.links.map((item) => (
-            <ColoredLink key={shortid.generate()} className={cn('link')} href={item.path}>
+            <Link key={shortid.generate()} className={cn('link')} href={item.path}>
               {item.name}
-            </ColoredLink>
+            </Link>
           ))}
         </List>
       </div>

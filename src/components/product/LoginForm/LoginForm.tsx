@@ -8,7 +8,7 @@ import Button from '@generic/Button/Button';
 /* ---------------------------------- Types --------------------------------- */
 import {OnLoginFunc, Theme} from 'types/types';
 /* ---------------------------------- Hooks --------------------------------- */
-import {useFormWithValidation} from '@utils/hooks';
+import useFormWithValidation from '@hooks/UseFormWithValidation';
 /* ---------------------------------- Utils --------------------------------- */
 import {login} from '@utils/texts';
 /* -------------------------------------------------------------------------- */
@@ -32,9 +32,8 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
     passwordInput,
   }
 
-  const {
-    values, handleChange, errors, fieldsValidity, isValid,
-  } = useFormWithValidation<typeof Fields>();
+  const {values, handleChange, errors, fieldsValidity, isValid} =
+    useFormWithValidation<typeof Fields>();
 
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);

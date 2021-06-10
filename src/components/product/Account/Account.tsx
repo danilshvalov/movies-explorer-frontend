@@ -3,7 +3,7 @@ import {HTMLAttributes} from 'react';
 import {Link} from 'react-router-dom';
 /* -------------------------------- Generics -------------------------------- */
 import Button from '@generic/Button/Button';
-import ColoredLink from '@generic/ColoredLink/ColoredLink';
+import {Link as GenericLink} from '@generic/Link/Link';
 /* ---------------------------------- Utils --------------------------------- */
 import {account as texts} from '@utils/texts';
 import {PAGE_LINKS} from '@utils/config';
@@ -20,7 +20,7 @@ export function Account({className, ...props}: AccountProps): JSX.Element {
   const cn = createCn('account', className);
   return (
     <div {...props} className={cn()}>
-      <Link component={ColoredLink} to={PAGE_LINKS.profile} className={cn('link')}>
+      <Link component={GenericLink} to={PAGE_LINKS.profile} className={cn('link')}>
         <Button className={cn('profile-button')}>{texts.buttons.account}</Button>
         {/** Иконка человечка */}
         <img className={cn('logo')} src={accountImg} alt={texts.accountLogo.alt} />

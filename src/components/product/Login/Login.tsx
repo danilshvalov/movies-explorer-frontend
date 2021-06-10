@@ -1,7 +1,7 @@
 import {createCn} from 'bem-react-classname';
 import {Link} from 'react-router-dom';
 /* -------------------------------- Generics -------------------------------- */
-import ColoredLink from '@generic/ColoredLink/ColoredLink';
+import {Link as GenericLink} from '@generic/Link/Link';
 import Logo from '@generic/Logo/Logo';
 /* ---------------------------------- Utils --------------------------------- */
 import {login as texts} from '@utils/texts';
@@ -35,7 +35,7 @@ export function Login({className, onLogin, ...props}: LoginProps): JSX.Element {
       {/** Перенаправляющий зарегистрированных пользователей текст */}
       <span className={cn('sub-text')}>
         {texts.subtext.text}
-        <Link component={ColoredLink} to={PAGE_LINKS.signUp} className={cn('link')}>
+        <Link component={GenericLink} to={PAGE_LINKS.signUp} className={cn('link')}>
           {texts.subtext.link}
         </Link>
       </span>

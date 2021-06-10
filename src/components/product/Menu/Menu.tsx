@@ -1,18 +1,21 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
+/* --------------------------------- Product -------------------------------- */
+import DesktopMenu from '@product/DesktopMenu/DesktopMenu';
+import MobileMenu from '@product/MobileMenu/MobileMenu';
+/* -------------------------------------------------------------------------- */
 
-import DesktopMenu from '@/DesktopMenu';
-import MobileMenu from '@/MobileMenu';
-
-export interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export interface FunctionalProps {
   isDesktop: boolean;
 }
+export type Props = DOMProps & FunctionalProps;
 
 /**
  *  Меню сайта
  *  Изменяется в зависимости от типа устройства
  *  */
-const Menu = ({className, isDesktop, ...props}: MenuProps) => {
+export function Menu({className, isDesktop, ...props}: Props): JSX.Element {
   const cn = createCn('menu', className);
 
   return (
@@ -28,6 +31,6 @@ const Menu = ({className, isDesktop, ...props}: MenuProps) => {
       )}
     </div>
   );
-};
+}
 
 export default Menu;

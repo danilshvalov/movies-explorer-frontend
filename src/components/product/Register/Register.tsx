@@ -4,7 +4,7 @@ import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {Link} from 'react-router-dom';
 
 import {PAGE_LINKS} from '@utils/config';
-import ColoredLink from '@generic/ColoredLink/ColoredLink';
+import {Link as GenericLink} from '@generic/Link/Link';
 import {register as texts} from '@utils/texts';
 import Logo from '@generic/Logo/Logo';
 import RegisterForm, {RegisterFunc} from '@product/RegisterForm/RegisterForm';
@@ -28,7 +28,7 @@ const Register = ({className, onRegister, ...props}: RegisterProps) => {
       {/** Ссылки перенаправления зарегистрированных пользователей */}
       <span className={cn('sub-text')}>
         {texts.subtext.text}
-        <Link component={ColoredLink} to={PAGE_LINKS.signIn} className={cn('link')}>
+        <Link component={GenericLink} to={PAGE_LINKS.signIn} className={cn('link')}>
           {texts.subtext.link}
         </Link>
       </span>

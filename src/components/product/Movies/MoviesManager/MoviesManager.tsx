@@ -1,11 +1,17 @@
-import {SearchData} from '@generic/SearchForm/SearchForm';
-import {useAllMovies, useSavedMovies} from '@product/App/App';
-
-import MoviesCardList from '@product/Movies/MoviesCardList/MoviesCardList';
-import moviesFilter from '@utils/movies-filter';
 import {useEffect, useState} from 'react';
-import {MoviesList} from 'types/types';
+/* --------------------------------- Generic -------------------------------- */
 import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
+import {SearchData} from '@generic/SearchForm/SearchForm';
+/* ---------------------------------- Hooks --------------------------------- */
+import useAllMovies from '@hooks/UseAllMovies';
+import useSavedMovies from '@hooks/UseSavedMovies';
+/* ---------------------------------- Types --------------------------------- */
+import {MoviesList} from 'types/types';
+/* ---------------------------------- Utils --------------------------------- */
+import moviesFilter from '@utils/movies-filter';
+/* ---------------------------------- Local --------------------------------- */
+import MoviesCardList from '@product/Movies/MoviesCardList/MoviesCardList';
+/* -------------------------------------------------------------------------- */
 
 export interface FunctionalProps {
   searchData: SearchData;

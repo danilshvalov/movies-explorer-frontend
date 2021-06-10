@@ -1,21 +1,22 @@
-import React from 'react';
+import {InputHTMLAttributes, forwardRef} from 'react';
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-
-import {Theme, WithError} from 'types/types';
-
+/* ---------------------------------- Types --------------------------------- */
+import {Theme, WithError, WithTheme} from 'types/types';
+/* -------------------------------------------------------------------------- */
 import './Field.css';
 
-export interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement>, WithError {
-  /** Цветовое решение поля */
-  theme?: Theme;
-}
+export type DOMProps = InputHTMLAttributes<HTMLInputElement>;
+export type FunctionalProps = WithError & WithTheme;
+export type Props = DOMProps & FunctionalProps;
 
 export type RefType = HTMLInputElement;
 
 /** Обёртка над [input]{@link HTMLInputElement}, поддерживающая выделение при ошибке */
-const Field = React.forwardRef<RefType, FieldProps>(
-  ({className, isError = false, theme = Theme.Transparent, ...props}, ref) => {
+export const Field = forwardRef<RefType, Props>(
+  ({
+    className, isError = false, theme = Theme.Transparent, ...props
+  }, ref) => {
     const cn = createCn('field', className);
 
     return (

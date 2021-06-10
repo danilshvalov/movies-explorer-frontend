@@ -1,13 +1,14 @@
 import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {createCn} from 'bem-react-classname';
-
+/* -------------------------------------------------------------------------- */
 import './Preloader.css';
 
-export type PreloaderProps = React.HTMLAttributes<HTMLDivElement>;
+export type DOMProps = React.HTMLAttributes<HTMLDivElement>;
+export type Props = DOMProps;
 
 /** Компонент-заглушка во время загрузки данных */
-const Preloader = ({className, ...props}: PreloaderProps) => {
+export function Preloader({className, ...props}: Props): JSX.Element {
   const cn = createCn('preloader', className);
   return (
     <div {...filterInvalidDOMProps(props)} className={cn()}>
@@ -16,6 +17,6 @@ const Preloader = ({className, ...props}: PreloaderProps) => {
       </div>
     </div>
   );
-};
+}
 
 export default Preloader;

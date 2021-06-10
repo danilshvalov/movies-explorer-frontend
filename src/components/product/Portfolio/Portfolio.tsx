@@ -1,17 +1,19 @@
-import React from 'react';
+import {HTMLAttributes} from 'react';
 import {createCn} from 'bem-react-classname';
 import shortid from 'shortid';
-
-import List from '@/List/List';
-import ArrowLink from '@/ArrowLink';
+/* --------------------------------- Generic -------------------------------- */
+import List from '@generic/List/List';
+import ArrowLink from '@generic/ArrowLink/ArrowLink';
+/* ---------------------------------- Utils --------------------------------- */
 import {portfolio as texts} from '@utils/texts';
-
+/* -------------------------------------------------------------------------- */
 import './Portfolio.css';
 
-export type PortfolioProps = React.HTMLAttributes<HTMLDivElement>;
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export type Props = DOMProps;
 
 /** Секция с ссылками на проекты из портфолио */
-const Portfolio: React.FC<PortfolioProps> = ({className, ...props}) => {
+export function Portfolio({className, ...props}: Props): JSX.Element {
   const cn = createCn('portfolio', className);
   return (
     <div {...props} className={cn()}>
@@ -25,6 +27,6 @@ const Portfolio: React.FC<PortfolioProps> = ({className, ...props}) => {
       </List>
     </div>
   );
-};
+}
 
 export default Portfolio;

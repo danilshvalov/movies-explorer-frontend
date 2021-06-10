@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
 import {SearchData} from '@generic/SearchForm/SearchForm';
 /* ---------------------------------- Hooks --------------------------------- */
-import {useSavedMovies} from '@product/App/App';
+import useSavedMovies from '@hooks/UseSavedMovies';
 /* ---------------------------------- Utils --------------------------------- */
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Types --------------------------------- */

@@ -9,7 +9,7 @@ import {IMovie, MoviesList} from 'types/types';
 import {useLocalStorage} from '@utils/hooks';
 /* -------------------------------------------------------------------------- */
 
-export interface UseSavedMoviesData {
+export interface ReturnType {
   value?: MoviesList;
   setValue: Dispatch<SetStateAction<MoviesList | undefined>>;
   isLoading: boolean;
@@ -18,7 +18,7 @@ export interface UseSavedMoviesData {
   containsMovie: (data: IMovie) => boolean;
 }
 
-export function useSavedMovies(): UseSavedMoviesData {
+export function useSavedMovies(): ReturnType {
   const [value, setValue] = useLocalStorage<MoviesList>('saved-movies');
   const [isLoading, setIsLoading] = useState(true);
 

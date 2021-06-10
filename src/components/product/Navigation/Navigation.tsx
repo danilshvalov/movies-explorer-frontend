@@ -1,30 +1,35 @@
 import {createCn} from 'bem-react-classname';
 import shortid from 'shortid';
-import React from 'react';
+import {HTMLAttributes} from 'react';
 import {Link} from 'react-router-dom';
-
-import ColoredLink from '@/ColoredLink/ColoredLink';
-import List from '@/List/List';
-import {LinkList} from 'types/types';
-
+/* --------------------------------- Generic -------------------------------- */
+import {Link as GenericLink} from '@generic/Link/Link';
+import List from '@generic/List/List';
+/* ---------------------------------- Types --------------------------------- */
+import {LinkList as LinksList} from 'types/types';
+/* -------------------------------------------------------------------------- */
 import './Navigation.css';
 
-export interface NavigationProps extends React.HTMLAttributes<HTMLDivElement> {
-  /** Список с отображаемыми ссылками */
-  linksList: LinkList;
-  /** Включение подчеркивания ссылки по текущему адресу */
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export interface FunctionalProps {
   underline: boolean;
 }
+export interface DataProps {
+  linksList: LinksList;
+}
+export type Props = DOMProps & FunctionalProps & DataProps;
 
 /** Компонент навигации по сайту */
-const Navigation: React.FC<NavigationProps> = ({className, linksList, underline, ...props}) => {
+export function Navigation({
+  className, linksList, underline, ...props
+}: Props): JSX.Element {
   const cn = createCn('navigation', className);
   return (
     <nav {...props} className={className}>
       <List className={cn('list')} itemClassName={cn('list-item')}>
         {linksList.map(({name, path}) => (
           <Link
-            component={ColoredLink}
+            component={GenericLink}
             key={shortid.generate()}
             className={cn('link', {
               underlined: underline && path === window.location.pathname,
@@ -37,6 +42,6 @@ const Navigation: React.FC<NavigationProps> = ({className, linksList, underline,
       </List>
     </nav>
   );
-};
+}
 
 export default Navigation;

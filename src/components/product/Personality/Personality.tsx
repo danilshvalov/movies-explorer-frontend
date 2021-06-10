@@ -1,20 +1,23 @@
-import React from 'react';
 import {createCn} from 'bem-react-classname';
 import shortid from 'shortid';
-
-import avatarImg from '@images/avatar.jpg';
-import List from '@/List/List';
+import {HTMLAttributes} from 'react';
+/* --------------------------------- Generic -------------------------------- */
+import Link from '@generic/Link/Link';
+import List from '@generic/List/List';
+/* ---------------------------------- Utils --------------------------------- */
 import {personality as texts} from '@utils/texts';
-import ColoredLink from '@/ColoredLink/ColoredLink';
-
+/* --------------------------------- Images --------------------------------- */
+import avatarImg from '@images/avatar.jpg';
+/* -------------------------------------------------------------------------- */
 import './Personality.css';
 
-export type PersonalityProps = React.HTMLAttributes<HTMLDivElement>;
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export type Props = DOMProps;
 
 /**
  * Информация об ученике Яндекс.Практикума
  * */
-const Personality = ({className, ...props}: PersonalityProps) => {
+export function Personality({className, ...props}: Props): JSX.Element {
   const cn = createCn('personality', className);
 
   return (
@@ -29,9 +32,9 @@ const Personality = ({className, ...props}: PersonalityProps) => {
         {/** Список ссылок на соцсети и т.п. */}
         <List className={cn('list')} itemClassName={cn('list-item')}>
           {texts.links.map((link) => (
-            <ColoredLink key={shortid.generate()} className={cn('link')} href={link.path}>
+            <Link key={shortid.generate()} className={cn('link')} href={link.path}>
               {link.name}
-            </ColoredLink>
+            </Link>
           ))}
         </List>
       </article>
@@ -39,6 +42,6 @@ const Personality = ({className, ...props}: PersonalityProps) => {
       <img className={cn('photo')} src={avatarImg} alt={texts.img.alt} />
     </div>
   );
-};
+}
 
 export default Personality;

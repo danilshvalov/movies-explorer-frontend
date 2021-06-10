@@ -1,13 +1,14 @@
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-import React from 'react';
+import {AnchorHTMLAttributes} from 'react';
+/* -------------------------------------------------------------------------- */
+import './Link.css';
 
-import './ColoredLink.css';
-
-export type ColoredLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement>;
+export type DOMProps = AnchorHTMLAttributes<HTMLAnchorElement>;
+export type Props = DOMProps;
 
 /** Обёртка над обычной ссылкой, поддерживающая анимацию при наведении */
-const ColoredLink: React.FC<ColoredLinkProps> = ({className, ...props}) => {
+export function Link({className, ...props}: Props): JSX.Element {
   const cn = createCn('colored-link', className);
 
   return (
@@ -15,6 +16,6 @@ const ColoredLink: React.FC<ColoredLinkProps> = ({className, ...props}) => {
       {props.children}
     </a>
   );
-};
+}
 
-export default ColoredLink;
+export default Link;

@@ -1,24 +1,25 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
-
-import ColoredLink, {ColoredLinkProps} from '@/ColoredLink';
+/* --------------------------------- Generic -------------------------------- */
+import * as GenericLink from '@generic/Link/Link';
+/* --------------------------------- Imaged --------------------------------- */
 import arrowLinkImg from '@images/arrow-link.svg';
+/* ---------------------------------- Utils --------------------------------- */
 import {arrowLink as texts} from '@utils/texts';
-
+/* -------------------------------------------------------------------------- */
 import './ArrowLink.css';
 
-export type ArrowLinkProps = ColoredLinkProps;
+export type Props = GenericLink.Props;
 
 /** Ссылка с картинкой стрелочки */
-const ArrowLink: React.FC<ArrowLinkProps> = ({className, ...props}) => {
+export function ArrowLink({className, ...props}: Props): JSX.Element {
   const cn = createCn('arrow-link', className);
 
   return (
-    <ColoredLink {...props} className={cn()}>
+    <GenericLink.Link {...props} className={cn()}>
       {props.children}
       <img className={cn('picture')} src={arrowLinkImg} alt={texts.img.alt} />
-    </ColoredLink>
+    </GenericLink.Link>
   );
-};
+}
 
 export default ArrowLink;

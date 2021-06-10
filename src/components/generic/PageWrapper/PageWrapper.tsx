@@ -1,13 +1,14 @@
-import React from 'react';
-import Footer from '@/Footer';
-import Header from '@/Header';
+import Footer from '@generic/Footer/Footer';
+import Header from '@product/Header/Header';
 
-const PageWrapper = (props: any) => (
-  <>
-    <Header />
-    {props.children}
-    <Footer />
-  </>
-);
+export function PageWrapper(props: any): JSX.Element {
+  return (
+    <>
+      <Header />
+      {props.children}
+      <Footer />
+    </>
+  );
+}
 
 export default PageWrapper;

@@ -7,13 +7,13 @@ import moviesApi from '@utils/api/MoviesApi';
 import {MoviesList} from 'types/types';
 /* -------------------------------------------------------------------------- */
 
-export interface UseAllMoviesData {
+export interface ReturnType {
   value?: MoviesList;
   setValue: Dispatch<SetStateAction<MoviesList | undefined>>;
   isLoading: boolean;
 }
 
-export function useAllMovies(): UseAllMoviesData {
+export function useAllMovies(): ReturnType {
   const [value, setValue] = useState<MoviesList>();
   const [isLoading, setIsLoading] = useState(true);
 

@@ -37,6 +37,10 @@ export interface WithError {
   isError?: boolean;
 }
 
+export interface WithTheme {
+  theme?: Theme;
+}
+
 export interface WithApiInteraction {
   APIError: string;
   isProcessing: boolean;
