@@ -1,7 +1,7 @@
 .delete-button {
   width: 21px;
   height: 21px;
-  background-image: url('../../images/delete-button.svg');
+  background-image: url("/src/images/delete-button.svg");
 }
 
 .with-delete {

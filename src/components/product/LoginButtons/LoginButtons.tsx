@@ -1,19 +1,20 @@
-import React from 'react';
 import {createCn} from 'bem-react-classname';
 import {useHistory} from 'react-router-dom';
-
-import Button from '@/Button';
-import List, {DOMProps as ListDOMProps} from '@/List/List';
+/* -------------------------------- Generics -------------------------------- */
+import * as GenericList from '@generic/List/List';
+import Button from '@generic/Button/Button';
+/* ---------------------------------- Utils --------------------------------- */
 import {loginButtons as texts} from '@utils/texts';
-import {Theme} from 'types/types';
-
-import './LoginButtons.css';
 import {PAGE_LINKS} from '@utils/config';
+/* ---------------------------------- Types --------------------------------- */
+import {Theme} from 'types/types';
+/* -------------------------------------------------------------------------- */
+import './LoginButtons.css';
 
-export type LoginButtonsProps = ListDOMProps;
+export type LoginButtonsProps = GenericList.DOMProps;
 
 /** Кнопки, перенаправляющие пользователя на вход в аккаунт */
-const LoginButtons = ({className, ...props}: LoginButtonsProps) => {
+function LoginButtons({className, ...props}: LoginButtonsProps): JSX.Element {
   const cn = createCn('login-buttons', className);
 
   const history = useHistory();
@@ -22,15 +23,15 @@ const LoginButtons = ({className, ...props}: LoginButtonsProps) => {
   const handleLoginClock = () => history.push(PAGE_LINKS.signIn);
 
   return (
-    <List {...props} className={cn()} itemClassName={cn('list-item')}>
+    <GenericList.List {...props} className={cn()} itemClassName={cn('list-item')}>
       <Button className={cn('button')} onClick={handleRegisterClick}>
         {texts.register}
       </Button>
       <Button className={cn('button')} onClick={handleLoginClock} theme={Theme.Azure}>
         {texts.login}
       </Button>
-    </List>
+    </GenericList.List>
   );
-};
+}
 
 export default LoginButtons;

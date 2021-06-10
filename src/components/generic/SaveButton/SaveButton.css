@@ -9,7 +9,7 @@
 .save-button_checked {
   width: 19px;
   height: 19px;
-  background-image: url('../../images/checked-button.svg');
+  background-image: url("/src/images/checked-button.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

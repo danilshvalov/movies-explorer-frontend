@@ -97,3 +97,10 @@ export type ReadFunc<T> = () => {data(): T; isOk: boolean};
 export type ReadablePromise<T> = {
   read: ReadFunc<T>;
 };
+
+export interface LoginUserData {
+  email: string;
+  password: string;
+}
+
+export type OnLoginFunc = ApiCallback<LoginUserData>;

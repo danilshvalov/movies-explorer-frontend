@@ -1,19 +1,22 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import {HTMLAttributes} from 'react';
 import {Link} from 'react-router-dom';
-
-import Button from '@/Button';
+/* -------------------------------- Generics -------------------------------- */
+import Button from '@generic/Button/Button';
+import ColoredLink from '@generic/ColoredLink/ColoredLink';
+/* ---------------------------------- Utils --------------------------------- */
 import {account as texts} from '@utils/texts';
-import accountImg from '@images/account-avatar.svg';
-import ColoredLink from '@/ColoredLink/ColoredLink';
 import {PAGE_LINKS} from '@utils/config';
-
+/* --------------------------------- Images --------------------------------- */
+import accountImg from '@images/account-avatar.svg';
+/* -------------------------------------------------------------------------- */
 import './Account.css';
 
-export type AccountProps = React.HTMLAttributes<HTMLDivElement>;
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export type AccountProps = DOMProps;
 
 /** Элемент, перенаправляющий на страницу управления аккаунтом */
-const Account = ({className, ...props}: AccountProps) => {
+export function Account({className, ...props}: AccountProps): JSX.Element {
   const cn = createCn('account', className);
   return (
     <div {...props} className={cn()}>
@@ -24,6 +27,6 @@ const Account = ({className, ...props}: AccountProps) => {
       </Link>
     </div>
   );
-};
+}
 
 export default Account;

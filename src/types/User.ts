@@ -5,12 +5,6 @@ export interface RegisterUserData {
   name: string;
 }
 
-/** Данные, необходимые для авторизации */
-export interface LoginUserData {
-  email: string;
-  password: string;
-}
-
 /** Данные, возвращаемые пользователю */
 export interface ProfileUserData {
   email: string;

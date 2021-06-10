@@ -1,31 +1,30 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-
-import {ApiCallback, Theme} from 'types/types';
-import Button from '@/Button';
-import Form, {FormProps} from '@/Form/Form';
-import {login} from '@utils/texts';
-import {LoginUserData} from 'types/User';
+/* -------------------------------- Generics -------------------------------- */
+import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
+import Field from '@generic/Field/Field';
+import * as GenericForm from '@generic/Form/Form';
+import Button from '@generic/Button/Button';
+/* ---------------------------------- Types --------------------------------- */
+import {OnLoginFunc, Theme} from 'types/types';
+/* ---------------------------------- Hooks --------------------------------- */
 import {useFormWithValidation} from '@utils/hooks';
-import Field from '@/Field/Field';
-import ErrorMessage from '@/ErrorMessage';
-
+/* ---------------------------------- Utils --------------------------------- */
+import {login} from '@utils/texts';
+/* -------------------------------------------------------------------------- */
 import './LoginForm.css';
 
 const texts = login.form;
 
-/** Тип возвращаемых данных  */
-
-/** Тип callback функции */
-export type LoginFunc = ApiCallback<LoginUserData>;
-
-export interface LoginFormProps extends FormProps {
-  /** callback, вызываемый при отправке формы */
-  onLogin: LoginFunc;
+export type DOMProps = GenericForm.DOMProps;
+export interface FunctionalProps {
+  onLogin: OnLoginFunc;
 }
 
+export type Props = DOMProps & FunctionalProps;
+
 /** Форма входа в аккаунт */
-const LoginForm = ({className, onLogin, ...props}: LoginFormProps) => {
+const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
   const cn = createCn('login-form', className);
 
   enum Fields {
@@ -33,8 +32,9 @@ const LoginForm = ({className, onLogin, ...props}: LoginFormProps) => {
     passwordInput,
   }
 
-  const {values, handleChange, errors, fieldsValidity, isValid} =
-    useFormWithValidation<typeof Fields>();
+  const {
+    values, handleChange, errors, fieldsValidity, isValid,
+  } = useFormWithValidation<typeof Fields>();
 
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);
@@ -54,7 +54,12 @@ const LoginForm = ({className, onLogin, ...props}: LoginFormProps) => {
   };
 
   return (
-    <Form {...props} className={cn()} onSubmit={handleSubmit} noValidate={true}>
+    <GenericForm.Form
+      {...(props as GenericForm.Props)}
+      className={cn()}
+      onSubmit={handleSubmit}
+      noValidate={true}
+    >
       <fieldset className={cn('fieldset')}>
         {/** Поле с Email */}
         <div className={cn('container')}>
@@ -95,7 +100,7 @@ const LoginForm = ({className, onLogin, ...props}: LoginFormProps) => {
       <Button className={cn('submit-button')} type="submit" disabled={!isValid} theme={Theme.Azure}>
         {isProcessing ? texts.submitButton.loadingText : texts.submitButton.text}
       </Button>
-    </Form>
+    </GenericForm.Form>
   );
 };
 export default LoginForm;

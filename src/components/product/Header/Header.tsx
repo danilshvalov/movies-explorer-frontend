@@ -2,16 +2,21 @@ import {createCn} from 'bem-react-classname';
 import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 
-import Navigation from '@Navigation/Navigation';
-import Account from '@/Account';
+// TODO что-то с этим сделать
+import Navigation from '@product/Navigation/Navigation';
+import Account from '@product/Account/Account';
 import Logo from '@generic/Logo/Logo';
-import Menu from '@Menu/Menu';
-import {header as texts} from '@utils/texts';
-import CurrentUserContext from '@contexts/CurrentUserContext';
-import LoginButtons from '@/LoginButtons';
-import {DeviceType} from 'types/types';
+import Menu from '@product/Menu/Menu';
+//
+import LoginButtons from '@product/LoginButtons/LoginButtons';
+/* ---------------------------------- Utils --------------------------------- */
 import getDeviceType from '@utils/device-type';
-
+import {header as texts} from '@utils/texts';
+/* ---------------------------------- Types --------------------------------- */
+import {DeviceType} from 'types/types';
+/* -------------------------------- Contexts -------------------------------- */
+import CurrentUserContext from '@contexts/CurrentUserContext';
+/* -------------------------------------------------------------------------- */
 import './Header.css';
 
 export type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
@@ -25,14 +30,13 @@ const Header = ({className, ...props}: HeaderProps) => {
 
   /** Обработчик обновления текущего устройства */
   React.useEffect(() => {
-    const handleWindowResize = () =>
-      setDeviceType(
-        getDeviceType({
-          desktop: 1280,
-          tablet: 768,
-          phone: 320,
-        }),
-      );
+    const handleWindowResize = () => setDeviceType(
+      getDeviceType({
+        desktop: 1280,
+        tablet: 768,
+        phone: 320,
+      }),
+    );
 
     handleWindowResize();
 

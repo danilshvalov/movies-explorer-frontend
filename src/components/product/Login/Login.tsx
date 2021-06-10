@@ -1,25 +1,28 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
-
 import {Link} from 'react-router-dom';
+/* -------------------------------- Generics -------------------------------- */
+import ColoredLink from '@generic/ColoredLink/ColoredLink';
+import Logo from '@generic/Logo/Logo';
+/* ---------------------------------- Utils --------------------------------- */
 import {login as texts} from '@utils/texts';
 import {PAGE_LINKS} from '@utils/config';
-import ColoredLink from '@/ColoredLink/ColoredLink';
-import LoginForm, {LoginFunc} from '@/LoginForm';
-import Logo from '@/Logo';
-
+/* ---------------------------------- Types --------------------------------- */
+import {OnLoginFunc} from 'types/types';
+/* ---------------------------------- Local --------------------------------- */
+import LoginForm from '@product/LoginForm/LoginForm';
+/* -------------------------------------------------------------------------- */
 import './Login.css';
 
 export interface LoginProps extends React.HTMLAttributes<HTMLDivElement> {
   /** callback, вызываемый при отправке формы */
-  onLogin: LoginFunc;
+  onLogin: OnLoginFunc;
 }
 
 /**
  * Секция с логином
  * @see LoginForm
  * */
-const Login = ({className, onLogin, ...props}: LoginProps) => {
+export function Login({className, onLogin, ...props}: LoginProps): JSX.Element {
   const cn = createCn('login', className);
   return (
     <div {...props} className={cn()}>
@@ -38,6 +41,6 @@ const Login = ({className, onLogin, ...props}: LoginProps) => {
       </span>
     </div>
   );
-};
+}
 
 export default Login;
