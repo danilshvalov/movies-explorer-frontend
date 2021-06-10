@@ -1,9 +1,6 @@
 import {AmountDeviceSettings, DeviceWidthSettings} from '../types/types';
 
-export const startMoviesCardCount = 9;
-export const addStep = 3;
-
-export const moviesAmountByDevice: AmountDeviceSettings = {
+export const MOVIES_AMOUNT_BY_DEVICE: AmountDeviceSettings = {
   desktop: {
     startCount: 3,
     step: 3,
@@ -18,13 +15,13 @@ export const moviesAmountByDevice: AmountDeviceSettings = {
   },
 };
 
-export const devicesWidth: DeviceWidthSettings = {
+export const DEVICES_WIDTHS: DeviceWidthSettings = {
   desktop: 1280,
   tablet: 768,
   phone: 320,
 };
 
-export const pageLinks = {
+export const PAGE_LINKS = {
   main: '/',
   movies: '/movies',
   savedMovies: '/saved-movies',
@@ -33,14 +30,14 @@ export const pageLinks = {
   signUp: '/signup',
 };
 
-export const sectionIds = {
+export const SECTIONS_IDS = {
   promo: 'promo',
   techs: 'techs',
   aboutProject: 'about-project',
   aboutMe: 'about-me',
 };
 
-export const externalLinks = {
+export const EXTERNAL_LINKS = {
   yandexPraktikum: 'https://praktikum.yandex.ru/',
   github: 'https://github.com/danilshvalov',
   telegram: 'https://t.me/danilshvalov',
@@ -49,5 +46,7 @@ export const externalLinks = {
   SPA: 'https://github.com/danilshvalov/react-mesto-api-full',
 };
 
-export const backendUrl = 'https://api.ds.movies-explorer.nomoredomains.icu';
-export const beatFilmUrl = 'https://api.nomoreparties.co/beatfilm-movies';
+// export const BACKEND_URL = 'https://api.ds.movies-explorer.nomoredomains.icu';
+export const BEATFILM_URL = 'https://api.nomoreparties.co/1beatfilm-movies';
+export const BACKEND_URL = 'http://localhost:5000';
+export const IMAGE_SERVER_URL = 'https://api.nomoreparties.co/';

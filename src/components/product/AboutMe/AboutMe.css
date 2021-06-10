@@ -1,0 +1,47 @@
+.about-me {
+  width: calc(100% - 140px);
+  max-width: 1140px;
+  margin: 0 auto 124px;
+}
+
+.about-me__header {
+  margin-bottom: 65px;
+}
+
+.about-me__personality {
+  margin-bottom: 103px;
+}
+
+.about-me__portfolio {
+  margin-bottom: 100px;
+}
+
+@media screen and (max-width: 1024px) {
+  .about-me {
+    width: calc(100% - 100px);
+    margin-bottom: 100px;
+  }
+
+  .about-me__header {
+    margin-bottom: 67px;
+  }
+
+  .about-me__personality {
+    margin-bottom: 90px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .about-me {
+    width: calc(100% - 28px);
+    margin-bottom: 100px;
+  }
+
+  .about-me__header {
+    margin-bottom: 60px;
+  }
+
+  .about-me__personality {
+    margin-bottom: 70px;
+  }
+}

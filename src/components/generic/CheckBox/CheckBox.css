@@ -1,0 +1,47 @@
+.checkbox {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  grid-template-columns: 36px 1fr;
+}
+
+.checkbox__button {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  appearance: none;
+  background: #c6c6c6;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.5s;
+}
+
+.checkbox__button:hover {
+  background-color: #afafaf;
+}
+
+.checkbox__button:checked {
+  background: #2be080;
+}
+
+.checkbox__button:checked:hover {
+  background-color: #1dce70;
+}
+
+.checkbox__button::before {
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 20px;
+  content: '';
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+.checkbox__button:checked::before {
+  left: 22px;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {LastLocationProvider} from 'react-router-last-location';
-import App from './components/App/App';
+import App from './components/product/App/App';
 import reportWebVitals from './reportWebVitals';
 
 import './index.css';

@@ -1,0 +1,24 @@
+.colored-title_theme_light {
+  background-color: #f2f2f2;
+  color: #000;
+}
+
+.colored-title_theme_azure {
+  background-color: #3456f3;
+  color: #fff;
+}
+
+.colored-title_theme_snow {
+  background-color: #f4f4f4;
+  color: #000;
+}
+
+.colored-title_theme_ghost {
+  background-color: #e8e8e8;
+  color: #000;
+}
+
+.colored-title_theme_transparent {
+  background-color: transparent;
+  color: transparent;
+}

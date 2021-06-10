@@ -1,0 +1,20 @@
+.section-header {
+  display: block;
+  width: 100%;
+  box-sizing: content-box;
+  padding: 0 0 22px;
+  border-bottom: 1px solid #000;
+  color: #000;
+  font-size: 22px;
+  font-weight: normal;
+  letter-spacing: -0.04em;
+  line-height: 27px;
+}
+
+@media screen and (max-width: 320px) {
+  .section-header {
+    padding-bottom: 28px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

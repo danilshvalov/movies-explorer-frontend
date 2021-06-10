@@ -1,0 +1,30 @@
+.login-buttons {
+  display: flex;
+}
+
+.login-buttons__button {
+  padding: 8px 20px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.login-buttons__list-item {
+  margin-right: 10px;
+}
+
+.login-buttons__list-item:last-of-type {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 460px) {
+  .login-buttons__button {
+    padding: 5px 12px;
+    font-size: 10px;
+  }
+
+  .login-buttons__list-item {
+    margin-right: 2px;
+  }
+}

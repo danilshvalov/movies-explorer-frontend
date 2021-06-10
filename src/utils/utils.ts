@@ -1,4 +1,7 @@
 import {ParsedTime} from '../types/types';
+import {IMAGE_SERVER_URL} from './config';
+import ApiError from '../errors/ApiError';
+import {errorTexts} from './texts';
 
 /**
  * Функция выравнивания количества
@@ -7,17 +10,9 @@ import {ParsedTime} from '../types/types';
  *
  * Если шаг нечётный - убираем до границы
  * */
-export const alignQuantity = (currentCount: number, step: number): number => {
-  if (currentCount % step === 0) {
-    return currentCount;
-  }
-
-  if (currentCount < step || step % 2 === 0) {
-    return currentCount + step - (currentCount % step);
-  }
-
-  return currentCount - (currentCount % step);
-};
+export function alignQuantity(currentCount: number, step: number): number {
+  return step - (currentCount % step);
+}
 
 export const parseTime = (minutes: number): ParsedTime => ({
   hours: Math.floor(minutes / 60),
@@ -35,3 +30,61 @@ export const getCopyrightDate = () => {
   const year = new Date().getFullYear();
   return year === 2021 ? '2021' : `2021 - ${year}`;
 };
+
+export function parseImage(path?: string) {
+  return new URL(path || '', IMAGE_SERVER_URL).href;
+}
+
+export function errorParser(err: any): Promise<string> {
+  if (err instanceof ApiError) {
+    if (err.code >= 500) {
+      return Promise.reject(errorTexts.internalServer);
+    }
+
+    err.res.json().then((res) => Promise.reject(res.message || errorTexts.internalServer));
+  }
+
+  return Promise.reject(errorTexts.internalServer);
+}
+
+export function wrapPromise<T>(promise: Promise<T>) {
+  let status = 'pending';
+  let result: T;
+  const suspender = promise.then(
+    (r) => {
+      status = 'success';
+      result = r;
+    },
+    (e) => {
+      status = 'error';
+      result = e;
+    },
+  );
+
+  return {
+    read() {
+      if (status === 'pending') {
+        throw suspender;
+      }
+      if (status === 'error') {
+        return {
+          data() {
+            throw result;
+          },
+          isOk: false,
+        };
+      }
+
+      if (status === 'success') {
+        return {
+          data() {
+            return result;
+          },
+          isOk: true,
+        };
+      }
+
+      throw suspender;
+    },
+  };
+}

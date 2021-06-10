@@ -1,46 +1,31 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "webextensions": true
   },
-  "extends": [
-    "airbnb-base"
-  ],
+  "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "./"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
-    "object-curly-spacing": [
-      "error",
-      "never"
-    ],
+    "object-curly-spacing": ["error", "never"],
+    "no-underscore-dangle": "off",
+    // ts...
+    "no-undef": "off",
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": [
-      "error"
-    ],
+    "@typescript-eslint/no-use-before-define": ["error"],
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": [
-      "error"
-    ],
+    "@typescript-eslint/no-shadow": ["error"],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error"
-    ],
+    "@typescript-eslint/no-unused-vars": ["error"],
     "react/jsx-filename-extension": [
       "warn",
       {
-        "extensions": [
-          ".tsx"
-        ]
+        "extensions": [".tsx"]
       }
     ],
     "import/extensions": [
@@ -56,19 +41,10 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx",
-          ".css"
-        ],
-        "moduleDirectory": [
-          "node_modules",
-          "src/"
-        ]
-      }
-    },
-    "typescript": {}
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".css"],
+        "moduleDirectory": ["node_modules", "src/"]
+      },
+      "typescript": {}
+    }
   }
 }

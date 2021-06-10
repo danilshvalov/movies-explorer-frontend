@@ -1,4 +1,5 @@
 @import url('./vendor/normalize.css');
+
 @import url('./fonts/_inter/fonts_inter.css');
 
 body,
@@ -9,6 +10,6 @@ html {
 }
 
 html * {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }

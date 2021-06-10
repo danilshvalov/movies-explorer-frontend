@@ -1,9 +1,12 @@
 class ApiError extends Error {
+  res: Response;
+
   code: number;
 
-  constructor(msg: string, code: number) {
-    super(msg);
-    this.code = code;
+  constructor(res: Response) {
+    super('ApiError');
+    this.res = res;
+    this.code = res.status;
   }
 }
 

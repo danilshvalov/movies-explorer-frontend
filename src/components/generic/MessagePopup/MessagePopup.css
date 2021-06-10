@@ -1,0 +1,16 @@
+.message-popup {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.message-popup__container {
+  display: flex;
+  width: 100%;
+  max-width: 300px;
+}
+
+.message-popup__close-button {
+  top: 30px;
+  right: 30px;
+}

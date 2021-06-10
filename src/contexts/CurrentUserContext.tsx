@@ -1,8 +1,8 @@
 import React from 'react';
-import {MoviesList} from '../types/types';
+import {MoviesList} from 'types/types';
 
 export interface UserContextProps {
-  isLoggedIn: boolean;
+  loggedIn: boolean;
   email: string;
   name: string;
   savedMovies: MoviesList;

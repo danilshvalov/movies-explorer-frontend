@@ -1,3 +1,5 @@
+import {SearchData} from '@generic/SearchForm/SearchForm';
+
 export enum Theme {
   Transparent = 'transparent',
   Azure = 'azure',
@@ -6,15 +8,41 @@ export enum Theme {
   Light = 'light',
 }
 
-export type Id = number;
+export type Id = string;
 
 export interface IMovie {
-  movieId: Id;
+  _id?: string;
+  movieId: number;
+  country: string;
+  director: string;
   duration: number;
-  thumbnail: any;
+  year: string;
+  description: string;
+  image: string;
+  trailer: string;
   nameRU: string;
+  nameEN: string;
+  thumbnail: string;
   isSaved: boolean;
 }
+
+export interface WithMoviesList {
+  moviesList: MoviesList;
+}
+
+export type OnSearchFunc = (data: SearchData) => any;
+export type SearchWithMoviesFunc = (data: SearchData) => MoviesList;
+
+export interface WithError {
+  isError?: boolean;
+}
+
+export interface WithApiInteraction {
+  APIError: string;
+  isProcessing: boolean;
+}
+
+export type ApiCallback<T> = (data: T) => Promise<void | string>;
 
 export interface ILink {
   name: string;
@@ -28,6 +56,11 @@ export enum DeviceType {
   Desktop = 'desktop',
   Tablet = 'tablet',
   Phone = 'phone',
+}
+
+export enum ButtonTypes {
+  Save,
+  Delete,
 }
 
 export interface DeviceWidthSettings {
@@ -58,3 +91,9 @@ export enum HTTPMethod {
   Patch = 'PATCH',
   Delete = 'DELETE',
 }
+
+export type ReadFunc<T> = () => {data(): T; isOk: boolean};
+
+export type ReadablePromise<T> = {
+  read: ReadFunc<T>;
+};
