@@ -32,7 +32,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
   }
 
   const {
-    values, handleChange, errors, fieldsValidity, isValid,
+    values, handleChange, errors, isValid,
   } = useFormWithValidation<typeof Fields>();
 
   const [APIError, setAPIError] = useState('');
@@ -67,7 +67,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               name={Fields[Fields.nameInput]}
               onChange={handleChange}
               minLength={2}
-              isError={!fieldsValidity.nameInput}
+              isError={true}
               required
             />
           </div>
@@ -82,7 +82,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               className={cn('field')}
               name={Fields[Fields.emailInput]}
               onChange={handleChange}
-              isError={!fieldsValidity.emailInput}
+              isError={true}
               type="email"
               required
             />
@@ -99,7 +99,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               name={Fields[Fields.passwordInput]}
               onChange={handleChange}
               minLength={8}
-              isError={!fieldsValidity.passwordInput}
+              isError={true}
               type="password"
               required
             />

@@ -10,19 +10,23 @@ import {errorTexts} from './texts';
  *
  * Если шаг нечётный - убираем до границы
  * */
+// REMOVE
+/** @deprecated */
 export function alignQuantity(currentCount: number, step: number): number {
   return step - (currentCount % step);
 }
 
-export const parseTime = (minutes: number): ParsedTime => ({
-  hours: Math.floor(minutes / 60),
-  minutes: minutes % 60,
-});
+export function parseTime(minutes: number): ParsedTime {
+  return {
+    hours: Math.floor(minutes / 60),
+    minutes: minutes % 60,
+  };
+}
 
 /**
  * Функция переводит минуты в формат {H}ч{М}м или {M}м
  * */
-export function stringifyTime({hours, minutes}: ParsedTime) {
+export function stringifyTime({hours, minutes}: ParsedTime): string {
   return hours && hours > 0 ? `${hours}ч ${minutes}м` : `${minutes}м`;
 }
 
@@ -31,10 +35,12 @@ export const getCopyrightDate = () => {
   return year === 2021 ? '2021' : `2021 - ${year}`;
 };
 
-export function parseImage(path?: string) {
+export function parseImage(path?: string): string {
   return new URL(path || '', IMAGE_SERVER_URL).href;
 }
 
+// REMOVE
+/** @deprecated */
 export function errorParser(err: any): Promise<string> {
   if (err instanceof ApiError) {
     if (err.code >= 500) {
@@ -47,6 +53,8 @@ export function errorParser(err: any): Promise<string> {
   return Promise.reject(errorTexts.internalServer);
 }
 
+// REMOVE
+/** @deprecated */
 export function wrapPromise<T>(promise: Promise<T>) {
   let status = 'pending';
   let result: T;

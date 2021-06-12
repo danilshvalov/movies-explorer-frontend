@@ -1,4 +1,8 @@
-import {ChangeEvent, useCallback, useState} from 'react';
+import {
+  ChangeEvent,
+  useCallback,
+  useState,
+} from 'react';
 
 type Fields<T> = {
   [K in keyof T]?: string;
@@ -9,16 +13,16 @@ type OnChangeFunc = (evt: ChangeEvent<HTMLInputElement>) => void;
 export interface ReturnType<T> {
   values: Fields<T>;
   errors: Fields<T>;
-  fieldsValidity: Fields<T>;
   isValid: boolean;
   handleChange: OnChangeFunc;
   resetForm: () => void;
+  isFieldValid: <K extends keyof T>(key: K) => boolean;
 }
 
-export function useFormWithValidation<T extends {[key: number]: string}>(): ReturnType<T> {
-  const [values, setValues] = useState<Fields<T>>({});
+export function useFormWithValidation<T extends
+ {[key: number]: string}>(initValues?: Fields<T>): ReturnType<T> {
+  const [values, setValues] = useState<Fields<T>>(initValues || {});
   const [errors, setErrors] = useState<Fields<T>>({});
-  const [fieldsValidity, setFieldsValidity] = useState<Fields<T>>({});
   const [isValid, setIsValid] = useState(false);
 
   const handleChange: OnChangeFunc = (evt) => {
@@ -33,10 +37,6 @@ export function useFormWithValidation<T extends {[key: number]: string}>(): Retu
       ...errors,
       [name]: target.validationMessage,
     });
-    setFieldsValidity({
-      ...fieldsValidity,
-      [name]: target.validity,
-    });
     setIsValid(target.closest('form')?.checkValidity() as boolean);
   };
 
@@ -49,13 +49,23 @@ export function useFormWithValidation<T extends {[key: number]: string}>(): Retu
     [setValues, setErrors, setIsValid],
   );
 
+  const isFieldValid = useCallback(
+    <K extends keyof T>(key: K) => {
+      if (errors[key]) {
+        return errors[key] === '';
+      }
+      return true;
+    },
+    [errors],
+  );
+
   return {
     values,
     errors,
-    fieldsValidity,
     isValid,
     handleChange,
     resetForm,
+    isFieldValid,
   };
 }
 

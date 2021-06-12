@@ -1,12 +1,11 @@
 import Api from './Api';
 import {BEATFILM_URL} from '../config';
-import {
-  HTTPMethod, Id, IMovie, MoviesList,
-} from '../../types/types';
+import {HTTPMethod, IMovie, MoviesList} from '../../types/types';
 import {parseImage} from '../utils';
 
+// TODO ...
 type MovieData = {
-  id: number;
+  movieId: number;
   nameRU: string;
   nameEN: string;
   director: string;
@@ -25,11 +24,8 @@ type MovieData = {
   };
 };
 
-function parseMovieData({
-  id, image, trailerLink, ...data
-}: MovieData): IMovie {
+function parseMovieData({image, trailerLink, ...data}: MovieData): IMovie {
   return {
-    movieId: id,
     thumbnail: parseImage(image?.formats.thumbnail.url),
     image: parseImage(image?.url),
     trailer: trailerLink,
@@ -48,15 +44,6 @@ class MoviesApi extends Api {
       path: '',
       method: HTTPMethod.Get,
     }).then((list) => list.map(parseMovieData));
-  }
-
-  // TODO nado???
-  // REMOVE
-  getMovie(id: Id): Promise<IMovie> {
-    return this.sendRequest({
-      path: `/${id}`,
-      method: HTTPMethod.Get,
-    }).then(parseMovieData);
   }
 }
 

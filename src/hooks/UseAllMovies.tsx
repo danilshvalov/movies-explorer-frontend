@@ -16,12 +16,24 @@ export interface ReturnType {
 export function useAllMovies(): ReturnType {
   const [value, setValue] = useState<MoviesList>();
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error>();
+
+  useEffect(() => {
+    if (error) {
+      const copy = error;
+      setError(undefined);
+      throw copy;
+    }
+  }, [error]);
 
   // TODO как обрабатывается ошибка?
   useEffect(() => {
     moviesApi
       .getMoviesList()
       .then((movies) => setValue(movies))
+      .catch((err) => {
+        setError(err);
+      })
       .finally(() => setIsLoading(false));
   }, []);
 

@@ -18,6 +18,13 @@ export interface ReturnType {
   containsMovie: (data: IMovie) => boolean;
 }
 
+/**
+ * Hook загрузки сохраненных фильмов
+ *
+ * При создании делает вызов к API, а затем самостоятельно поддерживает консистентное состояние
+ *
+ * @see mainApi
+ */
 export function useSavedMovies(): ReturnType {
   const [value, setValue] = useLocalStorage<MoviesList>('saved-movies');
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +39,12 @@ export function useSavedMovies(): ReturnType {
 
   const saveMovie = useCallback(
     (data: IMovie) => mainApi.saveMovie(data).then((movie) => {
-      setValue((old) => [...old!, movie]);
+      setValue((old) => {
+        if (old) {
+          return [...old, movie];
+        }
+        return [movie];
+      });
       return movie;
     }),
     [value, setValue],

@@ -52,7 +52,7 @@ class Api {
         return res.json();
       }
 
-      return Promise.reject(new ApiError(res));
+      throw new ApiError(res);
     });
   }
 }

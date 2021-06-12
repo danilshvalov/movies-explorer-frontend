@@ -1,11 +1,6 @@
 import {createContext} from 'react';
+import {User} from 'types/types';
 
-export interface UserContextProps {
-  loggedIn: boolean;
-  email: string;
-  name: string;
-}
-
-const CurrentUserContext = createContext<Partial<UserContextProps>>({});
+const CurrentUserContext = createContext<Partial<User>>({});
 
 export default CurrentUserContext;

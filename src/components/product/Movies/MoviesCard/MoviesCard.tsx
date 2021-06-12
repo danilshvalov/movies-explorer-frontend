@@ -1,9 +1,10 @@
 import {createCn} from 'bem-react-classname';
-
+/* -------------------------------- Generics -------------------------------- */
 import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
 import SaveButton from '@generic/SaveButton/SaveButton';
-import {OnSaveFunc} from '@generic/SaveButton/WithSave/WithSave';
-import {IMovie} from 'types/types';
+/* ---------------------------------- Types --------------------------------- */
+import {IMovie, OnSaveFunc} from 'types/types';
+/* -------------------------------------------------------------------------- */
 
 export type DataProps = GenericMoviesCard.DataProps;
 export type DOMProps = GenericMoviesCard.DOMProps;

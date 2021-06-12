@@ -1,5 +1,6 @@
 import {ProfileUserData, RegisterUserData} from 'types/User';
 import {
+  AuthorizedUserData,
   HTTPMethod, Id, IMovie, LoginUserData, MoviesList,
 } from '../../types/types';
 
@@ -28,7 +29,7 @@ export interface MovieData {
  * */
 class MainApi extends Api {
   /** Авторизация пользователя */
-  authorize(data: LoginUserData) {
+  authorize(data: LoginUserData): Promise<AuthorizedUserData> {
     return this.sendRequest({
       path: 'signin',
       method: HTTPMethod.Post,
@@ -36,15 +37,15 @@ class MainApi extends Api {
     });
   }
 
-  checkToken() {
+  checkToken(): Promise<AuthorizedUserData> {
     return this.sendRequest({
-      path: 'movies',
+      path: 'users/me',
       method: HTTPMethod.Get,
-    }).then((res) => res.ok);
+    });
   }
 
   /** Регистрация пользователя */
-  async register(data: RegisterUserData) {
+  register(data: RegisterUserData): Promise<RegisterUserData> {
     return this.sendRequest({
       path: 'signup',
       method: HTTPMethod.Post,
@@ -53,7 +54,7 @@ class MainApi extends Api {
   }
 
   /** Выход из аккаунта */
-  async logout() {
+  logout() {
     return this.sendRequest({
       path: 'signout',
       method: HTTPMethod.Post,
@@ -61,7 +62,7 @@ class MainApi extends Api {
   }
 
   /** Сохранение фильма */
-  async saveMovie(data: IMovie): Promise<IMovie> {
+  saveMovie(data: IMovie): Promise<IMovie> {
     return this.sendRequest({
       path: 'movies',
       method: HTTPMethod.Post,
@@ -70,7 +71,7 @@ class MainApi extends Api {
   }
 
   /** Удаление сохранённого фильма */
-  async deleteMovie(movieId: Id): Promise<IMovie> {
+  deleteMovie(movieId: Id): Promise<IMovie> {
     return this.sendRequest({
       path: `movies/${movieId}`,
       method: HTTPMethod.Delete,
@@ -86,7 +87,7 @@ class MainApi extends Api {
   }
 
   /** Получение пользовательских данных */
-  async getUserInfo(): Promise<CurrentProfileData> {
+  getUserInfo(): Promise<CurrentProfileData> {
     return this.sendRequest({
       path: 'users/me',
       method: HTTPMethod.Get,
@@ -94,7 +95,7 @@ class MainApi extends Api {
   }
 
   /** Обновление пользовательских данных */
-  async updateUserInfo(data: ProfileUserData): Promise<UpdateProfileData> {
+  updateUserInfo(data: ProfileUserData): Promise<UpdateProfileData> {
     return this.sendRequest({
       path: 'users/me',
       method: HTTPMethod.Patch,

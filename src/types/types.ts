@@ -46,8 +46,6 @@ export interface WithApiInteraction {
   isProcessing: boolean;
 }
 
-export type ApiCallback<T> = (data: T) => Promise<void | string>;
-
 export interface ILink {
   name: string;
   path: string;
@@ -96,23 +94,48 @@ export enum HTTPMethod {
   Delete = 'DELETE',
 }
 
-export type ReadFunc<T> = () => {data(): T; isOk: boolean};
+/* ---------------------------------- User ---------------------------------- */
+export interface UserActions {
+  authorize: OnLoginFunc;
+  register: OnRegisterFunc;
+  updateUserInfo: OnProfileUpdateFunc;
+  logout: OnLogoutFunc;
+}
 
-export type ReadablePromise<T> = {
-  read: ReadFunc<T>;
-};
+export interface UserState {
+  name: string;
+  email: string;
+  loggedIn: boolean;
+}
+
+export type User = UserActions & UserState;
+/* -------------------------------- DataTypes ------------------------------- */
+export interface RegisteredUser {
+  _id: string;
+  name: string;
+  email: string;
+}
 
 export interface LoginUserData {
   email: string;
   password: string;
 }
 
+export interface AuthorizedUserData {
+  name: string;
+  email: string;
+}
+
 export interface SearchData {
   isChecked: boolean;
   query: string;
 }
+/* -------------------------------- FuncTypes ------------------------------- */
 
-export type OnLoginFunc = ApiCallback<LoginUserData>;
+export type ApiCallback<T, U = T> = (data: T) => Promise<U>;
+export type OnLoginFunc = ApiCallback<LoginUserData, AuthorizedUserData>;
 export type OnRegisterFunc = ApiCallback<RegisterUserData>;
 export type OnProfileUpdateFunc = ApiCallback<ProfileUserData>;
 export type OnLogoutFunc = () => void;
+export type OnSaveFunc<T> = (data: T) => void;
+/* -------------------------------------------------------------------------- */

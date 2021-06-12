@@ -33,7 +33,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
   }
 
   const {
-    values, handleChange, errors, fieldsValidity, isValid,
+    values, handleChange, errors, isValid,
   } = useFormWithValidation<typeof Fields>();
 
   const [APIError, setAPIError] = React.useState('');
@@ -69,7 +69,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
               className={cn('field')}
               name={Fields[Fields.emailInput]}
               onChange={handleChange}
-              isError={!fieldsValidity.emailInput}
+              isError={true}
               type="email"
               required
             />
@@ -86,7 +86,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
               name={Fields[Fields.passwordInput]}
               onChange={handleChange}
               minLength={8}
-              isError={!fieldsValidity.passwordInput}
+              isError={true}
               type="password"
               required
             />

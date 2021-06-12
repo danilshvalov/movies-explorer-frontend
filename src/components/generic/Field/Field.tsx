@@ -15,12 +15,17 @@ export type RefType = HTMLInputElement;
 /** Обёртка над [input]{@link HTMLInputElement}, поддерживающая выделение при ошибке */
 export const Field = forwardRef<RefType, Props>(
   ({
-    className, isError = false, theme = Theme.Transparent, ...props
+    className, isError = false, theme = Theme.Transparent, defaultValue, ...props
   }, ref) => {
     const cn = createCn('field', className);
 
     return (
-      <input {...filterInvalidDOMProps(props)} ref={ref} className={cn({error: isError, theme})} />
+      <input
+        {...filterInvalidDOMProps(props)}
+        ref={ref}
+        className={cn({error: isError, theme})}
+        defaultValue={defaultValue}
+      />
     );
   },
 );

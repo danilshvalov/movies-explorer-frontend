@@ -34,8 +34,10 @@ export function ProfileForm({className, onProfileUpdate, ...props}: Props): JSX.
   }
 
   const {
-    values, handleChange, errors, fieldsValidity, isValid,
-  } = useFormWithValidation<typeof Fields>();
+    values, handleChange, errors, isValid, isFieldValid,
+  } = useFormWithValidation<
+    typeof Fields
+  >({nameInput: currentUser.name, emailInput: currentUser.email});
 
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);
@@ -56,16 +58,15 @@ export function ProfileForm({className, onProfileUpdate, ...props}: Props): JSX.
     }
   };
 
-  console.log('change');
-
   function isChanged() {
+    console.log(currentUser.name !== values.nameInput || currentUser.email !== values.emailInput);
     return currentUser.name !== values.nameInput || currentUser.email !== values.emailInput;
   }
 
   // ----------------------------------------------
   React.useEffect(() => {
     setIsFormValid(isValid && isChanged());
-  }, [isValid]);
+  }, [isValid, values]);
 
   return (
     <GenericForm.Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
@@ -79,7 +80,7 @@ export function ProfileForm({className, onProfileUpdate, ...props}: Props): JSX.
               name={Fields[Fields.nameInput]}
               onChange={handleChange}
               minLength={2}
-              isError={!fieldsValidity.nameInput}
+              isError={!isFieldValid('nameInput')}
               required
               defaultValue={currentUser.name}
             />
@@ -96,7 +97,7 @@ export function ProfileForm({className, onProfileUpdate, ...props}: Props): JSX.
               name={Fields[Fields.emailInput]}
               onChange={handleChange}
               type="email"
-              isError={!fieldsValidity.emailInput}
+              isError={!isFieldValid('emailInput')}
               required
               defaultValue={currentUser.email}
             />

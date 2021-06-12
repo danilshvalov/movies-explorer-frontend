@@ -9,7 +9,7 @@ export type Props = DOMProps;
 
 /** Обёртка над обычной ссылкой, поддерживающая анимацию при наведении */
 export function Link({className, ...props}: Props): JSX.Element {
-  const cn = createCn('colored-link', className);
+  const cn = createCn('link', className);
 
   return (
     <a {...filterInvalidDOMProps(props)} className={cn()}>
