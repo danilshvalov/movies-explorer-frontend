@@ -21,7 +21,7 @@ export type Props = DOMProps;
  *
  * Передает поисковый запрос {@link MoviesManager}
  * */
-const Movies = ({className, ...props}: Props) => {
+export function Movies({className, ...props}: Props): JSX.Element {
   const cn = createCn('movies', className);
 
   const [searchData, setSearchData] = useState<SearchData>();
@@ -34,18 +34,20 @@ const Movies = ({className, ...props}: Props) => {
     <section {...filterInvalidDOMProps(props)} className={cn()}>
       <SearchForm className={cn('search-form')} onSearch={handleSearch} />
       {searchData && (
-        <ErrorBoundary errorHandler={() => console.log('error')}>
+        <ErrorBoundary>
           <MoviesManager searchData={searchData} />
         </ErrorBoundary>
       )}
     </section>
   );
-};
+}
 
-const MoviesPage = (props: Props): JSX.Element => (
-  <PageWrapper>
-    <Movies {...props} />
-  </PageWrapper>
-);
+export function MoviesPage(props: Props): JSX.Element {
+  return (
+    <PageWrapper>
+      <Movies {...props} />
+    </PageWrapper>
+  );
+}
 
 export default MoviesPage;

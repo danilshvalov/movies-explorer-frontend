@@ -1,14 +1,13 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-
-// TODO что-то с этим сделать
+/* -------------------------------- Generics -------------------------------- */
+import Logo from '@generic/Logo/Logo';
+import LoginButtons from '@generic/LoginButtons/LoginButtons';
+/* -------------------------------- Products -------------------------------- */
 import Navigation from '@product/Navigation/Navigation';
 import Account from '@product/Account/Account';
-import Logo from '@generic/Logo/Logo';
 import Menu from '@product/Menu/Menu';
-//
-import LoginButtons from '@generic/LoginButtons/LoginButtons';
 /* ---------------------------------- Utils --------------------------------- */
 import getDeviceType from '@utils/device-type';
 /* ---------------------------------- Texts --------------------------------- */
@@ -23,11 +22,13 @@ import './Header.css';
 export type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
 
 /** Секция header */
-const Header = ({className, ...props}: HeaderProps) => {
+export function Header({className, ...props}: HeaderProps): JSX.Element {
   const cn = createCn('header', className);
 
   /** Текущее устройство пользователя */
-  const [deviceType, setDeviceType] = React.useState<DeviceType>(DeviceType.Desktop);
+  const [deviceType, setDeviceType] = React.useState<DeviceType>(
+    DeviceType.Desktop,
+  );
 
   /** Обработчик обновления текущего устройства */
   React.useEffect(() => {
@@ -65,6 +66,6 @@ const Header = ({className, ...props}: HeaderProps) => {
       )}
     </header>
   );
-};
+}
 
 export default Header;

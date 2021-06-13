@@ -1,5 +1,8 @@
 import React, {
-  HTMLAttributes, PropsWithChildren, useState, useEffect,
+  HTMLAttributes,
+  PropsWithChildren,
+  useState,
+  useEffect,
 } from 'react';
 import {createCn} from 'bem-react-classname';
 /* -------------------------------- Generics -------------------------------- */
@@ -7,18 +10,16 @@ import Button from '@generic/Button/Button';
 import Catch from '@generic/Catch/Catch';
 /* ---------------------------------- Types --------------------------------- */
 import {Theme, WithError} from 'types/types';
+/* ---------------------------------- Texts --------------------------------- */
+import {SAVED_MOVIES} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import './ErrorBoundary.css';
 
-export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export interface FunctionalProps extends WithError<Error> {
-  errorHandler: () => void;
-}
-export type Props = PropsWithChildren<DOMProps & FunctionalProps>;
+const TEXTS = SAVED_MOVIES.errorBoundary;
 
-function errorHandler(error: Error, info: React.ErrorInfo) {
-  console.log(error, info);
-}
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export type FunctionalProps = WithError<Error>
+export type Props = PropsWithChildren<DOMProps & FunctionalProps>;
 
 export const ErrorBoundary = Catch((props: Props): JSX.Element => {
   const cn = createCn('all-movies-error');
@@ -36,16 +37,18 @@ export const ErrorBoundary = Catch((props: Props): JSX.Element => {
   if (currentError) {
     return (
       <div className={cn()}>
-        {/* TODO Добавить текст */}
-        <p className={cn('text')}>Не удалось загрузить фильмы</p>
-        <Button className={cn('button')} onClick={handleButtonClick} theme={Theme.Azure}>
-          {/* TODO перенести в constants */}
-          Попробовать снова
+        <p className={cn('text')}>{TEXTS.message}</p>
+        <Button
+          className={cn('button')}
+          onClick={handleButtonClick}
+          theme={Theme.Azure}
+        >
+          {TEXTS.button.text}
         </Button>
       </div>
     );
   }
   return <>{props.children}</>;
-}, errorHandler);
+});
 
 export default ErrorBoundary;

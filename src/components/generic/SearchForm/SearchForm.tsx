@@ -12,26 +12,29 @@ import {SEARCH_FORM as TEXTS} from '@texts/generic';
 /* -------------------------------------------------------------------------- */
 import './SearchForm.css';
 
-export interface SearchFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+export interface SearchFormProps<T>
+  extends React.FormHTMLAttributes<HTMLFormElement> {
   /** Изначальное состояние формы */
   defaultChecked?: boolean;
-  onSearch: OnSearchFunc;
+  onSearch: OnSearchFunc<T>;
 }
 
 /** Поисковая форма */
-const SearchForm: React.FC<SearchFormProps> = ({
+function SearchForm<T>({
   className,
   onSearch,
   defaultChecked = false,
   ...props
-}) => {
+}: SearchFormProps<T>): JSX.Element {
   const cn = createCn('search-form', className);
 
   const [fieldQuery, setFieldQuery] = React.useState('');
   const [isChecked, setChecked] = React.useState(defaultChecked);
 
   /** Handlers */
-  const handleCheckboxChange = ({target}: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(target.checked);
   };
 
@@ -57,6 +60,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           className={cn('field')}
           placeholder={TEXTS.field.placeholder}
           onInput={handleFieldInput}
+          isError={true}
         >
           {/** Start-кнопка */}
           <Button className={cn('start-button')} theme={Theme.Azure}>
@@ -74,6 +78,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
       </List>
     </form>
   );
-};
+}
 
 export default SearchForm;

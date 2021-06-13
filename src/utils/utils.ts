@@ -1,5 +1,5 @@
-import {ParsedTime} from '../types/types';
-import {IMAGE_SERVER_URL} from './config';
+import {ParsedTime} from 'types/types';
+import {IMAGE_SERVER_URL} from '@utils/config';
 /**
  * Функция выравнивания количества
  *
@@ -7,11 +7,6 @@ import {IMAGE_SERVER_URL} from './config';
  *
  * Если шаг нечётный - убираем до границы
  * */
-// REMOVE
-/** @deprecated */
-export function alignQuantity(currentCount: number, step: number): number {
-  return step - (currentCount % step);
-}
 
 export function parseTime(minutes: number): ParsedTime {
   return {
@@ -27,10 +22,10 @@ export function stringifyTime({hours, minutes}: ParsedTime): string {
   return hours && hours > 0 ? `${hours}ч ${minutes}м` : `${minutes}м`;
 }
 
-export const getCopyrightDate = () => {
+export function getCopyrightDate(): string {
   const year = new Date().getFullYear();
   return year === 2021 ? '2021' : `2021 - ${year}`;
-};
+}
 
 export function parseImage(path?: string): string {
   return new URL(path || '', IMAGE_SERVER_URL).href;

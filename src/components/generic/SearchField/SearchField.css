@@ -23,6 +23,10 @@
   line-height: 20px;
 }
 
+.search-field__input_error::placeholder {
+  color: #ee3465;
+}
+
 @media screen and (max-width: 320px) {
   .search-field__input::placeholder {
     font-size: 14px;

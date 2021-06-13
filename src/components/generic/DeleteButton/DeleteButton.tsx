@@ -7,8 +7,6 @@ import './DeleteButton.css';
 
 export type DeleteButtonProps = GenericButton.Props;
 export type RefType = GenericButton.RefType;
-// TODO Move to types
-export type OnDeleteFunc<T> = (args: T) => any;
 
 /**
  * Кнопка удаления

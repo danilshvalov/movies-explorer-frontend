@@ -26,9 +26,9 @@ export interface ProfileProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /** Секция с формой изменения профиля */
-const Profile = ({
+export function Profile({
   className, onProfileUpdate, onLogout, ...props
-}: ProfileProps) => {
+}: ProfileProps): JSX.Element {
   const currentUser = React.useContext(CurrentUserContext);
   const cn = createCn('profile', className);
 
@@ -45,13 +45,15 @@ const Profile = ({
       </span>
     </div>
   );
-};
+}
 
-const ProfilePage = (props: ProfileProps) => (
-  <>
-    <Header />;
-    <Profile {...props} />
-  </>
-);
+export function ProfilePage(props: ProfileProps): JSX.Element {
+  return (
+    <>
+      <Header />;
+      <Profile {...props} />
+    </>
+  );
+}
 
 export default ProfilePage;

@@ -1,5 +1,9 @@
 import {
-  useState, useEffect, useCallback, Dispatch, SetStateAction,
+  useState,
+  useEffect,
+  useCallback,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 /* ---------------------------------- Utils --------------------------------- */
 import mainApi from '@utils/api/MainApi';
@@ -10,7 +14,7 @@ import useLocalStorage from './UseLocalStorage';
 /* -------------------------------------------------------------------------- */
 
 export interface ReturnType {
-  value?: MoviesList;
+  value: MoviesList | undefined;
   setValue: Dispatch<SetStateAction<MoviesList | undefined>>;
   isLoading: boolean;
   saveMovie: (data: IMovie) => Promise<IMovie>;
@@ -30,7 +34,6 @@ export function useSavedMovies(): ReturnType {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // TODO как обрабатывается ошибка?
     mainApi
       .getSavedMovies()
       .then((movies) => setValue(movies))
@@ -51,8 +54,13 @@ export function useSavedMovies(): ReturnType {
   );
 
   const deleteMovie = useCallback(
+    /**
+     * data_.id не должен быть null
+     * Если это не так - нарушена логика формирования карточки => нарушен контракт
+     */
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     (data: IMovie) => mainApi.deleteMovie(data._id!).then((movie) => {
-      setValue((old) => old!.filter((val: IMovie) => {
+      setValue((old) => old?.filter((val: IMovie) => {
         if (val._id && movie._id) {
           return val._id !== movie._id;
         }

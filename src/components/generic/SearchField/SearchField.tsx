@@ -23,11 +23,15 @@ const SearchField = React.forwardRef<RefType, SearchFieldProps>(
     return (
       <div className={cn()}>
         {/** Иконка увеличительного стекла */}
-        <img className={cn('icon')} src={images.MAGNIFIER} alt={TEXTS.img.alt} />
+        <img
+          className={cn('icon')}
+          src={images.MAGNIFIER}
+          alt={TEXTS.img.alt}
+        />
         <GenericField.Field
           {...props}
           ref={ref}
-          className={cn('input')}
+          className={cn('input', {error: props.isError || false})}
           placeholder={placeholder || ''}
           required
         />

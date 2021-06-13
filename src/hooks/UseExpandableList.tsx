@@ -1,5 +1,9 @@
 import {
-  Dispatch, SetStateAction, useCallback, useEffect, useState,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
 } from 'react';
 /* ---------------------------------- Utils --------------------------------- */
 import getDeviceType from '@utils/device-type';
@@ -14,7 +18,7 @@ export interface ExpandableListSettings {
 }
 
 export interface ReturnType<T> {
-  value?: T[];
+  value: T[] | undefined;
   setValue: Dispatch<SetStateAction<T[] | undefined>>;
   isComplete: boolean;
   expand: () => void;
@@ -32,11 +36,10 @@ export function useExpandableList<T>(
   const [isComplete, setIsComplete] = useState(true);
 
   const getAlignedCount = () => currentCount + step - (currentCount % step);
-  // ----------------------------------------------
+  /* -------------------------------------------------------------------------- */
 
-  /** exported func */
+  /* --------------------------- Exported Functions --------------------------- */
   const expand = useCallback(() => {
-    console.log('expand by: ', step);
     const newCount = getAlignedCount();
     setValue(storedValue?.slice(0, newCount));
     setCurrentCount(newCount);
@@ -45,9 +48,8 @@ export function useExpandableList<T>(
   const reset = useCallback(() => {
     setCurrentCount(step);
   }, [setCurrentCount]);
-  // ----------------------------------------------
 
-  /** Effects */
+  /* --------------------------------- Effects -------------------------------- */
   useEffect(() => {
     const handleResize = () => {
       setStep(countSettings[getDeviceType(deviceSettings)].step);
@@ -69,13 +71,15 @@ export function useExpandableList<T>(
   }, [currentCount, storedValue]);
 
   useEffect(() => {
-    setIsComplete((storedValue && currentCount >= storedValue.length) as boolean);
+    setIsComplete(
+      (storedValue && currentCount >= storedValue.length) as boolean,
+    );
   }, [currentCount]);
 
   useEffect(() => {
     reset();
   }, [storedValue]);
-  // ----------------------------------------------
+  /* -------------------------------------------------------------------------- */
 
   return {
     value,

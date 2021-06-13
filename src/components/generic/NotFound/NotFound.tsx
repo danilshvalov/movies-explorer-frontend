@@ -12,7 +12,7 @@ import {NOT_FOUND as TEXTS} from '@texts/product';
 import './NotFound.css';
 
 /** Страница 404 */
-const NotFound = (props: React.HTMLAttributes<HTMLDivElement>) => {
+export function NotFound(props: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
   const cn = createCn('not-found', props.className);
 
   /** История и последняя посещенная ссылка на сайте */
@@ -40,6 +40,6 @@ const NotFound = (props: React.HTMLAttributes<HTMLDivElement>) => {
       </Button>
     </div>
   );
-};
+}
 
 export default NotFound;

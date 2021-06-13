@@ -43,10 +43,17 @@ function MoviesManager({searchData}: Props): JSX.Element {
       setFilteredMovies(
         allMovies.value
           .filter((movie) => moviesFilter(movie, searchData))
-          .map((movie) => ({
-            ...movie,
-            isSaved: savedMovies.value!.some((other) => movie.movieId === other.movieId),
-          })),
+          .map((movie) => {
+            if (savedMovies.value) {
+              return {
+                ...movie,
+                isSaved: savedMovies.value.some(
+                  (other) => movie.movieId === other.movieId,
+                ),
+              };
+            }
+            return {...movie, isSaved: false};
+          }),
       );
     }
   }, [allMovies.value, savedMovies.value, searchData]);

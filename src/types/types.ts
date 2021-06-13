@@ -30,11 +30,8 @@ export interface WithMoviesList {
   moviesList: MoviesList;
 }
 
-export type OnSearchFunc = (data: SearchData) => any;
-export type SearchWithMoviesFunc = (data: SearchData) => MoviesList;
-
 export interface WithError<T = unknown> {
-  error?: T,
+  error?: T;
   isError?: boolean;
 }
 
@@ -133,11 +130,12 @@ export interface SearchData {
   query: string;
 }
 /* -------------------------------- FuncTypes ------------------------------- */
-
 export type ApiCallback<T, U = T> = (data: T) => Promise<U>;
 export type OnLoginFunc = ApiCallback<LoginUserData, AuthorizedUserData>;
 export type OnRegisterFunc = ApiCallback<RegisterUserData>;
 export type OnProfileUpdateFunc = ApiCallback<ProfileUserData>;
 export type OnLogoutFunc = () => void;
-export type OnSaveFunc<T> = (data: T) => void;
+export type OnSaveFunc<T, U = T> = ApiCallback<T, U>;
+export type OnSearchFunc<T> = (data: SearchData) => T;
+export type OnDeleteFunc<T, U = T> = ApiCallback<T, U>;
 /* -------------------------------------------------------------------------- */

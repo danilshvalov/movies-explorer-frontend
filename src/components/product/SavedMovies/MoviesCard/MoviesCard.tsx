@@ -1,10 +1,12 @@
-import DeleteButton, {OnDeleteFunc} from '@generic/DeleteButton/DeleteButton';
-import {IMovie} from 'types/types';
-
-import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
 import {createCn} from 'bem-react-classname';
-import './MoviesCard.css';
 import {useState} from 'react';
+/* -------------------------------- Generics -------------------------------- */
+import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
+import DeleteButton from '@generic/DeleteButton/DeleteButton';
+/* ---------------------------------- Types --------------------------------- */
+import {IMovie, OnDeleteFunc} from 'types/types';
+/* -------------------------------------------------------------------------- */
+import './MoviesCard.css';
 
 export interface FunctionalProps {
   onDelete: OnDeleteFunc<IMovie>;
@@ -29,10 +31,9 @@ export function MoviesCard({onDelete, ...props}: Props): JSX.Element {
       onMouseLeave={() => setIsHovered(false)}
     >
       <GenericMoviesCard.MoviesCard {...(props as GenericMoviesCard.Props)} />
-      {
-        /** Кнопка появляется при наведении  */
-        isHovered && <DeleteButton className={cn('button')} onClick={handleClick} />
-      }
+      { /** Кнопка появляется при наведении  */}
+      <DeleteButton className={cn('button', {hidden: !isHovered})} onClick={handleClick} />
+
     </div>
   );
 }
