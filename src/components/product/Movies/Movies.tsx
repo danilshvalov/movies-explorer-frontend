@@ -34,7 +34,7 @@ const Movies = ({className, ...props}: Props) => {
     <section {...filterInvalidDOMProps(props)} className={cn()}>
       <SearchForm className={cn('search-form')} onSearch={handleSearch} />
       {searchData && (
-        <ErrorBoundary>
+        <ErrorBoundary errorHandler={() => console.log('error')}>
           <MoviesManager searchData={searchData} />
         </ErrorBoundary>
       )}

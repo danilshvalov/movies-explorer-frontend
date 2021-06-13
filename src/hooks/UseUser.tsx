@@ -12,26 +12,32 @@ export function useUser(): User {
     name: 'Пользователь',
     email: 'email@mail.com',
     loggedIn: true,
+    isLoading: true,
   });
 
   useEffect(() => {
     mainApi
       .checkToken()
       .then(({name, email}) => {
-        setCurrentUser({name, email, loggedIn: true});
+        setCurrentUser((user) => ({
+          ...user, name, email, loggedIn: true,
+        }));
       })
-      .catch(() => setCurrentUser({...currentUser, loggedIn: false}));
+      .catch(() => setCurrentUser((user) => ({...user, loggedIn: false})))
+      .finally(() => setCurrentUser((user) => ({...user, isLoading: false})));
   }, []);
 
   function authorize(data: LoginUserData): Promise<AuthorizedUserData> {
     return mainApi
       .authorize(data)
       .then(({email, name}) => {
-        setCurrentUser({email, name, loggedIn: true});
+        setCurrentUser((user) => ({
+          ...user, email, name, loggedIn: true,
+        }));
         return {email, name};
       })
       .catch((err) => {
-        setCurrentUser({...currentUser, loggedIn: false});
+        setCurrentUser((user) => ({...user, loggedIn: false}));
         return err;
       });
   }
@@ -56,7 +62,9 @@ export function useUser(): User {
   useEffect(() => {
     mainApi
       .checkToken()
-      .then(({name, email}) => setCurrentUser({name, email, loggedIn: true}))
+      .then(({name, email}) => setCurrentUser((user) => ({
+        ...user, name, email, loggedIn: true,
+      })))
       .catch(() => setCurrentUser({...currentUser, loggedIn: false}));
   }, [history]);
 

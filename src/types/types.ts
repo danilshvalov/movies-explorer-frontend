@@ -33,7 +33,8 @@ export interface WithMoviesList {
 export type OnSearchFunc = (data: SearchData) => any;
 export type SearchWithMoviesFunc = (data: SearchData) => MoviesList;
 
-export interface WithError {
+export interface WithError<T = unknown> {
+  error?: T,
   isError?: boolean;
 }
 
@@ -106,6 +107,7 @@ export interface UserState {
   name: string;
   email: string;
   loggedIn: boolean;
+  isLoading: boolean;
 }
 
 export type User = UserActions & UserState;

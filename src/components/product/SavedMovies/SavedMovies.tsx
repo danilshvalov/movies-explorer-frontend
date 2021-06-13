@@ -18,7 +18,7 @@ export function SavedMovies({className, ...props}: Props): JSX.Element {
   const cn = createCn('saved-movies', className);
   const defaultChecked = false;
 
-  const [searchData, setSearchData] = useState<SearchData>({query: '', isChecked: defaultChecked});
+  const [searchData, setSearchData] = useState<SearchData | undefined>();
 
   return (
     <section {...props} className={cn()}>

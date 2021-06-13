@@ -12,7 +12,7 @@ import MoviesCardList from '@product/SavedMovies/MoviesCardList/MoviesCardList';
 /* -------------------------------------------------------------------------- */
 
 export interface FunctionalProps {
-  searchData: SearchData;
+  searchData?: SearchData;
 }
 export type Props = FunctionalProps;
 
@@ -23,7 +23,9 @@ export function MoviesManager({searchData}: Props): JSX.Element {
 
   useEffect(() => {
     if (savedMovies.value) {
-      setFilteredMovies(savedMovies.value.filter((movie) => moviesFilter(movie, searchData)));
+      setFilteredMovies(searchData
+        ? savedMovies.value.filter((movie) => moviesFilter(movie, searchData))
+        : savedMovies.value);
     }
   }, [savedMovies.value, searchData]);
 

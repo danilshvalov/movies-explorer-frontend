@@ -14,15 +14,12 @@ export function Catch<Props>(
       error: undefined,
     };
 
-    static getDerivedStateFromError(error: Error) {
-      return {error};
-    }
-
-    // eslint-disable-next-line class-methods-use-this
     componentDidCatch(error: Error, info: React.ErrorInfo) {
       if (errorHandler) {
         errorHandler(error, info);
       }
+
+      this.setState({error});
     }
 
     render() {

@@ -5,11 +5,20 @@ import {
 export function useLocalStorage<T>(
   key: string,
 ): [T | undefined, Dispatch<SetStateAction<T | undefined>>] {
-  const [value, setValue] = useState<T | undefined>();
+  const [value, setValue] = useState<T | undefined>(() => {
+    const item = window.localStorage.getItem(key);
+    console.log(JSON.parse(item!));
+    if (item) {
+      try {
+        return JSON.parse(item);
+      } catch {
+        return undefined;
+      }
+    }
+    return undefined;
+  });
 
   // TODO  доделать
-  // const item = window.localStorage.getItem(key);
-  // return item ? JSON.parse(item) : null;
 
   useEffect(() => {
     window.localStorage.setItem(key, JSON.stringify(value));

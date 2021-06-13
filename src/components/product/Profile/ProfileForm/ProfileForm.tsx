@@ -102,8 +102,12 @@ export function ProfileForm({
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 2000);
-  }, []);
+    if (currentUser.isLoading !== undefined) {
+      setIsLoading(currentUser.isLoading);
+    } else {
+      setIsLoading(true);
+    }
+  }, [currentUser.isLoading]);
 
   return (
     <PreloaderWrapper isLoading={isLoading}>

@@ -17,6 +17,7 @@ export function MoviesCardList({moviesList, ...props}: Props): JSX.Element {
         <Card.MoviesCard
           {...(movie as Card.DataProps & Card.FunctionalProps)}
           key={movie.movieId}
+          onDelete={props.onDelete}
         />
       ))}
     </GenericList.List>
