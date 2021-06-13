@@ -27,14 +27,16 @@ export type Props = DOMProps & FunctionalProps;
 const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
   const cn = createCn('login-form', className);
 
-  enum Fields {
-    emailInput,
-    passwordInput,
-  }
-
   const {
-    values, handleChange, errors, isValid,
-  } = useFormWithValidation<typeof Fields>();
+    values,
+    handleChange,
+    errors,
+    isValid,
+    isFieldValid,
+  } = useFormWithValidation({
+    emailInput: '',
+    passwordInput: '',
+  });
 
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);
@@ -42,11 +44,14 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
   const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
 
-    if (isValid) {
+    const emailValue = values.emailInput;
+    const passwordValue = values.passwordInput;
+
+    if (isValid && emailValue && passwordValue) {
       setIsProcessing(true);
       onLogin({
-        email: values.emailInput as string,
-        password: values.passwordInput as string,
+        email: emailValue,
+        password: passwordValue,
       })
         .catch((err) => setAPIError(err))
         .finally(() => setIsProcessing(false));
@@ -67,14 +72,16 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
             <label className={cn('label')}>{texts.emailInput.label}</label>
             <Field
               className={cn('field')}
-              name={Fields[Fields.emailInput]}
+              name="emailInput"
               onChange={handleChange}
-              isError={true}
+              isError={!isFieldValid('emailInput')}
               type="email"
               required
             />
           </div>
-          <ErrorMessage className={cn('field-error')}>{errors.emailInput}</ErrorMessage>
+          <ErrorMessage className={cn('field-error')}>
+            {errors.emailInput}
+          </ErrorMessage>
         </div>
 
         {/** Поле с паролем */}
@@ -83,22 +90,33 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
             <label className={cn('label')}>{texts.passwordInput.label}</label>
             <Field
               className={cn('field')}
-              name={Fields[Fields.passwordInput]}
+              name="passwordInput"
               onChange={handleChange}
               minLength={8}
-              isError={true}
+              isError={!isFieldValid('passwordInput')}
               type="password"
               required
             />
           </div>
-          <ErrorMessage className={cn('field-error')}>{errors.passwordInput}</ErrorMessage>
+          <ErrorMessage className={cn('field-error')}>
+            {errors.passwordInput}
+          </ErrorMessage>
         </div>
       </fieldset>
 
       {/** Кнопка отправки формы */}
       <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
-      <Button className={cn('submit-button')} type="submit" disabled={!isValid} theme={Theme.Azure}>
-        {isProcessing ? texts.submitButton.loadingText : texts.submitButton.text}
+      <Button
+        className={cn('submit-button')}
+        type="submit"
+        disabled={!isValid}
+        theme={Theme.Azure}
+      >
+        {
+          isProcessing
+            ? texts.submitButton.loadingText
+            : texts.submitButton.text
+        }
       </Button>
     </GenericForm.Form>
   );

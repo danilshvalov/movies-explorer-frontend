@@ -32,17 +32,29 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
   }
 
   const {
-    values, handleChange, errors, isValid,
-  } = useFormWithValidation<typeof Fields>();
+    values,
+    handleChange,
+    errors,
+    isValid,
+    isFieldValid,
+  } = useFormWithValidation({
+    nameInput: '',
+    emailInput: '',
+    passwordInput: '',
+  });
 
+  // TODO
   const [APIError, setAPIError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
 
-    if (isValid) {
-      setIsProcessing(true);
+    const nameValue = values.nameInput;
+    const emailValue = values.emailInput;
+    const passwordValue = values.passwordInput;
+
+    if (isValid && nameValue && emailValue && passwordValue) {
       setIsProcessing(true);
       onRegister({
         name: values.nameInput as string,
@@ -67,7 +79,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               name={Fields[Fields.nameInput]}
               onChange={handleChange}
               minLength={2}
-              isError={true}
+              isError={!isFieldValid('nameInput')}
               required
             />
           </div>
@@ -82,7 +94,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               className={cn('field')}
               name={Fields[Fields.emailInput]}
               onChange={handleChange}
-              isError={true}
+              isError={!isFieldValid('emailInput')}
               type="email"
               required
             />
@@ -99,7 +111,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               name={Fields[Fields.passwordInput]}
               onChange={handleChange}
               minLength={8}
-              isError={true}
+              isError={!isFieldValid('passwordInput')}
               type="password"
               required
             />
@@ -111,7 +123,11 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
       {/** Кнопка отправки формы */}
       <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
       <Button className={cn('submit-button')} type="submit" disabled={isValid} theme={Theme.Azure}>
-        {isProcessing ? texts.submitButton.loadingText : texts.submitButton.text}
+        {
+          isProcessing
+            ? texts.submitButton.loadingText
+            : texts.submitButton.text
+        }
       </Button>
     </GenericForm.Form>
   );

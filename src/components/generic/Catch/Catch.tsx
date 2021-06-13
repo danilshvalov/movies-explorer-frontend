@@ -27,7 +27,6 @@ export function Catch<Props>(
 
     render() {
       return <Component {...this.props} error={this.state.error} />;
-      // return component(this.props, this.state.error);
     }
   };
 }

@@ -28,7 +28,7 @@ function App(): JSX.Element {
   const cn = createCn('page');
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isAppLoading, setIsAppLoading] = useState(true);
+  const [isAppLoading, setIsAppLoading] = useState(false);
 
   const currentUser = useUser();
 

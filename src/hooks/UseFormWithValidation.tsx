@@ -1,26 +1,52 @@
 import {
+  Dispatch,
+  SetStateAction,
   ChangeEvent,
   useCallback,
   useState,
 } from 'react';
 
-type Fields<T> = {
+export type Fields<T> = {
   [K in keyof T]?: string;
 };
 
-type OnChangeFunc = (evt: ChangeEvent<HTMLInputElement>) => void;
+type ObjectType = {
+  [key: string]: string | undefined;
+};
+
+export type OnChangeFunc = (evt: ChangeEvent<HTMLInputElement>) => void;
+export type ResetFunc = () => void;
+export type ValidCheckFunc<T> = <K extends keyof T>(key: K) => boolean;
 
 export interface ReturnType<T> {
+  /** Текущие значения полей */
   values: Fields<T>;
+  /** Обновление текущих значений полей */
+  setValues: Dispatch<SetStateAction<Fields<T>>>;
+  /** Ошибки полей */
   errors: Fields<T>;
+  /** Валидность всей формы */
   isValid: boolean;
+  /**
+   * Callback события изменения поля
+   *
+   * @requires
+   * Обязательна установка этого обработчика на все поля формы
+   */
   handleChange: OnChangeFunc;
-  resetForm: () => void;
-  isFieldValid: <K extends keyof T>(key: K) => boolean;
+  /** Сброс всего */
+  resetForm: ResetFunc;
+  /** Проверка валидности поля по имени */
+  isFieldValid: ValidCheckFunc<T>;
 }
 
-export function useFormWithValidation<T extends
- {[key: number]: string}>(initValues?: Fields<T>): ReturnType<T> {
+/**
+ * Hook формы с валидацией
+ * @see ReturnType
+ */
+export function useFormWithValidation<T extends ObjectType>(
+  initValues?: T,
+): ReturnType<T> {
   const [values, setValues] = useState<Fields<T>>(initValues || {});
   const [errors, setErrors] = useState<Fields<T>>({});
   const [isValid, setIsValid] = useState(false);
@@ -61,6 +87,7 @@ export function useFormWithValidation<T extends
 
   return {
     values,
+    setValues,
     errors,
     isValid,
     handleChange,

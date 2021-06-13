@@ -18,13 +18,9 @@ export function useUser(): User {
     mainApi
       .checkToken()
       .then(({name, email}) => {
-        console.log(name, email);
         setCurrentUser({name, email, loggedIn: true});
       })
-      .catch((err) => {
-        console.log(err);
-        setCurrentUser((old) => ({...old, loggedIn: false}));
-      });
+      .catch(() => setCurrentUser({...currentUser, loggedIn: false}));
   }, []);
 
   function authorize(data: LoginUserData): Promise<AuthorizedUserData> {

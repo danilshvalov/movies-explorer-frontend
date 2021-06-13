@@ -9,7 +9,7 @@ import {PAGE_LINKS} from '@utils/config';
 /* ---------------------------------- Types --------------------------------- */
 import {OnLoginFunc} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
-import LoginForm from '@product/LoginForm/LoginForm';
+import LoginForm from '@product/Login/LoginForm/LoginForm';
 /* -------------------------------------------------------------------------- */
 import './Login.css';
 

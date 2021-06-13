@@ -1,8 +1,5 @@
 import {ParsedTime} from '../types/types';
 import {IMAGE_SERVER_URL} from './config';
-import ApiError from '../errors/ApiError';
-import {errorTexts} from './texts';
-
 /**
  * Функция выравнивания количества
  *
@@ -37,62 +34,4 @@ export const getCopyrightDate = () => {
 
 export function parseImage(path?: string): string {
   return new URL(path || '', IMAGE_SERVER_URL).href;
-}
-
-// REMOVE
-/** @deprecated */
-export function errorParser(err: any): Promise<string> {
-  if (err instanceof ApiError) {
-    if (err.code >= 500) {
-      return Promise.reject(errorTexts.internalServer);
-    }
-
-    err.res.json().then((res) => Promise.reject(res.message || errorTexts.internalServer));
-  }
-
-  return Promise.reject(errorTexts.internalServer);
-}
-
-// REMOVE
-/** @deprecated */
-export function wrapPromise<T>(promise: Promise<T>) {
-  let status = 'pending';
-  let result: T;
-  const suspender = promise.then(
-    (r) => {
-      status = 'success';
-      result = r;
-    },
-    (e) => {
-      status = 'error';
-      result = e;
-    },
-  );
-
-  return {
-    read() {
-      if (status === 'pending') {
-        throw suspender;
-      }
-      if (status === 'error') {
-        return {
-          data() {
-            throw result;
-          },
-          isOk: false,
-        };
-      }
-
-      if (status === 'success') {
-        return {
-          data() {
-            return result;
-          },
-          isOk: true,
-        };
-      }
-
-      throw suspender;
-    },
-  };
 }
