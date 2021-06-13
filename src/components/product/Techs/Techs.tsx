@@ -5,7 +5,7 @@ import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import List from '@generic/List/List';
 import SectionHeader from '@generic/SectionHeader/SectionHeader';
 /* ---------------------------------- Utils --------------------------------- */
-import {techs as texts} from '@utils/texts';
+import {TECHS as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import './Techs.css';
 
@@ -18,13 +18,13 @@ export function Techs({className, ...props}: Props): JSX.Element {
   return (
     <section {...filterInvalidDOMProps(props)} className={cn()}>
       <div className={cn('container')}>
-        <SectionHeader className={cn('header')}>{texts.header}</SectionHeader>
-        <h2 className={cn('title')}>{`${texts.list.length} технологий`}</h2>
+        <SectionHeader className={cn('header')}>{TEXTS.header}</SectionHeader>
+        <h2 className={cn('title')}>{`${TEXTS.list.length} технологий`}</h2>
         {/** Краткое описание */}
-        <p className={cn('about')}>{texts.about}</p>
+        <p className={cn('about')}>{TEXTS.about}</p>
         {/** Список технологий */}
         <List className={cn('list')} itemClassName={cn('list-item')}>
-          {texts.list}
+          {TEXTS.list}
         </List>
       </div>
     </section>

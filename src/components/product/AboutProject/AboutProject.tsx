@@ -5,8 +5,8 @@ import shortid from 'shortid';
 import Title from '@generic/Title/Title';
 import SectionHeader from '@generic/SectionHeader/SectionHeader';
 import List from '@generic/List/List';
-/* ---------------------------------- Utils --------------------------------- */
-import {aboutProject as texts, infoTicketsList} from '@utils/texts';
+/* ---------------------------------- Texts --------------------------------- */
+import {ABOUT_PROJECT as TEXTS, INFO_TICKETS_LIST} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
 import {Theme} from 'types/types';
 /* --------------------------------- Product -------------------------------- */
@@ -21,15 +21,15 @@ export type Props = DOMProps;
  * */
 export function AboutProject({className, ...props}: Props): JSX.Element {
   const cn = createCn('about-project', className);
-  const {leftColumn, rightColumn} = texts.infoTable;
+  const {leftColumn, rightColumn} = TEXTS.infoTable;
 
   return (
     <section {...props} className={cn()}>
-      <SectionHeader className={cn('header')}>{texts.header}</SectionHeader>
+      <SectionHeader className={cn('header')}>{TEXTS.header}</SectionHeader>
 
       {/** Описание этапов разработки */}
       <List className={cn('info-list')} itemClassName={cn('list-item')}>
-        {infoTicketsList.map((cardData) => (
+        {INFO_TICKETS_LIST.map((cardData) => (
           <InfoTicket key={shortid.generate()} className={cn('info-ticket')} {...cardData} />
         ))}
       </List>

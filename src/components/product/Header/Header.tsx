@@ -8,10 +8,11 @@ import Account from '@product/Account/Account';
 import Logo from '@generic/Logo/Logo';
 import Menu from '@product/Menu/Menu';
 //
-import LoginButtons from '@product/LoginButtons/LoginButtons';
+import LoginButtons from '@generic/LoginButtons/LoginButtons';
 /* ---------------------------------- Utils --------------------------------- */
 import getDeviceType from '@utils/device-type';
-import {header as texts} from '@utils/texts';
+/* ---------------------------------- Texts --------------------------------- */
+import {HEADER as TEXTS} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
 import {DeviceType} from 'types/types';
 /* -------------------------------- Contexts -------------------------------- */
@@ -53,7 +54,7 @@ const Header = ({className, ...props}: HeaderProps) => {
       {isLoggedIn ? (
         <Menu className={cn('menu')} isDesktop={isDesktop}>
           <Navigation
-            linksList={isDesktop ? texts.desktopMenu : texts.mobileMenu}
+            linksList={isDesktop ? TEXTS.desktopMenu : TEXTS.mobileMenu}
             underline={!isDesktop}
             className={cn('navigation')}
           />

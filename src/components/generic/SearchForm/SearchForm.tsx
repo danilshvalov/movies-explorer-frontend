@@ -1,13 +1,15 @@
 import {createCn} from 'bem-react-classname';
 import React from 'react';
-
+/* -------------------------------- Generics -------------------------------- */
 import CheckBox from '@generic/CheckBox/CheckBox';
 import SearchField from '@generic/SearchField/SearchField';
 import Button from '@generic/Button/Button';
 import List from '@generic/List/List';
+/* ---------------------------------- Types --------------------------------- */
 import {OnSearchFunc, Theme} from 'types/types';
-import {searchForm as texts} from '@utils/texts';
-
+/* ---------------------------------- Texts --------------------------------- */
+import {SEARCH_FORM as TEXTS} from '@texts/generic';
+/* -------------------------------------------------------------------------- */
 import './SearchForm.css';
 
 export interface SearchFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
@@ -40,26 +42,30 @@ const SearchForm: React.FC<SearchFormProps> = ({
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    onSearch({isChecked, query: fieldQuery});
+    if (fieldQuery !== '') {
+      onSearch({isChecked, query: fieldQuery});
+    } else {
+      // TODO добавить ошибку
+    }
   };
 
   return (
-    <form {...props} className={cn()} onSubmit={handleSubmit}>
+    <form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
       <List className={cn('list')} itemClassName={cn('list-item')}>
         {/** Поле поиска */}
         <SearchField
           className={cn('field')}
-          placeholder={texts.field.placeholder}
+          placeholder={TEXTS.field.placeholder}
           onInput={handleFieldInput}
         >
           {/** Start-кнопка */}
           <Button className={cn('start-button')} theme={Theme.Azure}>
-            {texts.startButton.label}
+            {TEXTS.startButton.label}
           </Button>
         </SearchField>
         {/** Переключатель */}
         <CheckBox
-          label={texts.checkBox.label}
+          label={TEXTS.checkBox.label}
           className={cn('check-button')}
           labelClassName={cn('check-label')}
           defaultChecked={defaultChecked}

@@ -9,7 +9,7 @@ import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
 /* ---------------------------------- Utils --------------------------------- */
-import {profile} from '@utils/texts';
+import {PROFILE} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
 import {OnProfileUpdateFunc} from 'types/types';
 /* -------------------------------- Contexts -------------------------------- */
@@ -17,7 +17,7 @@ import CurrentUserContext from '@contexts/CurrentUserContext';
 /* -------------------------------------------------------------------------- */
 import './ProfileForm.css';
 
-const texts = profile.form;
+const texts = PROFILE.form;
 
 export type DOMProps = GenericForm.DOMProps;
 export interface FunctionalProps {
@@ -46,7 +46,7 @@ export function ProfileForm({
   });
 
   useEffect(() => {
-    setValues({nameInput: currentUser.name, emailInput: currentUser.email});
+    setValues({nameInput: currentUser.name || '', emailInput: currentUser.email || ''});
   }, [currentUser]);
 
   // TODO API error работает???
@@ -129,7 +129,7 @@ export function ProfileForm({
                 minLength={2}
                 isError={!isFieldValid('nameInput')}
                 required
-                defaultValue={values.nameInput}
+                defaultValue={values.nameInput || ''}
               />
             </div>
             <ErrorMessage className={cn('field-error')}>
@@ -148,7 +148,7 @@ export function ProfileForm({
                 type="email"
                 isError={!isFieldValid('emailInput')}
                 required
-                defaultValue={values.emailInput}
+                defaultValue={values.emailInput || ''}
               />
             </div>
             <ErrorMessage className={cn('field-error')}>

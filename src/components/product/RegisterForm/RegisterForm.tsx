@@ -8,13 +8,13 @@ import * as GenericForm from '@generic/Form/Form';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
 /* ---------------------------------- Utils --------------------------------- */
-import {register} from '@utils/texts';
+import {REGISTER} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
 import {OnRegisterFunc, Theme} from 'types/types';
 /* -------------------------------------------------------------------------- */
 import './RegisterForm.css';
 
-const texts = register.form;
+const texts = REGISTER.form;
 
 export type DOMProps = GenericForm.DOMProps;
 export interface FunctionalProps {

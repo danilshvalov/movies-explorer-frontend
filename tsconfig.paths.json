@@ -2,13 +2,15 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@images/*": ["images/*"],
+      "@images-src/*": ["images/*"],
+      "@images": ["utils/images.ts"],
       "@product/*": ["components/product/*"],
       "@generic/*": ["components/generic/*"],
       "@utils/*": ["utils/*"],
       "types/*": ["types/*"],
       "@contexts/*": ["contexts/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@texts/*": ["texts/*"]
     }
   }
 }

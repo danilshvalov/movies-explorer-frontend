@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom';
 import {Link as GenericLink} from '@generic/Link/Link';
 import Logo from '@generic/Logo/Logo';
 /* ---------------------------------- Utils --------------------------------- */
-import {login as texts} from '@utils/texts';
 import {PAGE_LINKS} from '@utils/config';
+/* ---------------------------------- Texts --------------------------------- */
+import {LOGIN as TEXTS} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
 import {OnLoginFunc} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
@@ -29,14 +30,14 @@ export function Login({className, onLogin, ...props}: LoginProps): JSX.Element {
       {/** Логотип сайта */}
       <Logo className={cn('logo')} />
       {/** Заголовок секции */}
-      <h1 className={cn('title')}>{texts.title}</h1>
+      <h1 className={cn('title')}>{TEXTS.title}</h1>
       {/** Форма входа */}
       <LoginForm className={cn('form')} onLogin={onLogin} />
       {/** Перенаправляющий зарегистрированных пользователей текст */}
       <span className={cn('sub-text')}>
-        {texts.subtext.text}
+        {TEXTS.subtext.text}
         <Link component={GenericLink} to={PAGE_LINKS.signUp} className={cn('link')}>
-          {texts.subtext.link}
+          {TEXTS.subtext.link}
         </Link>
       </span>
     </div>

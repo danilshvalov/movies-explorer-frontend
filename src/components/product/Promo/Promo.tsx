@@ -2,7 +2,7 @@ import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {HTMLAttributes} from 'react';
 /* ---------------------------------- Utils --------------------------------- */
-import {promo as texts} from '@utils/texts';
+import {PROMO as TEXTS} from '@texts/product';
 /* --------------------------------- Product -------------------------------- */
 import NavTab from '@product/NavTab/NavTab';
 /* -------------------------------------------------------------------------- */
@@ -16,7 +16,7 @@ export function Promo({className, ...props}: Props): JSX.Element {
   const cn = createCn('promo', className);
   return (
     <section {...filterInvalidDOMProps(props)} className={cn()}>
-      <h1 className={cn('title')}>{texts.title}</h1>
+      <h1 className={cn('title')}>{TEXTS.title}</h1>
       <NavTab className={cn('nav-tab')} />
     </section>
   );

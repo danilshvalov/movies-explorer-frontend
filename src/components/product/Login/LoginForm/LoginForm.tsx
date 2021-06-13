@@ -9,12 +9,12 @@ import Button from '@generic/Button/Button';
 import {OnLoginFunc, Theme} from 'types/types';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
-/* ---------------------------------- Utils --------------------------------- */
-import {login} from '@utils/texts';
+/* ---------------------------------- Texts --------------------------------- */
+import {LOGIN} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import './LoginForm.css';
 
-const texts = login.form;
+const TEXTS = LOGIN.form;
 
 export type DOMProps = GenericForm.DOMProps;
 export interface FunctionalProps {
@@ -69,7 +69,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
         {/** Поле с Email */}
         <div className={cn('container')}>
           <div className={cn('field-wrapper')}>
-            <label className={cn('label')}>{texts.emailInput.label}</label>
+            <label className={cn('label')}>{TEXTS.emailInput.label}</label>
             <Field
               className={cn('field')}
               name="emailInput"
@@ -87,7 +87,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
         {/** Поле с паролем */}
         <div className={cn('container')}>
           <div className={cn('field-wrapper')}>
-            <label className={cn('label')}>{texts.passwordInput.label}</label>
+            <label className={cn('label')}>{TEXTS.passwordInput.label}</label>
             <Field
               className={cn('field')}
               name="passwordInput"
@@ -114,8 +114,8 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
       >
         {
           isProcessing
-            ? texts.submitButton.loadingText
-            : texts.submitButton.text
+            ? TEXTS.submitButton.loadingText
+            : TEXTS.submitButton.text
         }
       </Button>
     </GenericForm.Form>

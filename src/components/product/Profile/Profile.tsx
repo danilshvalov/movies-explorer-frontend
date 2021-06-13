@@ -5,7 +5,7 @@ import Button from '@generic/Button/Button';
 /* ---------------------------------- Types --------------------------------- */
 import {OnLogoutFunc, OnProfileUpdateFunc} from 'types/types';
 /* ---------------------------------- Utils --------------------------------- */
-import {profile as texts} from '@utils/texts';
+import {PROFILE as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import Header from '@product/Header/Header';
 /* -------------------------------- Contexts -------------------------------- */
@@ -40,7 +40,7 @@ const Profile = ({
       {/** Ссылка на выход из аккаунта */}
       <span className={cn('sub-text')}>
         <Button className={cn('exit-link')} onClick={() => onLogout()}>
-          {texts.subtext.exitLink}
+          {TEXTS.subtext.exitLink}
         </Button>
       </span>
     </div>

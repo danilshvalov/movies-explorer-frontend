@@ -1,10 +1,13 @@
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React from 'react';
-
+/* ---------------------------------- Utils --------------------------------- */
 import {parseTime, stringifyTime} from '@utils/utils';
-import {moviesCard as texts} from '@utils/texts';
+/* ---------------------------------- Texts --------------------------------- */
+import {MOVIES_CARD as TEXTS} from '@texts/generic';
+/* ---------------------------------- Types --------------------------------- */
 import {IMovie} from 'types/types';
+/* -------------------------------------------------------------------------- */
 
 import './MoviesCard.css';
 
@@ -14,10 +17,6 @@ export type Props = DataProps & DOMProps;
 
 /**
  * Миниатюрная карточка фильма
- *
- * Поддерживается карточка с [удалением]{@link DeleteButton}
- *
- * Поддерживается карточка с [сохранением]{@link SaveButton}
  * */
 export function MoviesCard({className, ...props}: Props): JSX.Element {
   const cn = createCn('movies-card', className);
@@ -30,7 +29,7 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
         <img
           className={cn('poster')}
           src={props.thumbnail}
-          alt={texts.img.alt}
+          alt={TEXTS.img.alt}
           onLoad={() => setPosterLoading(false)}
         />
       </div>

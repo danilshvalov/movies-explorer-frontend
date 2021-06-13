@@ -4,8 +4,8 @@ import shortid from 'shortid';
 /* -------------------------------- Generics -------------------------------- */
 import Link from '@generic/Link/Link';
 import * as GenericList from '@generic/List/List';
-/* ---------------------------------- Utils --------------------------------- */
-import {navTab as texts} from '@utils/texts';
+/* ---------------------------------- TEXTS --------------------------------- */
+import {NAV_TAB as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import './NavTab.css';
 
@@ -16,7 +16,7 @@ export function NavTab({className, ...props}: Props): JSX.Element {
   const cn = createCn('nav-tab', className);
   return (
     <GenericList.List {...props} className={cn()} itemClassName={cn('item')}>
-      {texts.buttons.map((btn) => (
+      {TEXTS.buttons.map((btn) => (
         <Link key={shortid.generate()} className={cn('button')} href={`#${btn.to}`}>
           {btn.text}
         </Link>

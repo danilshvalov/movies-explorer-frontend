@@ -4,10 +4,10 @@ import {HTMLAttributes} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import Link from '@generic/Link/Link';
 import List from '@generic/List/List';
-/* ---------------------------------- Utils --------------------------------- */
-import {personality as texts} from '@utils/texts';
+/* ---------------------------------- Texts --------------------------------- */
+import {PERSONALITY as TEXTS} from '@texts/product';
 /* --------------------------------- Images --------------------------------- */
-import avatarImg from '@images/avatar.jpg';
+import images from '@images';
 /* -------------------------------------------------------------------------- */
 import './Personality.css';
 
@@ -24,14 +24,14 @@ export function Personality({className, ...props}: Props): JSX.Element {
     <div {...props} className={cn()}>
       <article className={cn('info')}>
         {/** Имя  */}
-        <h2 className={cn('name')}>{texts.name}</h2>
+        <h2 className={cn('name')}>{TEXTS.name}</h2>
         {/** Краткое описание */}
-        <p className={cn('feature')}>{texts.feature}</p>
+        <p className={cn('feature')}>{TEXTS.feature}</p>
         {/** Обширное "о себе" */}
-        <p className={cn('description')}>{texts.description}</p>
+        <p className={cn('description')}>{TEXTS.description}</p>
         {/** Список ссылок на соцсети и т.п. */}
         <List className={cn('list')} itemClassName={cn('list-item')}>
-          {texts.links.map((link) => (
+          {TEXTS.links.map((link) => (
             <Link key={shortid.generate()} className={cn('link')} href={link.path}>
               {link.name}
             </Link>
@@ -39,7 +39,7 @@ export function Personality({className, ...props}: Props): JSX.Element {
         </List>
       </article>
       {/** Фотография ученика */}
-      <img className={cn('photo')} src={avatarImg} alt={texts.img.alt} />
+      <img className={cn('photo')} src={images.PROMO_AVATAR} alt={TEXTS.img.alt} />
     </div>
   );
 }

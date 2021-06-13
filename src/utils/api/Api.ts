@@ -21,32 +21,40 @@ export interface InitApiData {
   /** URL, на который будет отправляться запрос */
   baseUrl: string;
   /** Включаемые header'ы */
-  defaultHeaders?: Headers;
+  defaultHeaders?: HeadersInit;
   settings?: RequestInit;
 }
 
 /** Базовый класс для API */
 class Api {
-  protected readonly baseUrl: InitApiData['baseUrl'];
+  protected readonly baseUrl: string;
 
-  protected readonly defaultHeaders: InitApiData['defaultHeaders'];
+  protected readonly defaultHeaders: HeadersInit;
 
-  protected readonly settings?: RequestInit;
+  protected readonly settings: RequestInit | undefined;
 
-  constructor({baseUrl, defaultHeaders = new Headers(), settings}: InitApiData) {
+  constructor({
+    baseUrl,
+    defaultHeaders = new Headers(),
+    settings,
+  }: InitApiData) {
     this.baseUrl = baseUrl;
     this.defaultHeaders = defaultHeaders;
     this.settings = settings;
   }
 
   /** Формирует и отправляет запрос */
-  protected sendRequest({path, method, body}: SendRequestData) {
+  protected sendRequest({
+    path,
+    method,
+    body,
+  }: SendRequestData): Promise<any> {
     console.log(new URL(path, this.baseUrl)?.href, method, body);
     return fetch(new URL(path, this.baseUrl).href, {
       ...this.settings,
       method,
       headers: this.defaultHeaders,
-      body,
+      body: JSON.stringify(body),
     }).then((res) => {
       if (res.ok) {
         return res.json();

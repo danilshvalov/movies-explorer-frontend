@@ -14,8 +14,6 @@
   "rules": {
     "object-curly-spacing": ["error", "never"],
     "no-underscore-dangle": "off",
-    // ts...
-    "no-undef": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "no-shadow": "off",

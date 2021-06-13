@@ -4,10 +4,11 @@ import {forwardRef, ImgHTMLAttributes} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import {Link as GenericLink} from '@generic/Link/Link';
 /* --------------------------------- Images --------------------------------- */
-import logoImg from '@images/logo.svg';
+import images from '@images';
 /* ---------------------------------- Utils --------------------------------- */
 import {PAGE_LINKS} from '@utils/config';
-import {logo as texts} from '@utils/texts';
+/* ---------------------------------- Texts --------------------------------- */
+import {LOGO as TEXTS} from '@texts/generic';
 /* -------------------------------------------------------------------------- */
 import './Logo.css';
 
@@ -20,7 +21,7 @@ export const Logo = forwardRef<HTMLImageElement, Props>(({className, ...props}, 
   return (
     /** При нажатии перенаправляем на главную страницу */
     <Link component={GenericLink} to={PAGE_LINKS.main}>
-      <img {...props} className={cn()} ref={ref} src={logoImg} alt={texts.img.alt} />
+      <img {...props} className={cn()} ref={ref} src={images.LOGO} alt={TEXTS.img.alt} />
     </Link>
   );
 });

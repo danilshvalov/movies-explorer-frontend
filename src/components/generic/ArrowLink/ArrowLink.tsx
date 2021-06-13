@@ -2,9 +2,9 @@ import {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
 import * as GenericLink from '@generic/Link/Link';
 /* --------------------------------- Imaged --------------------------------- */
-import arrowLinkImg from '@images/arrow-link.svg';
-/* ---------------------------------- Utils --------------------------------- */
-import {arrowLink as texts} from '@utils/texts';
+import images from '@images';
+/* ---------------------------------- Texts --------------------------------- */
+import {ARROW_LINK as TEXTS} from '@texts/generic';
 /* -------------------------------------------------------------------------- */
 import './ArrowLink.css';
 
@@ -17,7 +17,7 @@ export function ArrowLink({className, ...props}: Props): JSX.Element {
   return (
     <GenericLink.Link {...props} className={cn()}>
       {props.children}
-      <img className={cn('picture')} src={arrowLinkImg} alt={texts.img.alt} />
+      <img className={cn('picture')} src={images.ARROW_LINK} alt={TEXTS.img.alt} />
     </GenericLink.Link>
   );
 }

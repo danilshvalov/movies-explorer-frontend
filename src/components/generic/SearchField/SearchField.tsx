@@ -1,17 +1,16 @@
 import React from 'react';
 import {createCn} from 'bem-react-classname';
-
 /* --------------------------------- Generic -------------------------------- */
 import * as GenericField from '@generic/Field/Field';
-/* ---------------------------------- Utils --------------------------------- */
-import {searchForm} from '@utils/texts';
+/* ---------------------------------- Texts --------------------------------- */
+import {SEARCH_FORM} from '@texts/generic';
 /* --------------------------------- Images --------------------------------- */
-import magnifierImg from '@images/magnifier.svg';
+import images from '@images';
 /* -------------------------------------------------------------------------- */
 
 import './SearchField.css';
 
-const texts = searchForm.field;
+const TEXTS = SEARCH_FORM.field;
 
 export type SearchFieldProps = GenericField.Props;
 export type RefType = GenericField.RefType;
@@ -24,12 +23,12 @@ const SearchField = React.forwardRef<RefType, SearchFieldProps>(
     return (
       <div className={cn()}>
         {/** Иконка увеличительного стекла */}
-        <img className={cn('icon')} src={magnifierImg} alt={texts.img.alt} />
+        <img className={cn('icon')} src={images.MAGNIFIER} alt={TEXTS.img.alt} />
         <GenericField.Field
           {...props}
           ref={ref}
           className={cn('input')}
-          placeholder={placeholder}
+          placeholder={placeholder || ''}
           required
         />
         {props.children}

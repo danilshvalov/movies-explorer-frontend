@@ -5,10 +5,11 @@ import {Link} from 'react-router-dom';
 import Button from '@generic/Button/Button';
 import {Link as GenericLink} from '@generic/Link/Link';
 /* ---------------------------------- Utils --------------------------------- */
-import {account as texts} from '@utils/texts';
 import {PAGE_LINKS} from '@utils/config';
 /* --------------------------------- Images --------------------------------- */
-import accountImg from '@images/account-avatar.svg';
+import {ACCOUNT as TEXTS} from '@texts/product';
+/* ---------------------------------- Texts --------------------------------- */
+import images from '@images';
 /* -------------------------------------------------------------------------- */
 import './Account.css';
 
@@ -21,9 +22,9 @@ export function Account({className, ...props}: AccountProps): JSX.Element {
   return (
     <div {...props} className={cn()}>
       <Link component={GenericLink} to={PAGE_LINKS.profile} className={cn('link')}>
-        <Button className={cn('profile-button')}>{texts.buttons.account}</Button>
+        <Button className={cn('profile-button')}>{TEXTS.buttons.account}</Button>
         {/** Иконка человечка */}
-        <img className={cn('logo')} src={accountImg} alt={texts.accountLogo.alt} />
+        <img className={cn('logo')} src={images.ACCOUNT_AVATAR} alt={TEXTS.accountLogo.alt} />
       </Link>
     </div>
   );
