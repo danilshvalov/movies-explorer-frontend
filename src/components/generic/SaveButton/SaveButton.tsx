@@ -16,6 +16,7 @@ export type Props = DOMProps & FunctionalProps;
 export function SaveButton({
   className,
   checked = false,
+  isLoading = false,
   ...props
 }: Props): JSX.Element {
   const cn = createCn('save-button', className);
@@ -23,7 +24,10 @@ export function SaveButton({
     <GenericButton.Button
       {...props}
       theme={Theme.Light}
-      className={cn({checked, loading: props.isLoading as boolean && checked})}
+      className={cn({
+        checked,
+        loading: isLoading && checked,
+      })}
     >
       {!checked && props.children}
     </GenericButton.Button>

@@ -30,3 +30,23 @@ export function getCopyrightDate(): string {
 export function parseImage(path?: string): string {
   return new URL(path || '', IMAGE_SERVER_URL).href;
 }
+
+export interface CancelablePromise<T> extends Promise<T> {
+  cancel: () => void;
+}
+
+// interface Promise<T> {
+//   asCancelable(): CancelablePromise<T>;
+// }
+
+export function asCancelable<T>(promise: Promise<T>): CancelablePromise<T> {
+  let cancel: (reason: {cancelled: boolean}) => void;
+  const wrappedPromise = new Promise((resolve, reject) => {
+    cancel = reject;
+    Promise.resolve(promise).then(resolve).catch(reject);
+  }) as any;
+  wrappedPromise.cancel = () => {
+    cancel({cancelled: true});
+  };
+  return wrappedPromise as CancelablePromise<T>;
+}

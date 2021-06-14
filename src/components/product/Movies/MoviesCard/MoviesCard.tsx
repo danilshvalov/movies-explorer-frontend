@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, {useState, useEffect, useRef} from 'react';
 import {createCn} from 'bem-react-classname';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
@@ -23,13 +24,26 @@ export type Props = DataProps & DOMProps & FunctionalProps;
 export function MoviesCard({className, ...props}: Props): JSX.Element {
   const cn = createCn('all-movies-card', className);
 
-  const [isHovered, setIsHovered] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
   const [isSaved, setIsSaved] = useState(props.isSaved);
   const [isLoading, setIsLoading] = useState(false);
+  /** Избавляемся от утечек памяти при размонтировании */
+  const isMounted = useRef(true);
+  /** Сама обертка */
+  function wrap(action: () => void) {
+    return () => {
+      if (isMounted.current) {
+        action();
+      }
+    };
+  }
 
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
+  useEffect(
+    () => () => {
+      isMounted.current = false;
+    },
+    [],
+  );
 
   function handleClick() {
     setIsLoading(true);
@@ -37,21 +51,21 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
     if (!isSaved) {
       props
         .onSave(movie)
-        .then(() => setIsSaved((old) => !old))
-        .finally(() => setIsLoading(false));
+        .then(wrap(() => setIsSaved((old) => !old)))
+        .finally(wrap(() => setIsLoading(false)));
     } else {
       props
         .onDelete(movie)
-        .then(() => setIsSaved((old) => !old))
-        .finally(() => setIsLoading(false));
+        .then(wrap(() => setIsSaved((old) => !old)))
+        .finally(wrap(() => setIsLoading(false)));
     }
   }
 
   return (
     <div
       className={cn()}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseOver={wrap(() => setIsHovered(true))}
+      onMouseLeave={wrap(() => setIsHovered(false))}
     >
       <GenericMoviesCard.MoviesCard {...props} />
       <SaveButton

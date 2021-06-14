@@ -41,7 +41,7 @@ export function MoviesManager({searchData}: Props): JSX.Element {
   useEffect(() => {
     if (savedMovies.value) {
       setFilteredMovies(
-        searchData && searchData.query !== ''
+        searchData
           ? savedMovies.value.filter((movie) => moviesFilter(movie, searchData))
           : savedMovies.value,
       );

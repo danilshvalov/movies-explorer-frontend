@@ -19,7 +19,6 @@ export interface SearchFormProps<T>
   /** Изначальное состояние формы */
   defaultChecked?: boolean;
   onSearch: OnSearchFunc<T>;
-  canBeEmpty?: boolean;
 }
 
 /** Поисковая форма */
@@ -50,7 +49,7 @@ function SearchForm<T>({
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (fieldQuery !== '' || props.canBeEmpty) {
+    if (fieldQuery !== '') {
       onSearch({isChecked, query: fieldQuery});
     } else {
       setErrorMessage(TEXTS.emptyFieldError);

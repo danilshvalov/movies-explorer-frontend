@@ -15,7 +15,6 @@ export type DOMProps = GenericMoviesCard.DOMProps;
 export type DataProps = GenericMoviesCard.DataProps;
 export type Props = DOMProps & DataProps & FunctionalProps;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function MoviesCard({onDelete, ...props}: Props): JSX.Element {
   const cn = createCn('save-movies-card');
 
