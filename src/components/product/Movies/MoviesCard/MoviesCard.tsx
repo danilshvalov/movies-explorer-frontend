@@ -5,7 +5,12 @@ import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
 import SaveButton from '@generic/SaveButton/SaveButton';
 /* ---------------------------------- Types --------------------------------- */
 import {IMovie, OnSaveFunc, OnDeleteFunc} from 'types/types';
+/* ---------------------------------- Texts --------------------------------- */
+import {MOVIES} from '@texts/product';
 /* -------------------------------------------------------------------------- */
+import './MoviesCard.css';
+
+const TEXTS = MOVIES.moviesCard;
 
 export type DataProps = GenericMoviesCard.DataProps;
 export type DOMProps = GenericMoviesCard.DOMProps;
@@ -20,13 +25,21 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
 
   const [isHovered, setIsHovered] = useState(true);
   const [isSaved, setIsSaved] = useState(props.isSaved);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleClick() {
+    setIsLoading(true);
     const movie = {...(props as IMovie), isSaved: !isSaved};
     if (!isSaved) {
-      props.onSave(movie).then((old) => setIsSaved(!old));
+      props
+        .onSave(movie)
+        .then((old) => setIsSaved(!old))
+        .finally(() => setIsLoading(false));
     } else {
-      props.onDelete(movie).then((old) => setIsSaved(!old));
+      props
+        .onDelete(movie)
+        .then((old) => setIsSaved(!old))
+        .finally(() => setIsLoading(false));
     }
   }
 
@@ -41,8 +54,7 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
         className={cn('button', {hidden: !isHovered && !isSaved})}
         onClick={handleClick}
       >
-        {/* TODO убрать в константы + добавить загрузку */}
-        Сохранить
+        {isLoading ? TEXTS.button.loadingText : TEXTS.button.text}
       </SaveButton>
     </div>
   );

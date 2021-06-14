@@ -9,11 +9,14 @@ import {DEVICES_WIDTHS, MOVIES_AMOUNT_BY_DEVICE} from '@utils/config';
 import getDeviceType from '@utils/device-type';
 /* ---------------------------------- Types --------------------------------- */
 import {IMovie, WithMoviesList} from 'types/types';
+/* ---------------------------------- Texts --------------------------------- */
+import {MOVIES} from '@texts/product';
 /* ---------------------------------- Local --------------------------------- */
 import * as Card from '@product/Movies/MoviesCard/MoviesCard';
 /* -------------------------------------------------------------------------- */
-
 import './MoviesCardList.css';
+
+const TEXTS = MOVIES.moviesCardList;
 
 export type DOMProps = GenericList.DOMProps;
 export type DataProps = WithMoviesList;
@@ -35,16 +38,11 @@ function MoviesCardList({moviesList, ...props}: Props): JSX.Element {
 
   /** Кнопка, появляющаяся при возможности добавления карточек */
   const OptionalMoreButton = () => (list.isComplete ? null : (
-  /** TODO переместить текст + добавить состояние загрузки  */ <Button
-        className={cn('more-button')}
-      >
-        Сохранить
-      </Button>
+      <Button className={cn('more-button')}>{TEXTS.moreButton.text}</Button>
   ));
 
   return (
     <GenericList.List {...props} className={cn()}>
-      {/* TODO добавить error-wrapper */}
       {list.value?.map((data) => (
         <Card.MoviesCard
           {...data}

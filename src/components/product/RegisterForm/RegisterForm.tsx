@@ -43,7 +43,6 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
     passwordInput: '',
   });
 
-  // TODO
   const [APIError, setAPIError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 

@@ -15,4 +15,8 @@
     width: calc(100% - 20px);
     margin-bottom: 40px;
   }
+
+  .saved-movies__search-form {
+    margin-bottom: 28px;
+  }
 }

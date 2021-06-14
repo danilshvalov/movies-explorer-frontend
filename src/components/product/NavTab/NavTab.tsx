@@ -9,7 +9,6 @@ import {NAV_TAB as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import './NavTab.css';
 
-// TODO изменить вид
 export type Props = GenericList.Props;
 
 export function NavTab({className, ...props}: Props): JSX.Element {

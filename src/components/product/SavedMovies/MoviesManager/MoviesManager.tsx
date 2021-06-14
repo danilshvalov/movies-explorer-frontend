@@ -9,6 +9,8 @@ import moviesFilter from '@utils/movies-filter';
 import {MoviesList, SearchData} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/SavedMovies/MoviesCardList/MoviesCardList';
+import ErrorStub from '@product/SavedMovies/ErrorStub/ErrorStub';
+import ErrorWrapper from '@generic/ErrorWrapper/ErrorWrapper';
 /* -------------------------------------------------------------------------- */
 
 export interface FunctionalProps {
@@ -16,22 +18,48 @@ export interface FunctionalProps {
 }
 export type Props = FunctionalProps;
 
+/**
+ * Компонент, управляющий фильмами
+ *
+ * Получает список фильмов с помощью хука
+ * Фильтрует фильмы по заданному запросу
+ * При пустом запросе выводится весь список
+ *
+ * @see useSavedMovies
+ * */
 export function MoviesManager({searchData}: Props): JSX.Element {
-  const savedMovies = useSavedMovies();
+  const [isError, setIsError] = useState(true);
+  const handleErrorReset = () => setIsError(false);
+  const handleErrorSet = () => setIsError(true);
 
-  const [filteredMovies, setFilteredMovies] = useState<MoviesList>(savedMovies.value || []);
+  const savedMovies = useSavedMovies(handleErrorSet);
+
+  const [filteredMovies, setFilteredMovies] = useState<MoviesList>(
+    savedMovies.value || [],
+  );
 
   useEffect(() => {
     if (savedMovies.value) {
-      setFilteredMovies(searchData
-        ? savedMovies.value.filter((movie) => moviesFilter(movie, searchData))
-        : savedMovies.value);
+      setFilteredMovies(
+        searchData && searchData.query !== ''
+          ? savedMovies.value.filter((movie) => moviesFilter(movie, searchData))
+          : savedMovies.value,
+      );
     }
   }, [savedMovies.value, searchData]);
 
   return (
     <PreloaderWrapper isLoading={savedMovies.isLoading}>
-      <MoviesCardList moviesList={filteredMovies} onDelete={savedMovies.deleteMovie} />
+      <ErrorWrapper
+        isError={isError}
+        onReset={handleErrorReset}
+        fallback={ErrorStub}
+      >
+        <MoviesCardList
+          moviesList={filteredMovies}
+          onDelete={savedMovies.deleteMovie}
+        />
+      </ErrorWrapper>
     </PreloaderWrapper>
   );
 }

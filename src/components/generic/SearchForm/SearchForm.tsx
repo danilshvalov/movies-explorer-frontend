@@ -1,10 +1,11 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import React, {useState} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import CheckBox from '@generic/CheckBox/CheckBox';
 import SearchField from '@generic/SearchField/SearchField';
 import Button from '@generic/Button/Button';
 import List from '@generic/List/List';
+import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
 /* ---------------------------------- Types --------------------------------- */
 import {OnSearchFunc, Theme} from 'types/types';
 /* ---------------------------------- Texts --------------------------------- */
@@ -17,6 +18,7 @@ export interface SearchFormProps<T>
   /** Изначальное состояние формы */
   defaultChecked?: boolean;
   onSearch: OnSearchFunc<T>;
+  canBeEmpty?: boolean;
 }
 
 /** Поисковая форма */
@@ -28,27 +30,29 @@ function SearchForm<T>({
 }: SearchFormProps<T>): JSX.Element {
   const cn = createCn('search-form', className);
 
-  const [fieldQuery, setFieldQuery] = React.useState('');
-  const [isChecked, setChecked] = React.useState(defaultChecked);
+  const [fieldQuery, setFieldQuery] = useState('');
+  const [isChecked, setIsChecked] = useState(defaultChecked);
+  const [errorMessage, setErrorMessage] = useState('');
 
   /** Handlers */
   const handleCheckboxChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(target.checked);
+    setIsChecked(target.checked);
   };
 
   const handleFieldInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setFieldQuery(evt.target.value);
+    setErrorMessage('');
   };
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (fieldQuery !== '') {
+    if (fieldQuery !== '' || props.canBeEmpty) {
       onSearch({isChecked, query: fieldQuery});
     } else {
-      // TODO добавить ошибку
+      setErrorMessage(TEXTS.emptyFieldError);
     }
   };
 
@@ -60,7 +64,6 @@ function SearchForm<T>({
           className={cn('field')}
           placeholder={TEXTS.field.placeholder}
           onInput={handleFieldInput}
-          isError={true}
         >
           {/** Start-кнопка */}
           <Button className={cn('start-button')} theme={Theme.Azure}>
@@ -76,6 +79,9 @@ function SearchForm<T>({
           onChange={handleCheckboxChange}
         />
       </List>
+      <ErrorMessage className={cn('error-message')}>
+        {errorMessage}
+      </ErrorMessage>
     </form>
   );
 }

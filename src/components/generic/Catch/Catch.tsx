@@ -5,6 +5,7 @@ export type ErrorHandlingComponent<Props> = React.ComponentType<Props & {error?:
 
 type ErrorState = {error?: Error};
 
+// REMOVE
 export function Catch<Props>(
   Component: ErrorHandlingComponent<Props>,
   errorHandler?: ErrorHandler,
@@ -15,6 +16,7 @@ export function Catch<Props>(
     };
 
     componentDidCatch(error: Error, info: React.ErrorInfo) {
+      console.log('ERROR', error);
       if (errorHandler) {
         errorHandler(error, info);
       }

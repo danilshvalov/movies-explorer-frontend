@@ -26,6 +26,7 @@ export interface IMovie {
   isSaved: boolean;
 }
 
+/* ---------------------------------- With ---------------------------------- */
 export interface WithMoviesList {
   moviesList: MoviesList;
 }
@@ -39,10 +40,16 @@ export interface WithTheme {
   theme?: Theme;
 }
 
+// TODO // REMOVE
 export interface WithApiInteraction {
   APIError: string;
   isProcessing: boolean;
 }
+
+export interface WithLoading {
+  isLoading?: boolean;
+}
+/* -------------------------------------------------------------------------- */
 
 export interface ILink {
   name: string;
@@ -138,4 +145,5 @@ export type OnLogoutFunc = () => void;
 export type OnSaveFunc<T, U = T> = ApiCallback<T, U>;
 export type OnSearchFunc<T> = (data: SearchData) => T;
 export type OnDeleteFunc<T, U = T> = ApiCallback<T, U>;
+export type OnErrorFunc = (err: Error) => any;
 /* -------------------------------------------------------------------------- */

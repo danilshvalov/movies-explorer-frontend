@@ -26,7 +26,6 @@ export function useAllMovies(): ReturnType {
     }
   }, [error]);
 
-  // TODO как обрабатывается ошибка?
   useEffect(() => {
     moviesApi
       .getMoviesList()

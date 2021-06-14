@@ -10,6 +10,7 @@
 
 .search-form__list {
   display: grid;
+  margin-bottom: 30px;
   border-radius: 9px;
   box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
   grid-template-columns: 7fr 1fr;
@@ -32,6 +33,13 @@
 }
 
 /* ----------------------------------------------------------------------- */
+
+.search-form__error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
 
 .search-form__field {
   padding: 3px 19px 3px 30px;
@@ -98,6 +106,7 @@
   }
 
   .search-form__list {
+    margin-bottom: 5px;
     box-shadow: none;
     gap: 25px;
     grid-template-columns: 3fr;

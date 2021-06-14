@@ -1,16 +1,18 @@
+/* eslint-disable import/no-duplicates */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-return-assign */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
-  useState,
-  useEffect,
-  useCallback,
-  Dispatch,
-  SetStateAction,
+  useState, useCallback, Dispatch, SetStateAction,
 } from 'react';
 /* ---------------------------------- Utils --------------------------------- */
 import mainApi from '@utils/api/MainApi';
 /* ---------------------------------- Types --------------------------------- */
-import {IMovie, MoviesList} from 'types/types';
+import {IMovie, MoviesList, OnErrorFunc} from 'types/types';
 /* ---------------------------------- Hooks --------------------------------- */
+import {useEffect} from 'react';
 import useLocalStorage from './UseLocalStorage';
+import useAsync from './UseAsync';
 /* -------------------------------------------------------------------------- */
 
 export interface ReturnType {
@@ -29,27 +31,28 @@ export interface ReturnType {
  *
  * @see mainApi
  */
-export function useSavedMovies(): ReturnType {
+export function useSavedMovies(errorHandler: OnErrorFunc): ReturnType {
   const [value, setValue] = useLocalStorage<MoviesList>('saved-movies');
-  const [isLoading, setIsLoading] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    mainApi
-      .getSavedMovies()
-      .then((movies) => setValue(movies))
-      .finally(() => setIsLoading(false));
+    mainApi.getSavedMovies().then(setValue).catch(errorHandler);
   }, []);
 
   const saveMovie = useCallback(
-    (data: IMovie) => mainApi.saveMovie(data).then((movie) => {
-      setValue((old) => {
-        if (old) {
-          return [...old, movie];
-        }
-        return [movie];
-      });
-      return movie;
-    }),
+    (data: IMovie) => mainApi
+      .saveMovie(data)
+      .then((movie) => {
+        setValue((old) => {
+          if (old) {
+            return [...old, movie];
+          }
+          return [movie];
+        });
+        return movie;
+      })
+      .catch(errorHandler),
     [value, setValue],
   );
 
@@ -59,16 +62,19 @@ export function useSavedMovies(): ReturnType {
      * Если это не так - нарушена логика формирования карточки => нарушен контракт
      */
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    (data: IMovie) => mainApi.deleteMovie(data._id!).then((movie) => {
-      setValue((old) => old?.filter((val: IMovie) => {
-        if (val._id && movie._id) {
-          return val._id !== movie._id;
-        }
-        return false;
-      }));
+    (data: IMovie) => mainApi
+      .deleteMovie(data._id!)
+      .then((movie) => {
+        setValue((old) => old?.filter((val: IMovie) => {
+          if (val._id && movie._id) {
+            return val._id !== movie._id;
+          }
+          return false;
+        }));
 
-      return movie;
-    }),
+        return movie;
+      })
+      .catch(errorHandler),
     [value, setValue],
   );
 
@@ -86,7 +92,9 @@ export function useSavedMovies(): ReturnType {
     setValue,
     isLoading,
     containsMovie,
+    // @ts-ignore
     saveMovie,
+    // @ts-ignore
     deleteMovie,
   };
 }

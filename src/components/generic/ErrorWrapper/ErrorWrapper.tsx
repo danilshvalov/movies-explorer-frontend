@@ -1,42 +1,23 @@
-/* eslint-disable max-len */
-import React from 'react';
+import React, {PropsWithChildren, ComponentType} from 'react';
 
-export interface ErrorWrapperProps {
-  fallback: JSX.Element;
+export interface FallbackComponentProps {
+  isError?: boolean;
+  onReset?: () => void;
 }
 
-export interface State {
-  error: any;
-  errorInfo: any;
+export interface FunctionalProps extends FallbackComponentProps {
+  fallback: ComponentType<FallbackComponentProps>;
 }
+export type Props = PropsWithChildren<FunctionalProps>;
 
-class ErrorWrapper extends React.Component<ErrorWrapperProps, State> {
-  constructor(props: any) {
-    super(props);
-    this.state = {error: null, errorInfo: null};
-  }
-
-  componentDidCatch(error: any, errorInfo: any) {
-    // Catch errors in any components below and re-render with error message
-    this.setState({
-      error,
-      errorInfo,
-    });
-    // You can also log error messages to an error reporting service here
-  }
-
-  handleReset() {
-    this.setState({error: null, errorInfo: null});
-  }
-
-  render() {
-    if (this.state.errorInfo) {
-      // Error path
-      return this.props.fallback;
-    }
-    // Normally, just render children
-    return this.props.children;
-  }
+export function ErrorWrapper({isError, onReset, ...props}: Props): JSX.Element {
+  return (
+    <>
+      {isError
+        ? React.createElement(props.fallback, {isError, onReset})
+        : props.children}
+    </>
+  );
 }
 
 export default ErrorWrapper;

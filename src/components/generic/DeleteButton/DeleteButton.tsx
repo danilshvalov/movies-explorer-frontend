@@ -12,9 +12,17 @@ export type RefType = GenericButton.RefType;
  * Кнопка удаления
  *
  * Обёртка над [обычной кнопкой]{@link Button} с картинкой крестика */
-const DeleteButton = forwardRef<RefType, DeleteButtonProps>(({className, ...props}, ref) => {
-  const cn = createCn('delete-button', className);
-  return <GenericButton.Button {...props} ref={ref} className={cn()} />;
-});
+const DeleteButton = forwardRef<RefType, DeleteButtonProps>(
+  ({className, ...props}, ref) => {
+    const cn = createCn('delete-button', className);
+    return (
+      <GenericButton.Button
+        {...props}
+        ref={ref}
+        className={cn({loading: props.isLoading ?? false})}
+      />
+    );
+  },
+);
 
 export default DeleteButton;

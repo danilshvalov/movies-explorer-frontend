@@ -26,6 +26,7 @@ export function SavedMovies({className, ...props}: Props): JSX.Element {
         className={cn('search-form')}
         onSearch={setSearchData}
         defaultChecked={defaultChecked}
+        canBeEmpty
       />
       <MoviesManager searchData={searchData} />
     </section>

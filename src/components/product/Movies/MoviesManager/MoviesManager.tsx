@@ -10,6 +10,8 @@ import {MoviesList, SearchData} from 'types/types';
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/Movies/MoviesCardList/MoviesCardList';
+import ErrorStub from '@product/Movies/ErrorStub/ErrorStub';
+import ErrorWrapper from '@generic/ErrorWrapper/ErrorWrapper';
 /* -------------------------------------------------------------------------- */
 
 export interface FunctionalProps {
@@ -22,17 +24,20 @@ export type Props = FunctionalProps;
  *
  * Получает списки фильмов с помощью хуков
  * Фильтрует фильмы по заданному запросу
+ * Пустой запрос считается некорректным
  *
  * @see useAllMovies
  * @see useSavedMovies
  * */
 function MoviesManager({searchData}: Props): JSX.Element {
-  const allMovies = useAllMovies();
-  const savedMovies = useSavedMovies();
-
-  const [filteredMovies, setFilteredMovies] = useState<MoviesList>([]);
+  const [isError, setIsError] = useState(false);
+  const handleErrorReset = () => setIsError(false);
+  const handleErrorSet = () => setIsError(true);
 
   const [isLoading, setIsLoading] = useState(true);
+  const allMovies = useAllMovies();
+  const savedMovies = useSavedMovies(handleErrorSet);
+  const [filteredMovies, setFilteredMovies] = useState<MoviesList>([]);
 
   useEffect(() => {
     setIsLoading(allMovies.isLoading || savedMovies.isLoading);
@@ -60,11 +65,17 @@ function MoviesManager({searchData}: Props): JSX.Element {
 
   return (
     <PreloaderWrapper isLoading={isLoading}>
-      <MoviesCardList
-        onSave={savedMovies.saveMovie}
-        onDelete={savedMovies.deleteMovie}
-        moviesList={filteredMovies}
-      />
+      <ErrorWrapper
+        isError={isError}
+        onReset={handleErrorReset}
+        fallback={ErrorStub}
+      >
+        <MoviesCardList
+          onSave={savedMovies.saveMovie}
+          onDelete={savedMovies.deleteMovie}
+          moviesList={filteredMovies}
+        />
+      </ErrorWrapper>
     </PreloaderWrapper>
   );
 }
