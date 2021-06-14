@@ -1,3 +1,4 @@
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {createCn} from 'bem-react-classname';
 import React, {useState} from 'react';
 /* -------------------------------- Generics -------------------------------- */
@@ -57,7 +58,7 @@ function SearchForm<T>({
   };
 
   return (
-    <form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
+    <form {...filterInvalidDOMProps(props)} className={cn()} onSubmit={handleSubmit} noValidate>
       <List className={cn('list')} itemClassName={cn('list-item')}>
         {/** Поле поиска */}
         <SearchField

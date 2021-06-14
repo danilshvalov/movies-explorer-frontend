@@ -33,12 +33,12 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
     if (!isSaved) {
       props
         .onSave(movie)
-        .then((old) => setIsSaved(!old))
+        .then(() => setIsSaved((old) => !old))
         .finally(() => setIsLoading(false));
     } else {
       props
         .onDelete(movie)
-        .then((old) => setIsSaved(!old))
+        .then(() => setIsSaved((old) => !old))
         .finally(() => setIsLoading(false));
     }
   }
@@ -53,6 +53,7 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
       <SaveButton
         className={cn('button', {hidden: !isHovered && !isSaved})}
         onClick={handleClick}
+        checked={isSaved}
       >
         {isLoading ? TEXTS.button.loadingText : TEXTS.button.text}
       </SaveButton>

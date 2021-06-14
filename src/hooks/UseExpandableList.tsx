@@ -60,6 +60,7 @@ export function useExpandableList<T>(
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  /** Выравнивание при изменении шага */
   useEffect(() => {
     if (storedValue && currentCount < storedValue.length) {
       expand();
@@ -72,13 +73,10 @@ export function useExpandableList<T>(
 
   useEffect(() => {
     setIsComplete(
-      (storedValue && currentCount >= storedValue.length) as boolean,
+      (storedValue && storedValue.length <= currentCount) ?? true,
     );
-  }, [currentCount]);
+  }, [currentCount, storedValue]);
 
-  useEffect(() => {
-    reset();
-  }, [storedValue]);
   /* -------------------------------------------------------------------------- */
 
   return {

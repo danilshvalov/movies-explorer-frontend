@@ -1,3 +1,4 @@
+import {INTERNAL_SERVER} from '../../texts/api';
 import {HTTPMethod} from '../../types/types';
 import ApiError from '../../errors/ApiError';
 
@@ -23,6 +24,14 @@ export interface InitApiData {
   /** Включаемые header'ы */
   defaultHeaders?: HeadersInit;
   settings?: RequestInit;
+}
+
+function errorParser(err: any) {
+  if (err instanceof ApiError) {
+    throw err;
+  }
+  const {message, status} = INTERNAL_SERVER;
+  throw new ApiError(message, status);
 }
 
 /** Базовый класс для API */
@@ -55,14 +64,18 @@ class Api {
       ...this.settings,
       method,
       headers: this.defaultHeaders,
-      body: JSON.stringify(body),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+      body,
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
 
-      throw new ApiError(res);
-    });
+        return res.json().then((errBody) => {
+          throw new ApiError(errBody.message, res.status);
+        });
+      })
+      .catch(errorParser);
   }
 }
 export default Api;

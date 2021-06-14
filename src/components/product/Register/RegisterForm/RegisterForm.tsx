@@ -11,6 +11,8 @@ import useFormWithValidation from '@hooks/UseFormWithValidation';
 import {REGISTER} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
 import {OnRegisterFunc, Theme} from 'types/types';
+/* --------------------------------- Errors --------------------------------- */
+import ApiError from 'errors/ApiError';
 /* -------------------------------------------------------------------------- */
 import './RegisterForm.css';
 
@@ -32,11 +34,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
   }
 
   const {
-    values,
-    handleChange,
-    errors,
-    isValid,
-    isFieldValid,
+    values, handleChange, errors, isValid, isFieldValid,
   } = useFormWithValidation({
     nameInput: '',
     emailInput: '',
@@ -45,6 +43,10 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
 
   const [APIError, setAPIError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+
+  function handleAPIError(err: ApiError) {
+    setAPIError(err.message);
+  }
 
   const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
@@ -60,13 +62,17 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
         email: values.emailInput as string,
         password: values.passwordInput as string,
       })
-        .catch(setAPIError)
+        .catch(handleAPIError)
         .finally(() => setIsProcessing(false));
     }
   };
-
   return (
-    <GenericForm.Form {...props} className={cn()} onSubmit={handleSubmit} noValidate>
+    <GenericForm.Form
+      {...props}
+      className={cn()}
+      onSubmit={handleSubmit}
+      noValidate
+    >
       <fieldset className={cn('fieldset')}>
         {/** Поле с именем */}
 
@@ -77,12 +83,14 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               className={cn('field')}
               name={Fields[Fields.nameInput]}
               onChange={handleChange}
-              minLength={2}
+              // minLength={2}
               isError={!isFieldValid('nameInput')}
               required
             />
           </div>
-          <ErrorMessage className={cn('field-error')}>{errors.nameInput}</ErrorMessage>
+          <ErrorMessage className={cn('field-error')}>
+            {errors.nameInput}
+          </ErrorMessage>
         </div>
 
         {/** Поле с Email */}
@@ -98,7 +106,9 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               required
             />
           </div>
-          <ErrorMessage className={cn('field-error')}>{errors.emailInput}</ErrorMessage>
+          <ErrorMessage className={cn('field-error')}>
+            {errors.emailInput}
+          </ErrorMessage>
         </div>
 
         {/** Поле с паролем */}
@@ -115,18 +125,23 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               required
             />
           </div>
-          <ErrorMessage className={cn('field-error')}>{errors.passwordInput}</ErrorMessage>
+          <ErrorMessage className={cn('field-error')}>
+            {errors.passwordInput}
+          </ErrorMessage>
         </div>
       </fieldset>
 
       {/** Кнопка отправки формы */}
       <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
-      <Button className={cn('submit-button')} type="submit" disabled={isValid} theme={Theme.Azure}>
-        {
-          isProcessing
-            ? texts.submitButton.loadingText
-            : texts.submitButton.text
-        }
+      <Button
+        className={cn('submit-button')}
+        type="submit"
+        disabled={!isValid}
+        theme={Theme.Azure}
+      >
+        {isProcessing
+          ? texts.submitButton.loadingText
+          : texts.submitButton.text}
       </Button>
     </GenericForm.Form>
   );

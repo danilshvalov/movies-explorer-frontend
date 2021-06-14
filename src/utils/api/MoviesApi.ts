@@ -5,7 +5,7 @@ import {parseImage} from '../utils';
 
 // TODO ...
 type MovieData = {
-  movieId: number;
+  id: number;
   nameRU: string;
   nameEN: string;
   director: string;
@@ -24,8 +24,11 @@ type MovieData = {
   };
 };
 
-function parseMovieData({image, trailerLink, ...data}: MovieData): IMovie {
+function parseMovieData({
+  image, trailerLink, id, ...data
+}: MovieData): IMovie {
   return {
+    movieId: id,
     thumbnail: parseImage(image?.formats.thumbnail.url),
     image: parseImage(image?.url),
     trailer: trailerLink,

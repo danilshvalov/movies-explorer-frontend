@@ -11,7 +11,7 @@ import {REGISTER as TEXTS} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
 import {OnRegisterFunc} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
-import RegisterForm from '@product/RegisterForm/RegisterForm';
+import RegisterForm from '@product/Register/RegisterForm/RegisterForm';
 /* -------------------------------------------------------------------------- */
 import './Register.css';
 

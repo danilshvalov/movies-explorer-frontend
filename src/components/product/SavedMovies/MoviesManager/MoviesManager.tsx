@@ -28,7 +28,7 @@ export type Props = FunctionalProps;
  * @see useSavedMovies
  * */
 export function MoviesManager({searchData}: Props): JSX.Element {
-  const [isError, setIsError] = useState(true);
+  const [isError, setIsError] = useState(false);
   const handleErrorReset = () => setIsError(false);
   const handleErrorSet = () => setIsError(true);
 

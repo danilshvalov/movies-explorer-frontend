@@ -14,7 +14,7 @@ export function ErrorMessage({
   ...props
 }: ErrorMessageProps): JSX.Element {
   const cn = createCn('error-message', className);
-  return <span className={cn()}>{props.children}</span>;
+  return <span className={cn()} title={props.children as string}>{props.children}</span>;
 }
 
 export default ErrorMessage;

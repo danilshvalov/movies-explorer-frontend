@@ -5,13 +5,16 @@ import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
 import useAllMovies from '@hooks/UseAllMovies';
 import useSavedMovies from '@hooks/UseSavedMovies';
 /* ---------------------------------- Types --------------------------------- */
-import {MoviesList, SearchData} from 'types/types';
+import {IMovie, SearchData} from 'types/types';
 /* ---------------------------------- Utils --------------------------------- */
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/Movies/MoviesCardList/MoviesCardList';
 import ErrorStub from '@product/Movies/ErrorStub/ErrorStub';
 import ErrorWrapper from '@generic/ErrorWrapper/ErrorWrapper';
+import useExpandableList from '@hooks/UseExpandableList';
+import {DEVICES_WIDTHS, MOVIES_AMOUNT_BY_DEVICE} from '@utils/config';
+import getDeviceType from '@utils/device-type';
 /* -------------------------------------------------------------------------- */
 
 export interface FunctionalProps {
@@ -30,6 +33,8 @@ export type Props = FunctionalProps;
  * @see useSavedMovies
  * */
 function MoviesManager({searchData}: Props): JSX.Element {
+  const {startCount} = MOVIES_AMOUNT_BY_DEVICE[getDeviceType(DEVICES_WIDTHS)];
+
   const [isError, setIsError] = useState(false);
   const handleErrorReset = () => setIsError(false);
   const handleErrorSet = () => setIsError(true);
@@ -37,7 +42,31 @@ function MoviesManager({searchData}: Props): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
   const allMovies = useAllMovies();
   const savedMovies = useSavedMovies(handleErrorSet);
-  const [filteredMovies, setFilteredMovies] = useState<MoviesList>([]);
+  const filteredMovies = useExpandableList<IMovie>(
+    {
+      startCount,
+      deviceSettings: DEVICES_WIDTHS,
+      countSettings: MOVIES_AMOUNT_BY_DEVICE,
+    },
+    allMovies.value,
+  );
+
+  function handleSave(data: IMovie): Promise<IMovie> {
+    return savedMovies.saveMovie(data).then((movie) => {
+      allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId //
+        ? {...movie, isSaved: true}
+        : val)));
+      return movie;
+    });
+  }
+
+  function handleDelete(data: IMovie): Promise<IMovie> {
+    return savedMovies.deleteMovie(data).then(() => {
+      allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId //
+        ? {...data, isSaved: false} : val)));
+      return data;
+    });
+  }
 
   useEffect(() => {
     setIsLoading(allMovies.isLoading || savedMovies.isLoading);
@@ -45,23 +74,23 @@ function MoviesManager({searchData}: Props): JSX.Element {
 
   useEffect(() => {
     if (allMovies.value && savedMovies.value) {
-      setFilteredMovies(
+      filteredMovies.setValue(
         allMovies.value
           .filter((movie) => moviesFilter(movie, searchData))
           .map((movie) => {
             if (savedMovies.value) {
-              return {
-                ...movie,
-                isSaved: savedMovies.value.some(
-                  (other) => movie.movieId === other.movieId,
-                ),
-              };
+              const same = savedMovies.value.find(
+                (other) => movie.movieId === other.movieId,
+              );
+              return same
+                ? {...movie, isSaved: true, _id: same._id}
+                : {...movie, isSaved: false};
             }
             return {...movie, isSaved: false};
           }),
       );
     }
-  }, [allMovies.value, savedMovies.value, searchData]);
+  }, [searchData, allMovies.value, savedMovies.value]);
 
   return (
     <PreloaderWrapper isLoading={isLoading}>
@@ -71,9 +100,12 @@ function MoviesManager({searchData}: Props): JSX.Element {
         fallback={ErrorStub}
       >
         <MoviesCardList
-          onSave={savedMovies.saveMovie}
-          onDelete={savedMovies.deleteMovie}
-          moviesList={filteredMovies}
+          onSave={handleSave}
+          onDelete={handleDelete}
+          /** Preloader не даст загрузиться несуществующему списку */
+          moviesList={filteredMovies.value || []}
+          isComplete={filteredMovies.isComplete}
+          onExpand={filteredMovies.expand}
         />
       </ErrorWrapper>
     </PreloaderWrapper>

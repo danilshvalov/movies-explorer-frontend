@@ -1,5 +1,6 @@
 .register-form {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -13,8 +14,13 @@
 }
 
 .register-form__fieldset {
+  min-width: 0;
   border: 0;
-  margin-bottom: 131px;
+}
+
+.register-form__container {
+  display: flex;
+  flex-direction: column;
 }
 
 .register-form__label {
@@ -32,16 +38,22 @@
   font-weight: 500;
   line-height: 17px;
 }
+.register-form__field-error {
+}
+.register-form__submit-error {
+  font-size: 14px;
+  text-align: center;
+}
 
 @media screen and (max-width: 768px) {
   .register-form__fieldset {
-    margin-bottom: 132px;
+    /* margin-bottom: 132px; */
   }
 }
 
 @media screen and (max-width: 460px) {
   .register-form__fieldset {
-    margin-bottom: 220px;
+    /* margin-bottom: 220px; */
   }
 
   .register-form__submit-button {
