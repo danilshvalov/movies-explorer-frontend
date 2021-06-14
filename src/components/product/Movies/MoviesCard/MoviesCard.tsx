@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {createCn} from 'bem-react-classname';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
@@ -27,6 +27,10 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
   const [isSaved, setIsSaved] = useState(props.isSaved);
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    console.log(isLoading);
+  }, [isLoading]);
+
   function handleClick() {
     setIsLoading(true);
     const movie = {...(props as IMovie), isSaved: !isSaved};
@@ -54,6 +58,7 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
         className={cn('button', {hidden: !isHovered && !isSaved})}
         onClick={handleClick}
         checked={isSaved}
+        isLoading={isLoading}
       >
         {isLoading ? TEXTS.button.loadingText : TEXTS.button.text}
       </SaveButton>

@@ -1,6 +1,7 @@
 import {createCn} from 'bem-react-classname';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericList from '@generic/List/List';
+import NothingFoundStub from '@generic/NothingFoundStub/NothingFoundStub';
 /* ---------------------------------- Types --------------------------------- */
 import {WithMoviesList} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
@@ -16,7 +17,7 @@ export type Props = DOMProps & FunctionalProps & DataProps;
 export function MoviesCardList({moviesList, ...props}: Props): JSX.Element {
   const cn = createCn('save-movies-list', props.className);
 
-  return (
+  const CardListMarkup = () => (
     <GenericList.List {...props} className={cn()}>
       {moviesList.map((movie) => (
         <Card.MoviesCard
@@ -28,6 +29,12 @@ export function MoviesCardList({moviesList, ...props}: Props): JSX.Element {
       ))}
     </GenericList.List>
   );
+
+  const EmptyStubMarkup = () => (
+    <NothingFoundStub className={cn('nothing-stub')} />
+  );
+
+  return moviesList.length === 0 ? <EmptyStubMarkup /> : <CardListMarkup />;
 }
 
 export default MoviesCardList;

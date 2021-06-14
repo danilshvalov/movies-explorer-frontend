@@ -61,22 +61,19 @@ export function useSavedMovies(errorHandler: OnErrorFunc): ReturnType {
      * Если это не так - нарушена логика формирования карточки
      */
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    (data: IMovie) => {
-      console.log('DELETE DATA: ', data);
-      return mainApi
-        .deleteMovie(data._id!)
-        .then((movie) => {
-          setValue((old) => old?.filter((val: IMovie) => {
-            if (val._id && movie._id) {
-              return val._id !== movie._id;
-            }
-            return false;
-          }));
+    (data: IMovie) => mainApi
+      .deleteMovie(data._id!)
+      .then((movie) => {
+        setValue((old) => old?.filter((val: IMovie) => {
+          if (val._id && movie._id) {
+            return val._id !== movie._id;
+          }
+          return false;
+        }));
 
-          return movie;
-        })
-        .catch(errorHandler);
-    },
+        return movie;
+      })
+      .catch(errorHandler),
     [value, setValue],
   );
 

@@ -83,9 +83,11 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               className={cn('field')}
               name={Fields[Fields.nameInput]}
               onChange={handleChange}
+              // TODO вернуть после тестирования
               // minLength={2}
               isError={!isFieldValid('nameInput')}
               required
+              disabled={isProcessing}
             />
           </div>
           <ErrorMessage className={cn('field-error')}>
@@ -104,6 +106,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               isError={!isFieldValid('emailInput')}
               type="email"
               required
+              disabled={isProcessing}
             />
           </div>
           <ErrorMessage className={cn('field-error')}>
@@ -123,6 +126,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               isError={!isFieldValid('passwordInput')}
               type="password"
               required
+              disabled={isProcessing}
             />
           </div>
           <ErrorMessage className={cn('field-error')}>
@@ -136,7 +140,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
       <Button
         className={cn('submit-button')}
         type="submit"
-        disabled={!isValid}
+        disabled={!isValid || isProcessing}
         theme={Theme.Azure}
       >
         {isProcessing

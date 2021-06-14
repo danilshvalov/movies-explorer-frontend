@@ -2,6 +2,7 @@ import {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
 import Button from '@generic/Button/Button';
 import * as GenericList from '@generic/List/List';
+import NothingFoundStub from '@generic/NothingFoundStub/NothingFoundStub';
 /* ---------------------------------- Types --------------------------------- */
 import {IMovie, Theme, WithMoviesList} from 'types/types';
 /* ---------------------------------- Texts --------------------------------- */
@@ -30,8 +31,9 @@ function MoviesCardList({
   const cn = createCn('all-movies-list');
 
   /** Кнопка, появляющаяся при возможности добавления карточек */
-  function OptionalMoreButton() {
-    return isComplete ? null : (
+  const OptionalMoreButton = (): JSX.Element => (isComplete ? (
+      <></>
+  ) : (
       <Button
         className={cn('more-button')}
         onClick={onExpand}
@@ -39,10 +41,9 @@ function MoviesCardList({
       >
         {TEXTS.moreButton.text}
       </Button>
-    );
-  }
+  ));
 
-  return (
+  const CardListMarkup = (): JSX.Element => (
     <>
       <GenericList.List {...props} className={cn()} itemClassName={cn('card')}>
         {moviesList.map((data) => (
@@ -57,6 +58,10 @@ function MoviesCardList({
       <OptionalMoreButton />
     </>
   );
+
+  const EmptyStubMarkup = (): JSX.Element => <NothingFoundStub className={cn('nothing-stub')} />;
+
+  return moviesList.length === 0 ? <EmptyStubMarkup /> : <CardListMarkup />;
 }
 
 export default MoviesCardList;

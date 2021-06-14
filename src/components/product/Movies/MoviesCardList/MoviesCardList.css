@@ -13,6 +13,13 @@
   align-items: center;
 }
 
+.all-movies-list__nothing-stub {
+  display: flex;
+  width: 35%;
+  justify-content: center;
+  margin-top: 60px;
+}
+
 .all-movies-list__more-button {
   width: 100%;
   padding: 10px 0;

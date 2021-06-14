@@ -53,6 +53,7 @@ export function ProfileForm({
   const [APIError, setAPIError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isFormValid, setIsFormValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   /**
    * HTML-текст, появляющийся при наведении на кнопку submit
@@ -78,6 +79,9 @@ export function ProfileForm({
         .finally(() => setIsProcessing(false));
     }
   };
+  useEffect(() => {
+    setIsLoading(currentUser.isLoading ?? true);
+  }, [currentUser.isLoading]);
 
   useEffect(() => {
     function checkIsChanged(): boolean {
@@ -100,15 +104,6 @@ export function ProfileForm({
 
   // ----------------------------------------------
 
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    if (currentUser.isLoading !== undefined) {
-      setIsLoading(currentUser.isLoading);
-    } else {
-      setIsLoading(true);
-    }
-  }, [currentUser.isLoading]);
-
   return (
     <PreloaderWrapper isLoading={isLoading}>
       <GenericForm.Form
@@ -128,6 +123,7 @@ export function ProfileForm({
                 onChange={handleChange}
                 minLength={2}
                 isError={!isFieldValid('nameInput')}
+                disabled={isProcessing}
                 required
                 defaultValue={values.nameInput || ''}
               />
@@ -148,6 +144,7 @@ export function ProfileForm({
                 type="email"
                 isError={!isFieldValid('emailInput')}
                 required
+                disabled={isProcessing}
                 defaultValue={values.emailInput || ''}
               />
             </div>
@@ -162,7 +159,7 @@ export function ProfileForm({
         <Button
           className={cn('submit-button')}
           type="submit"
-          disabled={!isFormValid}
+          disabled={!isFormValid || isProcessing}
           title={hoverButtonText}
         >
           {

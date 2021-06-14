@@ -12,6 +12,13 @@
   overflow: hidden;
 }
 
+.save-movies-list__nothing-stub {
+  display: flex;
+  width: 35%;
+  justify-content: center;
+  margin-top: 60px;
+}
+
 @media screen and (max-width: 768px) {
   .save-movies-list {
     grid-template-columns: 1fr 1fr;

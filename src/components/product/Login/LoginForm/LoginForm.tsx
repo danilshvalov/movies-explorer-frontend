@@ -77,6 +77,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
               isError={!isFieldValid('emailInput')}
               type="email"
               required
+              disabled={isProcessing}
             />
           </div>
           <ErrorMessage className={cn('field-error')}>
@@ -96,6 +97,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
               isError={!isFieldValid('passwordInput')}
               type="password"
               required
+              disabled={isProcessing}
             />
           </div>
           <ErrorMessage className={cn('field-error')}>
@@ -109,7 +111,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
       <Button
         className={cn('submit-button')}
         type="submit"
-        disabled={!isValid}
+        disabled={!isValid || isProcessing}
         theme={Theme.Azure}
       >
         {
