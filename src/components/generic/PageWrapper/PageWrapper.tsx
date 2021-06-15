@@ -1,6 +1,6 @@
-import Footer from '@generic/Footer/Footer';
+import React, {PropsWithChildren, ReactFragment} from 'react';
+import Footer from '@product/Footer/Footer';
 import Header from '@product/Header/Header';
-import {PropsWithChildren, ReactFragment} from 'react';
 
 export function PageWrapper(
   props: PropsWithChildren<ReactFragment>,

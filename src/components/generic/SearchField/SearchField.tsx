@@ -39,6 +39,9 @@ const SearchField = React.forwardRef<RefType, SearchFieldProps>(
       </div>
     );
   },
+
 );
+
+SearchField.displayName = 'SearchField';
 
 export default SearchField;

@@ -1,45 +1,45 @@
 import {
-  Dispatch, SetStateAction, useEffect, useState,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
 } from 'react';
 /* ---------------------------------- Utils --------------------------------- */
 import moviesApi from '@utils/api/MoviesApi';
 /* ---------------------------------- Types --------------------------------- */
-import {MoviesList} from 'types/types';
+import {MoviesList, OnErrorFunc} from 'types/types';
 /* -------------------------------------------------------------------------- */
 
 export interface ReturnType {
   value?: MoviesList;
   setValue: Dispatch<SetStateAction<MoviesList | undefined>>;
   isLoading: boolean;
+  retry: () => void;
 }
 
-export function useAllMovies(): ReturnType {
+export function useAllMovies(errorHandler: OnErrorFunc): ReturnType {
   const [value, setValue] = useState<MoviesList>();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error>();
 
-  useEffect(() => {
-    if (error) {
-      const copy = error;
-      setError(undefined);
-      throw copy;
-    }
-  }, [error]);
-
-  useEffect(() => {
+  const retry = useCallback(() => {
+    setIsLoading(true);
     moviesApi
       .getMoviesList()
       .then((movies) => setValue(movies))
-      .catch((err) => {
-        setError(err);
-      })
+      .catch(errorHandler)
       .finally(() => setIsLoading(false));
+  }, [setValue, setIsLoading]);
+
+  useEffect(() => {
+    retry();
   }, []);
 
   return {
     value,
     setValue,
     isLoading,
+    retry,
   };
 }
 

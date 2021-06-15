@@ -1,17 +1,20 @@
-import {useState, HTMLAttributes} from 'react';
+import React, {useState, HTMLAttributes} from 'react';
 import {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
 import PageWrapper from '@generic/PageWrapper/PageWrapper';
 import SearchForm from '@generic/SearchForm/SearchForm';
 /* ---------------------------------- Types --------------------------------- */
-import {SearchData} from 'types/types';
+import {OnErrorMessageFunc, SearchData} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesManager from '@product/SavedMovies/MoviesManager/MoviesManager';
 /* -------------------------------------------------------------------------- */
 import './SavedMovies.css';
 
 export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export type Props = DOMProps;
+export interface FunctionalProps {
+  onErrorMessage: OnErrorMessageFunc;
+}
+export type Props = FunctionalProps & DOMProps;
 
 /** Секция, включающая в себя список всех сохранённых фильмов и поисковую форму */
 export function SavedMovies({className, ...props}: Props): JSX.Element {
@@ -27,7 +30,10 @@ export function SavedMovies({className, ...props}: Props): JSX.Element {
         onSearch={setSearchData}
         defaultChecked={defaultChecked}
       />
-      <MoviesManager searchData={searchData} />
+      <MoviesManager
+        searchData={searchData}
+        onErrorMessage={props.onErrorMessage}
+      />
     </section>
   );
 }

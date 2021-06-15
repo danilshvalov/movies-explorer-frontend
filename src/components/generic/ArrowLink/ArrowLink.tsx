@@ -1,4 +1,4 @@
-import {createCn} from 'bem-react-classname';
+import React, {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
 import * as GenericLink from '@generic/Link/Link';
 /* --------------------------------- Imaged --------------------------------- */

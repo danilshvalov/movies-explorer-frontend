@@ -1,7 +1,8 @@
 import {Route, Switch} from 'react-router-dom';
 import {createCn} from 'bem-react-classname';
-import {useState} from 'react';
+import React, {useState} from 'react';
 /* --------------------------------- Generic -------------------------------- */
+import MessagePopup from '@generic/MessagePopup/MessagePopup';
 import ProtectedRoute from '@generic/ProtectedRoute/ProtectedRoute';
 import NotFound from '@generic/NotFound/NotFound';
 import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
@@ -18,6 +19,7 @@ import {PAGE_LINKS} from '@utils/config';
 import CurrentUserContext from '@contexts/CurrentUserContext';
 /* ---------------------------------- Hooks --------------------------------- */
 import useUser from '@hooks/UseUser';
+import useMessagePopup from '@hooks/UseMessagePopup';
 /* ---------------------------------- Types --------------------------------- */
 import {LoginUserData} from 'types/types';
 import {ProfileUserData, RegisterUserData} from 'types/User';
@@ -27,8 +29,11 @@ import './App.css';
 function App(): JSX.Element {
   const cn = createCn('page');
 
+  // TODO
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isAppLoading, setIsAppLoading] = useState(false);
+
+  const messagePopup = useMessagePopup();
 
   const currentUser = useUser();
 
@@ -48,6 +53,10 @@ function App(): JSX.Element {
     return currentUser.updateUserInfo(data);
   }
 
+  function handleErrorMessage(msg: string) {
+    messagePopup.open(msg);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <PreloaderWrapper isLoading={isAppLoading}>
@@ -57,17 +66,20 @@ function App(): JSX.Element {
 
             {/** Movies */}
             <ProtectedRoute path={PAGE_LINKS.movies}>
-              <MoviesPage />
+              <MoviesPage onErrorMessage={handleErrorMessage} />
             </ProtectedRoute>
 
             {/** SavedMovies */}
             <ProtectedRoute path={PAGE_LINKS.savedMovies}>
-              <SavedMoviesPage />
+              <SavedMoviesPage onErrorMessage={handleErrorMessage} />
             </ProtectedRoute>
 
             {/** Profile */}
             <ProtectedRoute path={PAGE_LINKS.profile}>
-              <ProfilePage onProfileUpdate={handleProfileUpdate} onLogout={handleLogout} />
+              <ProfilePage
+                onProfileUpdate={handleProfileUpdate}
+                onLogout={handleLogout}
+              />
             </ProtectedRoute>
 
             {/** Routes */}
@@ -90,6 +102,12 @@ function App(): JSX.Element {
               <NotFound />
             </Route>
           </Switch>
+
+          <MessagePopup
+            isOpen={messagePopup.isOpen}
+            message={messagePopup.message}
+            onClose={messagePopup.close}
+          />
         </div>
       </PreloaderWrapper>
     </CurrentUserContext.Provider>

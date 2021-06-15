@@ -1,9 +1,10 @@
-import {createCn} from 'bem-react-classname';
+import React, {createCn} from 'bem-react-classname';
 import {FormEvent, useState} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import Button from '@generic/Button/Button';
 import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
 import Field from '@generic/Field/Field';
+import FieldWrapper from '@generic/FieldWrapper/FieldWrapper';
 import * as GenericForm from '@generic/Form/Form';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
@@ -11,8 +12,6 @@ import useFormWithValidation from '@hooks/UseFormWithValidation';
 import {REGISTER} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
 import {OnRegisterFunc, Theme} from 'types/types';
-/* --------------------------------- Errors --------------------------------- */
-import ApiError from 'errors/ApiError';
 /* -------------------------------------------------------------------------- */
 import './RegisterForm.css';
 
@@ -27,12 +26,6 @@ export type Props = DOMProps & FunctionalProps;
 export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
   const cn = createCn('register-form', props.className);
 
-  enum Fields {
-    nameInput,
-    emailInput,
-    passwordInput,
-  }
-
   const {
     values, handleChange, errors, isValid, isFieldValid,
   } = useFormWithValidation({
@@ -44,7 +37,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
   const [APIError, setAPIError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  function handleAPIError(err: ApiError) {
+  function handleAPIError(err: Error) {
     setAPIError(err.message);
   }
 
@@ -77,11 +70,11 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
         {/** Поле с именем */}
 
         <div className={cn('container')}>
-          <div className={cn('field-wrapper')}>
+          <FieldWrapper className={cn('field-wrapper')}>
             <label className={cn('label')}>{texts.nameInput.label}</label>
             <Field
               className={cn('field')}
-              name={Fields[Fields.nameInput]}
+              name={'nameInput'}
               onChange={handleChange}
               // TODO вернуть после тестирования
               // minLength={2}
@@ -89,7 +82,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               required
               disabled={isProcessing}
             />
-          </div>
+          </FieldWrapper>
           <ErrorMessage className={cn('field-error')}>
             {errors.nameInput}
           </ErrorMessage>
@@ -97,18 +90,18 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
 
         {/** Поле с Email */}
         <div className={cn('container')}>
-          <div className={cn('field-wrapper')}>
+          <FieldWrapper className={cn('field-wrapper')}>
             <label className={cn('label')}>{texts.emailInput.label}</label>
             <Field
               className={cn('field')}
-              name={Fields[Fields.emailInput]}
+              name={'emailInput'}
               onChange={handleChange}
               isError={!isFieldValid('emailInput')}
               type="email"
               required
               disabled={isProcessing}
             />
-          </div>
+          </FieldWrapper>
           <ErrorMessage className={cn('field-error')}>
             {errors.emailInput}
           </ErrorMessage>
@@ -116,11 +109,11 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
 
         {/** Поле с паролем */}
         <div className={cn('container')}>
-          <div className={cn('field-wrapper')}>
+          <FieldWrapper className={cn('field-wrapper')}>
             <label className={cn('label')}>{texts.passwordInput.label}</label>
             <Field
               className={cn('field')}
-              name={Fields[Fields.passwordInput]}
+              name={'passwordInput'}
               onChange={handleChange}
               minLength={8}
               isError={!isFieldValid('passwordInput')}
@@ -128,7 +121,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
               required
               disabled={isProcessing}
             />
-          </div>
+          </FieldWrapper>
           <ErrorMessage className={cn('field-error')}>
             {errors.passwordInput}
           </ErrorMessage>

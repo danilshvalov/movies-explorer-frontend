@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
 import {createCn} from 'bem-react-classname';
 
 import './SectionHeader.css';
 
-export type SectionHeaderProps = React.HTMLAttributes<HTMLHeadingElement>;
+export type SectionHeaderProps = HTMLAttributes<HTMLHeadingElement>;
 
 export type RefType = HTMLHeadingElement;
 
@@ -19,5 +19,7 @@ const SectionHeader = React.forwardRef<RefType, SectionHeaderProps>(
     );
   },
 );
+
+SectionHeader.displayName = 'SectionHeader';
 
 export default SectionHeader;

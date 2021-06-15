@@ -40,12 +40,6 @@ export interface WithTheme {
   theme?: Theme;
 }
 
-// TODO // REMOVE
-export interface WithApiInteraction {
-  APIError: string;
-  isProcessing: boolean;
-}
-
 export interface WithLoading {
   isLoading?: boolean;
 }
@@ -146,4 +140,5 @@ export type OnSaveFunc<T, U = T> = ApiCallback<T, U>;
 export type OnSearchFunc<T> = (data: SearchData) => T;
 export type OnDeleteFunc<T, U = T> = ApiCallback<T, U>;
 export type OnErrorFunc = (err: Error) => any;
+export type OnErrorMessageFunc = (msg: string) => void;
 /* -------------------------------------------------------------------------- */

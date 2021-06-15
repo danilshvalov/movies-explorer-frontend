@@ -1,4 +1,4 @@
-import {createCn} from 'bem-react-classname';
+import React, {createCn} from 'bem-react-classname';
 import {HTMLAttributes} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* --------------------------------- Generic -------------------------------- */

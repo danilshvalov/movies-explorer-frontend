@@ -1,6 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-import {forwardRef, FormHTMLAttributes} from 'react';
+import React, {forwardRef, FormHTMLAttributes} from 'react';
 /* -------------------------------------------------------------------------- */
 import './Form.css';
 
@@ -18,5 +18,7 @@ export const Form = forwardRef<RefType, Props>((props, ref) => {
     </form>
   );
 });
+
+Form.displayName = 'Form';
 
 export default Form;

@@ -1,18 +1,26 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* --------------------------------- Generics -------------------------------- */
 import CloseButton from '@generic/CloseButton/CloseButton';
 /* -------------------------------------------------------------------------- */
 import './MessagePopup.css';
 
-// TODO сделать что-то с этим чудом
-export function MessagePopup(props: React.HTMLAttributes<HTMLDivElement>) {
+export interface FunctionalProps {
+  isOpen: boolean;
+  message: string;
+  onClose: () => void;
+}
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export type Props = FunctionalProps & DOMProps;
+
+export function MessagePopup(props: Props): JSX.Element {
   const cn = createCn('message-popup', props.className);
 
   return (
-    <div className={cn()}>
-      <CloseButton className={cn('close-button')} />
-      {props.children}
+    <div {...filterInvalidDOMProps(props)} className={cn({opened: props.isOpen})}>
+      <CloseButton className={cn('close-button')} onClick={props.onClose} />
+      <p className={cn('message')}> {props.message}</p>
     </div>
   );
 }

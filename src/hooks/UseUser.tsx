@@ -38,7 +38,7 @@ export function useUser(): User {
       })
       .catch((err) => {
         setCurrentUser((user) => ({...user, loggedIn: false}));
-        return err;
+        return Promise.reject(err);
       });
   }
 

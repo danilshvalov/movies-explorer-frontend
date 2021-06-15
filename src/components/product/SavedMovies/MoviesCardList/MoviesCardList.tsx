@@ -1,4 +1,4 @@
-import {createCn} from 'bem-react-classname';
+import React, {createCn} from 'bem-react-classname';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericList from '@generic/List/List';
 import NothingFoundStub from '@generic/NothingFoundStub/NothingFoundStub';

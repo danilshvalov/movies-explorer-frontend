@@ -1,4 +1,4 @@
-import {createCn} from 'bem-react-classname';
+import React, {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
 import Button from '@generic/Button/Button';
 import * as GenericList from '@generic/List/List';

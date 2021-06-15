@@ -5,6 +5,7 @@ import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
 import Field from '@generic/Field/Field';
 import * as GenericForm from '@generic/Form/Form';
 import Button from '@generic/Button/Button';
+import FieldWrapper from '@generic/FieldWrapper/FieldWrapper';
 /* ---------------------------------- Types --------------------------------- */
 import {OnLoginFunc, Theme} from 'types/types';
 /* ---------------------------------- Hooks --------------------------------- */
@@ -41,6 +42,10 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);
 
+  function handleAPIError(err: Error) {
+    setAPIError(err.message);
+  }
+
   const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
 
@@ -53,7 +58,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
         email: emailValue,
         password: passwordValue,
       })
-        .catch((err) => setAPIError(err))
+        .catch(handleAPIError)
         .finally(() => setIsProcessing(false));
     }
   };
@@ -68,7 +73,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
       <fieldset className={cn('fieldset')}>
         {/** Поле с Email */}
         <div className={cn('container')}>
-          <div className={cn('field-wrapper')}>
+          <FieldWrapper className={cn('field-wrapper')}>
             <label className={cn('label')}>{TEXTS.emailInput.label}</label>
             <Field
               className={cn('field')}
@@ -79,7 +84,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
               required
               disabled={isProcessing}
             />
-          </div>
+          </FieldWrapper>
           <ErrorMessage className={cn('field-error')}>
             {errors.emailInput}
           </ErrorMessage>
@@ -87,7 +92,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
 
         {/** Поле с паролем */}
         <div className={cn('container')}>
-          <div className={cn('field-wrapper')}>
+          <FieldWrapper className={cn('field-wrapper')}>
             <label className={cn('label')}>{TEXTS.passwordInput.label}</label>
             <Field
               className={cn('field')}
@@ -99,7 +104,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
               required
               disabled={isProcessing}
             />
-          </div>
+          </FieldWrapper>
           <ErrorMessage className={cn('field-error')}>
             {errors.passwordInput}
           </ErrorMessage>

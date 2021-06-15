@@ -1,41 +1,90 @@
 .login-form {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   justify-content: space-between;
 }
 
+/* -------------------------------------------------------------------------- */
 .login-form__field-wrapper {
-  margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
 }
 
-.login-form__field-wrapper:last-of-type {
+/* -------------------------------------------------------------------------- */
+
+.login-form__fieldset {
+  min-width: 0;
+  border: 0;
+  margin-bottom: 117px;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.login-form__container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.login-form__container:last-of-type {
   margin-bottom: 0;
 }
 
-.login-form__fieldset {
-  border: 0;
-  margin-bottom: 201px;
-}
+/* -------------------------------------------------------------------------- */
 
 .login-form__label {
+  margin-bottom: 4px;
   color: #a0a0a0;
   font-size: 10px;
   font-weight: normal;
   line-height: 12px;
 }
 
+/* -------------------------------------------------------------------------- */
+
 .login-form__submit-button {
   width: 100%;
-  padding: 13px 0;
+  padding: 14px 0;
   border-radius: 3px;
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
 }
 
+/* -------------------------------------------------------------------------- */
+.login-form__field-error {
+  height: 14px;
+}
+
+/* -------------------------------------------------------------------------- */
+.login-form__submit-error {
+  display: flex;
+  height: 71px;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: center;
+  white-space: normal;
+}
+
+/* -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 860px) {
+  .login-form__label {
+    margin-bottom: 5px;
+  }
+
+  .login-form__fieldset {
+    margin-bottom: 116px;
+  }
+}
+
 @media screen and (max-width: 460px) {
   .login-form__fieldset {
-    margin-bottom: 289px;
+    margin-bottom: 204px;
   }
 
   .login-form__submit-button {

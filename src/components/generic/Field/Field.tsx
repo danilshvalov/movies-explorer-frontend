@@ -1,4 +1,4 @@
-import {InputHTMLAttributes, forwardRef} from 'react';
+import React, {InputHTMLAttributes, forwardRef} from 'react';
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* ---------------------------------- Types --------------------------------- */
@@ -29,5 +29,7 @@ export const Field = forwardRef<RefType, Props>(
     );
   },
 );
+
+Field.displayName = 'Field';
 
 export default Field;

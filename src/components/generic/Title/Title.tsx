@@ -28,4 +28,6 @@ export const Title = forwardRef<RefType, Props>(
   },
 );
 
+Title.displayName = 'Title';
+
 export default Title;

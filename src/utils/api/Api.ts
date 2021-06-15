@@ -1,6 +1,6 @@
-import {INTERNAL_SERVER} from '../../texts/api';
-import {HTTPMethod} from '../../types/types';
-import ApiError from '../../errors/ApiError';
+import {INTERNAL_SERVER} from '@texts/api';
+import {HTTPMethod} from 'types/types';
+import ApiError from '@errors/ApiError';
 
 /**
  * Интерфейс данных для создания запроса

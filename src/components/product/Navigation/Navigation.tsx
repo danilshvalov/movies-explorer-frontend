@@ -1,6 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import shortid from 'shortid';
-import {HTMLAttributes} from 'react';
+import React, {HTMLAttributes} from 'react';
 import {Link} from 'react-router-dom';
 /* --------------------------------- Generic -------------------------------- */
 import {Link as GenericLink} from '@generic/Link/Link';

@@ -10,7 +10,7 @@ export type RefType = GenericButton.RefType;
 
 /**
  * Кнопка "гамбургер" (≡)
- * @see Button
+ * @see {@link GenericButton.Button Button}
  * */
 const HamburgerButton = React.forwardRef<RefType, HamburgerButtonProps>(
   ({className, ...props}, ref) => {
@@ -19,5 +19,7 @@ const HamburgerButton = React.forwardRef<RefType, HamburgerButtonProps>(
     return <GenericButton.Button {...props} ref={ref} className={cn()} />;
   },
 );
+
+HamburgerButton.displayName = 'HamburgerButton';
 
 export default HamburgerButton;

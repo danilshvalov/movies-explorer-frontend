@@ -1,7 +1,7 @@
 import {createCn} from 'bem-react-classname';
 import classNames from 'classnames';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-import React from 'react';
+import React, {forwardRef} from 'react';
 
 import './CheckBox.css';
 
@@ -18,7 +18,7 @@ export interface CheckBoxProps
 export type RefType = HTMLInputElement;
 
 /** Обёртка над checkbox, поддерживающая label */
-const CheckBox = React.forwardRef<RefType, CheckBoxProps>(
+const CheckBox = forwardRef<RefType, CheckBoxProps>(
   ({
     label, labelClassName, buttonClassName, className, ...props
   }, ref) => {
@@ -39,5 +39,7 @@ const CheckBox = React.forwardRef<RefType, CheckBoxProps>(
     );
   },
 );
+
+CheckBox.displayName = 'CheckBox';
 
 export default CheckBox;

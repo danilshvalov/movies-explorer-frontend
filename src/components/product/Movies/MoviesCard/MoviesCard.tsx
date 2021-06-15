@@ -66,6 +66,7 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
       className={cn()}
       onMouseOver={wrap(() => setIsHovered(true))}
       onMouseLeave={wrap(() => setIsHovered(false))}
+      onFocus={wrap(() => setIsHovered(true))}
     >
       <GenericMoviesCard.MoviesCard {...props} />
       <SaveButton

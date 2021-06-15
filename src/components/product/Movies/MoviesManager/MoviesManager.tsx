@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
 /* ---------------------------------- Hooks --------------------------------- */
 import useAllMovies from '@hooks/UseAllMovies';
 import useSavedMovies from '@hooks/UseSavedMovies';
 /* ---------------------------------- Types --------------------------------- */
-import {IMovie, SearchData} from 'types/types';
+import {IMovie, OnErrorMessageFunc, SearchData} from 'types/types';
 /* ---------------------------------- Utils --------------------------------- */
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Local --------------------------------- */
@@ -19,6 +19,7 @@ import getDeviceType from '@utils/device-type';
 
 export interface FunctionalProps {
   searchData: SearchData;
+  onErrorMessage: OnErrorMessageFunc;
 }
 export type Props = FunctionalProps;
 
@@ -32,15 +33,17 @@ export type Props = FunctionalProps;
  * @see useAllMovies
  * @see useSavedMovies
  * */
-function MoviesManager({searchData}: Props): JSX.Element {
+function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element {
   const {startCount} = MOVIES_AMOUNT_BY_DEVICE[getDeviceType(DEVICES_WIDTHS)];
 
   const [isError, setIsError] = useState(false);
-  const handleErrorReset = () => setIsError(false);
-  const handleErrorSet = () => setIsError(true);
+  const handleErrorSet = (err: Error) => {
+    onErrorMessage(err.message);
+    setIsError(true);
+  };
 
   const [isLoading, setIsLoading] = useState(true);
-  const allMovies = useAllMovies();
+  const allMovies = useAllMovies(handleErrorSet);
   const savedMovies = useSavedMovies(handleErrorSet);
   const filteredMovies = useExpandableList<IMovie>(
     {
@@ -50,6 +53,12 @@ function MoviesManager({searchData}: Props): JSX.Element {
     },
     allMovies.value,
   );
+
+  const handleErrorReset = () => {
+    allMovies.retry();
+    savedMovies.retry();
+    setIsError(false);
+  };
 
   function handleSave(data: IMovie): Promise<IMovie> {
     return savedMovies.saveMovie(data).then((movie) => {
@@ -63,7 +72,8 @@ function MoviesManager({searchData}: Props): JSX.Element {
   function handleDelete(data: IMovie): Promise<IMovie> {
     return savedMovies.deleteMovie(data).then(() => {
       allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId //
-        ? {...data, isSaved: false} : val)));
+        ? {...data, isSaved: false}
+        : val)));
       return data;
     });
   }
@@ -92,6 +102,13 @@ function MoviesManager({searchData}: Props): JSX.Element {
     }
   }, [searchData, allMovies.value, savedMovies.value]);
 
+  /** Сброс ошибки при поиске */
+  useEffect(() => {
+    if (isError) {
+      handleErrorReset();
+    }
+  }, [searchData]);
+
   return (
     <PreloaderWrapper isLoading={isLoading}>
       <ErrorWrapper
@@ -102,7 +119,6 @@ function MoviesManager({searchData}: Props): JSX.Element {
         <MoviesCardList
           onSave={handleSave}
           onDelete={handleDelete}
-          /** Preloader не даст загрузиться несуществующему списку */
           moviesList={filteredMovies.value || []}
           isComplete={filteredMovies.isComplete}
           onExpand={filteredMovies.expand}

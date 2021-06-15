@@ -1,6 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import {Link} from 'react-router-dom';
-import {forwardRef, ImgHTMLAttributes} from 'react';
+import React, {forwardRef, ImgHTMLAttributes} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import {Link as GenericLink} from '@generic/Link/Link';
 /* --------------------------------- Images --------------------------------- */
@@ -25,5 +25,7 @@ export const Logo = forwardRef<HTMLImageElement, Props>(({className, ...props}, 
     </Link>
   );
 });
+
+Logo.displayName = 'Logo';
 
 export default Logo;

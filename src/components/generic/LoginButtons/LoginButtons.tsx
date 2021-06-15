@@ -1,5 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import {useHistory} from 'react-router-dom';
+import React from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericList from '@generic/List/List';
 import Button from '@generic/Button/Button';

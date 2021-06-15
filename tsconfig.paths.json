@@ -11,7 +11,8 @@
       "types/*": ["types/*"],
       "@contexts/*": ["contexts/*"],
       "@hooks/*": ["hooks/*"],
-      "@texts/*": ["texts/*"]
+      "@texts/*": ["texts/*"],
+      "@errors/*": ["errors/*"]
     }
   }
 }

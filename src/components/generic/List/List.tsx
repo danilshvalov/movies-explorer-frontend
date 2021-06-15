@@ -32,4 +32,6 @@ export const List = forwardRef<RefType, Props>((props, ref): JSX.Element => {
   );
 });
 
+List.displayName = 'List';
+
 export default List;

@@ -1,4 +1,4 @@
-import {createCn} from 'bem-react-classname';
+import React, {createCn} from 'bem-react-classname';
 import shortid from 'shortid';
 import {HTMLAttributes} from 'react';
 /* --------------------------------- Generic -------------------------------- */

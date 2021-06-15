@@ -1,5 +1,5 @@
 import {createCn} from 'bem-react-classname';
-import {forwardRef} from 'react';
+import React, {forwardRef} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericButton from '@generic/Button/Button';
 /* -------------------------------------------------------------------------- */
@@ -24,5 +24,7 @@ const DeleteButton = forwardRef<RefType, DeleteButtonProps>(
     );
   },
 );
+
+DeleteButton.displayName = 'DeleteButton';
 
 export default DeleteButton;

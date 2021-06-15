@@ -1,5 +1,9 @@
 import {
-  useState, useCallback, Dispatch, SetStateAction, useEffect,
+  useState,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+  useEffect,
 } from 'react';
 /* ---------------------------------- Utils --------------------------------- */
 import mainApi from '@utils/api/MainApi';
@@ -16,6 +20,7 @@ export interface ReturnType {
   saveMovie: (data: IMovie) => Promise<IMovie>;
   deleteMovie: (data: IMovie) => Promise<IMovie>;
   containsMovie: (data: IMovie) => boolean;
+  retry: () => void;
 }
 
 /**
@@ -29,14 +34,21 @@ export function useSavedMovies(errorHandler: OnErrorFunc): ReturnType {
   const [value, setValue] = useLocalStorage<MoviesList>('saved-movies');
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  const retry = useCallback(() => {
     if (!value) {
       setIsLoading(true);
-      mainApi.getSavedMovies().then((val) => {
-        setValue(val);
-        setIsLoading(false);
-      }).catch(errorHandler);
+      mainApi
+        .getSavedMovies()
+        .then((val) => {
+          setValue(val);
+          setIsLoading(false);
+        })
+        .catch(errorHandler);
     }
+  }, [setIsLoading, setValue]);
+
+  useEffect(() => {
+    retry();
   }, []);
 
   const saveMovie = useCallback(
@@ -93,6 +105,7 @@ export function useSavedMovies(errorHandler: OnErrorFunc): ReturnType {
     containsMovie,
     saveMovie,
     deleteMovie,
+    retry,
   };
 }
 

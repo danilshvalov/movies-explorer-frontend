@@ -1,6 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-import {ButtonHTMLAttributes, forwardRef} from 'react';
+import React, {ButtonHTMLAttributes, forwardRef} from 'react';
 /* ---------------------------------- Types --------------------------------- */
 import {Theme, WithLoading, WithTheme} from 'types/types';
 /* -------------------------------------------------------------------------- */
@@ -43,5 +43,7 @@ export const Button = forwardRef<RefType, Props>(
     );
   },
 );
+
+Button.displayName = 'Button';
 
 export default Button;

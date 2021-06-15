@@ -1,5 +1,6 @@
 import {createCn} from 'bem-react-classname';
 import {Link} from 'react-router-dom';
+import React, {HTMLAttributes} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import {Link as GenericLink} from '@generic/Link/Link';
 import Logo from '@generic/Logo/Logo';
@@ -14,7 +15,7 @@ import LoginForm from '@product/Login/LoginForm/LoginForm';
 /* -------------------------------------------------------------------------- */
 import './Login.css';
 
-export interface LoginProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface LoginProps extends HTMLAttributes<HTMLDivElement> {
   /** callback, вызываемый при отправке формы */
   onLogin: OnLoginFunc;
 }

@@ -1,5 +1,5 @@
 import {createCn} from 'bem-react-classname';
-import {HTMLAttributes} from 'react';
+import React, {HTMLAttributes} from 'react';
 import {Link} from 'react-router-dom';
 /* -------------------------------- Generics -------------------------------- */
 import Button from '@generic/Button/Button';
