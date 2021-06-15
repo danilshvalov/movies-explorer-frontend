@@ -1,19 +1,19 @@
 import {createCn} from 'bem-react-classname';
-import React, {useState} from 'react';
+import React, {HTMLAttributes, useState} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* -------------------------------- Generics -------------------------------- */
 import PageWrapper from '@generic/PageWrapper/PageWrapper';
 import SearchForm from '@generic/SearchForm/SearchForm';
 /* ---------------------------------- Types --------------------------------- */
-import {OnErrorMessageFunc, SearchData} from 'types/types';
+import {OnExternalErrorFunc, SearchData} from 'types/types';
 /* --------------------------------- Local -------------------------------- */
 import MoviesManager from '@product/Movies/MoviesManager/MoviesManager';
 /* -------------------------------------------------------------------------- */
 import './Movies.css';
 
-export type DOMProps = React.HTMLAttributes<HTMLDivElement>;
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
 export interface FunctionalProps {
-  onErrorMessage: OnErrorMessageFunc;
+  onExternalError: OnExternalErrorFunc;
 }
 export type Props = FunctionalProps & DOMProps;
 
@@ -37,7 +37,7 @@ export function Movies({className, ...props}: Props): JSX.Element {
       {searchData && (
         <MoviesManager
           searchData={searchData}
-          onErrorMessage={props.onErrorMessage}
+          onExternalError={props.onExternalError}
         />
       )}
     </section>

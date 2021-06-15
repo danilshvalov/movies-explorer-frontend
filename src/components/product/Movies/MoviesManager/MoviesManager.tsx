@@ -7,11 +7,7 @@ import useAllMovies from '@hooks/UseAllMovies';
 import useSavedMovies from '@hooks/UseSavedMovies';
 import useExpandableList from '@hooks/UseExpandableList';
 /* ---------------------------------- Types --------------------------------- */
-import {
-  IMovie,
-  OnErrorMessageFunc,
-  SearchData,
-} from 'types/types';
+import {IMovie, OnExternalErrorFunc, SearchData} from 'types/types';
 /* ---------------------------------- Utils --------------------------------- */
 import {filterMoviesList} from '@utils/movies-filter';
 /* ---------------------------------- Local --------------------------------- */
@@ -28,7 +24,7 @@ import {markSavedMovies} from '@utils/utils';
 
 export interface FunctionalProps {
   searchData: SearchData;
-  onErrorMessage: OnErrorMessageFunc;
+  onExternalError: OnExternalErrorFunc;
 }
 export type Props = FunctionalProps;
 
@@ -44,7 +40,7 @@ export type Props = FunctionalProps;
  * */
 function MoviesManager({
   searchData,
-  onErrorMessage,
+  onExternalError,
 }: Props): JSX.Element {
   const {startCount} = MOVIES_AMOUNT_BY_DEVICE[getDeviceType(DEVICES_WIDTHS)];
   const [isError, setIsError] = useState(false);
@@ -76,10 +72,6 @@ function MoviesManager({
     setIsError(false);
   }
 
-  function handleErrorMessage(err: Error) {
-    onErrorMessage(err.message);
-  }
-
   function handleSuccessSaving(movie: IMovie): IMovie {
     allMovies.addMovie(movie);
     return movie;
@@ -95,7 +87,7 @@ function MoviesManager({
       .saveMovie(data)
       .then(handleSuccessSaving)
       .catch((err) => {
-        handleErrorMessage(err);
+        onExternalError(err);
         /** Если что-то пошло не так - возвращаем старые данные */
         return data;
       });
@@ -106,7 +98,7 @@ function MoviesManager({
       .deleteMovie(data)
       .then(handleSuccessDeleting)
       .catch((err) => {
-        handleErrorMessage(err);
+        onExternalError(err);
         /** Если что-то пошло не так - возвращаем старые данные */
         return data;
       });

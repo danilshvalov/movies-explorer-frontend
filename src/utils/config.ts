@@ -27,7 +27,7 @@ export const DEVICES_WIDTHS: DeviceWidthSettings = {
 export const SHORTS_FILMS_DURATION = 40;
 
 export const PAGE_LINKS = {
-  /** exact */
+  /** must be exact */
   main: '/',
   movies: '/movies',
   savedMovies: '/saved-movies',

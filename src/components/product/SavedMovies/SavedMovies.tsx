@@ -5,7 +5,7 @@ import {createCn} from 'bem-react-classname';
 import PageWrapper from '@generic/PageWrapper/PageWrapper';
 import SearchForm from '@generic/SearchForm/SearchForm';
 /* ---------------------------------- Types --------------------------------- */
-import {OnErrorMessageFunc, SearchData} from 'types/types';
+import {OnExternalErrorFunc, SearchData} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesManager from '@product/SavedMovies/MoviesManager/MoviesManager';
 /* -------------------------------------------------------------------------- */
@@ -13,7 +13,7 @@ import './SavedMovies.css';
 
 export type DOMProps = HTMLAttributes<HTMLDivElement>;
 export interface FunctionalProps {
-  onErrorMessage: OnErrorMessageFunc;
+  onExternalError: OnExternalErrorFunc;
 }
 export type Props = FunctionalProps & DOMProps;
 
@@ -33,7 +33,7 @@ export function SavedMovies({className, ...props}: Props): JSX.Element {
       />
       <MoviesManager
         searchData={searchData}
-        onErrorMessage={props.onErrorMessage}
+        onExternalError={props.onExternalError}
       />
     </section>
   );

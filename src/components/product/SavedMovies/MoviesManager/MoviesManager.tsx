@@ -7,7 +7,7 @@ import useSavedMovies from '@hooks/UseSavedMovies';
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Types --------------------------------- */
 import {
-  IMovie, MoviesList, OnErrorMessageFunc, SearchData,
+  IMovie, MoviesList, OnExternalErrorFunc, SearchData,
 } from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/SavedMovies/MoviesCardList/MoviesCardList';
@@ -17,7 +17,7 @@ import ErrorWrapper from '@generic/ErrorWrapper/ErrorWrapper';
 
 export interface FunctionalProps {
   searchData?: SearchData;
-  onErrorMessage: OnErrorMessageFunc;
+  onExternalError: OnExternalErrorFunc;
 }
 export type Props = FunctionalProps;
 
@@ -32,7 +32,7 @@ export type Props = FunctionalProps;
  * */
 export function MoviesManager({
   searchData,
-  onErrorMessage,
+  onExternalError,
 }: Props): JSX.Element {
   const [isError, setIsError] = useState(false);
 
@@ -54,7 +54,7 @@ export function MoviesManager({
     .deleteMovie(data)
     .then()
     .catch((err) => {
-      onErrorMessage(err.message);
+      onExternalError(err);
       return data;
     });
 

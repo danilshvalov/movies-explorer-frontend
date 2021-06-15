@@ -24,6 +24,10 @@ import useMessagePopup from '@hooks/UseMessagePopup';
 /* ---------------------------------- Types --------------------------------- */
 import {LoginUserData} from 'types/types';
 import {ProfileUserData, RegisterUserData} from 'types/User';
+/* --------------------------------- Errors --------------------------------- */
+import ApiError from '@errors/ApiError';
+/* ---------------------------------- Texts --------------------------------- */
+import INTERNAL_SERVER from '@texts/api';
 /* -------------------------------------------------------------------------- */
 import './App.css';
 
@@ -54,8 +58,12 @@ function App(): JSX.Element {
     return currentUser.updateUserInfo(data);
   }
 
-  function handleErrorMessage(msg: string) {
-    messagePopup.open(msg);
+  function handleError(err: Error): void {
+    if (err instanceof ApiError) {
+      messagePopup.open(err.message);
+    } else {
+      messagePopup.open(INTERNAL_SERVER.message);
+    }
   }
 
   useEffect(() => {
@@ -78,12 +86,12 @@ function App(): JSX.Element {
           <Switch>
             {/** Movies */}
             <AuthorizedRoute path={PAGE_LINKS.movies}>
-              <MoviesPage onErrorMessage={handleErrorMessage} />
+              <MoviesPage onExternalError={handleError} />
             </AuthorizedRoute>
 
             {/** SavedMovies */}
             <AuthorizedRoute path={PAGE_LINKS.savedMovies}>
-              <SavedMoviesPage onErrorMessage={handleErrorMessage} />
+              <SavedMoviesPage onExternalError={handleError} />
             </AuthorizedRoute>
 
             {/** Profile */}

@@ -8,7 +8,10 @@ import {
 /* ---------------------------------- Utils --------------------------------- */
 import getDeviceType from '@utils/device-type';
 /* ---------------------------------- Types --------------------------------- */
-import {AmountDeviceSettings, DeviceWidthSettings} from 'types/types';
+import {
+  AmountDeviceSettings,
+  DeviceWidthSettings,
+} from 'types/types';
 /* -------------------------------------------------------------------------- */
 
 export interface ExpandableListSettings {
@@ -17,16 +20,25 @@ export interface ExpandableListSettings {
   countSettings: AmountDeviceSettings;
 }
 
+export type ValueType<T> = T[] | undefined;
+export type SetValueFunc<T> = Dispatch<SetStateAction<T[] | undefined>>;
+export type ExpandFunc = () => void;
+export type ResetFunc = () => void;
+
 export interface ReturnType<T> {
-  value: T[] | undefined;
-  setValue: Dispatch<SetStateAction<T[] | undefined>>;
+  value: ValueType<T>;
+  setValue: SetValueFunc<T>;
   isComplete: boolean;
-  expand: () => void;
-  reset: () => void;
+  expand: ExpandFunc;
+  reset: ResetFunc;
 }
 
 export function useExpandableList<T>(
-  {startCount, deviceSettings, countSettings}: ExpandableListSettings,
+  {
+    startCount,
+    deviceSettings,
+    countSettings,
+  }: ExpandableListSettings,
   initVal?: T[],
 ): ReturnType<T> {
   const [value, setValue] = useState<T[] | undefined>(initVal);
@@ -35,8 +47,8 @@ export function useExpandableList<T>(
   const [step, setStep] = useState(startCount);
   const [isComplete, setIsComplete] = useState(true);
 
+  /* -------------------------------- Internal -------------------------------- */
   const getAlignedCount = () => currentCount + step - (currentCount % step);
-  /* -------------------------------------------------------------------------- */
 
   /* --------------------------- Exported Functions --------------------------- */
   const expand = useCallback(() => {
@@ -51,9 +63,11 @@ export function useExpandableList<T>(
 
   /* --------------------------------- Effects -------------------------------- */
   useEffect(() => {
-    const handleResize = () => {
-      setStep(countSettings[getDeviceType(deviceSettings)].step);
-    };
+    function handleResize() {
+      setStep(
+        countSettings[getDeviceType(deviceSettings)].step,
+      );
+    }
 
     window.addEventListener('resize', handleResize);
 
@@ -62,19 +76,28 @@ export function useExpandableList<T>(
 
   /** Выравнивание при изменении шага */
   useEffect(() => {
-    if (storedValue && currentCount < storedValue.length) {
-      expand();
+    function handleStepChange() {
+      if (!isComplete) {
+        expand();
+      }
     }
-  }, [step]);
+    handleStepChange();
+  }, [step, isComplete]);
 
   useEffect(() => {
-    setValue(storedValue?.slice(0, currentCount));
-  }, [currentCount, storedValue]);
+    function trimList() {
+      setValue(storedValue?.slice(0, currentCount));
+    }
 
-  useEffect(() => {
-    setIsComplete(
-      (storedValue && storedValue.length <= currentCount) ?? true,
-    );
+    function updateCompleteState() {
+      setIsComplete(
+        (storedValue && storedValue.length <= currentCount)
+          ?? true,
+      );
+    }
+
+    trimList();
+    updateCompleteState();
   }, [currentCount, storedValue]);
 
   /* -------------------------------------------------------------------------- */

@@ -139,6 +139,5 @@ export type OnLogoutFunc = () => Promise<void>;
 export type OnSaveFunc<T, U = T> = ApiCallback<T, U>;
 export type OnSearchFunc<T> = (data: SearchData) => T;
 export type OnDeleteFunc<T, U = T> = ApiCallback<T, U>;
-export type OnErrorFunc = (err: Error) => any;
-export type OnErrorMessageFunc = (msg: string) => void;
+export type OnExternalErrorFunc = (err: Error) => void;
 /* -------------------------------------------------------------------------- */

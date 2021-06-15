@@ -23,6 +23,11 @@ export interface ReturnType {
   removeMovie: (data: IMovie) => void;
 }
 
+/**
+ * Hook загрузки всех фильмов
+ *
+ * @see {@link moviesApi}
+ */
 export function useAllMovies(): ReturnType {
   const [value, setValue] = useState<MoviesList>();
   const [isLoading, setIsLoading] = useState(true);
