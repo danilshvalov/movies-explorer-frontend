@@ -1,3 +1,4 @@
+import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React, {useState, HTMLAttributes} from 'react';
 import {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
@@ -24,7 +25,7 @@ export function SavedMovies({className, ...props}: Props): JSX.Element {
   const [searchData, setSearchData] = useState<SearchData | undefined>();
 
   return (
-    <section {...props} className={cn()}>
+    <section {...filterInvalidDOMProps(props)} className={cn()}>
       <SearchForm
         className={cn('search-form')}
         onSearch={setSearchData}
