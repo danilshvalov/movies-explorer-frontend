@@ -1,93 +1,140 @@
-import mainApi from '@utils/api/MainApi';
-import {PAGE_LINKS} from '@utils/config';
 import {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
+/* ---------------------------------- Utils --------------------------------- */
+import mainApi from '@utils/api/MainApi';
+import {DEFAULT_USER, PAGE_LINKS} from '@utils/config';
+/* ---------------------------------- Types --------------------------------- */
 import {UpdateProfileData} from 'types/Api';
 import {
-  AuthorizedUserData, LoginUserData, User, UserState,
+  AuthorizedUserData,
+  LoginUserData,
+  User,
+  UserState,
 } from 'types/types';
-import {ProfileUserData, RegisterUserData} from 'types/User';
+import {
+  ProfileUserData,
+  RegisterUserData,
+} from 'types/User';
+/* -------------------------------------------------------------------------- */
 
 export function useUser(): User {
-  const [currentUser, setCurrentUser] = useState<UserState>({
-    name: 'Пользователь',
-    email: 'email@mail.com',
-    loggedIn: true,
-    isLoading: true,
-  });
+  const [currentUser, setCurrentUser] = useState<UserState>(
+    {
+      ...DEFAULT_USER,
+      loggedIn: true,
+      isLoading: true,
+    },
+  );
 
   const history = useHistory();
 
-  useEffect(() => {
-    mainApi
-      .checkToken()
-      .then(({name, email}) => {
-        setCurrentUser((user) => ({
-          ...user,
-          name,
-          email,
-          loggedIn: true,
-        }));
-      })
-      .catch(() => setCurrentUser((user) => ({...user, loggedIn: false})))
-      .finally(() => setCurrentUser((user) => ({...user, isLoading: false})));
-  }, []);
-
-  function authorize(data: LoginUserData): Promise<AuthorizedUserData> {
-    return mainApi
-      .authorize(data)
-      .then(({email, name}) => {
-        setCurrentUser((user) => ({
-          ...user,
-          email,
-          name,
-          loggedIn: true,
-        }));
-        history.push(PAGE_LINKS.movies);
-        return {email, name};
-      })
-      .catch((err) => {
-        setCurrentUser((user) => ({...user, loggedIn: false}));
-        return Promise.reject(err);
-      })
-      .finally(() => setCurrentUser((user) => ({...user, isLoading: false})));
+  /* ----------------------------- State changers ----------------------------- */
+  function authorizeUser({
+    name,
+    email,
+  }: AuthorizedUserData) {
+    setCurrentUser((user) => ({
+      ...user,
+      email,
+      name,
+      loggedIn: true,
+    }));
   }
 
-  function register(data: RegisterUserData): Promise<AuthorizedUserData> {
+  function updateUser({email, name}: UpdateProfileData) {
+    setCurrentUser({...currentUser, name, email});
+  }
+
+  function setUnAuthorizedUser() {
+    setCurrentUser((user) => ({...user, loggedIn: false}));
+  }
+
+  function setLoadingEnd() {
+    setCurrentUser((user) => ({
+      ...user,
+      isLoading: false,
+    }));
+  }
+
+  /* -------------------------------- Handlers -------------------------------- */
+
+  function handleSuccessAuthorizing(
+    user: AuthorizedUserData,
+  ): AuthorizedUserData {
+    authorizeUser(user);
+    history.push(PAGE_LINKS.movies);
+    return user;
+  }
+
+  function handleFailureAuthorizing(err: Error) {
+    setUnAuthorizedUser();
+    return Promise.reject(err);
+  }
+
+  function handleSuccessLogout() {
+    setUnAuthorizedUser();
+    history.push(PAGE_LINKS.main);
+  }
+
+  function handleSuccessProfileUpdate(
+    data: UpdateProfileData,
+  ) {
+    updateUser(data);
+    return data;
+  }
+
+  /* -------------------------------- Internal -------------------------------- */
+  function checkToken() {
+    mainApi
+      .checkToken()
+      .then(authorizeUser)
+      .catch(setUnAuthorizedUser)
+      .finally(setLoadingEnd);
+  }
+
+  /* ---------------------------- Export functions ---------------------------- */
+
+  function authorize(
+    data: LoginUserData,
+  ): Promise<AuthorizedUserData> {
+    return mainApi
+      .authorize(data)
+      .then(handleSuccessAuthorizing)
+      .catch(handleFailureAuthorizing)
+      .finally(setLoadingEnd);
+  }
+
+  function register(
+    data: RegisterUserData,
+  ): Promise<AuthorizedUserData> {
     return mainApi
       .register(data)
       .then(() => authorize(data))
-      .catch((err) => {
-        setCurrentUser((user) => ({...user, loggedIn: false}));
-        return Promise.reject(err);
-      });
+      .catch(handleFailureAuthorizing);
   }
 
-  function updateUserInfo(data: ProfileUserData): Promise<UpdateProfileData> {
-    return mainApi.updateUserInfo(data).then(({name, email}) => {
-      setCurrentUser({...currentUser, name, email});
-      return {name, email};
-    });
+  function updateUserInfo(
+    data: ProfileUserData,
+  ): Promise<UpdateProfileData> {
+    return mainApi
+      .updateUserInfo(data)
+      .then(handleSuccessProfileUpdate);
   }
 
   function logout() {
-    return mainApi.logout().then(() => {
-      setCurrentUser((user) => ({...user, loggedIn: false}));
-      history.push(PAGE_LINKS.main);
-    });
+    return mainApi.logout().then(handleSuccessLogout);
   }
 
+  /* --------------------------------- Effects -------------------------------- */
+
+  /** Проверка токена при монтировании */
   useEffect(() => {
-    mainApi
-      .checkToken()
-      .then(({name, email}) => setCurrentUser((user) => ({
-        ...user,
-        name,
-        email,
-        loggedIn: true,
-      })))
-      .catch(() => setCurrentUser({...currentUser, loggedIn: false}))
-      .finally(() => setCurrentUser((user) => ({...user, isLoading: false})));
+    checkToken();
+  }, []);
+
+  /** Проверка токена при изменении страницы */
+  useEffect(() => {
+    checkToken();
   }, [history]);
 
   return {
