@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import {createCn} from 'bem-react-classname';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
@@ -25,54 +24,30 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
   const cn = createCn('all-movies-card', className);
 
   const [isHovered, setIsHovered] = useState(false);
-  const [isSaved, setIsSaved] = useState(props.isSaved);
   const [isLoading, setIsLoading] = useState(false);
-  /** Избавляемся от утечек памяти при размонтировании */
-  const isMounted = useRef(true);
-  /** Сама обертка */
-  function wrap(action: () => void) {
-    return () => {
-      if (isMounted.current) {
-        action();
-      }
-    };
-  }
-
-  useEffect(
-    () => () => {
-      isMounted.current = false;
-    },
-    [],
-  );
 
   function handleClick() {
     setIsLoading(true);
-    const movie = {...(props as IMovie), isSaved: !isSaved};
-    if (!isSaved) {
-      props
-        .onSave(movie)
-        .then(wrap(() => (val: IMovie) => setIsSaved(val.isSaved)))
-        .finally(wrap(() => setIsLoading(false)));
+    const movie = {...(props as IMovie)};
+    if (!props.isSaved) {
+      props.onSave(movie);
     } else {
-      props
-        .onDelete(movie)
-        .then(wrap(() => (val: IMovie) => setIsSaved(val.isSaved)))
-        .finally(wrap(() => setIsLoading(false)));
+      props.onDelete(movie);
     }
   }
 
   return (
     <div
       className={cn()}
-      onMouseOver={wrap(() => setIsHovered(true))}
-      onMouseLeave={wrap(() => setIsHovered(false))}
-      onFocus={wrap(() => setIsHovered(true))}
+      onMouseOver={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
     >
       <GenericMoviesCard.MoviesCard {...props} />
       <SaveButton
-        className={cn('button', {hidden: !isHovered && !isSaved})}
+        className={cn('button', {hidden: !isHovered && !props.isSaved})}
         onClick={handleClick}
-        checked={isSaved}
+        checked={props.isSaved}
         isLoading={isLoading}
       >
         {isLoading ? TEXTS.button.loadingText : TEXTS.button.text}

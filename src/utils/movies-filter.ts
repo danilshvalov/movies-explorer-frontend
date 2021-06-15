@@ -1,9 +1,13 @@
-import {IMovie, SearchData} from '../types/types';
+/* ---------------------------------- Utils --------------------------------- */
+import {SHORTS_FILMS_DURATION} from '@utils/config';
+/* ---------------------------------- Types --------------------------------- */
+import {IMovie, MoviesList, SearchData} from 'types/types';
+/* -------------------------------------------------------------------------- */
 
 const wordPattern = /[a-zа-яё]+/gi;
 
 function isShortFilm(duration: number): boolean {
-  return duration < 40;
+  return duration < SHORTS_FILMS_DURATION;
 }
 
 export default function moviesFilter(
@@ -24,9 +28,17 @@ export default function moviesFilter(
     words?.some((v) => {
       const val = v.toLocaleLowerCase();
       return (
-        (nameRU && nameRU.toLocaleLowerCase().includes(val))
+        (nameRU
+          && nameRU.toLocaleLowerCase().includes(val))
         || (nameEN && nameEN.toLocaleLowerCase().includes(val))
       );
     }) || false
   );
+}
+
+export function filterMoviesList(
+  moviesList: MoviesList,
+  searchData: SearchData,
+): MoviesList {
+  return moviesList.filter((movie) => moviesFilter(movie, searchData));
 }

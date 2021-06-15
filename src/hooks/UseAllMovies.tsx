@@ -7,14 +7,18 @@ import {
 /* ---------------------------------- Utils --------------------------------- */
 import moviesApi from '@utils/api/MoviesApi';
 /* ---------------------------------- Types --------------------------------- */
-import {MoviesList} from 'types/types';
+import {IMovie, MoviesList} from 'types/types';
 /* -------------------------------------------------------------------------- */
 
 export interface ReturnType {
   value?: MoviesList;
-  setValue: Dispatch<SetStateAction<MoviesList | undefined>>;
+  setValue: Dispatch<
+    SetStateAction<MoviesList | undefined>
+  >;
   isLoading: boolean;
   loadOrRetry: () => Promise<void>;
+  /** Удаляет фильм из массива без запроса к API */
+  removeMovie: (data: IMovie) => void;
 }
 
 export function useAllMovies(): ReturnType {
@@ -31,11 +35,21 @@ export function useAllMovies(): ReturnType {
       .finally(() => setIsLoading(false));
   }, [setValue, setIsLoading]);
 
+  const removeMovie = useCallback(
+    (movie: IMovie) => {
+      setValue((old) => old?.map((val) => (val.movieId === movie.movieId
+        ? {...movie, isSaved: true}
+        : val)));
+    },
+    [setValue],
+  );
+
   return {
     value,
     setValue,
     isLoading,
     loadOrRetry,
+    removeMovie,
   };
 }
 

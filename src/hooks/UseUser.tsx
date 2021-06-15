@@ -49,7 +49,8 @@ export function useUser(): User {
       .catch((err) => {
         setCurrentUser((user) => ({...user, loggedIn: false}));
         return Promise.reject(err);
-      });
+      })
+      .finally(() => setCurrentUser((user) => ({...user, isLoading: false})));
   }
 
   function register(data: RegisterUserData): Promise<AuthorizedUserData> {
@@ -85,7 +86,8 @@ export function useUser(): User {
         email,
         loggedIn: true,
       })))
-      .catch(() => setCurrentUser({...currentUser, loggedIn: false}));
+      .catch(() => setCurrentUser({...currentUser, loggedIn: false}))
+      .finally(() => setCurrentUser((user) => ({...user, isLoading: false})));
   }, [history]);
 
   return {

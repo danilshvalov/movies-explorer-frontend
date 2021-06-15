@@ -1,9 +1,8 @@
 import {Route, Switch} from 'react-router-dom';
 import {createCn} from 'bem-react-classname';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import MessagePopup from '@generic/MessagePopup/MessagePopup';
-import ProtectedRoute from '@generic/ProtectedRoute/ProtectedRoute';
 import NotFound from '@generic/NotFound/NotFound';
 import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
 /* --------------------------------- Product -------------------------------- */
@@ -13,6 +12,8 @@ import MoviesPage from '@product/Movies/Movies';
 import SavedMoviesPage from '@product/SavedMovies/SavedMovies';
 import ProfilePage from '@product/Profile/Profile';
 import MainPage from '@product/Main/Main';
+import AuthorizedRoute from '@product/AuthorizedRoute/AuthorizedRoute';
+import UnAuthorizedRoute from '@product/UnAuthorizedRoute/UnAuthorizedRoute';
 /* ---------------------------------- Utils --------------------------------- */
 import {LOCAL_STORAGE_KEYS, PAGE_LINKS} from '@utils/config';
 /* -------------------------------- Contexts -------------------------------- */
@@ -29,9 +30,7 @@ import './App.css';
 function App(): JSX.Element {
   const cn = createCn('page');
 
-  // TODO
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isAppLoading, setIsAppLoading] = useState(false);
+  const [isAppLoading, setIsAppLoading] = useState(true);
 
   const messagePopup = useMessagePopup();
 
@@ -59,50 +58,60 @@ function App(): JSX.Element {
     messagePopup.open(msg);
   }
 
+  useEffect(() => {
+    setIsAppLoading(currentUser.isLoading);
+  }, [currentUser.isLoading]);
+
+  useEffect(() => {
+    console.log(
+      'isLoading: ',
+      isAppLoading,
+      'loggedIn: ',
+      currentUser.loggedIn,
+    );
+  }, [currentUser.isLoading, currentUser.loggedIn]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <PreloaderWrapper isLoading={isAppLoading}>
         <div className={cn()}>
           <Switch>
-            {/** ProtectedRoutes */}
-
             {/** Movies */}
-            <ProtectedRoute path={PAGE_LINKS.movies}>
+            <AuthorizedRoute path={PAGE_LINKS.movies}>
               <MoviesPage onErrorMessage={handleErrorMessage} />
-            </ProtectedRoute>
+            </AuthorizedRoute>
 
             {/** SavedMovies */}
-            <ProtectedRoute path={PAGE_LINKS.savedMovies}>
+            <AuthorizedRoute path={PAGE_LINKS.savedMovies}>
               <SavedMoviesPage onErrorMessage={handleErrorMessage} />
-            </ProtectedRoute>
+            </AuthorizedRoute>
 
             {/** Profile */}
-            <ProtectedRoute path={PAGE_LINKS.profile}>
+            <AuthorizedRoute path={PAGE_LINKS.profile}>
               <ProfilePage
                 onProfileUpdate={handleProfileUpdate}
                 onLogout={handleLogout}
               />
-            </ProtectedRoute>
+            </AuthorizedRoute>
 
-            {/** Routes */}
             {/** Main */}
             <Route exact path={PAGE_LINKS.main}>
               <MainPage />
             </Route>
 
             {/** Login */}
-            <Route path={PAGE_LINKS.signIn}>
+            <UnAuthorizedRoute path={PAGE_LINKS.signIn}>
               <Login onLogin={handleLogin} />
-            </Route>
+            </UnAuthorizedRoute>
 
             {/** Register */}
-            <Route path={PAGE_LINKS.signUp}>
+            <UnAuthorizedRoute path={PAGE_LINKS.signUp}>
               <Register onRegister={handleRegister} />
-            </Route>
+            </UnAuthorizedRoute>
 
-            <Route path="/">
+            <UnAuthorizedRoute path={PAGE_LINKS.notFound}>
               <NotFound />
-            </Route>
+            </UnAuthorizedRoute>
           </Switch>
 
           <MessagePopup

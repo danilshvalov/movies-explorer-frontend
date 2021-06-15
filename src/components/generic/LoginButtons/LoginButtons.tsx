@@ -21,8 +21,12 @@ function LoginButtons({className, ...props}: LoginButtonsProps): JSX.Element {
 
   const history = useHistory();
 
-  const handleRegisterClick = () => history.push(PAGE_LINKS.signUp);
-  const handleLoginClock = () => history.push(PAGE_LINKS.signIn);
+  function handleRegisterClick() {
+    return history.push(PAGE_LINKS.signUp);
+  }
+  function handleLoginClock() {
+    return history.push(PAGE_LINKS.signIn);
+  }
 
   return (
     <GenericList.List {...props} className={cn()} itemClassName={cn('list-item')}>

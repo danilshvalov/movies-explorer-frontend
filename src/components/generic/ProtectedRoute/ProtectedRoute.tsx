@@ -1,18 +1,16 @@
 import React from 'react';
 import {Route, Redirect, RouteProps} from 'react-router-dom';
-/* ---------------------------------- Utils --------------------------------- */
-import {PAGE_LINKS} from '@utils/config';
-/* -------------------------------- Contexts -------------------------------- */
-import CurrentUserContext from '@contexts/CurrentUserContext';
-/* -------------------------------------------------------------------------- */
 
-export type Props = RouteProps;
+export interface FunctionalProps {
+  condition: boolean;
+  redirectTo: string;
+}
+export type Props = RouteProps & FunctionalProps;
 
-export function ProtectedRoute({...rest}: Props): JSX.Element {
-  const {loggedIn: isLoggedIn} = React.useContext(CurrentUserContext);
+export function ProtectedRoute({condition, redirectTo, ...rest}: Props): JSX.Element {
   const renderComponent = () => {
-    if (!isLoggedIn) {
-      return <Redirect to={PAGE_LINKS.signIn} />;
+    if (!condition) {
+      return <Redirect to={redirectTo} />;
     }
     return <Route {...rest} />;
   };

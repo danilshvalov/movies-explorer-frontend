@@ -1,4 +1,4 @@
-import {ParsedTime} from 'types/types';
+import {MoviesList, ParsedTime} from 'types/types';
 import {IMAGE_SERVER_URL} from '@utils/config';
 /**
  * Функция выравнивания количества
@@ -31,22 +31,20 @@ export function parseImage(path?: string): string {
   return new URL(path || '', IMAGE_SERVER_URL).href;
 }
 
-export interface CancelablePromise<T> extends Promise<T> {
-  cancel: () => void;
-}
-
-// interface Promise<T> {
-//   asCancelable(): CancelablePromise<T>;
-// }
-
-export function asCancelable<T>(promise: Promise<T>): CancelablePromise<T> {
-  let cancel: (reason: {cancelled: boolean}) => void;
-  const wrappedPromise = new Promise((resolve, reject) => {
-    cancel = reject;
-    Promise.resolve(promise).then(resolve).catch(reject);
-  }) as any;
-  wrappedPromise.cancel = () => {
-    cancel({cancelled: true});
-  };
-  return wrappedPromise as CancelablePromise<T>;
+/**
+ * Получает на вход все фильмы и сохраненные фильмы
+ * Возвращает список всех фильмов, с помеченными сохраненными
+ */
+export function markSavedMovies(allMovies: MoviesList, savedMovies?: MoviesList): MoviesList {
+  return allMovies.map((movie) => {
+    if (savedMovies) {
+      const same = savedMovies.find(
+        (other) => movie.movieId === other.movieId,
+      );
+      return same
+        ? {...movie, isSaved: true, _id: same._id}
+        : {...movie, isSaved: false};
+    }
+    return {...movie, isSaved: false};
+  });
 }

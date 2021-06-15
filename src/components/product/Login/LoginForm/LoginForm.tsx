@@ -29,11 +29,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
   const cn = createCn('login-form', className);
 
   const {
-    values,
-    handleChange,
-    errors,
-    isValid,
-    isFieldValid,
+    values, handleChange, errors, isValid, isFieldValid,
   } = useFormWithValidation({
     emailInput: '',
     passwordInput: '',
@@ -41,7 +37,6 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
 
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);
-
   function handleAPIError(err: Error) {
     setAPIError(err.message);
   }
@@ -57,9 +52,7 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
       onLogin({
         email: emailValue,
         password: passwordValue,
-      })
-        .catch(handleAPIError)
-        .finally(() => setIsProcessing(false));
+      }).catch(handleAPIError);
     }
   };
 
@@ -119,11 +112,9 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
         disabled={!isValid || isProcessing}
         theme={Theme.Azure}
       >
-        {
-          isProcessing
-            ? TEXTS.submitButton.loadingText
-            : TEXTS.submitButton.text
-        }
+        {isProcessing
+          ? TEXTS.submitButton.loadingText
+          : TEXTS.submitButton.text}
       </Button>
     </GenericForm.Form>
   );

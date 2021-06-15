@@ -227,6 +227,8 @@ export const PROFILE = {
     submitButton: {
       loadingText: 'Изменяем...',
       text: 'Редактировать',
+      afterChangeText: 'Готово',
+      hoverErrorText: 'Вы ничего не изменили. Сохранение не требуется',
     },
   },
   subtext: {
@@ -265,8 +267,7 @@ export const REGISTER = {
 /* -------------------------------------------------------------------------- */
 export const SAVED_MOVIES = {
   errorBoundary: {
-    message:
-      'Что-то пошло не так. Подождите немного и попробуйте ещё раз',
+    message: 'Что-то пошло не так. Подождите немного и попробуйте ещё раз',
     button: {
       text: 'Давайте попробуем ещё раз',
     },

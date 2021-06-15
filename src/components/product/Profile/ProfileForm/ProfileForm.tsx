@@ -1,11 +1,12 @@
 import {createCn} from 'bem-react-classname';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {
+  ChangeEvent, useContext, useEffect, useState,
+} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
 import * as GenericForm from '@generic/Form/Form';
 import Button from '@generic/Button/Button';
 import Field from '@generic/Field/Field';
-import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
 /* ---------------------------------- Utils --------------------------------- */
@@ -17,7 +18,7 @@ import CurrentUserContext from '@contexts/CurrentUserContext';
 /* -------------------------------------------------------------------------- */
 import './ProfileForm.css';
 
-const texts = PROFILE.form;
+const TEXTS = PROFILE.form;
 
 export type DOMProps = GenericForm.DOMProps;
 export interface FunctionalProps {
@@ -34,26 +35,18 @@ export function ProfileForm({
   const currentUser = useContext(CurrentUserContext);
 
   const {
-    values,
-    setValues,
-    isFieldValid,
-    handleChange,
-    errors,
-    isValid,
+    values, setValues, isFieldValid, handleChange, errors, isValid,
   } = useFormWithValidation({
     nameInput: currentUser.name,
     emailInput: currentUser.email,
   });
 
-  useEffect(() => {
-    setValues({nameInput: currentUser.name || '', emailInput: currentUser.email || ''});
-  }, [currentUser]);
-
-  // TODO API error работает???
   const [APIError, setAPIError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isFormValid, setIsFormValid] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
+  const [submitButtonText, setSubmitButtonText] = useState(
+    TEXTS.submitButton.text,
+  );
 
   /**
    * HTML-текст, появляющийся при наведении на кнопку submit
@@ -62,7 +55,31 @@ export function ProfileForm({
    */
   const [hoverButtonText, setHoverButtonText] = useState('');
 
-  /* -------------------------------------------------------------------------- */
+  /* -------------------------------- Handlers -------------------------------- */
+
+  function handleInputChange(evt: ChangeEvent<HTMLInputElement>) {
+    handleChange(evt);
+    setSubmitButtonText(TEXTS.submitButton.text);
+  }
+
+  function handlePreSubmit() {
+    setIsProcessing(true);
+    setSubmitButtonText(TEXTS.submitButton.loadingText);
+  }
+
+  function handleSuccessUpdate() {
+    setSubmitButtonText(TEXTS.submitButton.afterChangeText);
+  }
+
+  function handleProcessFinalization() {
+    setIsProcessing(false);
+  }
+
+  function handleAPIError(err: Error) {
+    setSubmitButtonText(TEXTS.submitButton.text);
+    setAPIError(err.message);
+  }
+
   const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
 
@@ -70,18 +87,18 @@ export function ProfileForm({
     const emailValue = values.emailInput;
 
     if (isFormValid && nameValue && emailValue) {
-      setIsProcessing(true);
+      handlePreSubmit();
       onProfileUpdate({
         name: nameValue,
         email: emailValue,
       })
-        .catch(setAPIError)
-        .finally(() => setIsProcessing(false));
+        .then(handleSuccessUpdate)
+        .catch(handleAPIError)
+        .finally(handleProcessFinalization);
     }
   };
-  useEffect(() => {
-    setIsLoading(currentUser.isLoading ?? true);
-  }, [currentUser.isLoading]);
+
+  /* --------------------------------- Effects -------------------------------- */
 
   useEffect(() => {
     function checkIsChanged(): boolean {
@@ -93,8 +110,13 @@ export function ProfileForm({
 
     const isChanged = checkIsChanged();
 
+    /**
+     * Если пользователь хочет отправить форму, но данные остались прежними,
+     * при наведении на кнопку появляется надпись, информирующая пользователя о том,
+     * почему кнопка находится в заблокированном состоянии
+     */
     if (!isChanged) {
-      setHoverButtonText('Вы ничего не изменили. Сохранение не требуется');
+      setHoverButtonText(TEXTS.submitButton.hoverErrorText);
     } else {
       setHoverButtonText('');
     }
@@ -102,74 +124,75 @@ export function ProfileForm({
     setIsFormValid(isValid && isChanged);
   }, [values]);
 
-  // ----------------------------------------------
+  useEffect(() => {
+    setValues({
+      nameInput: currentUser.name ?? '',
+      emailInput: currentUser.email ?? '',
+    });
+  }, [currentUser]);
+
+  /* -------------------------------------------------------------------------- */
 
   return (
-    <PreloaderWrapper isLoading={isLoading}>
-      <GenericForm.Form
-        {...props}
-        className={cn()}
-        onSubmit={handleSubmit}
-        noValidate
+    <GenericForm.Form
+      {...props}
+      className={cn()}
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <fieldset className={cn('fieldset')}>
+        {/** Поле с именем */}
+        <div className={cn('container')}>
+          <div className={cn('field-wrapper')}>
+            <label className={cn('label')}>{TEXTS.nameInput.label}</label>
+            <Field
+              className={cn('field')}
+              name={'nameInput'}
+              onChange={handleInputChange}
+              minLength={2}
+              isError={!isFieldValid('nameInput')}
+              disabled={isProcessing}
+              required
+              defaultValue={values.nameInput || ''}
+            />
+          </div>
+          <ErrorMessage className={cn('field-error')}>
+            {errors.nameInput}
+          </ErrorMessage>
+        </div>
+
+        {/** Поле с Email */}
+        <div className={cn('container')}>
+          <div className={cn('field-wrapper')}>
+            <label className={cn('label')}>{TEXTS.emailInput.label}</label>
+            <Field
+              className={cn('field')}
+              name={'emailInput'}
+              onChange={handleInputChange}
+              type="email"
+              isError={!isFieldValid('emailInput')}
+              required
+              disabled={isProcessing}
+              defaultValue={values.emailInput || ''}
+            />
+          </div>
+          <ErrorMessage className={cn('field-error')}>
+            {errors.emailInput}
+          </ErrorMessage>
+        </div>
+      </fieldset>
+
+      {/** Кнопка отправки формы */}
+      <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
+      <Button
+        className={cn('submit-button')}
+        type="submit"
+        disabled={!isFormValid || isProcessing}
+        title={hoverButtonText}
       >
-        <fieldset className={cn('fieldset')}>
-          {/** Поле с именем */}
-          <div className={cn('container')}>
-            <div className={cn('field-wrapper')}>
-              <label className={cn('label')}>{texts.nameInput.label}</label>
-              <Field
-                className={cn('field')}
-                name={'nameInput'}
-                onChange={handleChange}
-                minLength={2}
-                isError={!isFieldValid('nameInput')}
-                disabled={isProcessing}
-                required
-                defaultValue={values.nameInput || ''}
-              />
-            </div>
-            <ErrorMessage className={cn('field-error')}>
-              {errors.nameInput}
-            </ErrorMessage>
-          </div>
-
-          {/** Поле с Email */}
-          <div className={cn('container')}>
-            <div className={cn('field-wrapper')}>
-              <label className={cn('label')}>{texts.emailInput.label}</label>
-              <Field
-                className={cn('field')}
-                name={'emailInput'}
-                onChange={handleChange}
-                type="email"
-                isError={!isFieldValid('emailInput')}
-                required
-                disabled={isProcessing}
-                defaultValue={values.emailInput || ''}
-              />
-            </div>
-            <ErrorMessage className={cn('field-error')}>
-              {errors.emailInput}
-            </ErrorMessage>
-          </div>
-        </fieldset>
-
-        {/** Кнопка отправки формы */}
-        <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
-        <Button
-          className={cn('submit-button')}
-          type="submit"
-          disabled={!isFormValid || isProcessing}
-          title={hoverButtonText}
-        >
-          {
-            isProcessing
-              ? texts.submitButton.loadingText
-              : texts.submitButton.text
-          }
-        </Button>
-      </GenericForm.Form>
-    </PreloaderWrapper>
+        {submitButtonText}
+      </Button>
+    </GenericForm.Form>
   );
 }
 

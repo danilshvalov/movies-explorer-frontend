@@ -5,16 +5,24 @@ import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
 import useAllMovies from '@hooks/UseAllMovies';
 import useSavedMovies from '@hooks/UseSavedMovies';
 /* ---------------------------------- Types --------------------------------- */
-import {IMovie, OnErrorMessageFunc, SearchData} from 'types/types';
+import {
+  IMovie,
+  OnErrorMessageFunc,
+  SearchData,
+} from 'types/types';
 /* ---------------------------------- Utils --------------------------------- */
-import moviesFilter from '@utils/movies-filter';
+import {filterMoviesList} from '@utils/movies-filter';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/Movies/MoviesCardList/MoviesCardList';
 import ErrorStub from '@product/Movies/ErrorStub/ErrorStub';
 import ErrorWrapper from '@generic/ErrorWrapper/ErrorWrapper';
 import useExpandableList from '@hooks/UseExpandableList';
-import {DEVICES_WIDTHS, MOVIES_AMOUNT_BY_DEVICE} from '@utils/config';
+import {
+  DEVICES_WIDTHS,
+  MOVIES_AMOUNT_BY_DEVICE,
+} from '@utils/config';
 import getDeviceType from '@utils/device-type';
+import {markSavedMovies} from '@utils/utils';
 /* -------------------------------------------------------------------------- */
 
 export interface FunctionalProps {
@@ -33,17 +41,12 @@ export type Props = FunctionalProps;
  * @see useAllMovies
  * @see useSavedMovies
  * */
-function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element {
+function MoviesManager({
+  searchData,
+  onErrorMessage,
+}: Props): JSX.Element {
   const {startCount} = MOVIES_AMOUNT_BY_DEVICE[getDeviceType(DEVICES_WIDTHS)];
-
   const [isError, setIsError] = useState(false);
-  const handleErrorSet = () => {
-    setIsError(true);
-  };
-  const handleErrorMessage = (err: Error) => {
-    onErrorMessage(err.message);
-  };
-
   const [isLoading, setIsLoading] = useState(true);
   const allMovies = useAllMovies();
   const savedMovies = useSavedMovies();
@@ -56,72 +59,90 @@ function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element {
     allMovies.value,
   );
 
-  useEffect(() => {
-    allMovies.loadOrRetry().catch(handleErrorSet);
-    savedMovies.loadOrRetry().catch(handleErrorSet);
-  }, []);
+  /* -------------------------------- Handlers -------------------------------- */
 
-  const handleErrorReset = () => {
+  function handleErrorSet() {
+    setIsError(true);
+  }
+
+  function handleLoadMovies() {
     allMovies.loadOrRetry().catch(handleErrorSet);
     savedMovies.loadOrRetry().catch(handleErrorSet);
+  }
+
+  function handleReset() {
+    handleLoadMovies();
     setIsError(false);
-  };
+  }
+
+  function handleErrorMessage(err: Error) {
+    onErrorMessage(err.message);
+  }
+
+  function handleSuccessSaving(movie: IMovie) {
+    allMovies.removeMovie(movie);
+    return movie;
+  }
 
   function handleSave(data: IMovie): Promise<IMovie> {
     return savedMovies
       .saveMovie(data)
-      .then((movie) => {
-        allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId //
-          ? {...movie, isSaved: true}
-          : val)));
-        return movie;
-      })
+      .then(handleSuccessSaving)
       .catch((err) => {
         handleErrorMessage(err);
+        /** Если что-то пошло не так - возвращаем старые данные */
         return data;
       });
   }
 
   function handleDelete(data: IMovie): Promise<IMovie> {
-    return savedMovies.deleteMovie(data).then(() => {
-      allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId //
-        ? {...data, isSaved: false}
-        : val)));
-      return data;
-    }).catch((err) => {
-      handleErrorMessage(err);
-      return data;
-    });
+    return savedMovies
+      .deleteMovie(data)
+      .then(() => {
+        allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId
+          ? {...data, isSaved: false}
+          : val)));
+        return data;
+      })
+      .catch((err) => {
+        handleErrorMessage(err);
+        /** Если что-то пошло не так - возвращаем старые данные */
+        return data;
+      });
   }
 
+  /* --------------------------------- Effects -------------------------------- */
+
   useEffect(() => {
-    setIsLoading(allMovies.isLoading || savedMovies.isLoading);
+    /** Первоначальная загрузка фильмов при монтировании */
+    handleLoadMovies();
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(
+      allMovies.isLoading || savedMovies.isLoading,
+    );
   }, [allMovies.isLoading, savedMovies.isLoading]);
 
   useEffect(() => {
-    if (allMovies.value && savedMovies.value) {
-      filteredMovies.setValue(
-        allMovies.value
-          .filter((movie) => moviesFilter(movie, searchData))
-          .map((movie) => {
-            if (savedMovies.value) {
-              const same = savedMovies.value.find(
-                (other) => movie.movieId === other.movieId,
-              );
-              return same
-                ? {...movie, isSaved: true, _id: same._id}
-                : {...movie, isSaved: false};
-            }
-            return {...movie, isSaved: false};
-          }),
-      );
+    function handleSearching() {
+      if (allMovies.value && savedMovies.value) {
+        filteredMovies.setValue(
+          markSavedMovies(
+            filterMoviesList(allMovies.value, searchData),
+            savedMovies.value,
+          ),
+        );
+      }
     }
+
+    handleSearching();
   }, [searchData, allMovies.value, savedMovies.value]);
 
   /** Сброс ошибки при поиске */
   useEffect(() => {
     if (isError) {
-      handleErrorReset();
+      handleReset();
     }
   }, [searchData]);
 
@@ -129,7 +150,7 @@ function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element {
     <PreloaderWrapper isLoading={isLoading}>
       <ErrorWrapper
         isError={isError}
-        onReset={handleErrorReset}
+        onReset={handleReset}
         fallback={ErrorStub}
       >
         <MoviesCardList

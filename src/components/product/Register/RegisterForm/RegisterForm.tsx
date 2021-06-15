@@ -8,6 +8,7 @@ import FieldWrapper from '@generic/FieldWrapper/FieldWrapper';
 import * as GenericForm from '@generic/Form/Form';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
+import useSafeAsyncCall from '@hooks/UseSafeAsyncCall';
 /* ---------------------------------- Utils --------------------------------- */
 import {REGISTER} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
@@ -36,6 +37,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
 
   const [APIError, setAPIError] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const call = useSafeAsyncCall();
 
   function handleAPIError(err: Error) {
     setAPIError(err.message);
@@ -56,7 +58,7 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
         password: values.passwordInput as string,
       })
         .catch(handleAPIError)
-        .finally(() => setIsProcessing(false));
+        .finally(call(() => setIsProcessing(false)));
     }
   };
   return (

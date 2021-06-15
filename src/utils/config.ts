@@ -21,13 +21,17 @@ export const DEVICES_WIDTHS: DeviceWidthSettings = {
   phone: 320,
 };
 
+export const SHORTS_FILMS_DURATION = 40;
+
 export const PAGE_LINKS = {
+  /** exact */
   main: '/',
   movies: '/movies',
   savedMovies: '/saved-movies',
   profile: '/profile',
   signIn: '/signin',
   signUp: '/signup',
+  notFound: '/',
 };
 
 export const SECTIONS_IDS = {

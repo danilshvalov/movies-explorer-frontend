@@ -1,5 +1,5 @@
 import React, {createCn} from 'bem-react-classname';
-import {useEffect, useRef, useState} from 'react';
+import {useState} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
 import DeleteButton from '@generic/DeleteButton/DeleteButton';
@@ -21,34 +21,17 @@ export function MoviesCard({onDelete, ...props}: Props): JSX.Element {
   const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  /** Избавляемся от утечек памяти при размонтировании */
-  const isMounted = useRef(true);
-  /** Сама обертка */
-  function wrap(action: () => void) {
-    return () => {
-      if (isMounted.current) {
-        action();
-      }
-    };
-  }
-
-  useEffect(
-    () => () => {
-      isMounted.current = false;
-    },
-    [],
-  );
-
   function handleClick() {
     setIsLoading(true);
-    onDelete(props as IMovie).finally(wrap(() => setIsLoading(false)));
+    onDelete(props as IMovie);
   }
 
   return (
     <div
       className={cn()}
-      onMouseEnter={wrap(() => setIsHovered(true))}
-      onMouseLeave={wrap(() => setIsHovered(false))}
+      onMouseOver={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
     >
       <GenericMoviesCard.MoviesCard {...(props as GenericMoviesCard.Props)} />
       {/** Кнопка появляется при наведении  */}
