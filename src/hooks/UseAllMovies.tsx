@@ -17,6 +17,8 @@ export interface ReturnType {
   >;
   isLoading: boolean;
   loadOrRetry: () => Promise<void>;
+  /** Добавляет фильм в массив без запроса к API */
+  addMovie: (data: IMovie) => void;
   /** Удаляет фильм из массива без запроса к API */
   removeMovie: (data: IMovie) => void;
 }
@@ -35,10 +37,19 @@ export function useAllMovies(): ReturnType {
       .finally(() => setIsLoading(false));
   }, [setValue, setIsLoading]);
 
-  const removeMovie = useCallback(
+  const addMovie = useCallback(
     (movie: IMovie) => {
       setValue((old) => old?.map((val) => (val.movieId === movie.movieId
         ? {...movie, isSaved: true}
+        : val)));
+    },
+    [setValue],
+  );
+
+  const removeMovie = useCallback(
+    (movie: IMovie) => {
+      setValue((old) => old?.map((val) => (val.movieId === movie.movieId
+        ? {...movie, isSaved: false}
         : val)));
     },
     [setValue],
@@ -49,6 +60,7 @@ export function useAllMovies(): ReturnType {
     setValue,
     isLoading,
     loadOrRetry,
+    addMovie,
     removeMovie,
   };
 }

@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import PreloaderWrapper from '@generic/PreloaderWrapper/PreloaderWrapper';
+import ErrorWrapper from '@generic/ErrorWrapper/ErrorWrapper';
 /* ---------------------------------- Hooks --------------------------------- */
 import useAllMovies from '@hooks/UseAllMovies';
 import useSavedMovies from '@hooks/UseSavedMovies';
+import useExpandableList from '@hooks/UseExpandableList';
 /* ---------------------------------- Types --------------------------------- */
 import {
   IMovie,
@@ -15,8 +17,7 @@ import {filterMoviesList} from '@utils/movies-filter';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/Movies/MoviesCardList/MoviesCardList';
 import ErrorStub from '@product/Movies/ErrorStub/ErrorStub';
-import ErrorWrapper from '@generic/ErrorWrapper/ErrorWrapper';
-import useExpandableList from '@hooks/UseExpandableList';
+/* ---------------------------------- Utils --------------------------------- */
 import {
   DEVICES_WIDTHS,
   MOVIES_AMOUNT_BY_DEVICE,
@@ -79,7 +80,12 @@ function MoviesManager({
     onErrorMessage(err.message);
   }
 
-  function handleSuccessSaving(movie: IMovie) {
+  function handleSuccessSaving(movie: IMovie): IMovie {
+    allMovies.addMovie(movie);
+    return movie;
+  }
+
+  function handleSuccessDeleting(movie: IMovie): IMovie {
     allMovies.removeMovie(movie);
     return movie;
   }
@@ -98,12 +104,7 @@ function MoviesManager({
   function handleDelete(data: IMovie): Promise<IMovie> {
     return savedMovies
       .deleteMovie(data)
-      .then(() => {
-        allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId
-          ? {...data, isSaved: false}
-          : val)));
-        return data;
-      })
+      .then(handleSuccessDeleting)
       .catch((err) => {
         handleErrorMessage(err);
         /** Если что-то пошло не так - возвращаем старые данные */
@@ -156,7 +157,7 @@ function MoviesManager({
         <MoviesCardList
           onSave={handleSave}
           onDelete={handleDelete}
-          moviesList={filteredMovies.value || []}
+          moviesList={filteredMovies.value ?? []}
           isComplete={filteredMovies.isComplete}
           onExpand={filteredMovies.expand}
         />
