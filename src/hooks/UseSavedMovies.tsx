@@ -1,16 +1,13 @@
 import {
-  useState,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-  useEffect,
+  useState, useCallback, Dispatch, SetStateAction,
 } from 'react';
 /* ---------------------------------- Utils --------------------------------- */
 import mainApi from '@utils/api/MainApi';
+import {LOCAL_STORAGE_KEYS} from '@utils/config';
 /* ---------------------------------- Types --------------------------------- */
-import {IMovie, MoviesList, OnErrorFunc} from 'types/types';
+import {IMovie, MoviesList} from 'types/types';
 /* ---------------------------------- Hooks --------------------------------- */
-import useLocalStorage from './UseLocalStorage';
+import useLocalStorage from '@hooks/UseLocalStorage';
 /* -------------------------------------------------------------------------- */
 
 export interface ReturnType {
@@ -20,7 +17,7 @@ export interface ReturnType {
   saveMovie: (data: IMovie) => Promise<IMovie>;
   deleteMovie: (data: IMovie) => Promise<IMovie>;
   containsMovie: (data: IMovie) => boolean;
-  retry: () => void;
+  loadOrRetry: () => Promise<void>;
 }
 
 /**
@@ -30,40 +27,31 @@ export interface ReturnType {
  *
  * @see mainApi
  */
-export function useSavedMovies(errorHandler: OnErrorFunc): ReturnType {
-  const [value, setValue] = useLocalStorage<MoviesList>('saved-movies');
+export function useSavedMovies(): ReturnType {
+  const [value, setValue] = useLocalStorage<MoviesList>(LOCAL_STORAGE_KEYS.savedMovies);
   const [isLoading, setIsLoading] = useState(false);
 
-  const retry = useCallback(() => {
+  const loadOrRetry = useCallback(() => {
     if (!value) {
       setIsLoading(true);
-      mainApi
-        .getSavedMovies()
-        .then((val) => {
-          setValue(val);
-          setIsLoading(false);
-        })
-        .catch(errorHandler);
+      return mainApi.getSavedMovies().then((val) => {
+        setValue(val);
+        setIsLoading(false);
+      });
     }
+    return Promise.resolve();
   }, [setIsLoading, setValue]);
 
-  useEffect(() => {
-    retry();
-  }, []);
-
   const saveMovie = useCallback(
-    (data: IMovie) => mainApi
-      .saveMovie(data)
-      .then((movie) => {
-        setValue((old) => {
-          if (old) {
-            return [...old, movie];
-          }
-          return [movie];
-        });
-        return movie;
-      })
-      .catch(errorHandler),
+    (data: IMovie) => mainApi.saveMovie(data).then((movie) => {
+      setValue((old) => {
+        if (old) {
+          return [...old, movie];
+        }
+        return [movie];
+      });
+      return movie;
+    }),
     [value, setValue],
   );
 
@@ -73,19 +61,16 @@ export function useSavedMovies(errorHandler: OnErrorFunc): ReturnType {
      * Если это не так - нарушена логика формирования карточки
      */
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    (data: IMovie) => mainApi
-      .deleteMovie(data._id!)
-      .then((movie) => {
-        setValue((old) => old?.filter((val: IMovie) => {
-          if (val._id && movie._id) {
-            return val._id !== movie._id;
-          }
-          return false;
-        }));
+    (data: IMovie) => mainApi.deleteMovie(data._id!).then((movie) => {
+      setValue((old) => old?.filter((val: IMovie) => {
+        if (val._id && movie._id) {
+          return val._id !== movie._id;
+        }
+        return false;
+      }));
 
-        return movie;
-      })
-      .catch(errorHandler),
+      return movie;
+    }),
     [value, setValue],
   );
 
@@ -105,7 +90,7 @@ export function useSavedMovies(errorHandler: OnErrorFunc): ReturnType {
     containsMovie,
     saveMovie,
     deleteMovie,
-    retry,
+    loadOrRetry,
   };
 }
 

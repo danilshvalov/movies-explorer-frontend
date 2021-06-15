@@ -37,14 +37,16 @@ function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element {
   const {startCount} = MOVIES_AMOUNT_BY_DEVICE[getDeviceType(DEVICES_WIDTHS)];
 
   const [isError, setIsError] = useState(false);
-  const handleErrorSet = (err: Error) => {
-    onErrorMessage(err.message);
+  const handleErrorSet = () => {
     setIsError(true);
+  };
+  const handleErrorMessage = (err: Error) => {
+    onErrorMessage(err.message);
   };
 
   const [isLoading, setIsLoading] = useState(true);
-  const allMovies = useAllMovies(handleErrorSet);
-  const savedMovies = useSavedMovies(handleErrorSet);
+  const allMovies = useAllMovies();
+  const savedMovies = useSavedMovies();
   const filteredMovies = useExpandableList<IMovie>(
     {
       startCount,
@@ -54,19 +56,30 @@ function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element {
     allMovies.value,
   );
 
+  useEffect(() => {
+    allMovies.loadOrRetry().catch(handleErrorSet);
+    savedMovies.loadOrRetry().catch(handleErrorSet);
+  }, []);
+
   const handleErrorReset = () => {
-    allMovies.retry();
-    savedMovies.retry();
+    allMovies.loadOrRetry().catch(handleErrorSet);
+    savedMovies.loadOrRetry().catch(handleErrorSet);
     setIsError(false);
   };
 
   function handleSave(data: IMovie): Promise<IMovie> {
-    return savedMovies.saveMovie(data).then((movie) => {
-      allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId //
-        ? {...movie, isSaved: true}
-        : val)));
-      return movie;
-    });
+    return savedMovies
+      .saveMovie(data)
+      .then((movie) => {
+        allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId //
+          ? {...movie, isSaved: true}
+          : val)));
+        return movie;
+      })
+      .catch((err) => {
+        handleErrorMessage(err);
+        return data;
+      });
   }
 
   function handleDelete(data: IMovie): Promise<IMovie> {
@@ -74,6 +87,9 @@ function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element {
       allMovies.setValue((old) => old?.map((val) => (val.movieId === data.movieId //
         ? {...data, isSaved: false}
         : val)));
+      return data;
+    }).catch((err) => {
+      handleErrorMessage(err);
       return data;
     });
   }

@@ -1,4 +1,5 @@
 import mainApi from '@utils/api/MainApi';
+import {PAGE_LINKS} from '@utils/config';
 import {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {UpdateProfileData} from 'types/Api';
@@ -15,12 +16,17 @@ export function useUser(): User {
     isLoading: true,
   });
 
+  const history = useHistory();
+
   useEffect(() => {
     mainApi
       .checkToken()
       .then(({name, email}) => {
         setCurrentUser((user) => ({
-          ...user, name, email, loggedIn: true,
+          ...user,
+          name,
+          email,
+          loggedIn: true,
         }));
       })
       .catch(() => setCurrentUser((user) => ({...user, loggedIn: false})))
@@ -32,8 +38,12 @@ export function useUser(): User {
       .authorize(data)
       .then(({email, name}) => {
         setCurrentUser((user) => ({
-          ...user, email, name, loggedIn: true,
+          ...user,
+          email,
+          name,
+          loggedIn: true,
         }));
+        history.push(PAGE_LINKS.movies);
         return {email, name};
       })
       .catch((err) => {
@@ -42,8 +52,14 @@ export function useUser(): User {
       });
   }
 
-  function register(data: RegisterUserData): Promise<RegisterUserData> {
-    return mainApi.register(data);
+  function register(data: RegisterUserData): Promise<AuthorizedUserData> {
+    return mainApi
+      .register(data)
+      .then(() => authorize(data))
+      .catch((err) => {
+        setCurrentUser((user) => ({...user, loggedIn: false}));
+        return Promise.reject(err);
+      });
   }
 
   function updateUserInfo(data: ProfileUserData): Promise<UpdateProfileData> {
@@ -54,16 +70,20 @@ export function useUser(): User {
   }
 
   function logout() {
-    return mainApi.logout();
+    return mainApi.logout().then(() => {
+      setCurrentUser((user) => ({...user, loggedIn: false}));
+      history.push(PAGE_LINKS.main);
+    });
   }
-
-  const history = useHistory();
 
   useEffect(() => {
     mainApi
       .checkToken()
       .then(({name, email}) => setCurrentUser((user) => ({
-        ...user, name, email, loggedIn: true,
+        ...user,
+        name,
+        email,
+        loggedIn: true,
       })))
       .catch(() => setCurrentUser({...currentUser, loggedIn: false}));
   }, [history]);

@@ -6,7 +6,9 @@ import useSavedMovies from '@hooks/UseSavedMovies';
 /* ---------------------------------- Utils --------------------------------- */
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Types --------------------------------- */
-import {MoviesList, OnErrorMessageFunc, SearchData} from 'types/types';
+import {
+  IMovie, MoviesList, OnErrorMessageFunc, SearchData,
+} from 'types/types';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/SavedMovies/MoviesCardList/MoviesCardList';
 import ErrorStub from '@product/SavedMovies/ErrorStub/ErrorStub';
@@ -28,23 +30,37 @@ export type Props = FunctionalProps;
  *
  * @see useSavedMovies
  * */
-export function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element {
+export function MoviesManager({
+  searchData,
+  onErrorMessage,
+}: Props): JSX.Element {
   const [isError, setIsError] = useState(false);
-  const handleErrorSet = (err: Error) => {
-    onErrorMessage(err.message);
-    setIsError(true);
-  };
 
-  const savedMovies = useSavedMovies(handleErrorSet);
-
-  const handleErrorReset = () => {
-    savedMovies.retry();
-    setIsError(false);
-  };
+  const savedMovies = useSavedMovies();
 
   const [filteredMovies, setFilteredMovies] = useState<MoviesList>(
     savedMovies.value || [],
   );
+
+  const handleErrorSet = () => {
+    setIsError(true);
+  };
+  const handleErrorReset = () => {
+    savedMovies.loadOrRetry().catch(handleErrorSet);
+    setIsError(false);
+  };
+
+  const handleDelete = (data: IMovie) => savedMovies
+    .deleteMovie(data)
+    .then()
+    .catch((err) => {
+      onErrorMessage(err.message);
+      return data;
+    });
+
+  useEffect(() => {
+    savedMovies.loadOrRetry().catch(handleErrorSet);
+  }, []);
 
   useEffect(() => {
     if (savedMovies.value) {
@@ -72,7 +88,7 @@ export function MoviesManager({searchData, onErrorMessage}: Props): JSX.Element 
       >
         <MoviesCardList
           moviesList={filteredMovies}
-          onDelete={savedMovies.deleteMovie}
+          onDelete={handleDelete}
         />
       </ErrorWrapper>
     </PreloaderWrapper>

@@ -51,12 +51,12 @@ export function MoviesCard({className, ...props}: Props): JSX.Element {
     if (!isSaved) {
       props
         .onSave(movie)
-        .then(wrap(() => setIsSaved((old) => !old)))
+        .then(wrap(() => (val: IMovie) => setIsSaved(val.isSaved)))
         .finally(wrap(() => setIsLoading(false)));
     } else {
       props
         .onDelete(movie)
-        .then(wrap(() => setIsSaved((old) => !old)))
+        .then(wrap(() => (val: IMovie) => setIsSaved(val.isSaved)))
         .finally(wrap(() => setIsLoading(false)));
     }
   }

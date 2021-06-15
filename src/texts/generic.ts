@@ -32,7 +32,7 @@ export const MOVIES_CARD = {
 /* -------------------------------------------------------------------------- */
 
 export const NOTHING_FOUND_STUB = {
-  description: 'Ничего не удалось найти :/',
+  description: 'Котик здесь ничего не нашёл :/',
   img: {
     alt: 'Картинка котика',
     src: images.NOT_FOUND_CAT,

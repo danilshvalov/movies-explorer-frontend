@@ -14,7 +14,7 @@ import SavedMoviesPage from '@product/SavedMovies/SavedMovies';
 import ProfilePage from '@product/Profile/Profile';
 import MainPage from '@product/Main/Main';
 /* ---------------------------------- Utils --------------------------------- */
-import {PAGE_LINKS} from '@utils/config';
+import {LOCAL_STORAGE_KEYS, PAGE_LINKS} from '@utils/config';
 /* -------------------------------- Contexts -------------------------------- */
 import CurrentUserContext from '@contexts/CurrentUserContext';
 /* ---------------------------------- Hooks --------------------------------- */
@@ -38,16 +38,18 @@ function App(): JSX.Element {
   const currentUser = useUser();
 
   function handleLogin(data: LoginUserData) {
-    return currentUser.authorize(data);
+    return currentUser.authorize(data).then((res) => {
+      /** Убираем фильмы предыдущего пользователя, если таковые имеются */
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.savedMovies);
+      return res;
+    });
   }
 
   function handleRegister(data: RegisterUserData) {
     return currentUser.register(data);
   }
 
-  const handleLogout = () => {
-    currentUser.logout();
-  };
+  const handleLogout = () => currentUser.logout();
 
   function handleProfileUpdate(data: ProfileUserData) {
     return currentUser.updateUserInfo(data);

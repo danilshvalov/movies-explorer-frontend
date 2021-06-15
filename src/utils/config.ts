@@ -50,3 +50,6 @@ export const EXTERNAL_LINKS = {
 export const BEATFILM_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 export const BACKEND_URL = 'http://localhost:5000';
 export const IMAGE_SERVER_URL = 'https://api.nomoreparties.co/';
+export const LOCAL_STORAGE_KEYS = {
+  savedMovies: 'saved-movies',
+};
