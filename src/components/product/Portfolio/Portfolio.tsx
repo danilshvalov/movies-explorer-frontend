@@ -9,8 +9,7 @@ import {PORTFOLIO as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import './Portfolio.css';
 
-export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export type Props = DOMProps;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
 /** Секция с ссылками на проекты из портфолио */
 export function Portfolio({className, ...props}: Props): JSX.Element {

@@ -18,9 +18,9 @@ export function NotFound(
 
   const history = useHistory();
 
-  const handleBackButtonClick = () => {
+  function handleBackButtonClick() {
     history.push(PAGE_LINKS.main);
-  };
+  }
   return (
     <div className={cn()}>
       <div className={cn('container')}>

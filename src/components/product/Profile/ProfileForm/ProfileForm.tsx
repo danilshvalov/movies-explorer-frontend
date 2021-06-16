@@ -1,6 +1,9 @@
 import {createCn} from 'bem-react-classname';
 import React, {
-  ChangeEvent, useContext, useEffect, useState,
+  ChangeEvent,
+  useContext,
+  useEffect,
+  useState,
 } from 'react';
 /* --------------------------------- Generics -------------------------------- */
 import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
@@ -25,8 +28,8 @@ export type DOMProps = GenericForm.DOMProps;
 export interface FunctionalProps {
   onProfileUpdate: OnProfileUpdateFunc;
 }
-
 export type Props = DOMProps & FunctionalProps;
+
 export function ProfileForm({
   className,
   onProfileUpdate,
@@ -36,7 +39,12 @@ export function ProfileForm({
   const currentUser = useContext(CurrentUserContext);
 
   const {
-    values, setValues, isFieldValid, handleChange, errors, isValid,
+    values,
+    setValues,
+    isFieldValid,
+    handleChange,
+    errors,
+    isValid,
   } = useFormWithValidation({
     nameInput: currentUser.name,
     emailInput: currentUser.email,
@@ -58,7 +66,9 @@ export function ProfileForm({
 
   /* -------------------------------- Handlers -------------------------------- */
 
-  function handleInputChange(evt: ChangeEvent<HTMLInputElement>) {
+  function handleInputChange(
+    evt: ChangeEvent<HTMLInputElement>,
+  ) {
     handleChange(evt);
     setSubmitButtonText(TEXTS.submitButton.text);
   }
@@ -145,7 +155,9 @@ export function ProfileForm({
         {/** Поле с именем */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>{TEXTS.nameInput.label}</label>
+            <label className={cn('label')}>
+              {TEXTS.nameInput.label}
+            </label>
             <Field
               className={cn('field')}
               name={'nameInput'}
@@ -165,7 +177,9 @@ export function ProfileForm({
         {/** Поле с Email */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>{TEXTS.emailInput.label}</label>
+            <label className={cn('label')}>
+              {TEXTS.emailInput.label}
+            </label>
             <Field
               className={cn('field')}
               name={'emailInput'}
@@ -184,7 +198,9 @@ export function ProfileForm({
       </fieldset>
 
       {/** Кнопка отправки формы */}
-      <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
+      <ErrorMessage className={cn('submit-error')}>
+        {APIError}
+      </ErrorMessage>
       <Button
         className={cn('submit-button')}
         type="submit"

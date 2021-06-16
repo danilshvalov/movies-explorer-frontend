@@ -11,8 +11,7 @@ import images from '@images';
 /* -------------------------------------------------------------------------- */
 import './Personality.css';
 
-export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export type Props = DOMProps;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
 /**
  * Информация об ученике Яндекс.Практикума

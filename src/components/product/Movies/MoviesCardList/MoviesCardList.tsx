@@ -7,6 +7,8 @@ import NothingFoundStub from '@generic/NothingFoundStub/NothingFoundStub';
 import {IMovie, Theme, WithMoviesList} from 'types/types';
 /* ---------------------------------- Texts --------------------------------- */
 import {MOVIES} from '@texts/product';
+/* ---------------------------------- Hooks --------------------------------- */
+import {ExpandFunc} from '@hooks/UseExpandableList';
 /* ---------------------------------- Local --------------------------------- */
 import * as Card from '@product/Movies/MoviesCard/MoviesCard';
 /* -------------------------------------------------------------------------- */
@@ -16,9 +18,10 @@ const TEXTS = MOVIES.moviesCardList;
 
 export type DOMProps = GenericList.DOMProps;
 export type DataProps = WithMoviesList;
-export interface FunctionalProps extends Card.FunctionalProps {
+export interface FunctionalProps
+  extends Card.FunctionalProps {
   isComplete: boolean;
-  onExpand: () => void;
+  onExpand: ExpandFunc;
 }
 export type Props = DOMProps & FunctionalProps & DataProps;
 
@@ -31,9 +34,10 @@ function MoviesCardList({
   const cn = createCn('all-movies-list');
 
   /** Кнопка, появляющаяся при возможности добавления карточек */
-  const OptionalMoreButton = (): JSX.Element => (isComplete ? (
+  function OptionalMoreButton(): JSX.Element {
+    return isComplete ? (
       <></>
-  ) : (
+    ) : (
       <Button
         className={cn('more-button')}
         onClick={onExpand}
@@ -41,27 +45,42 @@ function MoviesCardList({
       >
         {TEXTS.moreButton.text}
       </Button>
-  ));
+    );
+  }
 
-  const CardListMarkup = (): JSX.Element => (
-    <>
-      <GenericList.List {...props} className={cn()} itemClassName={cn('card')}>
-        {moviesList.map((data) => (
-          <Card.MoviesCard
-            {...(data as IMovie)}
-            key={data.movieId}
-            onSave={props.onSave}
-            onDelete={props.onDelete}
-          />
-        ))}
-      </GenericList.List>
-      <OptionalMoreButton />
-    </>
+  function CardListMarkup(): JSX.Element {
+    return (
+      <>
+        <GenericList.List
+          {...props}
+          className={cn()}
+          itemClassName={cn('card')}
+        >
+          {moviesList.map((data) => (
+            <Card.MoviesCard
+              {...(data as IMovie)}
+              key={data.movieId}
+              onSave={props.onSave}
+              onDelete={props.onDelete}
+            />
+          ))}
+        </GenericList.List>
+        <OptionalMoreButton />
+      </>
+    );
+  }
+
+  function EmptyStubMarkup(): JSX.Element {
+    return (
+      <NothingFoundStub className={cn('nothing-stub')} />
+    );
+  }
+
+  return moviesList.length === 0 ? (
+    <EmptyStubMarkup />
+  ) : (
+    <CardListMarkup />
   );
-
-  const EmptyStubMarkup = (): JSX.Element => <NothingFoundStub className={cn('nothing-stub')} />;
-
-  return moviesList.length === 0 ? <EmptyStubMarkup /> : <CardListMarkup />;
 }
 
 export default MoviesCardList;

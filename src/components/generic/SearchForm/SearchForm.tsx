@@ -1,6 +1,8 @@
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {createCn} from 'bem-react-classname';
-import React, {createRef, useEffect, useState} from 'react';
+import React, {
+  createRef, FormHTMLAttributes, useEffect, useState,
+} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import CheckBox from '@generic/CheckBox/CheckBox';
 import SearchField from '@generic/SearchField/SearchField';
@@ -15,13 +17,17 @@ import {SEARCH_FORM as TEXTS} from '@texts/generic';
 import './SearchForm.css';
 
 export interface SearchFormProps<T>
-  extends React.FormHTMLAttributes<HTMLFormElement> {
+  extends FormHTMLAttributes<HTMLFormElement> {
   /** Изначальное состояние формы */
   defaultChecked?: boolean;
   onSearch: OnSearchFunc<T>;
 }
 
-/** Поисковая форма */
+/**
+ * Поисковая форма
+ *
+ * @see {@link SearchField}
+ * */
 function SearchForm<T>({
   className,
   onSearch,

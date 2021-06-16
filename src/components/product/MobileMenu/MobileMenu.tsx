@@ -1,25 +1,33 @@
 import {createCn} from 'bem-react-classname';
 import useKey from '@rooks/use-key';
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import CloseButton from '@generic/CloseButton/CloseButton';
 import HamburgerButton from '@generic/HamburgerButton/HamburgerButton';
 /* -------------------------------------------------------------------------- */
 import './MobileMenu.css';
 
-export type MobileMenuProps = React.HTMLAttributes<HTMLDivElement>;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
 /** Меню для устройств с небольшим разрешением */
-export function MobileMenu({className, ...props}: MobileMenuProps): JSX.Element {
+export function MobileMenu({
+  className,
+  ...props
+}: Props): JSX.Element {
   const cn = createCn('mobile-menu', className);
 
-  /** Переменная-флаг, изменяющая видимость меню */
   const [isOpen, setOpen] = React.useState(false);
 
-  /** Handlers */
-  const handleOpenButtonClick = () => setOpen(true);
-  const handleCloseButtonClick = () => setOpen(false);
-  const handleEsc = () => setOpen(false);
+  /* -------------------------------- Handlers -------------------------------- */
+  function handleOpenButtonClick() {
+    return setOpen(true);
+  }
+  function handleCloseButtonClick() {
+    return setOpen(false);
+  }
+  function handleEsc() {
+    return setOpen(false);
+  }
 
   /** Вешаем слушателя кнопки Esc при открытии */
   useKey(['Escape'], handleEsc, {when: isOpen});

@@ -8,6 +8,7 @@ import LOGO from '@images-src/logo.svg';
 import MAGNIFIER from '@images-src/magnifier.svg';
 import NOT_FOUND_CAT from '@images-src/not-found-cat.png';
 import PROMO_AVATAR from '@images-src/promo-avatar.jpg';
+import ROTATING_LINE from '@images-src/rotating-line.svg';
 
 export const images = {
   ACCOUNT_AVATAR,
@@ -20,6 +21,7 @@ export const images = {
   MAGNIFIER,
   NOT_FOUND_CAT,
   PROMO_AVATAR,
+  ROTATING_LINE,
 };
 
 export default images;

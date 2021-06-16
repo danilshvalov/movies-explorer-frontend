@@ -1,23 +1,29 @@
-import React, {PropsWithChildren, useEffect, useState} from 'react';
+import React, {PropsWithChildren} from 'react';
+import {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
 import * as GenericPreloader from '@generic/Preloader/Preloader';
 /* -------------------------------------------------------------------------- */
+import './PreloaderWrapper.css';
 
 export interface FunctionalProps {
   isLoading: boolean;
 }
 export type DOMProps = GenericPreloader.DOMProps;
-export type Props = PropsWithChildren<DOMProps & FunctionalProps>;
+export type Props = PropsWithChildren<
+  DOMProps & FunctionalProps
+>;
 
-function PreloaderWrapper(props: Props): JSX.Element {
-  const [isLoading, setIsLoading] = useState(props.isLoading);
+function PreloaderWrapper({
+  className,
+  ...props
+}: Props): JSX.Element {
+  const cn = createCn('preloader-wrapper', className);
 
-  useEffect(() => {
-    setIsLoading(props.isLoading);
-  }, [props.isLoading]);
-
-  return isLoading ? (
-    <GenericPreloader.Preloader {...(props as GenericPreloader.Props)} />
+  return props.isLoading ? (
+    <GenericPreloader.Preloader
+      {...(props as GenericPreloader.Props)}
+      className={cn()}
+    />
   ) : (
     <>{props.children}</>
   );

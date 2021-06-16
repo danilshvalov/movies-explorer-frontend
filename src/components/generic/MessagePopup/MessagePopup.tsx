@@ -14,6 +14,9 @@ export interface FunctionalProps {
 export type DOMProps = HTMLAttributes<HTMLDivElement>;
 export type Props = FunctionalProps & DOMProps;
 
+/**
+ * Всплывающее сообщение
+ */
 export function MessagePopup(props: Props): JSX.Element {
   const cn = createCn('message-popup', props.className);
 

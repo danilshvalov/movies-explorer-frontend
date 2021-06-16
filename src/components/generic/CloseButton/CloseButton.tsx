@@ -8,7 +8,11 @@ import './CloseButton.css';
 export type Props = GenericButton.Props;
 export type RefType = GenericButton.RefType;
 
-/** Кнопка с крестиком */
+/**
+ * Кнопка с крестиком
+ *
+ * @see {@link GenericButton.Button Button}
+ * */
 export const CloseButton = forwardRef<RefType, Props>(({
   className,
   ...props

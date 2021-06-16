@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* -------------------------------- Generics -------------------------------- */
 import Link from '@generic/Link/Link';
@@ -10,9 +10,9 @@ import {FOOTER as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import './Footer.css';
 
-export type FooterProps = React.HTMLAttributes<HTMLDivElement>;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
-export function Footer({className, ...props}: FooterProps): JSX.Element {
+export function Footer({className, ...props}: Props): JSX.Element {
   const cn = createCn('footer', className);
   return (
     <footer {...filterInvalidDOMProps(props)} className={cn()}>

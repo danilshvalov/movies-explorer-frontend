@@ -1,17 +1,17 @@
 import {createCn} from 'bem-react-classname';
 import classNames from 'classnames';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-import React, {forwardRef} from 'react';
-
+import React, {forwardRef, InputHTMLAttributes} from 'react';
+/* -------------------------------------------------------------------------- */
 import './CheckBox.css';
 
 export interface CheckBoxProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends InputHTMLAttributes<HTMLInputElement> {
   /** className самого checkbox */
   buttonClassName?: string;
   /** className label рядом с кнопкой */
   labelClassName?: string;
-  /** Содержание / текст label */
+  /** Содержание/текст label */
   label?: string;
 }
 

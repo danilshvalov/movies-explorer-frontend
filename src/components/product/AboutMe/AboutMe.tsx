@@ -8,19 +8,31 @@ import Personality from '@product/Personality/Personality';
 /* ---------------------------------- Texts --------------------------------- */
 import {ABOUT_ME as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */
-
 import './AboutMe.css';
 
-export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export type Props = DOMProps;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
-/** Секция с информацией об ученике (персональные данные, портфолио) Яндекс.Практикума */
-export function AboutMe({className, ...props}: Props): JSX.Element {
+/**
+ * Секция с информацией об ученике (персональные данные, портфолио) Яндекс.Практикума
+ *
+ * @see
+ * {@link Personality}
+ * {@link Portfolio}
+ * */
+export function AboutMe({
+  className,
+  ...props
+}: Props): JSX.Element {
   const cn = createCn('about-me', className);
 
   return (
-    <section {...filterInvalidDOMProps(props)} className={cn()}>
-      <SectionHeader className={cn('header')}>{TEXTS.header}</SectionHeader>
+    <section
+      {...filterInvalidDOMProps(props)}
+      className={cn()}
+    >
+      <SectionHeader className={cn('header')}>
+        {TEXTS.header}
+      </SectionHeader>
       <Personality className={cn('personality')} />
       <Portfolio className={cn('portfolio')} />
     </section>

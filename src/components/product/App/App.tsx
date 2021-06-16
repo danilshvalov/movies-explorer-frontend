@@ -120,6 +120,7 @@ function App(): JSX.Element {
               <Register onRegister={handleRegister} />
             </UnAuthorizedRoute>
 
+            {/* 404 */}
             <Route path={PAGE_LINKS.notFound}>
               <NotFound />
             </Route>

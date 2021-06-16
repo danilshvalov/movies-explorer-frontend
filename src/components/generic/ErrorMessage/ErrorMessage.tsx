@@ -1,12 +1,12 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
 /* ---------------------------------- Types --------------------------------- */
 import {WithError} from 'types/types';
 /* -------------------------------------------------------------------------- */
 import './ErrorMessage.css';
 
 export interface ErrorMessageProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
+  extends HTMLAttributes<HTMLSpanElement>,
     WithError {}
 
 export function ErrorMessage({

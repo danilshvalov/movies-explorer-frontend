@@ -6,6 +6,7 @@ import './FieldWrapper.css';
 export type Props = HTMLAttributes<HTMLDivElement>;
 export type RefType = HTMLDivElement;
 
+/** Обертка с подсветкой поля ввода */
 export const FieldWrapper = forwardRef<RefType, Props>(
   (props, ref): JSX.Element => {
     const cn = createCn('field-wrapper', props.className);

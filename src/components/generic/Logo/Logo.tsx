@@ -15,7 +15,11 @@ import './Logo.css';
 export type DOMProps = ImgHTMLAttributes<HTMLImageElement>;
 export type Props = DOMProps;
 
-/** Логотип сайта */
+/**
+ * Логотип сайта
+ *
+ * @see {@link images.LOGO логотип}
+ *  */
 export const Logo = forwardRef<HTMLImageElement, Props>(({className, ...props}, ref) => {
   const cn = createCn('logo', className);
   return (

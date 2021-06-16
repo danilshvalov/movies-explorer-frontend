@@ -2,10 +2,9 @@ import React, {forwardRef} from 'react';
 import {createCn} from 'bem-react-classname';
 import classNames from 'classnames';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
-
+/* -------------------------------------------------------------------------- */
 import './List.css';
 
-// export namespace List {
 export type DOMProps = React.HTMLAttributes<HTMLUListElement>;
 export interface FunctionalProps {
   itemClassName?: string;
@@ -16,7 +15,7 @@ export type Props = DOMProps & FunctionalProps;
 export type RefType = HTMLUListElement;
 
 /**
- * Компонент-обёртка над [списком]{@link HTMLUListElement}
+ * Компонент-обёртка над {@link HTMLUListElement списком}
  * Все дочерние элементы помещаются в {@link HTMLLIElement}
  */
 export const List = forwardRef<RefType, Props>((props, ref): JSX.Element => {

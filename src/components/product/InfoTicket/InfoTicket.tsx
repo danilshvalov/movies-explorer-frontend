@@ -1,9 +1,10 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
-
+import React, {HTMLAttributes} from 'react';
+/* -------------------------------------------------------------------------- */
 import './InfoTicket.css';
 
-export interface InfoTicketProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface Props
+  extends HTMLAttributes<HTMLDivElement> {
   /** Текст заголовка */
   title: string;
   /** Текст содержания */
@@ -11,12 +12,12 @@ export interface InfoTicketProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /** Компонент-карточка с названием и какой-либо информацией */
-const InfoTicket: React.FC<InfoTicketProps> = ({
+export function InfoTicket({
   title,
   about,
   className,
   ...props
-}) => {
+}: Props): JSX.Element {
   const cn = createCn('info-ticket', className);
   return (
     <div {...props} className={cn()}>
@@ -24,6 +25,6 @@ const InfoTicket: React.FC<InfoTicketProps> = ({
       <p className={cn('about')}>{about}</p>
     </div>
   );
-};
+}
 
 export default InfoTicket;

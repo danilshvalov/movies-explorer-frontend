@@ -12,7 +12,7 @@ export type Props = DOMProps & FunctionalProps;
 
 export type RefType = HTMLInputElement;
 
-/** Обёртка над [input]{@link HTMLInputElement}, поддерживающая выделение при ошибке */
+/** Обёртка над {@link HTMLInputElement input}, поддерживающая выделение при ошибке */
 export const Field = forwardRef<RefType, Props>(
   ({
     className, isError = false, theme = Theme.Transparent, ...props

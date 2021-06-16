@@ -14,8 +14,7 @@ import InfoTicket from '@product/InfoTicket/InfoTicket';
 /* -------------------------------------------------------------------------- */
 import './AboutProject.css';
 
-export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export type Props = DOMProps;
+export type Props = HTMLAttributes<HTMLDivElement>;
 /**
  * Секция с информацией о проекте: описание этапов разработки
  * */

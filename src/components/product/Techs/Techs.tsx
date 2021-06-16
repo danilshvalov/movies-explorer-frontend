@@ -9,8 +9,7 @@ import {TECHS as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */
 import './Techs.css';
 
-export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export type Props = DOMProps;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
 /** Секция с используемыми технологиями */
 export function Techs({className, ...props}: Props): JSX.Element {

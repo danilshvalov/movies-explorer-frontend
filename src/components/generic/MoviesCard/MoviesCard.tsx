@@ -20,20 +20,35 @@ export type Props = DataProps & DOMProps;
 /**
  * Миниатюрная карточка фильма
  * */
-export function MoviesCard({className, ...props}: Props): JSX.Element {
+export function MoviesCard({
+  className,
+  ...props
+}: Props): JSX.Element {
   const cn = createCn('movies-card', className);
 
+  /** Включает и выключает анимацию прелоадера постера */
   const [isPosterLoading, setPosterLoading] = React.useState(true);
+
+  function handleImageLoad() {
+    setPosterLoading(false);
+  }
 
   return (
     <Link href={props.trailer}>
-      <div {...filterInvalidDOMProps(props)} className={cn()}>
-        <div className={cn('loading-wrapper', {disabled: !isPosterLoading})}>
+      <div
+        {...filterInvalidDOMProps(props)}
+        className={cn()}
+      >
+        <div
+          className={cn('loading-wrapper', {
+            disabled: !isPosterLoading,
+          })}
+        >
           <img
             className={cn('poster')}
             src={props.thumbnail}
             alt={TEXTS.img.alt}
-            onLoad={() => setPosterLoading(false)}
+            onLoad={handleImageLoad}
           />
         </div>
         <div className={cn('info')}>

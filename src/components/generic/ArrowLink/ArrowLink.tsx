@@ -10,7 +10,11 @@ import './ArrowLink.css';
 
 export type Props = GenericLink.Props;
 
-/** Ссылка с картинкой стрелочки */
+/**
+ * Ссылка с картинкой стрелочки
+ *
+ * @see {@link GenericLink.Link Link}
+ * */
 export function ArrowLink({className, ...props}: Props): JSX.Element {
   const cn = createCn('arrow-link', className);
 

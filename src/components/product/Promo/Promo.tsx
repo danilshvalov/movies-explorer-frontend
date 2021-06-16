@@ -8,8 +8,7 @@ import NavTab from '@product/NavTab/NavTab';
 /* -------------------------------------------------------------------------- */
 import './Promo.css';
 
-export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export type Props = DOMProps;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
 /** Приветствующая секция с навигацией по странице */
 export function Promo({className, ...props}: Props): JSX.Element {

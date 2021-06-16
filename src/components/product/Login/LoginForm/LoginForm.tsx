@@ -22,7 +22,6 @@ export type DOMProps = GenericForm.DOMProps;
 export interface FunctionalProps {
   onLogin: OnLoginFunc;
 }
-
 export type Props = DOMProps & FunctionalProps;
 
 /** Форма входа в аккаунт */

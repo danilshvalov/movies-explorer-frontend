@@ -15,16 +15,22 @@ import LoginForm from '@product/Login/LoginForm/LoginForm';
 /* -------------------------------------------------------------------------- */
 import './Login.css';
 
-export interface LoginProps extends HTMLAttributes<HTMLDivElement> {
+export type DOMProps = HTMLAttributes<HTMLDivElement>;
+export interface FunctionalProps {
   /** callback, вызываемый при отправке формы */
   onLogin: OnLoginFunc;
 }
+export type Props = DOMProps & FunctionalProps;
 
 /**
  * Секция с логином
- * @see LoginForm
+ * @see {@link LoginForm}
  * */
-export function Login({className, onLogin, ...props}: LoginProps): JSX.Element {
+export function Login({
+  className,
+  onLogin,
+  ...props
+}: Props): JSX.Element {
   const cn = createCn('login', className);
   return (
     <div {...props} className={cn()}>
@@ -37,7 +43,11 @@ export function Login({className, onLogin, ...props}: LoginProps): JSX.Element {
       {/** Перенаправляющий зарегистрированных пользователей текст */}
       <span className={cn('sub-text')}>
         {TEXTS.subtext.text}
-        <Link component={GenericLink} to={PAGE_LINKS.signUp} className={cn('link')}>
+        <Link
+          component={GenericLink}
+          to={PAGE_LINKS.signUp}
+          className={cn('link')}
+        >
           {TEXTS.subtext.link}
         </Link>
       </span>

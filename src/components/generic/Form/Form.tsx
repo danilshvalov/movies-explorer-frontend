@@ -8,7 +8,7 @@ export type DOMProps = FormHTMLAttributes<HTMLFormElement>;
 export type RefType = HTMLFormElement;
 export type Props = DOMProps;
 
-/** Обёртка над [формой]{@link HTMLFormElement} с измененными стилями */
+/** Обёртка над {@link HTMLFormElement формой} с измененными стилями */
 export const Form = forwardRef<RefType, Props>((props, ref) => {
   const cn = createCn('form', props.className);
 

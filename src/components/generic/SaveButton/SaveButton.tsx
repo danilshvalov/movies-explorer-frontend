@@ -12,7 +12,11 @@ export interface FunctionalProps extends GenericButton.FunctionalProps {
 }
 export type Props = DOMProps & FunctionalProps;
 
-/** Кнопка сохранения */
+/**
+ * Кнопка сохранения
+ *
+ * @see {@link GenericButton.Button Button}
+ * */
 export function SaveButton({
   className,
   checked = false,

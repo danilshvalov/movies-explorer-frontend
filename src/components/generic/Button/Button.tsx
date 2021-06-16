@@ -14,7 +14,11 @@ export type Props = DOMProps & FunctionalProps;
 
 export type RefType = HTMLButtonElement;
 
-/** Обёртка над обычной кнопкой, поддерживающая разные цветовые решения */
+/**
+ * Обёртка над обычной кнопкой, поддерживающая разные цветовые решения
+ *
+ * @see {@link Theme}
+ * */
 export const Button = forwardRef<RefType, Props>(
   (
     {

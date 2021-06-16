@@ -10,6 +10,13 @@ export interface FunctionalProps extends FallbackComponentProps {
 }
 export type Props = PropsWithChildren<FunctionalProps>;
 
+/**
+ * Обертка ошибки
+ * @requires
+ * FallbackComponent
+ *
+ * @see {@link FallbackComponentProps}
+ */
 export function ErrorWrapper({isError, onReset, ...props}: Props): JSX.Element {
   return (
     <>

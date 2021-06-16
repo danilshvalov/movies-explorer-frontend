@@ -13,11 +13,10 @@ import images from '@images';
 /* -------------------------------------------------------------------------- */
 import './Account.css';
 
-export type DOMProps = HTMLAttributes<HTMLDivElement>;
-export type AccountProps = DOMProps;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
 /** Элемент, перенаправляющий на страницу управления аккаунтом */
-export function Account({className, ...props}: AccountProps): JSX.Element {
+export function Account({className, ...props}: Props): JSX.Element {
   const cn = createCn('account', className);
   return (
     <div {...props} className={cn()}>

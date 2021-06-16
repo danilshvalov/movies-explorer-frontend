@@ -1,5 +1,5 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {Link} from 'react-router-dom';
 /* --------------------------------- Generic -------------------------------- */
@@ -15,12 +15,17 @@ import RegisterForm from '@product/Register/RegisterForm/RegisterForm';
 /* -------------------------------------------------------------------------- */
 import './Register.css';
 
-export interface RegisterProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FunctionalProps extends HTMLAttributes<HTMLDivElement> {
   onRegister: OnRegisterFunc;
 }
+export type Props = FunctionalProps;
 
 /** Секция регистрации пользователя */
-export function Register({className, onRegister, ...props}: RegisterProps): JSX.Element {
+export function Register({
+  className,
+  onRegister,
+  ...props
+}: Props): JSX.Element {
   const cn = createCn('register', className);
 
   return (
@@ -32,7 +37,11 @@ export function Register({className, onRegister, ...props}: RegisterProps): JSX.
       {/** Ссылки перенаправления зарегистрированных пользователей */}
       <span className={cn('sub-text')}>
         {TEXTS.subtext.text}
-        <Link component={GenericLink} to={PAGE_LINKS.signIn} className={cn('link')}>
+        <Link
+          component={GenericLink}
+          to={PAGE_LINKS.signIn}
+          className={cn('link')}
+        >
           {TEXTS.subtext.link}
         </Link>
       </span>

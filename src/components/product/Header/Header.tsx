@@ -1,5 +1,5 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* -------------------------------- Generics -------------------------------- */
 import Logo from '@generic/Logo/Logo';
@@ -19,10 +19,10 @@ import CurrentUserContext from '@contexts/CurrentUserContext';
 /* -------------------------------------------------------------------------- */
 import './Header.css';
 
-export type HeaderProps = React.HTMLAttributes<HTMLDivElement>;
+export type Props = HTMLAttributes<HTMLDivElement>;
 
 /** Секция header */
-export function Header({className, ...props}: HeaderProps): JSX.Element {
+export function Header({className, ...props}: Props): JSX.Element {
   const cn = createCn('header', className);
 
   /** Текущее устройство пользователя */

@@ -1,5 +1,5 @@
 import {createCn} from 'bem-react-classname';
-import React from 'react';
+import React, {HTMLAttributes} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import Button from '@generic/Button/Button';
 /* ---------------------------------- Types --------------------------------- */
@@ -19,16 +19,20 @@ function getGreetingText(name: string | undefined) {
   return `Привет, ${name || 'друг'}!`;
 }
 
-export interface ProfileProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FunctionalProps extends HTMLAttributes<HTMLDivElement> {
   /** callback изменения профиля */
   onProfileUpdate: OnProfileUpdateFunc;
   onLogout: OnLogoutFunc;
 }
+export type Props = FunctionalProps;
 
 /** Секция с формой изменения профиля */
 export function Profile({
-  className, onProfileUpdate, onLogout, ...props
-}: ProfileProps): JSX.Element {
+  className,
+  onProfileUpdate,
+  onLogout,
+  ...props
+}: Props): JSX.Element {
   const currentUser = React.useContext(CurrentUserContext);
   const cn = createCn('profile', className);
 
@@ -39,7 +43,7 @@ export function Profile({
       <ProfileForm className={cn('form')} onProfileUpdate={onProfileUpdate} />
       {/** Ссылка на выход из аккаунта */}
       <span className={cn('sub-text')}>
-        <Button className={cn('exit-link')} onClick={() => onLogout()}>
+        <Button className={cn('exit-link')} onClick={onLogout}>
           {TEXTS.subtext.exitLink}
         </Button>
       </span>
@@ -47,7 +51,7 @@ export function Profile({
   );
 }
 
-export function ProfilePage(props: ProfileProps): JSX.Element {
+export function ProfilePage(props: Props): JSX.Element {
   return (
     <>
       <Header />

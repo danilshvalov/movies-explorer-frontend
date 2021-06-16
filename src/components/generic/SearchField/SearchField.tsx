@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {createCn} from 'bem-react-classname';
 /* --------------------------------- Generic -------------------------------- */
 import * as GenericField from '@generic/Field/Field';
@@ -15,8 +15,12 @@ const TEXTS = SEARCH_FORM.field;
 export type SearchFieldProps = GenericField.Props;
 export type RefType = GenericField.RefType;
 
-/** Поле поисковой формы */
-const SearchField = React.forwardRef<RefType, SearchFieldProps>(
+/**
+ * Поле поисковой формы
+ *
+ * @see {@link GenericField.Field Field}
+ * */
+const SearchField = forwardRef<RefType, SearchFieldProps>(
   ({placeholder, className, ...props}, ref) => {
     const cn = createCn('search-field', className);
 
