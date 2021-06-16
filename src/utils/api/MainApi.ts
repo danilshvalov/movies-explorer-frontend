@@ -17,7 +17,8 @@ import Api from './Api';
 
 /**
  * API для собственного backend'a
- * @see Api
+ *
+ * @see {@link Api}
  * */
 class MainApi extends Api {
   /** Авторизация пользователя */

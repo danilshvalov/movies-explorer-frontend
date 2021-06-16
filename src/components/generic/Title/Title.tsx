@@ -20,7 +20,7 @@ export const Title = forwardRef<RefType, Props>(
   ({
     className, theme = Theme.Light, headingType, ...props
   }, ref) => {
-    const cn = createCn('colored-title', className);
+    const cn = createCn('title', className);
     return createElement(headingType, {
       ...props,
       ref,
