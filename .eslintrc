@@ -15,7 +15,7 @@
     "project": "./tsconfig.json",
     "tsconfigRootDir": "./"
   },
-  "plugins": ["react", "@typescript-eslint", "import", "prettier", "jsx-a11y"],
+  "plugins": ["react", "@typescript-eslint", "import", "jsx-a11y"],
   "rules": {
     "object-curly-spacing": ["error", "never"],
     "no-underscore-dangle": "off",

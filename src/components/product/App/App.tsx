@@ -120,9 +120,9 @@ function App(): JSX.Element {
               <Register onRegister={handleRegister} />
             </UnAuthorizedRoute>
 
-            <UnAuthorizedRoute path={PAGE_LINKS.notFound}>
+            <Route path={PAGE_LINKS.notFound}>
               <NotFound />
-            </UnAuthorizedRoute>
+            </Route>
           </Switch>
 
           <MessagePopup
