@@ -139,6 +139,7 @@ function MoviesManager({
     if (isError) {
       handleReset();
     }
+    filteredMovies.reset();
   }, [searchData]);
 
   return (

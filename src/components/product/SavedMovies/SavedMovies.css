@@ -1,6 +1,10 @@
 .saved-movies {
   width: calc(100% - 140px);
-  margin: 0 auto 101px;
+  margin: 0 auto 80px;
+}
+
+.saved-movies__search-form {
+  margin-bottom: 30px;
 }
 
 @media screen and (max-width: 768px) {
@@ -14,9 +18,5 @@
   .saved-movies {
     width: calc(100% - 20px);
     margin-bottom: 40px;
-  }
-
-  .saved-movies__search-form {
-    margin-bottom: 28px;
   }
 }
