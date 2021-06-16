@@ -10,7 +10,8 @@ import Button from '@generic/Button/Button';
 import List from '@generic/List/List';
 import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
 /* ---------------------------------- Types --------------------------------- */
-import {OnSearchFunc, Theme} from 'types/types';
+import {Theme} from 'types/types';
+import {OnSearchFunc} from 'types/functional';
 /* ---------------------------------- Texts --------------------------------- */
 import {SEARCH_FORM as TEXTS} from '@texts/generic';
 /* -------------------------------------------------------------------------- */

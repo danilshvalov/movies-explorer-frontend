@@ -12,7 +12,8 @@ import useSafeAsyncCall from '@hooks/UseSafeAsyncCall';
 /* ---------------------------------- Utils --------------------------------- */
 import {REGISTER} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
-import {OnRegisterFunc, Theme} from 'types/types';
+import {Theme} from 'types/types';
+import {OnRegisterFunc} from 'types/functional';
 /* -------------------------------------------------------------------------- */
 import './RegisterForm.css';
 
@@ -24,18 +25,11 @@ export interface FunctionalProps {
 }
 export type Props = DOMProps & FunctionalProps;
 
-export function RegisterForm({
-  onRegister,
-  ...props
-}: Props): JSX.Element {
+export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
   const cn = createCn('register-form', props.className);
 
   const {
-    values,
-    handleChange,
-    errors,
-    isValid,
-    isFieldValid,
+    values, handleChange, errors, isValid, isFieldValid,
   } = useFormWithValidation({
     nameInput: '',
     emailInput: '',
@@ -67,12 +61,7 @@ export function RegisterForm({
     const emailValue = values.emailInput;
     const passwordValue = values.passwordInput;
 
-    if (
-      isValid
-      && nameValue
-      && emailValue
-      && passwordValue
-    ) {
+    if (isValid && nameValue && emailValue && passwordValue) {
       handlePreSubmit();
       onRegister({
         name: values.nameInput as string,
@@ -96,9 +85,7 @@ export function RegisterForm({
 
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>
-              {texts.nameInput.label}
-            </label>
+            <label className={cn('label')}>{texts.nameInput.label}</label>
             <Field
               className={cn('field')}
               name={'nameInput'}
@@ -117,9 +104,7 @@ export function RegisterForm({
         {/** Поле с Email */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>
-              {texts.emailInput.label}
-            </label>
+            <label className={cn('label')}>{texts.emailInput.label}</label>
             <Field
               className={cn('field')}
               name={'emailInput'}
@@ -138,9 +123,7 @@ export function RegisterForm({
         {/** Поле с паролем */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>
-              {texts.passwordInput.label}
-            </label>
+            <label className={cn('label')}>{texts.passwordInput.label}</label>
             <Field
               className={cn('field')}
               name={'passwordInput'}
@@ -159,9 +142,7 @@ export function RegisterForm({
       </fieldset>
 
       {/** Кнопка отправки формы */}
-      <ErrorMessage className={cn('submit-error')}>
-        {APIError}
-      </ErrorMessage>
+      <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
       <Button
         className={cn('submit-button')}
         type="submit"

@@ -16,7 +16,7 @@ import useFormWithValidation from '@hooks/UseFormWithValidation';
 /* ---------------------------------- Utils --------------------------------- */
 import {PROFILE} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
-import {OnProfileUpdateFunc} from 'types/types';
+import {OnProfileUpdateFunc} from 'types/functional';
 /* -------------------------------- Contexts -------------------------------- */
 import CurrentUserContext from '@contexts/CurrentUserContext';
 /* -------------------------------------------------------------------------- */

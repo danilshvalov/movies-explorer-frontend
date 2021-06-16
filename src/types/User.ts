@@ -1,12 +1,22 @@
-/** Данные, необходимые для регистрации */
-export interface RegisterUserData {
-  email: string;
-  password: string;
-  name: string;
+import {
+  OnLoginFunc,
+  OnLogoutFunc,
+  OnProfileUpdateFunc,
+  OnRegisterFunc,
+} from 'types/functional';
+
+export interface UserActions {
+  authorize: OnLoginFunc;
+  register: OnRegisterFunc;
+  updateUserInfo: OnProfileUpdateFunc;
+  logout: OnLogoutFunc;
 }
 
-/** Данные, возвращаемые пользователю */
-export interface ProfileUserData {
-  email: string;
+export interface UserState {
   name: string;
+  email: string;
+  loggedIn: boolean;
+  isLoading: boolean;
 }
+
+export type User = UserActions & UserState;

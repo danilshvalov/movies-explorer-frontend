@@ -4,35 +4,27 @@ import {useHistory} from 'react-router-dom';
 import mainApi from '@utils/api/MainApi';
 import {DEFAULT_USER, PAGE_LINKS} from '@utils/config';
 /* ---------------------------------- Types --------------------------------- */
-import {UpdateProfileData} from 'types/Api';
+import {User, UserState} from 'types/user';
 import {
   AuthorizedUserData,
   LoginUserData,
-  User,
-  UserState,
-} from 'types/types';
-import {
   ProfileUserData,
   RegisterUserData,
-} from 'types/User';
+} from 'types/api';
+
 /* -------------------------------------------------------------------------- */
 
 export function useUser(): User {
-  const [currentUser, setCurrentUser] = useState<UserState>(
-    {
-      ...DEFAULT_USER,
-      loggedIn: true,
-      isLoading: true,
-    },
-  );
+  const [currentUser, setCurrentUser] = useState<UserState>({
+    ...DEFAULT_USER,
+    loggedIn: true,
+    isLoading: true,
+  });
 
   const history = useHistory();
 
   /* ----------------------------- State changers ----------------------------- */
-  function authorizeUser({
-    name,
-    email,
-  }: AuthorizedUserData) {
+  function authorizeUser({name, email}: AuthorizedUserData) {
     setCurrentUser((user) => ({
       ...user,
       email,
@@ -41,7 +33,7 @@ export function useUser(): User {
     }));
   }
 
-  function updateUser({email, name}: UpdateProfileData) {
+  function updateUser({email, name}: ProfileUserData) {
     setCurrentUser({...currentUser, name, email});
   }
 
@@ -76,9 +68,7 @@ export function useUser(): User {
     history.push(PAGE_LINKS.main);
   }
 
-  function handleSuccessProfileUpdate(
-    data: UpdateProfileData,
-  ) {
+  function handleSuccessProfileUpdate(data: ProfileUserData) {
     updateUser(data);
     return data;
   }
@@ -94,9 +84,7 @@ export function useUser(): User {
 
   /* ---------------------------- Export functions ---------------------------- */
 
-  function authorize(
-    data: LoginUserData,
-  ): Promise<AuthorizedUserData> {
+  function authorize(data: LoginUserData): Promise<AuthorizedUserData> {
     return mainApi
       .authorize(data)
       .then(handleSuccessAuthorizing)
@@ -104,21 +92,15 @@ export function useUser(): User {
       .finally(setLoadingEnd);
   }
 
-  function register(
-    data: RegisterUserData,
-  ): Promise<AuthorizedUserData> {
+  function register(data: RegisterUserData): Promise<AuthorizedUserData> {
     return mainApi
       .register(data)
       .then(() => authorize(data))
       .catch(handleFailureAuthorizing);
   }
 
-  function updateUserInfo(
-    data: ProfileUserData,
-  ): Promise<UpdateProfileData> {
-    return mainApi
-      .updateUserInfo(data)
-      .then(handleSuccessProfileUpdate);
+  function updateUserInfo(data: ProfileUserData): Promise<ProfileUserData> {
+    return mainApi.updateUserInfo(data).then(handleSuccessProfileUpdate);
   }
 
   function logout() {

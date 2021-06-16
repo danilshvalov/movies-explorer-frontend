@@ -1,27 +1,19 @@
-import {ProfileUserData, RegisterUserData} from 'types/User';
+/* ---------------------------------- Types --------------------------------- */
 import {
+  ProfileUserData,
+  RegisterUserData,
   AuthorizedUserData,
-  HTTPMethod, Id, IMovie, LoginUserData, MoviesList,
-} from '../../types/types';
+  LoginUserData,
+} from 'types/api';
+import {
+  HTTPMethod, Id, IMovie, MoviesList,
+} from 'types/types';
 
-import {BACKEND_URL} from '../config';
+/* ---------------------------------- Utils --------------------------------- */
+import {BACKEND_URL} from '@utils/config';
+/* ----------------------------------- Api ---------------------------------- */
 import Api from './Api';
-import {CurrentProfileData, UpdateProfileData} from '../../types/Api';
-
-export interface MovieData {
-  _id: string;
-  movieId: number;
-  country: string;
-  director: string;
-  duration: number;
-  year: string;
-  description: string;
-  image: string;
-  trailer: string;
-  nameRU: string;
-  nameEN: string;
-  thumbnail: string;
-}
+/* -------------------------------------------------------------------------- */
 
 /**
  * API для собственного backend'a
@@ -87,7 +79,7 @@ class MainApi extends Api {
   }
 
   /** Получение пользовательских данных */
-  getUserInfo(): Promise<CurrentProfileData> {
+  getUserInfo(): Promise<ProfileUserData> {
     return this.sendRequest({
       path: 'users/me',
       method: HTTPMethod.Get,
@@ -95,7 +87,7 @@ class MainApi extends Api {
   }
 
   /** Обновление пользовательских данных */
-  updateUserInfo(data: ProfileUserData): Promise<UpdateProfileData> {
+  updateUserInfo(data: ProfileUserData): Promise<ProfileUserData> {
     return this.sendRequest({
       path: 'users/me',
       method: HTTPMethod.Patch,

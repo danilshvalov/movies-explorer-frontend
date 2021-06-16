@@ -3,7 +3,7 @@ import React, {HTMLAttributes} from 'react';
 /* --------------------------------- Generic -------------------------------- */
 import Button from '@generic/Button/Button';
 /* ---------------------------------- Types --------------------------------- */
-import {OnLogoutFunc, OnProfileUpdateFunc} from 'types/types';
+import {OnLogoutFunc, OnProfileUpdateFunc} from 'types/functional';
 /* ---------------------------------- Utils --------------------------------- */
 import {PROFILE as TEXTS} from '@texts/product';
 /* -------------------------------------------------------------------------- */

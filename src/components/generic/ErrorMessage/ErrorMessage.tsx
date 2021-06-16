@@ -1,7 +1,7 @@
 import {createCn} from 'bem-react-classname';
 import React, {HTMLAttributes} from 'react';
 /* ---------------------------------- Types --------------------------------- */
-import {WithError} from 'types/types';
+import {WithError} from 'types/functional';
 /* -------------------------------------------------------------------------- */
 import './ErrorMessage.css';
 
@@ -14,7 +14,11 @@ export function ErrorMessage({
   ...props
 }: ErrorMessageProps): JSX.Element {
   const cn = createCn('error-message', className);
-  return <span className={cn()} title={props.children as string}>{props.children}</span>;
+  return (
+    <span className={cn()} title={props.children as string}>
+      {props.children}
+    </span>
+  );
 }
 
 export default ErrorMessage;

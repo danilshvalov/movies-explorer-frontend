@@ -2,7 +2,8 @@ import React, {InputHTMLAttributes, forwardRef} from 'react';
 import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme, WithError, WithTheme} from 'types/types';
+import {Theme} from 'types/types';
+import {WithError, WithTheme} from 'types/functional';
 /* -------------------------------------------------------------------------- */
 import './Field.css';
 

@@ -4,7 +4,8 @@ import {useState} from 'react';
 import * as GenericMoviesCard from '@generic/MoviesCard/MoviesCard';
 import DeleteButton from '@generic/DeleteButton/DeleteButton';
 /* ---------------------------------- Types --------------------------------- */
-import {IMovie, OnDeleteFunc} from 'types/types';
+import {IMovie} from 'types/types';
+import {OnDeleteFunc} from 'types/functional';
 /* -------------------------------------------------------------------------- */
 import './MoviesCard.css';
 

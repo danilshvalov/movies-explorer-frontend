@@ -6,9 +6,8 @@ import useSavedMovies from '@hooks/UseSavedMovies';
 /* ---------------------------------- Utils --------------------------------- */
 import moviesFilter from '@utils/movies-filter';
 /* ---------------------------------- Types --------------------------------- */
-import {
-  IMovie, MoviesList, OnExternalErrorFunc, SearchData,
-} from 'types/types';
+import {IMovie, MoviesList, SearchData} from 'types/types';
+import {OnExternalErrorFunc} from 'types/functional';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesCardList from '@product/SavedMovies/MoviesCardList/MoviesCardList';
 import ErrorStub from '@product/SavedMovies/ErrorStub/ErrorStub';
@@ -86,10 +85,7 @@ export function MoviesManager({
         onReset={handleErrorReset}
         fallback={ErrorStub}
       >
-        <MoviesCardList
-          moviesList={filteredMovies}
-          onDelete={handleDelete}
-        />
+        <MoviesCardList moviesList={filteredMovies} onDelete={handleDelete} />
       </ErrorWrapper>
     </PreloaderWrapper>
   );

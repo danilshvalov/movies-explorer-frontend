@@ -7,7 +7,8 @@ import * as GenericForm from '@generic/Form/Form';
 import Button from '@generic/Button/Button';
 import FieldWrapper from '@generic/FieldWrapper/FieldWrapper';
 /* ---------------------------------- Types --------------------------------- */
-import {OnLoginFunc, Theme} from 'types/types';
+import {Theme} from 'types/types';
+import {OnLoginFunc} from 'types/functional';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
 import useSafeAsyncCall from '@hooks/UseSafeAsyncCall';
@@ -25,19 +26,11 @@ export interface FunctionalProps {
 export type Props = DOMProps & FunctionalProps;
 
 /** Форма входа в аккаунт */
-const LoginForm = ({
-  className,
-  onLogin,
-  ...props
-}: Props): JSX.Element => {
+const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
   const cn = createCn('login-form', className);
 
   const {
-    values,
-    handleChange,
-    errors,
-    isValid,
-    isFieldValid,
+    values, handleChange, errors, isValid, isFieldValid,
   } = useFormWithValidation({
     emailInput: '',
     passwordInput: '',
@@ -89,9 +82,7 @@ const LoginForm = ({
         {/** Поле с Email */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>
-              {TEXTS.emailInput.label}
-            </label>
+            <label className={cn('label')}>{TEXTS.emailInput.label}</label>
             <Field
               className={cn('field')}
               name="emailInput"
@@ -110,9 +101,7 @@ const LoginForm = ({
         {/** Поле с паролем */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>
-              {TEXTS.passwordInput.label}
-            </label>
+            <label className={cn('label')}>{TEXTS.passwordInput.label}</label>
             <Field
               className={cn('field')}
               name="passwordInput"
@@ -131,9 +120,7 @@ const LoginForm = ({
       </fieldset>
 
       {/** Кнопка отправки формы */}
-      <ErrorMessage className={cn('submit-error')}>
-        {APIError}
-      </ErrorMessage>
+      <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
       <Button
         className={cn('submit-button')}
         type="submit"

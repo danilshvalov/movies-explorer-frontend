@@ -4,7 +4,8 @@ import Button from '@generic/Button/Button';
 import * as GenericList from '@generic/List/List';
 import NothingFoundStub from '@generic/NothingFoundStub/NothingFoundStub';
 /* ---------------------------------- Types --------------------------------- */
-import {IMovie, Theme, WithMoviesList} from 'types/types';
+import {IMovie, Theme} from 'types/types';
+import {WithMoviesList} from 'types/functional';
 /* ---------------------------------- Texts --------------------------------- */
 import {MOVIES} from '@texts/product';
 /* ---------------------------------- Hooks --------------------------------- */

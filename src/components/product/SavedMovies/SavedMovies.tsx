@@ -5,7 +5,8 @@ import {createCn} from 'bem-react-classname';
 import PageWrapper from '@generic/PageWrapper/PageWrapper';
 import SearchForm from '@generic/SearchForm/SearchForm';
 /* ---------------------------------- Types --------------------------------- */
-import {OnExternalErrorFunc, SearchData} from 'types/types';
+import {SearchData} from 'types/types';
+import {OnExternalErrorFunc} from 'types/functional';
 /* ---------------------------------- Local --------------------------------- */
 import MoviesManager from '@product/SavedMovies/MoviesManager/MoviesManager';
 /* -------------------------------------------------------------------------- */

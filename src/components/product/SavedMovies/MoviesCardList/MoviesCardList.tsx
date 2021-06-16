@@ -3,7 +3,7 @@ import React, {createCn} from 'bem-react-classname';
 import * as GenericList from '@generic/List/List';
 import NothingFoundStub from '@generic/NothingFoundStub/NothingFoundStub';
 /* ---------------------------------- Types --------------------------------- */
-import {WithMoviesList} from 'types/types';
+import {WithMoviesList} from 'types/functional';
 /* ---------------------------------- Local --------------------------------- */
 import * as Card from '@product/SavedMovies/MoviesCard/MoviesCard';
 /* -------------------------------------------------------------------------- */

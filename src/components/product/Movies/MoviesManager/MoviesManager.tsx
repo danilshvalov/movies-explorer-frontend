@@ -7,7 +7,8 @@ import useAllMovies from '@hooks/UseAllMovies';
 import useSavedMovies from '@hooks/UseSavedMovies';
 import useExpandableList from '@hooks/UseExpandableList';
 /* ---------------------------------- Types --------------------------------- */
-import {IMovie, OnExternalErrorFunc, SearchData} from 'types/types';
+import {IMovie, SearchData} from 'types/types';
+import {OnExternalErrorFunc} from 'types/functional';
 /* ---------------------------------- Utils --------------------------------- */
 import {filterMoviesList} from '@utils/movies-filter';
 /* ---------------------------------- Local --------------------------------- */

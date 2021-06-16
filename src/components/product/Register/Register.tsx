@@ -9,7 +9,7 @@ import {Link as GenericLink} from '@generic/Link/Link';
 import {PAGE_LINKS} from '@utils/config';
 import {REGISTER as TEXTS} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
-import {OnRegisterFunc} from 'types/types';
+import {OnRegisterFunc} from 'types/functional';
 /* ---------------------------------- Local --------------------------------- */
 import RegisterForm from '@product/Register/RegisterForm/RegisterForm';
 /* -------------------------------------------------------------------------- */
