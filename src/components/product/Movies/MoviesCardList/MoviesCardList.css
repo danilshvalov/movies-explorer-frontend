@@ -35,6 +35,10 @@
     grid-template-columns: 1fr 1fr;
     row-gap: 47px;
   }
+
+  .all-movies-list__more-button {
+    margin-top: 64px;
+  }
 }
 
 @media screen and (max-width: 540px) {
