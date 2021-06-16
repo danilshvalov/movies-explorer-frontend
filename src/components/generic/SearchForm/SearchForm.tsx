@@ -30,7 +30,7 @@ function SearchForm<T>({
 }: SearchFormProps<T>): JSX.Element {
   const cn = createCn('search-form', className);
 
-  const [fieldQuery, setFieldQuery] = useState('');
+  const [fieldQuery, setFieldQuery] = useState<string>();
   const [isChecked, setIsChecked] = useState(defaultChecked);
   const [errorMessage, setErrorMessage] = useState('');
   const fieldRef = createRef<HTMLInputElement>();
@@ -62,7 +62,9 @@ function SearchForm<T>({
   /* --------------------------------- Effects -------------------------------- */
 
   useEffect(() => {
-    onSearch({isChecked, query: fieldQuery});
+    if (fieldQuery) {
+      onSearch({isChecked, query: fieldQuery});
+    }
   }, [isChecked, fieldQuery]);
 
   return (

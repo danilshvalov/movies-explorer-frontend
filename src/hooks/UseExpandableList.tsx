@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 /* ---------------------------------- Utils --------------------------------- */
-import getDeviceType from '@utils/device-type';
+import {getAmountSettings} from '@utils/device-type';
 /* ---------------------------------- Types --------------------------------- */
 import {
   AmountDeviceSettings,
@@ -16,12 +16,15 @@ import {
 
 export interface ExpandableListSettings {
   startCount: number;
+  step: number;
   deviceSettings: DeviceWidthSettings;
   countSettings: AmountDeviceSettings;
 }
 
 export type ValueType<T> = T[] | undefined;
-export type SetValueFunc<T> = Dispatch<SetStateAction<T[] | undefined>>;
+export type SetValueFunc<T> = Dispatch<
+  SetStateAction<T[] | undefined>
+>;
 export type ExpandFunc = () => void;
 export type ResetFunc = () => void;
 
@@ -34,55 +37,52 @@ export interface ReturnType<T> {
 }
 
 export function useExpandableList<T>(
-  {
-    startCount,
-    deviceSettings,
-    countSettings,
-  }: ExpandableListSettings,
+  {deviceSettings, countSettings}: ExpandableListSettings,
   initVal?: T[],
 ): ReturnType<T> {
+  /* -------------------------------- Internal -------------------------------- */
+  const getCurrentSettings = () => getAmountSettings(deviceSettings, countSettings);
+
+  /* --------------------------------- States --------------------------------- */
   const [value, setValue] = useState<T[] | undefined>(initVal);
   const [storedValue, setStoredValue] = useState<T[] | undefined>(initVal);
-  const [currentCount, setCurrentCount] = useState(startCount);
-  const [step, setStep] = useState(startCount);
+  const [currentCount, setCurrentCount] = useState(
+    getCurrentSettings().startCount,
+  );
+  const [step, setStep] = useState(
+    getCurrentSettings().step,
+  );
   const [isComplete, setIsComplete] = useState(true);
-
-  /* -------------------------------- Internal -------------------------------- */
-  const getAlignedCount = () => currentCount + step - (currentCount % step);
 
   /* --------------------------- Exported Functions --------------------------- */
   const expand = useCallback(() => {
-    const newCount = getAlignedCount();
-    setValue(storedValue?.slice(0, newCount));
+    const newCount = currentCount + step;
     setCurrentCount(newCount);
-  }, [setValue, storedValue, getAlignedCount]);
+  }, [currentCount, step, setCurrentCount]);
 
   const reset = useCallback(() => {
-    setCurrentCount(step);
+    setCurrentCount(getCurrentSettings().startCount);
   }, [setCurrentCount]);
 
   /* --------------------------------- Effects -------------------------------- */
   useEffect(() => {
     function handleResize() {
-      setStep(
-        countSettings[getDeviceType(deviceSettings)].step,
-      );
+      setStep(getCurrentSettings().step);
     }
 
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [setStep]);
 
-  /** Выравнивание при изменении шага */
   useEffect(() => {
-    function handleStepChange() {
-      if (!isComplete) {
-        expand();
-      }
+    /** Выравнивание при изменении шага */
+    if (!isComplete && currentCount % step !== 0) {
+      setCurrentCount(
+        currentCount + step - (currentCount % step),
+      );
     }
-    handleStepChange();
-  }, [step, isComplete]);
+  }, [step]);
 
   useEffect(() => {
     function trimList() {
@@ -91,7 +91,8 @@ export function useExpandableList<T>(
 
     function updateCompleteState() {
       setIsComplete(
-        (storedValue && storedValue.length <= currentCount)
+        (storedValue
+          && storedValue.length <= currentCount)
           ?? true,
       );
     }

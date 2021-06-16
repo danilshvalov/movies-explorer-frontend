@@ -1,9 +1,16 @@
-import {DeviceType, DeviceWidthSettings} from '../types/types';
+import {
+  AmountDeviceSettings,
+  AmountSettings,
+  DeviceType,
+  DeviceWidthSettings,
+} from '../types/types';
 
 /** Функция определения типа текущего устройства
   @param settings - критерии, определяющие устройства
 */
-const getDeviceType = (settings: DeviceWidthSettings): DeviceType => {
+const getDeviceType = (
+  settings: DeviceWidthSettings,
+): DeviceType => {
   const currentWidth = window.innerWidth;
 
   if (currentWidth > settings.tablet) {
@@ -15,5 +22,12 @@ const getDeviceType = (settings: DeviceWidthSettings): DeviceType => {
 
   return DeviceType.Phone;
 };
+
+export function getAmountSettings(
+  deviceSettings: DeviceWidthSettings,
+  countSettings: AmountDeviceSettings,
+): AmountSettings {
+  return countSettings[getDeviceType(deviceSettings)];
+}
 
 export default getDeviceType;

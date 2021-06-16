@@ -42,7 +42,7 @@ function MoviesManager({
   searchData,
   onExternalError,
 }: Props): JSX.Element {
-  const {startCount} = MOVIES_AMOUNT_BY_DEVICE[getDeviceType(DEVICES_WIDTHS)];
+  const {startCount, step} = MOVIES_AMOUNT_BY_DEVICE[getDeviceType(DEVICES_WIDTHS)];
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const allMovies = useAllMovies();
@@ -50,6 +50,7 @@ function MoviesManager({
   const filteredMovies = useExpandableList<IMovie>(
     {
       startCount,
+      step,
       deviceSettings: DEVICES_WIDTHS,
       countSettings: MOVIES_AMOUNT_BY_DEVICE,
     },
