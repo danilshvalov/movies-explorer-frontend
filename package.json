@@ -35,7 +35,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "npx eslint",
-    "deploy": "npm run build && scp -r ./build/* danilshvalov@84.201.181.239:/home/danilshvalov/frontend"
+    "deploy": "npm run build && scp -r ./build/* danilshvalov@84.252.133.5:/home/danilshvalov/frontend"
   },
   "eslintConfig": {
     "extends": [

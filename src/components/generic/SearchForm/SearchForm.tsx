@@ -1,8 +1,6 @@
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {createCn} from 'bem-react-classname';
-import React, {
-  createRef, FormHTMLAttributes, useEffect, useState,
-} from 'react';
+import React, {createRef, FormHTMLAttributes, useState} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import CheckBox from '@generic/CheckBox/CheckBox';
 import SearchField from '@generic/SearchField/SearchField';
@@ -43,20 +41,22 @@ function SearchForm<T>({
   const fieldRef = createRef<HTMLInputElement>();
 
   /* -------------------------------- Handlers -------------------------------- */
-  function handleCheckboxChange({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) {
-    setIsChecked(target.checked);
+  function handleCheckboxChange({target}: React.ChangeEvent<HTMLInputElement>) {
+    const {checked} = target;
+    setIsChecked(checked);
+
+    if (fieldQuery) {
+      onSearch({isChecked: checked, query: fieldQuery});
+    }
   }
 
-  function handleSubmit(
-    evt: React.FormEvent<HTMLFormElement>,
-  ) {
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
     const fieldValue = fieldRef.current?.value;
     if (fieldValue && fieldValue !== '') {
       setFieldQuery(fieldValue);
+      onSearch({isChecked, query: fieldValue});
     } else {
       setErrorMessage(TEXTS.emptyFieldError);
     }
@@ -66,14 +66,6 @@ function SearchForm<T>({
     setErrorMessage('');
   }
 
-  /* --------------------------------- Effects -------------------------------- */
-
-  useEffect(() => {
-    if (fieldQuery) {
-      onSearch({isChecked, query: fieldQuery});
-    }
-  }, [isChecked, fieldQuery]);
-
   return (
     <form
       {...filterInvalidDOMProps(props)}
@@ -81,10 +73,7 @@ function SearchForm<T>({
       onSubmit={handleSubmit}
       noValidate
     >
-      <List
-        className={cn('list')}
-        itemClassName={cn('list-item')}
-      >
+      <List className={cn('list')} itemClassName={cn('list-item')}>
         {/** Поле поиска */}
         <SearchField
           className={cn('field')}
@@ -93,10 +82,7 @@ function SearchForm<T>({
           onChange={handleChange}
         >
           {/** Start-кнопка */}
-          <Button
-            className={cn('start-button')}
-            theme={Theme.Azure}
-          >
+          <Button className={cn('start-button')} theme={Theme.Azure}>
             {TEXTS.startButton.label}
           </Button>
         </SearchField>

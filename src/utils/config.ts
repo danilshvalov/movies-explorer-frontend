@@ -1,7 +1,7 @@
 import {
   AmountDeviceSettings,
   DeviceWidthSettings,
-} from '../types/types';
+} from 'types/types';
 
 export const MOVIES_AMOUNT_BY_DEVICE: AmountDeviceSettings = {
   desktop: {
@@ -55,9 +55,8 @@ export const EXTERNAL_LINKS = {
   SPA: 'https://github.com/danilshvalov/react-mesto-api-full',
 };
 
-// export const BACKEND_URL = 'https://api.ds.movies-explorer.nomoredomains.icu';
+export const BACKEND_URL = 'https://api.ds.movies-explorer.nomoredomains.icu';
 export const BEATFILM_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-export const BACKEND_URL = 'http://localhost:5000';
 export const IMAGE_SERVER_URL = 'https://api.nomoreparties.co/';
 export const LOCAL_STORAGE_KEYS = {
   savedMovies: 'saved-movies',
