@@ -11,10 +11,15 @@ import {
   ProfileUserData,
   RegisterUserData,
 } from 'types/api';
-
 /* -------------------------------------------------------------------------- */
 
-export function useUser(): User {
+export type OnAuthorizeFunc = () => void;
+
+export interface Callbacks {
+  onAuthorize?: OnAuthorizeFunc;
+}
+
+export function useUser(callbacks?: Callbacks): User {
   const [currentUser, setCurrentUser] = useState<UserState>({
     ...DEFAULT_USER,
     loggedIn: true,
@@ -55,6 +60,7 @@ export function useUser(): User {
   ): AuthorizedUserData {
     authorizeUser(user);
     history.push(PAGE_LINKS.movies);
+    callbacks?.onAuthorize?.();
     return user;
   }
 

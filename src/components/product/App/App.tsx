@@ -37,7 +37,16 @@ function App(): JSX.Element {
 
   const messagePopup = useMessagePopup();
 
-  const currentUser = useUser();
+  /* -------------------------------------------------------------------------- */
+
+  function handleSuccessAuthorize() {
+    /** Убираем фильмы предыдущего пользователя, если таковые имеются */
+    localStorage.removeItem(LOCAL_STORAGE_KEYS.savedMovies);
+  }
+
+  const currentUser = useUser({onAuthorize: handleSuccessAuthorize});
+
+  /* -------------------------------------------------------------------------- */
 
   function handleError(err: Error): void {
     if (err instanceof ApiError) {
@@ -48,11 +57,7 @@ function App(): JSX.Element {
   }
 
   function handleLogin(data: LoginUserData) {
-    return currentUser.authorize(data).then((res) => {
-      /** Убираем фильмы предыдущего пользователя, если таковые имеются */
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.savedMovies);
-      return res;
-    });
+    return currentUser.authorize(data);
   }
 
   function handleRegister(data: RegisterUserData) {
@@ -66,6 +71,8 @@ function App(): JSX.Element {
   function handleProfileUpdate(data: ProfileUserData) {
     return currentUser.updateUserInfo(data);
   }
+
+  /* -------------------------------------------------------------------------- */
 
   useEffect(() => {
     setIsAppLoading(currentUser.isLoading);
