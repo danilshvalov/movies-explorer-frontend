@@ -1,6 +1,5 @@
 .register-form {
   display: flex;
-  min-width: 0;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -54,6 +53,7 @@
 
 /* -------------------------------------------------------------------------- */
 .register-form__field-error {
+  display: block;
   height: 14px;
 }
 

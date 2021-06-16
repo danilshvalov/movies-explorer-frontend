@@ -3,12 +3,12 @@
   width: 100%;
   max-width: 410px;
   flex-direction: column;
-  margin: 70px auto 0;
+  margin: 71px auto 0;
 }
 
 .profile__title {
   overflow: hidden;
-  margin-bottom: 125px;
+  margin-bottom: 124px;
   color: #000;
   font-size: 24px;
   font-weight: 500;

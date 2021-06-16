@@ -2,11 +2,12 @@ import {createCn} from 'bem-react-classname';
 import React, {
   ChangeEvent, useContext, useEffect, useState,
 } from 'react';
-/* --------------------------------- Generic -------------------------------- */
+/* --------------------------------- Generics -------------------------------- */
 import ErrorMessage from '@generic/ErrorMessage/ErrorMessage';
 import * as GenericForm from '@generic/Form/Form';
 import Button from '@generic/Button/Button';
 import Field from '@generic/Field/Field';
+import FieldWrapper from '@generic/FieldWrapper/FieldWrapper';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
 /* ---------------------------------- Utils --------------------------------- */
@@ -143,7 +144,7 @@ export function ProfileForm({
       <fieldset className={cn('fieldset')}>
         {/** Поле с именем */}
         <div className={cn('container')}>
-          <div className={cn('field-wrapper')}>
+          <FieldWrapper className={cn('field-wrapper')}>
             <label className={cn('label')}>{TEXTS.nameInput.label}</label>
             <Field
               className={cn('field')}
@@ -155,7 +156,7 @@ export function ProfileForm({
               required
               defaultValue={values.nameInput || ''}
             />
-          </div>
+          </FieldWrapper>
           <ErrorMessage className={cn('field-error')}>
             {errors.nameInput}
           </ErrorMessage>
@@ -163,7 +164,7 @@ export function ProfileForm({
 
         {/** Поле с Email */}
         <div className={cn('container')}>
-          <div className={cn('field-wrapper')}>
+          <FieldWrapper className={cn('field-wrapper')}>
             <label className={cn('label')}>{TEXTS.emailInput.label}</label>
             <Field
               className={cn('field')}
@@ -175,7 +176,7 @@ export function ProfileForm({
               disabled={isProcessing}
               defaultValue={values.emailInput || ''}
             />
-          </div>
+          </FieldWrapper>
           <ErrorMessage className={cn('field-error')}>
             {errors.emailInput}
           </ErrorMessage>

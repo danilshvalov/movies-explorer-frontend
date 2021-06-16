@@ -50,7 +50,7 @@ export function Profile({
 export function ProfilePage(props: ProfileProps): JSX.Element {
   return (
     <>
-      <Header />;
+      <Header />
       <Profile {...props} />
     </>
   );

@@ -15,7 +15,10 @@ import MainPage from '@product/Main/Main';
 import AuthorizedRoute from '@product/AuthorizedRoute/AuthorizedRoute';
 import UnAuthorizedRoute from '@product/UnAuthorizedRoute/UnAuthorizedRoute';
 /* ---------------------------------- Utils --------------------------------- */
-import {LOCAL_STORAGE_KEYS, PAGE_LINKS} from '@utils/config';
+import {
+  LOCAL_STORAGE_KEYS,
+  PAGE_LINKS,
+} from '@utils/config';
 /* -------------------------------- Contexts -------------------------------- */
 import CurrentUserContext from '@contexts/CurrentUserContext';
 /* ---------------------------------- Hooks --------------------------------- */
@@ -23,7 +26,10 @@ import useUser from '@hooks/UseUser';
 import useMessagePopup from '@hooks/UseMessagePopup';
 /* ---------------------------------- Types --------------------------------- */
 import {LoginUserData} from 'types/types';
-import {ProfileUserData, RegisterUserData} from 'types/User';
+import {
+  ProfileUserData,
+  RegisterUserData,
+} from 'types/User';
 /* --------------------------------- Errors --------------------------------- */
 import ApiError from '@errors/ApiError';
 /* ---------------------------------- Texts --------------------------------- */
@@ -43,7 +49,9 @@ function App(): JSX.Element {
   function handleLogin(data: LoginUserData) {
     return currentUser.authorize(data).then((res) => {
       /** Убираем фильмы предыдущего пользователя, если таковые имеются */
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.savedMovies);
+      localStorage.removeItem(
+        LOCAL_STORAGE_KEYS.savedMovies,
+      );
       return res;
     });
   }
@@ -70,15 +78,6 @@ function App(): JSX.Element {
     setIsAppLoading(currentUser.isLoading);
   }, [currentUser.isLoading]);
 
-  useEffect(() => {
-    console.log(
-      'isLoading: ',
-      isAppLoading,
-      'loggedIn: ',
-      currentUser.loggedIn,
-    );
-  }, [currentUser.isLoading, currentUser.loggedIn]);
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <PreloaderWrapper isLoading={isAppLoading}>
@@ -91,7 +90,9 @@ function App(): JSX.Element {
 
             {/** SavedMovies */}
             <AuthorizedRoute path={PAGE_LINKS.savedMovies}>
-              <SavedMoviesPage onExternalError={handleError} />
+              <SavedMoviesPage
+                onExternalError={handleError}
+              />
             </AuthorizedRoute>
 
             {/** Profile */}
