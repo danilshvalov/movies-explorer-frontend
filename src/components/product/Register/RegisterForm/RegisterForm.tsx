@@ -24,11 +24,18 @@ export interface FunctionalProps {
 }
 export type Props = DOMProps & FunctionalProps;
 
-export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
+export function RegisterForm({
+  onRegister,
+  ...props
+}: Props): JSX.Element {
   const cn = createCn('register-form', props.className);
 
   const {
-    values, handleChange, errors, isValid, isFieldValid,
+    values,
+    handleChange,
+    errors,
+    isValid,
+    isFieldValid,
   } = useFormWithValidation({
     nameInput: '',
     emailInput: '',
@@ -39,8 +46,18 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
   const [isProcessing, setIsProcessing] = useState(false);
   const call = useSafeAsyncCall();
 
+  /* -------------------------------- Handlers -------------------------------- */
+
   function handleAPIError(err: Error) {
-    setAPIError(err.message);
+    call(() => setAPIError(err.message));
+  }
+
+  function handlePreSubmit() {
+    setIsProcessing(true);
+  }
+
+  function handleProcessFinalization() {
+    call(() => setIsProcessing(false));
   }
 
   const handleSubmit = (evt: FormEvent) => {
@@ -50,17 +67,23 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
     const emailValue = values.emailInput;
     const passwordValue = values.passwordInput;
 
-    if (isValid && nameValue && emailValue && passwordValue) {
-      setIsProcessing(true);
+    if (
+      isValid
+      && nameValue
+      && emailValue
+      && passwordValue
+    ) {
+      handlePreSubmit();
       onRegister({
         name: values.nameInput as string,
         email: values.emailInput as string,
         password: values.passwordInput as string,
       })
         .catch(handleAPIError)
-        .finally(call(() => setIsProcessing(false)));
+        .finally(handleProcessFinalization);
     }
   };
+
   return (
     <GenericForm.Form
       {...props}
@@ -73,13 +96,14 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
 
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>{texts.nameInput.label}</label>
+            <label className={cn('label')}>
+              {texts.nameInput.label}
+            </label>
             <Field
               className={cn('field')}
               name={'nameInput'}
               onChange={handleChange}
-              // TODO вернуть после тестирования
-              // minLength={2}
+              minLength={2}
               isError={!isFieldValid('nameInput')}
               required
               disabled={isProcessing}
@@ -93,7 +117,9 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
         {/** Поле с Email */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>{texts.emailInput.label}</label>
+            <label className={cn('label')}>
+              {texts.emailInput.label}
+            </label>
             <Field
               className={cn('field')}
               name={'emailInput'}
@@ -112,7 +138,9 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
         {/** Поле с паролем */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>{texts.passwordInput.label}</label>
+            <label className={cn('label')}>
+              {texts.passwordInput.label}
+            </label>
             <Field
               className={cn('field')}
               name={'passwordInput'}
@@ -131,7 +159,9 @@ export function RegisterForm({onRegister, ...props}: Props): JSX.Element {
       </fieldset>
 
       {/** Кнопка отправки формы */}
-      <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
+      <ErrorMessage className={cn('submit-error')}>
+        {APIError}
+      </ErrorMessage>
       <Button
         className={cn('submit-button')}
         type="submit"

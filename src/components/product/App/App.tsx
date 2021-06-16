@@ -46,6 +46,14 @@ function App(): JSX.Element {
 
   const currentUser = useUser();
 
+  function handleError(err: Error): void {
+    if (err instanceof ApiError) {
+      messagePopup.open(err.message);
+    } else {
+      messagePopup.open(INTERNAL_SERVER.message);
+    }
+  }
+
   function handleLogin(data: LoginUserData) {
     return currentUser.authorize(data).then((res) => {
       /** Убираем фильмы предыдущего пользователя, если таковые имеются */
@@ -60,18 +68,12 @@ function App(): JSX.Element {
     return currentUser.register(data);
   }
 
-  const handleLogout = () => currentUser.logout();
+  function handleLogout() {
+    return currentUser.logout().catch(handleError);
+  }
 
   function handleProfileUpdate(data: ProfileUserData) {
     return currentUser.updateUserInfo(data);
-  }
-
-  function handleError(err: Error): void {
-    if (err instanceof ApiError) {
-      messagePopup.open(err.message);
-    } else {
-      messagePopup.open(INTERNAL_SERVER.message);
-    }
   }
 
   useEffect(() => {
@@ -80,7 +82,7 @@ function App(): JSX.Element {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <PreloaderWrapper isLoading={isAppLoading}>
+      <PreloaderWrapper isLoading={isAppLoading} className={cn('preloader')}>
         <div className={cn()}>
           <Switch>
             {/** Movies */}

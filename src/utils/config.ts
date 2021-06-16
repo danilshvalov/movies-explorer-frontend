@@ -5,15 +5,15 @@ import {
 
 export const MOVIES_AMOUNT_BY_DEVICE: AmountDeviceSettings = {
   desktop: {
-    startCount: 3,
+    startCount: 12,
     step: 3,
   },
   tablet: {
-    startCount: 2,
+    startCount: 8,
     step: 2,
   },
   phone: {
-    startCount: 4,
+    startCount: 5,
     step: 1,
   },
 };

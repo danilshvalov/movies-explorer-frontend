@@ -18,3 +18,10 @@
   width: 100%;
   object-fit: contain;
 }
+
+@media screen and (max-width: 460px) {
+  .nothing-found__text {
+    margin-bottom: 40px;
+    font-size: 18px;
+  }
+}

@@ -1,6 +1,6 @@
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import {createCn} from 'bem-react-classname';
-import React, {useState} from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 /* -------------------------------- Generics -------------------------------- */
 import CheckBox from '@generic/CheckBox/CheckBox';
 import SearchField from '@generic/SearchField/SearchField';
@@ -33,40 +33,61 @@ function SearchForm<T>({
   const [fieldQuery, setFieldQuery] = useState('');
   const [isChecked, setIsChecked] = useState(defaultChecked);
   const [errorMessage, setErrorMessage] = useState('');
+  const fieldRef = createRef<HTMLInputElement>();
 
-  /** Handlers */
-  const handleCheckboxChange = ({
+  /* -------------------------------- Handlers -------------------------------- */
+  function handleCheckboxChange({
     target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
+  }: React.ChangeEvent<HTMLInputElement>) {
     setIsChecked(target.checked);
-  };
+  }
 
-  const handleFieldInput = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setFieldQuery(evt.target.value);
-    setErrorMessage('');
-  };
-
-  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+  function handleSubmit(
+    evt: React.FormEvent<HTMLFormElement>,
+  ) {
     evt.preventDefault();
 
-    if (fieldQuery !== '') {
-      onSearch({isChecked, query: fieldQuery});
+    const fieldValue = fieldRef.current?.value;
+    if (fieldValue && fieldValue !== '') {
+      setFieldQuery(fieldValue);
     } else {
       setErrorMessage(TEXTS.emptyFieldError);
     }
-  };
+  }
+
+  function handleChange() {
+    setErrorMessage('');
+  }
+
+  /* --------------------------------- Effects -------------------------------- */
+
+  useEffect(() => {
+    onSearch({isChecked, query: fieldQuery});
+  }, [isChecked, fieldQuery]);
 
   return (
-    <form {...filterInvalidDOMProps(props)} className={cn()} onSubmit={handleSubmit} noValidate>
-      <List className={cn('list')} itemClassName={cn('list-item')}>
+    <form
+      {...filterInvalidDOMProps(props)}
+      className={cn()}
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <List
+        className={cn('list')}
+        itemClassName={cn('list-item')}
+      >
         {/** Поле поиска */}
         <SearchField
           className={cn('field')}
           placeholder={TEXTS.field.placeholder}
-          onInput={handleFieldInput}
+          ref={fieldRef}
+          onChange={handleChange}
         >
           {/** Start-кнопка */}
-          <Button className={cn('start-button')} theme={Theme.Azure}>
+          <Button
+            className={cn('start-button')}
+            theme={Theme.Azure}
+          >
             {TEXTS.startButton.label}
           </Button>
         </SearchField>

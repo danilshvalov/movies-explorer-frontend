@@ -26,7 +26,7 @@ export interface InitApiData {
   settings?: RequestInit;
 }
 
-function errorParser(err: any) {
+function errorParser(err: Error) {
   if (err instanceof ApiError) {
     throw err;
   }

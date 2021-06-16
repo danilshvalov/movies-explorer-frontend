@@ -1,12 +1,12 @@
 import {useCallback, useEffect, useRef} from 'react';
-// REMOVE ???
+
 export function useSafeAsyncCall(): (callback: any, args?: any) => any {
-  const isMounted = useRef(true);
+  const isMounted = useRef<boolean>(true);
 
   const call = useCallback(
     (callback: any, args?: any) => {
       if (isMounted.current) {
-        return () => callback(args);
+        return callback(args);
       }
       return undefined;
     },
@@ -15,7 +15,7 @@ export function useSafeAsyncCall(): (callback: any, args?: any) => any {
 
   useEffect(() => () => {
     isMounted.current = false;
-  });
+  }, []);
 
   return call;
 }

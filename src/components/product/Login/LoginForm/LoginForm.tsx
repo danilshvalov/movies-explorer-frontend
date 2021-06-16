@@ -10,6 +10,7 @@ import FieldWrapper from '@generic/FieldWrapper/FieldWrapper';
 import {OnLoginFunc, Theme} from 'types/types';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
+import useSafeAsyncCall from '@hooks/UseSafeAsyncCall';
 /* ---------------------------------- Texts --------------------------------- */
 import {LOGIN} from '@texts/product';
 /* -------------------------------------------------------------------------- */
@@ -25,11 +26,19 @@ export interface FunctionalProps {
 export type Props = DOMProps & FunctionalProps;
 
 /** Форма входа в аккаунт */
-const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
+const LoginForm = ({
+  className,
+  onLogin,
+  ...props
+}: Props): JSX.Element => {
   const cn = createCn('login-form', className);
 
   const {
-    values, handleChange, errors, isValid, isFieldValid,
+    values,
+    handleChange,
+    errors,
+    isValid,
+    isFieldValid,
   } = useFormWithValidation({
     emailInput: '',
     passwordInput: '',
@@ -37,8 +46,20 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
 
   const [APIError, setAPIError] = React.useState('');
   const [isProcessing, setIsProcessing] = React.useState(false);
+  const call = useSafeAsyncCall();
+
+  /* -------------------------------- Handlers -------------------------------- */
+
   function handleAPIError(err: Error) {
-    setAPIError(err.message);
+    call(() => setAPIError(err.message));
+  }
+
+  function handlePreSubmit() {
+    setIsProcessing(true);
+  }
+
+  function handleProcessFinalization() {
+    call(() => setIsProcessing(false));
   }
 
   const handleSubmit = (evt: React.FormEvent) => {
@@ -48,11 +69,13 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
     const passwordValue = values.passwordInput;
 
     if (isValid && emailValue && passwordValue) {
-      setIsProcessing(true);
+      handlePreSubmit();
       onLogin({
         email: emailValue,
         password: passwordValue,
-      }).catch(handleAPIError);
+      })
+        .catch(handleAPIError)
+        .finally(handleProcessFinalization);
     }
   };
 
@@ -67,7 +90,9 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
         {/** Поле с Email */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>{TEXTS.emailInput.label}</label>
+            <label className={cn('label')}>
+              {TEXTS.emailInput.label}
+            </label>
             <Field
               className={cn('field')}
               name="emailInput"
@@ -86,7 +111,9 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
         {/** Поле с паролем */}
         <div className={cn('container')}>
           <FieldWrapper className={cn('field-wrapper')}>
-            <label className={cn('label')}>{TEXTS.passwordInput.label}</label>
+            <label className={cn('label')}>
+              {TEXTS.passwordInput.label}
+            </label>
             <Field
               className={cn('field')}
               name="passwordInput"
@@ -105,7 +132,9 @@ const LoginForm = ({className, onLogin, ...props}: Props): JSX.Element => {
       </fieldset>
 
       {/** Кнопка отправки формы */}
-      <ErrorMessage className={cn('submit-error')}>{APIError}</ErrorMessage>
+      <ErrorMessage className={cn('submit-error')}>
+        {APIError}
+      </ErrorMessage>
       <Button
         className={cn('submit-button')}
         type="submit"
