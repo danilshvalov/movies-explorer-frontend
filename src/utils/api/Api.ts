@@ -1,5 +1,5 @@
 import {INTERNAL_SERVER} from '@texts/api';
-import {HTTPMethod} from 'types/types';
+import {HTTPMethod} from '@types-src/types';
 import ApiError from '@errors/ApiError';
 
 /**

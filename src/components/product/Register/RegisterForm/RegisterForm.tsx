@@ -12,8 +12,8 @@ import useSafeAsyncCall from '@hooks/UseSafeAsyncCall';
 /* ---------------------------------- Utils --------------------------------- */
 import {REGISTER} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme} from 'types/types';
-import {OnRegisterFunc} from 'types/functional';
+import {Theme} from '@types-src/types';
+import {OnRegisterFunc} from '@types-src/functional';
 /* -------------------------------------------------------------------------- */
 import './RegisterForm.css';
 

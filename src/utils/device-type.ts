@@ -3,7 +3,7 @@ import {
   AmountSettings,
   DeviceType,
   DeviceWidthSettings,
-} from '../types/types';
+} from '@types-src/types';
 
 /** Функция определения типа текущего устройства
   @param settings - критерии, определяющие устройства

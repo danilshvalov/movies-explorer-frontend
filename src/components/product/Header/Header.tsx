@@ -13,7 +13,7 @@ import getDeviceType from '@utils/device-type';
 /* ---------------------------------- Texts --------------------------------- */
 import {HEADER as TEXTS} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
-import {DeviceType} from 'types/types';
+import {DeviceType} from '@types-src/types';
 /* -------------------------------- Contexts -------------------------------- */
 import CurrentUserContext from '@contexts/CurrentUserContext';
 /* -------------------------------------------------------------------------- */

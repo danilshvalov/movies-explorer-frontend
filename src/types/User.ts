@@ -3,7 +3,7 @@ import {
   OnLogoutFunc,
   OnProfileUpdateFunc,
   OnRegisterFunc,
-} from 'types/functional';
+} from '@types-src/functional';
 
 export interface UserActions {
   authorize: OnLoginFunc;

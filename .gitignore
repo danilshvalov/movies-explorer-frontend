@@ -24,5 +24,4 @@ yarn-error.log*
 
 .idea
 .vscode
-.pre-commit-config.yaml
 todo.md

@@ -4,10 +4,10 @@ import {
   RegisterUserData,
   AuthorizedUserData,
   LoginUserData,
-} from 'types/api';
+} from '@types-src/api';
 import {
   HTTPMethod, Id, IMovie, MoviesList,
-} from 'types/types';
+} from '@types-src/types';
 
 /* ---------------------------------- Utils --------------------------------- */
 import {BACKEND_URL} from '@utils/config';

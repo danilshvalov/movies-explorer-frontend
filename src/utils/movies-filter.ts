@@ -1,7 +1,7 @@
 /* ---------------------------------- Utils --------------------------------- */
 import {SHORTS_FILMS_DURATION} from '@utils/config';
 /* ---------------------------------- Types --------------------------------- */
-import {IMovie, MoviesList, SearchData} from 'types/types';
+import {IMovie, MoviesList, SearchData} from '@types-src/types';
 /* -------------------------------------------------------------------------- */
 
 const wordPattern = /[a-zа-яё]+/gi;

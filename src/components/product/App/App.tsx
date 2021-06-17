@@ -22,7 +22,7 @@ import CurrentUserContext from '@contexts/CurrentUserContext';
 import useUser from '@hooks/UseUser';
 import useMessagePopup from '@hooks/UseMessagePopup';
 /* ---------------------------------- Types --------------------------------- */
-import {LoginUserData, ProfileUserData, RegisterUserData} from 'types/api';
+import {LoginUserData, ProfileUserData, RegisterUserData} from '@types-src/api';
 /* --------------------------------- Errors --------------------------------- */
 import ApiError from '@errors/ApiError';
 /* ---------------------------------- Texts --------------------------------- */

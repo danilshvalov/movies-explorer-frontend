@@ -2,7 +2,7 @@ import {createCn} from 'bem-react-classname';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 import React, {ButtonHTMLAttributes, forwardRef} from 'react';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme} from 'types/types';
+import {Theme} from '@types-src/types';
 import {WithLoading, WithTheme} from 'types/functional';
 /* -------------------------------------------------------------------------- */
 import './Button.css';

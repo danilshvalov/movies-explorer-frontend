@@ -1,10 +1,10 @@
-import {MoviesList, SearchData, Theme} from 'types/types';
+import {MoviesList, SearchData, Theme} from '@types-src/types';
 import {
   AuthorizedUserData,
   LoginUserData,
   ProfileUserData,
   RegisterUserData,
-} from 'types/api';
+} from '@types-src/api';
 
 /* ---------------------------------- With ---------------------------------- */
 export interface WithMoviesList {

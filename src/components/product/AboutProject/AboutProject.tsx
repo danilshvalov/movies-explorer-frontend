@@ -8,7 +8,7 @@ import List from '@generic/List/List';
 /* ---------------------------------- Texts --------------------------------- */
 import {ABOUT_PROJECT as TEXTS, INFO_TICKETS_LIST} from '@texts/product';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme} from 'types/types';
+import {Theme} from '@types-src/types';
 /* --------------------------------- Product -------------------------------- */
 import InfoTicket from '@product/InfoTicket/InfoTicket';
 /* -------------------------------------------------------------------------- */

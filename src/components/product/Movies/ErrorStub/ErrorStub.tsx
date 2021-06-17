@@ -4,7 +4,7 @@ import {createCn} from 'bem-react-classname';
 import Button from '@generic/Button/Button';
 import {FallbackComponentProps} from '@generic/ErrorWrapper/ErrorWrapper';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme} from 'types/types';
+import {Theme} from '@types-src/types';
 /* ---------------------------------- Texts --------------------------------- */
 import {SAVED_MOVIES} from '@texts/product';
 /* -------------------------------------------------------------------------- */

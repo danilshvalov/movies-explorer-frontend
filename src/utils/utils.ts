@@ -1,4 +1,4 @@
-import {MoviesList, ParsedTime} from 'types/types';
+import {MoviesList, ParsedTime} from '@types-src/types';
 import {IMAGE_SERVER_URL} from '@utils/config';
 /**
  * Функция выравнивания количества

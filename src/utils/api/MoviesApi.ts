@@ -1,7 +1,10 @@
-import Api from './Api';
-import {BEATFILM_URL} from '../config';
-import {HTTPMethod, IMovie, MoviesList} from '../../types/types';
-import {parseImage} from '../utils';
+/* ---------------------------------- Types --------------------------------- */
+import {HTTPMethod, IMovie, MoviesList} from '@types-src/types';
+/* ---------------------------------- Utils --------------------------------- */
+import Api from '@utils/api/Api';
+import {BEATFILM_URL} from '@utils/config';
+import {parseImage} from '@utils/utils';
+/* -------------------------------------------------------------------------- */
 
 export type MovieData = {
   id: number;

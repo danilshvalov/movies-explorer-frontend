@@ -1,5 +1,4 @@
 {
-  "extends": "./tsconfig-checks.json",
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
@@ -8,7 +7,7 @@
       "@product/*": ["components/product/*"],
       "@generic/*": ["components/generic/*"],
       "@utils/*": ["utils/*"],
-      "types/*": ["types/*"],
+      "@types-src/*": ["types/*"],
       "@contexts/*": ["contexts/*"],
       "@hooks/*": ["hooks/*"],
       "@texts/*": ["texts/*"],

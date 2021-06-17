@@ -1,7 +1,7 @@
 import {createCn} from 'bem-react-classname';
 import {createElement, forwardRef, HTMLProps} from 'react';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme} from 'types/types';
+import {Theme} from '@types-src/types';
 import {WithTheme} from 'types/functional';
 /* -------------------------------------------------------------------------- */
 import './Title.css';

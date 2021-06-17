@@ -9,7 +9,7 @@ import {LOGIN_BUTTONS as TEXTS} from '@texts/generic';
 /* ---------------------------------- Utils --------------------------------- */
 import {PAGE_LINKS} from '@utils/config';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme} from 'types/types';
+import {Theme} from '@types-src/types';
 /* -------------------------------------------------------------------------- */
 import './LoginButtons.css';
 

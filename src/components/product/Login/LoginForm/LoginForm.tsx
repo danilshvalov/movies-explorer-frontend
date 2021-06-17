@@ -7,8 +7,8 @@ import * as GenericForm from '@generic/Form/Form';
 import Button from '@generic/Button/Button';
 import FieldWrapper from '@generic/FieldWrapper/FieldWrapper';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme} from 'types/types';
-import {OnLoginFunc} from 'types/functional';
+import {Theme} from '@types-src/types';
+import {OnLoginFunc} from '@types-src/functional';
 /* ---------------------------------- Hooks --------------------------------- */
 import useFormWithValidation from '@hooks/UseFormWithValidation';
 import useSafeAsyncCall from '@hooks/UseSafeAsyncCall';

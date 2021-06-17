@@ -1,7 +1,7 @@
 import {
   AmountDeviceSettings,
   DeviceWidthSettings,
-} from 'types/types';
+} from '@types-src/types';
 
 export const MOVIES_AMOUNT_BY_DEVICE: AmountDeviceSettings = {
   desktop: {

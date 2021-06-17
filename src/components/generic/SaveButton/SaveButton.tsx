@@ -2,7 +2,7 @@ import React, {createCn} from 'bem-react-classname';
 /* -------------------------------- Generics -------------------------------- */
 import * as GenericButton from '@generic/Button/Button';
 /* ---------------------------------- Types --------------------------------- */
-import {Theme} from 'types/types';
+import {Theme} from '@types-src/types';
 /* -------------------------------------------------------------------------- */
 import './SaveButton.css';
 

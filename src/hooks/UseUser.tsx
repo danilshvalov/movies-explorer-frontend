@@ -4,13 +4,13 @@ import {useHistory} from 'react-router-dom';
 import mainApi from '@utils/api/MainApi';
 import {DEFAULT_USER, PAGE_LINKS} from '@utils/config';
 /* ---------------------------------- Types --------------------------------- */
-import {User, UserState} from 'types/user';
+import {User, UserState} from '@types-src/user';
 import {
   AuthorizedUserData,
   LoginUserData,
   ProfileUserData,
   RegisterUserData,
-} from 'types/api';
+} from '@types-src/api';
 /* -------------------------------------------------------------------------- */
 
 export type OnAuthorizeFunc = () => void;
