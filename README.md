@@ -8,7 +8,6 @@
 
 Верстка сделана по [макету](https://www.figma.com/file/XLVdaJOYgaeg6SbZIVbH10/template?node-id=932%3A3407) в `Figma`
 
-
 ### Использованные технологии
 
 `HTML` `CSS` `BEM` `Typescript` `TSX` `Git` `NPM` `Craco`
