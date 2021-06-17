@@ -15,19 +15,22 @@
 ### Quick start
 
 1. Клонирование репозитория
-`
-git clone https://github.com/danilshvalov/movies-explorer-frontend.git
-`
 
-2. Установка необходимых пакетов
-`
+```bash
+git clone https://github.com/danilshvalov/movies-explorer-frontend.git 
+```
+
+2. Установка необходимых пакетов  
+
+```bash
 npm install
-`
+```
 
 3. Запуск
-`
+
+```bash
 npm run start
-`
+```
 
 ### Дополнительные скрипты
 
