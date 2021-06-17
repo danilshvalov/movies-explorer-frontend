@@ -3,8 +3,7 @@ import {BEATFILM_URL} from '../config';
 import {HTTPMethod, IMovie, MoviesList} from '../../types/types';
 import {parseImage} from '../utils';
 
-// TODO ...
-type MovieData = {
+export type MovieData = {
   id: number;
   nameRU: string;
   nameEN: string;
@@ -24,7 +23,7 @@ type MovieData = {
   };
 };
 
-function parseMovieData({
+export function parseMovieData({
   image, trailerLink, id, ...data
 }: MovieData): IMovie {
   return {
@@ -42,7 +41,7 @@ function parseMovieData({
  * @see Api
  * */
 class MoviesApi extends Api {
-  async getMoviesList(): Promise<MoviesList> {
+  getMoviesList(): Promise<MoviesList> {
     return this.sendRequest({
       path: '',
       method: HTTPMethod.Get,

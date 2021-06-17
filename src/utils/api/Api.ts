@@ -59,7 +59,6 @@ class Api {
     body,
   }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
   SendRequestData): Promise<any> {
-    console.log(new URL(path, this.baseUrl)?.href, method, body);
     return fetch(new URL(path, this.baseUrl).href, {
       ...this.settings,
       method,
