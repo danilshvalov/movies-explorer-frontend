@@ -1,0 +1,88 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* -------------------------------------------------------------------------- */
+.register-form__field-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.register-form__fieldset {
+  min-width: 0;
+  border: 0;
+  margin-bottom: 46.5px;
+}
+
+/* -------------------------------------------------------------------------- */
+.register-form__container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.register-form__container:last-of-type {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.register-form__label {
+  margin-bottom: 5px;
+  color: #a0a0a0;
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 12px;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.register-form__submit-button {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+/* -------------------------------------------------------------------------- */
+.register-form__field-error {
+  display: block;
+  height: 14px;
+}
+
+/* -------------------------------------------------------------------------- */
+.register-form__submit-error {
+  display: flex;
+  height: 71px;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+  text-align: center;
+  white-space: normal;
+}
+
+@media screen and (max-width: 768px) {
+  .register-form__fieldset {
+    margin-bottom: 48px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .register-form__fieldset {
+    margin-bottom: 134.5px;
+  }
+
+  .register-form__submit-button {
+    padding: 15px 0;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

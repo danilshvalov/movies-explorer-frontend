@@ -1,0 +1,26 @@
+.movies {
+  width: calc(100% - 140px);
+  margin: 0 auto 80px;
+}
+
+.movies__search-form {
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .movies {
+    width: calc(100% - 60px);
+    margin-bottom: 89px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .movies {
+    width: calc(100% - 20px);
+    margin-bottom: 136px;
+  }
+
+  .movies__search-form {
+    margin-bottom: 22px;
+  }
+}

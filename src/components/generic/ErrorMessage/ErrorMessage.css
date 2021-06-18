@@ -1,0 +1,8 @@
+.error-message {
+  overflow: hidden;
+  color: #ee3465;
+  font-size: 10px;
+  line-height: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

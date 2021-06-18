@@ -1,13 +1,6 @@
-import React from 'react';
-import {MoviesList} from '../utils/types';
+import {createContext} from 'react';
+import {User} from '@types-src/user';
 
-export interface UserContextProps {
-  isLoggedIn: boolean;
-  email: string;
-  name: string;
-  savedMovies: MoviesList;
-}
-
-const CurrentUserContext = React.createContext<Partial<UserContextProps>>({});
+const CurrentUserContext = createContext<Partial<User>>({});
 
 export default CurrentUserContext;

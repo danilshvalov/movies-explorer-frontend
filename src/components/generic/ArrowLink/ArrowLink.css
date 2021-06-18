@@ -1,0 +1,18 @@
+.arrow-link {
+  cursor: pointer;
+}
+
+.arrow-link__picture {
+  width: 17px;
+  height: 17px;
+  margin-left: 20px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 400px) {
+  .arrow-link__picture {
+    width: 10px;
+    height: 10px;
+    margin-bottom: 5px;
+  }
+}

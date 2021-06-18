@@ -1,5 +1,5 @@
-import {ParsedTime} from './types';
-
+import {MoviesList, ParsedTime} from '@types-src/types';
+import {IMAGE_SERVER_URL} from '@utils/config';
 /**
  * Функция выравнивания количества
  *
@@ -7,31 +7,47 @@ import {ParsedTime} from './types';
  *
  * Если шаг нечётный - убираем до границы
  * */
-export const alignQuantity = (currentCount: number, step: number): number => {
-  if (currentCount % step === 0) {
-    return currentCount;
-  }
 
-  if (currentCount < step || step % 2 === 0) {
-    return currentCount + step - (currentCount % step);
-  }
-
-  return currentCount - (currentCount % step);
-};
-
-export const parseTime = (minutes: number): ParsedTime => ({
-  hours: Math.floor(minutes / 60),
-  minutes: minutes % 60,
-});
+export function parseTime(minutes: number): ParsedTime {
+  return {
+    hours: Math.floor(minutes / 60),
+    minutes: minutes % 60,
+  };
+}
 
 /**
  * Функция переводит минуты в формат {H}ч{М}м или {M}м
  * */
-export function stringifyTime({hours, minutes}: ParsedTime) {
+export function stringifyTime({hours, minutes}: ParsedTime): string {
   return hours && hours > 0 ? `${hours}ч ${minutes}м` : `${minutes}м`;
 }
 
-export const getCopyrightDate = () => {
+export function getCopyrightDate(): string {
   const year = new Date().getFullYear();
   return year === 2021 ? '2021' : `2021 - ${year}`;
-};
+}
+
+export function parseImage(path?: string): string {
+  return new URL(path || '', IMAGE_SERVER_URL).href;
+}
+
+/**
+ * Получает на вход все фильмы и сохраненные фильмы
+ * Возвращает список всех фильмов, с помеченными сохраненными
+ */
+export function markSavedMovies(
+  allMovies: MoviesList,
+  savedMovies?: MoviesList,
+): MoviesList {
+  return allMovies.map((movie) => {
+    if (savedMovies) {
+      const same = savedMovies.find(
+        (other) => movie.movieId === other.movieId,
+      );
+      return same
+        ? {...movie, isSaved: true, _id: same._id}
+        : {...movie, isSaved: false};
+    }
+    return {...movie, isSaved: false};
+  });
+}

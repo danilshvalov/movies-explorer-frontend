@@ -1,0 +1,117 @@
+.about-project {
+  width: calc(100% - 140px);
+  margin: 0 auto 111px;
+}
+
+.about-project__header {
+  margin-bottom: 70px;
+}
+
+.about-project__info-table {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.about-project__list-item:not(:last-of-type) {
+  margin-right: 40px;
+}
+
+.about-project__info-list {
+  display: flex;
+  margin-bottom: 110px;
+}
+
+.about-project__item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.about-project__column-title {
+  padding: 10px 0;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 17px;
+}
+
+.about-project__column-title_theme_light {
+  background-color: #f2f2f2;
+  color: #000;
+}
+
+.about-project__column-title_theme_azure {
+  background-color: #3456f3;
+  color: #fff;
+}
+
+.about-project__content {
+  color: #a0a0a0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 1024px) {
+  .about-project {
+    width: calc(100% - 100px);
+    margin-bottom: 90px;
+  }
+
+  .about-project__info-list {
+    margin-bottom: 93px;
+  }
+
+  .about-project__info-table {
+    grid-template-columns: 1fr 3.78fr;
+  }
+
+  .about-project__list-item:not(:last-of-type) {
+    margin-right: 30px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .about-project {
+    width: calc(100% - 36px);
+    flex-direction: column;
+    margin-bottom: 131px;
+  }
+
+  .about-project__header {
+    margin-bottom: 60px;
+  }
+
+  .about-project__info-list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 61px;
+  }
+
+  .about-project__list-item {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 56px;
+  }
+
+  .about-project__list-item:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .about-project__info-table {
+    grid-template-columns: 1fr 1.85fr;
+  }
+
+  .about-project__content {
+    padding: 10px 0;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 13px;
+  }
+
+  .about-project__column-title {
+    margin-bottom: 0;
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

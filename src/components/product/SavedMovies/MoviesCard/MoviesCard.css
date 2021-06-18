@@ -1,0 +1,13 @@
+.save-movies-card {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+.save-movies-card__button {
+  position: absolute;
+  top: 12px;
+  right: 13px;
+  padding: 0;
+  transition: all 0.25s linear;
+}

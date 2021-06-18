@@ -1,0 +1,10 @@
+.delete-button {
+  width: 21px;
+  height: 21px;
+  background-image: url("/src/images/delete-button.svg");
+  background-size: cover;
+}
+
+.delete-button_loading {
+  background-image: url("/src/images/rotating-line.svg");
+}

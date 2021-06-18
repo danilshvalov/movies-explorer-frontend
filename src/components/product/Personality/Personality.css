@@ -1,0 +1,143 @@
+.personality {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+}
+
+.personality__info {
+  display: flex;
+  max-width: 590px;
+  flex-direction: column;
+  padding: 0;
+  margin: 0 20px 0 0;
+}
+
+.personality__name {
+  padding: 0;
+  margin: 0 0 20px;
+  color: #000;
+  font-size: 50px;
+  font-weight: normal;
+  letter-spacing: -0.04em;
+  line-height: 58px;
+}
+
+.personality__photo {
+  width: 100%;
+  max-width: 270px;
+  height: 100%;
+  max-height: 327px;
+  padding: 0;
+  margin: 0;
+  border-radius: 10px;
+  justify-self: flex-end;
+  object-fit: cover;
+}
+
+.personality__feature {
+  padding: 0;
+  margin: 0 0 25px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.personality__description {
+  padding: 0;
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 22px;
+}
+
+.personality__list {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: auto 0 0;
+  list-style: none;
+}
+
+.personality__list-item {
+  padding: 0;
+  margin: 0 20px 0 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+.personality__list-item:last-of-type {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .personality__name {
+    margin-bottom: 15px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .personality__feature {
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .personality__description {
+    max-width: 360px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .personality__photo {
+    max-width: 255px;
+    max-height: 307px;
+  }
+
+  .personality__list {
+    margin-bottom: 2px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .personality {
+    flex-flow: column-reverse;
+  }
+
+  .personality__info {
+    margin-right: 0;
+  }
+
+  .personality__list-item {
+    margin-right: 26px;
+  }
+
+  .personality__photo {
+    max-width: 292px;
+    max-height: 352px;
+    margin: 0 auto 40px;
+  }
+
+  .personality__name {
+    margin-bottom: 20px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .personality__feature {
+    margin-bottom: 20px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .personality__description {
+    max-width: 100%;
+    margin-bottom: 40px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

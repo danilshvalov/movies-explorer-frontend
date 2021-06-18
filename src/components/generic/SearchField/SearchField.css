@@ -1,0 +1,35 @@
+.search-field {
+  display: flex;
+}
+
+.search-field__input {
+  width: 100%;
+  border-bottom: 1px solid transparent;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.search-field__icon {
+  width: 15px;
+  height: 15px;
+  align-self: center;
+  margin-right: 20px;
+}
+
+.search-field__input::placeholder {
+  color: #a0a0a0;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+@media screen and (max-width: 320px) {
+  .search-field__input::placeholder {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .search-field__icon {
+    display: none;
+  }
+}

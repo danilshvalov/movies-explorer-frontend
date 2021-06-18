@@ -1,19 +1,44 @@
-import {MoviesList} from './types';
+/* ---------------------------------- Utils --------------------------------- */
+import {SHORTS_FILMS_DURATION} from '@utils/config';
+/* ---------------------------------- Types --------------------------------- */
+import {IMovie, MoviesList, SearchData} from '@types-src/types';
+/* -------------------------------------------------------------------------- */
 
-export interface moviesFilterProps {
-  moviesList: MoviesList;
-  isShortFilms: boolean;
-  query: string;
+const wordPattern = /[a-zа-яё]+/gi;
+
+function isShortFilm(duration: number): boolean {
+  return duration < SHORTS_FILMS_DURATION;
 }
 
-function moviesFilter({moviesList, isShortFilms, query}: moviesFilterProps) {
-  // FEATURE добавить логику
-  // Консоль будет убрана при реализации логики
-  // eslint-disable-next-line no-console
-  console.log(`moviesFilter query: ${query} isShortFilms: ${isShortFilms}`);
-  return isShortFilms
-    ? moviesList.filter(({duration}) => duration <= 40)
-    : moviesList;
+export default function moviesFilter(
+  {nameRU, nameEN, duration}: IMovie,
+  {query, isChecked: isShortFilms}: SearchData,
+): boolean {
+  if (!isShortFilm(duration) && isShortFilms) {
+    return false;
+  }
+
+  if (query === '') {
+    return true;
+  }
+
+  const words = query.trim().match(wordPattern);
+
+  return (
+    words?.some((v) => {
+      const val = v.toLocaleLowerCase();
+      return (
+        (nameRU
+          && nameRU.toLocaleLowerCase().includes(val))
+        || (nameEN && nameEN.toLocaleLowerCase().includes(val))
+      );
+    }) || false
+  );
 }
 
-export default moviesFilter;
+export function filterMoviesList(
+  moviesList: MoviesList,
+  searchData: SearchData,
+): MoviesList {
+  return moviesList.filter((movie) => moviesFilter(movie, searchData));
+}

@@ -1,0 +1,40 @@
+.info-ticket__title {
+  margin-bottom: 25px;
+  color: #000;
+  font-size: 20px;
+  font-weight: normal;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+}
+
+.info-ticket__about {
+  max-width: 550px;
+  color: #000;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .info-ticket__title {
+    margin-bottom: 22px;
+  }
+
+  .info-ticket__about {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .info-ticket__title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .info-ticket__about {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
