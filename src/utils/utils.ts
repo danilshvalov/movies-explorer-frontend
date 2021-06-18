@@ -35,7 +35,10 @@ export function parseImage(path?: string): string {
  * Получает на вход все фильмы и сохраненные фильмы
  * Возвращает список всех фильмов, с помеченными сохраненными
  */
-export function markSavedMovies(allMovies: MoviesList, savedMovies?: MoviesList): MoviesList {
+export function markSavedMovies(
+  allMovies: MoviesList,
+  savedMovies?: MoviesList,
+): MoviesList {
   return allMovies.map((movie) => {
     if (savedMovies) {
       const same = savedMovies.find(

@@ -59,7 +59,10 @@ export const BACKEND_URL = 'https://api.ds.movies-explorer.nomoredomains.icu';
 export const BEATFILM_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 export const IMAGE_SERVER_URL = 'https://api.nomoreparties.co/';
 export const LOCAL_STORAGE_KEYS = {
+  allMovies: 'all-movies',
   savedMovies: 'saved-movies',
+  allMoviesQuery: 'all-movies-query',
+  savedMoviesQuery: 'saved-movies-query',
 };
 
 export const DEFAULT_USER = {

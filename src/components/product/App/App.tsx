@@ -41,7 +41,9 @@ function App(): JSX.Element {
 
   function handleSuccessAuthorize() {
     /** Убираем фильмы предыдущего пользователя, если таковые имеются */
-    localStorage.removeItem(LOCAL_STORAGE_KEYS.savedMovies);
+    Object.values(LOCAL_STORAGE_KEYS).forEach((key) => {
+      localStorage.removeItem(key);
+    });
   }
 
   const currentUser = useUser({onAuthorize: handleSuccessAuthorize});

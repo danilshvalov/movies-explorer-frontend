@@ -58,9 +58,9 @@ export function useUser(callbacks?: Callbacks): User {
   function handleSuccessAuthorizing(
     user: AuthorizedUserData,
   ): AuthorizedUserData {
+    callbacks?.onAuthorize?.();
     authorizeUser(user);
     history.push(PAGE_LINKS.movies);
-    callbacks?.onAuthorize?.();
     return user;
   }
 

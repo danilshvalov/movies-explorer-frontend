@@ -1,5 +1,5 @@
 import {createCn} from 'bem-react-classname';
-import React, {HTMLAttributes, useState} from 'react';
+import React, {HTMLAttributes} from 'react';
 import filterInvalidDOMProps from 'filter-invalid-dom-props';
 /* -------------------------------- Generics -------------------------------- */
 import PageWrapper from '@generic/PageWrapper/PageWrapper';
@@ -9,6 +9,10 @@ import {SearchData} from 'types/types';
 import {OnExternalErrorFunc} from 'types/functional';
 /* --------------------------------- Local -------------------------------- */
 import MoviesManager from '@product/Movies/MoviesManager/MoviesManager';
+/* ---------------------------------- Utils --------------------------------- */
+import {LOCAL_STORAGE_KEYS} from '@utils/config';
+/* ---------------------------------- Hooks --------------------------------- */
+import useLocalStorage from '@hooks/UseLocalStorage';
 /* -------------------------------------------------------------------------- */
 import './Movies.css';
 
@@ -26,7 +30,9 @@ export type Props = FunctionalProps & DOMProps;
 export function Movies({className, ...props}: Props): JSX.Element {
   const cn = createCn('movies', className);
 
-  const [searchData, setSearchData] = useState<SearchData>();
+  const [searchData, setSearchData] = useLocalStorage<SearchData>(
+    LOCAL_STORAGE_KEYS.allMoviesQuery,
+  );
 
   const handleSearch = (data: SearchData) => {
     setSearchData(data);
@@ -34,7 +40,12 @@ export function Movies({className, ...props}: Props): JSX.Element {
 
   return (
     <section {...filterInvalidDOMProps(props)} className={cn()}>
-      <SearchForm className={cn('search-form')} onSearch={handleSearch} />
+      <SearchForm
+        className={cn('search-form')}
+        defaultQuery={searchData?.query}
+        defaultChecked={searchData?.isChecked}
+        onSearch={handleSearch}
+      />
       {searchData && (
         <MoviesManager
           searchData={searchData}

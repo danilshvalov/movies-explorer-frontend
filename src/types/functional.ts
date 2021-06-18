@@ -31,7 +31,7 @@ export type OnRegisterFunc = ApiCallback<RegisterUserData, AuthorizedUserData>;
 export type OnProfileUpdateFunc = ApiCallback<ProfileUserData>;
 export type OnLogoutFunc = () => Promise<void>;
 export type OnSaveFunc<T, U = T> = ApiCallback<T, U>;
-export type OnSearchFunc<T> = (data: SearchData) => T;
+export type OnSearchFunc<T = void> = (data: SearchData) => T;
 export type OnDeleteFunc<T, U = T> = ApiCallback<T, U>;
 export type OnExternalErrorFunc = (err: Error) => void;
 /* -------------------------------------------------------------------------- */

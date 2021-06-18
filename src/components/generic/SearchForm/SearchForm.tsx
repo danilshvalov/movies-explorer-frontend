@@ -15,11 +15,11 @@ import {SEARCH_FORM as TEXTS} from '@texts/generic';
 /* -------------------------------------------------------------------------- */
 import './SearchForm.css';
 
-export interface SearchFormProps<T>
-  extends FormHTMLAttributes<HTMLFormElement> {
+export interface SearchFormProps extends FormHTMLAttributes<HTMLFormElement> {
   /** Изначальное состояние формы */
   defaultChecked?: boolean;
-  onSearch: OnSearchFunc<T>;
+  defaultQuery?: string;
+  onSearch: OnSearchFunc;
 }
 
 /**
@@ -27,15 +27,16 @@ export interface SearchFormProps<T>
  *
  * @see {@link SearchField}
  * */
-function SearchForm<T>({
+function SearchForm({
   className,
   onSearch,
   defaultChecked = false,
+  defaultQuery = '',
   ...props
-}: SearchFormProps<T>): JSX.Element {
+}: SearchFormProps): JSX.Element {
   const cn = createCn('search-form', className);
 
-  const [fieldQuery, setFieldQuery] = useState<string>();
+  const [fieldQuery, setFieldQuery] = useState(defaultQuery);
   const [isChecked, setIsChecked] = useState(defaultChecked);
   const [errorMessage, setErrorMessage] = useState('');
   const fieldRef = createRef<HTMLInputElement>();
@@ -80,6 +81,7 @@ function SearchForm<T>({
           placeholder={TEXTS.field.placeholder}
           ref={fieldRef}
           onChange={handleChange}
+          defaultValue={fieldQuery}
         >
           {/** Start-кнопка */}
           <Button className={cn('start-button')} theme={Theme.Azure}>
@@ -91,7 +93,7 @@ function SearchForm<T>({
           label={TEXTS.checkBox.label}
           className={cn('check-button')}
           labelClassName={cn('check-label')}
-          defaultChecked={defaultChecked}
+          checked={isChecked}
           onChange={handleCheckboxChange}
         />
       </List>

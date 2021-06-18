@@ -1,8 +1,5 @@
 import {
-  useState,
-  useCallback,
-  Dispatch,
-  SetStateAction,
+  useState, useCallback, Dispatch, SetStateAction,
 } from 'react';
 /* ---------------------------------- Utils --------------------------------- */
 import mainApi from '@utils/api/MainApi';
@@ -15,9 +12,7 @@ import useLocalStorage from '@hooks/UseLocalStorage';
 
 export interface ReturnType {
   value: MoviesList | undefined;
-  setValue: Dispatch<
-    SetStateAction<MoviesList | undefined>
-  >;
+  setValue: Dispatch<SetStateAction<MoviesList | undefined>>;
   isLoading: boolean;
   saveMovie: (data: IMovie) => Promise<IMovie>;
   deleteMovie: (data: IMovie) => Promise<IMovie>;
@@ -50,6 +45,9 @@ export function useSavedMovies(): ReturnType {
 
   function handleSuccessLoading(movies: MoviesList) {
     setValue(movies);
+  }
+
+  function handleFinalization() {
     setIsLoading(false);
   }
 
@@ -73,7 +71,10 @@ export function useSavedMovies(): ReturnType {
   const loadOrRetry = useCallback((): Promise<void> => {
     if (!value) {
       handlePreLoading();
-      return mainApi.getSavedMovies().then(handleSuccessLoading);
+      return mainApi
+        .getSavedMovies()
+        .then(handleSuccessLoading)
+        .finally(handleFinalization);
     }
     return Promise.resolve();
   }, [setIsLoading, setValue]);
